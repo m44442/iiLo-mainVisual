@@ -5,8 +5,8 @@ import { Inter } from 'next/font/google';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: '3Dパーティクルアニメーション',
-  description: 'Next.js App Routerとreact-three-fiberを使用した3Dパーティクルアニメーション',
+  title: '背景（仮）',
+  description: 'Next.js * react-three-fiber * ts',
 };
 
 export default function RootLayout({
