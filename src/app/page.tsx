@@ -28,20 +28,26 @@ export default function Home() {
     <main className="relative w-full h-screen">
       <div className="absolute inset-0 z-10">
         <Canvas
-          camera={{ position: [0, 0, 30], fov: 60 }}
+          camera={{ position: [0, 0, 20], fov: 60 }}
           style={{
             position: 'absolute',
             top: 0,
             left: 0,
             width: '100%',
-            height: '100%'
+            height: '100%',
+            background: '#ffffff' // 背景を白に設定
           }}
         >
-          <color attach="background" args={['#ffffff']} />
-            <ParticleAnimation particleCount={30000} animationDuration={3.0} />
-            <OrbitControls enableDamping dampingFactor={0.05} />
+          <ParticleAnimation 
+
+            particleCount={60000} 
+            animationDuration={9.0} 
+          />
+          <OrbitControls enableDamping dampingFactor={0.4} />
         </Canvas>
       </div>
+      
+      
     </main>
   );
 }
