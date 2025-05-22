@@ -143,36 +143,74 @@ export default function ParticleSystem() {
     bufferGeometry.setAttribute('position', new THREE.BufferAttribute(boxParticles, 3))
     bufferGeometry.setAttribute('two', new THREE.BufferAttribute(sphereParticles, 3))
 
-    // Create material
-    const shaderMaterial = new THREE.RawShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      uniforms: {
-        uPoint01: { value: 0.0 },
-        uTime: { value: 0.0 },
-        uSize: { value: 0.1 },
-      },
-      transparent: true,
-      blending: THREE.NormalBlending,
-    })
+    // シェーダーマテリアルの初期値を散らばった状態に
+  const shaderMaterial = new THREE.RawShaderMaterial({
+    vertexShader,
+    fragmentShader,
+    uniforms: {
+      uPoint01: { value: 1.0 }, // 1.0で散らばった状態に
+      uTime: { value: 0.0 },
+      uSize: { value: 0.05 }, // 少し小さめサイズから開始
+    },
+    transparent: true,
+    blending: THREE.NormalBlending,
+  })
 
-    return {
-      geometry: bufferGeometry,
-      material: shaderMaterial
-    }
+  return {
+    geometry: bufferGeometry,
+    material: shaderMaterial
+  }
   }, [])
 
   // GSAP Animation
-  useEffect(() => {
-    if (materialRef.current) {
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 })
-      tl.to(materialRef.current.uniforms.uPoint01, {
-        value: 0.0,
-        ease: "power4.out",
-        duration: 4,
-      })
-    }
-  }, [])
+ useEffect(() => {
+  if (materialRef.current) {
+    // まず初期値を非常に大きくセット
+    materialRef.current.uniforms.uPoint01.value = 30.0;
+    
+    // そこから通常の値に落とし込む
+    const firstAnimation = gsap.timeline();
+    
+    // 非常に散らばった状態から集まった状態(0.0)へ
+    firstAnimation.to(materialRef.current.uniforms.uPoint01, {
+      value: 0.0,
+      ease: "power3.out", // よりドラマチックなイージング
+      duration: 2.5, // 長めの時間をかけて集める
+    });
+
+    // パーティクルのサイズも大きくする
+    firstAnimation.to(materialRef.current.uniforms.uSize, {
+      value: 2.0,
+      ease: "power1.inOut",
+      duration: 2.5,
+    }, 0); // 0は同時スタートの意味
+    
+    // 最初のアニメーションが終わったら繰り返しのアニメーション開始
+    firstAnimation.call(() => {
+      // 最初のアニメーションが完了したあとの繰り返しアニメーション
+      const loopAnimation = gsap.timeline({
+        repeat: -1,
+        repeatDelay: 1
+      });
+      
+      // ここでは形状を0.0で維持したまま別の微妙な動きを与える
+      // 例: 少しだけ形状を変えて元に戻す
+      loopAnimation.to(materialRef.current!.uniforms.uPoint01, {
+        value: 0.05, // ほんの少し変形
+        ease: "power1.inOut",
+        duration: 2
+      });
+      
+      loopAnimation.to(materialRef.current!.uniforms.uPoint01, {
+        value: 0.0, // 元に戻す
+        ease: "power1.inOut",
+        duration: 2
+      });
+      
+      loopAnimation.play();
+    });
+  }
+}, [])
 
   // Animation loop
   useFrame(() => {
@@ -182,20 +220,20 @@ export default function ParticleSystem() {
   })
 
   return (
-    <points ref={pointsRef} geometry={geometry} material={material}>
-      <rawShaderMaterial
-        ref={materialRef}
-        attach="material"
-        vertexShader={vertexShader}
-        fragmentShader={fragmentShader}
-        uniforms={{
-          uPoint01: { value: 0.0 },
-          uTime: { value: 0.0 },
-          uSize: { value: 0.1 },
-        }}
-        transparent
-        blending={THREE.NormalBlending}
-      />
-    </points>
+  <points ref={pointsRef} geometry={geometry} material={material}>
+    <rawShaderMaterial
+      ref={materialRef}
+      attach="material"
+      vertexShader={vertexShader}
+      fragmentShader={fragmentShader}
+      uniforms={{
+        uPoint01: { value: 30.0 }, // 散らばった状態から開始
+        uTime: { value: 0.0 },
+        uSize: { value: 2.0 }, // 少し小さめから開始
+      }}
+      transparent
+      blending={THREE.NormalBlending}
+    />
+  </points>
   )
 }
