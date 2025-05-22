@@ -1,5 +1,5 @@
 {
-  "name": "particle-animation-nextjs",
+  "name": "nextjs-threejs-particles",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/drei": "^9.91.0",
-    "@react-three/fiber": "^8.18.0",
-    "next": "^14.0.4",
+    "@react-three/fiber": "^8.15.12",
+    "@react-three/drei": "^9.96.0",
+    "gsap": "^3.12.2",
+    "next": "14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "three": "^0.159.0"
@@ -21,11 +22,8 @@
     "@types/react": "^18.2.45",
     "@types/react-dom": "^18.2.18",
     "@types/three": "^0.159.0",
-    "autoprefixer": "^10.4.16",
     "eslint": "^8.56.0",
-    "eslint-config-next": "^14.0.4",
-    "postcss": "^8.4.32",
-    "tailwindcss": "^3.4.17",
+    "eslint-config-next": "14.0.4",
     "typescript": "^5.3.3"
   }
 }
