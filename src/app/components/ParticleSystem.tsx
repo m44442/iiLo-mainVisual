@@ -165,6 +165,8 @@ export default function ParticleSystem() {
   // GSAP Animation
  useEffect(() => {
   if (materialRef.current) {
+    const isMobile = window.innerWidth < 768; // モバイル判定
+    const baseSize = isMobile ? 1.5 : 2.0
     // まず初期値を非常に大きくセット
     materialRef.current.uniforms.uPoint01.value = 30.0;
     
@@ -180,7 +182,7 @@ export default function ParticleSystem() {
 
     // パーティクルのサイズも大きくする
     firstAnimation.to(materialRef.current.uniforms.uSize, {
-      value: 2.0,
+      value: baseSize, // モバイルでは1.5、PCでは2.0
       ease: "power1.inOut",
       duration: 2.5,
     }, 0); // 0は同時スタートの意味
