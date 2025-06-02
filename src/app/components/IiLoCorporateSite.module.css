@@ -154,114 +154,139 @@
 }
 
 /* Service Section */
+.serviceBlackSection {
+  padding: 80px 24px;
+  background-color: black;
+  color: white;
+}
+
+.serviceContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.serviceSectionTitle {
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  position: relative;
+  padding-left: 24px;
+  margin: 0;
+  flex-shrink: 0;
+  margin-top: 20px; /* カードの上部と高さを合わせる */
+}
+
+/* 白い円のスタイル */
+.serviceSectionTitle::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #FFFFFF;
+  border-radius: 50%;
+}
+
 .serviceCard {
-  background-color: #f3f4f6;
+  background-color: #e5e7eb;
   color: black;
-  padding: 32px;
-  border-radius: 8px;
+  padding: 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  width: 90%;
+}
+
+.serviceHeaderLeft {
+  flex: 1;
+  max-width: 400px;
 }
 
 .serviceSubtitle {
-  font-size: 14px;
-  color: #6b7280;
-  margin-bottom: 8px;
+  font-size: 16px;
+  color: black;
+  margin-bottom: 16px;
+  line-height: 1.4;
 }
 
 .serviceTitleRow {
   display: flex;
-  align-items: center;
-  margin-bottom: 24px;
+  align-items: flex-end;
+  margin-bottom: 32px;
 }
 
-.serviceIcon {
-  width: 32px;
-  height: 32px;
-  background-color: black;
-  margin-right: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.serviceIconDiamond {
-  width: 16px;
-  height: 16px;
-  background-color: white;
-  transform: rotate(45deg);
-}
-
-.serviceTitle {
-  font-size: 32px;
-  font-weight: 300;
+.serviceLogo {
+  margin-right: 12px;
 }
 
 .serviceTitleSmall {
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 200;
+  color: black;
+  margin-left: -13px;
 }
 
-/* Device Mockups */
+.serviceButton {
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 12px 50px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.serviceButton:hover {
+  background-color: #333;
+}
+
+.serviceHeaderRight {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+}
+
+/* Device Mockups - Next.js Image版 */
 .deviceMockup {
   display: flex;
   justify-content: center;
-  margin-bottom: 24px;
+  align-items: flex-end;
   position: relative;
+  height: 300px;
+  gap: 0;
 }
 
-.phoneMockup {
-  width: 80px;
-  height: 128px;
-  background-color: #d1d5db;
-  border-radius: 8px;
-  border: 2px solid #9ca3af;
-  margin-right: 24px;
+.phoneContainer {
   position: relative;
+  z-index: 2;
+  margin-right: -70px;
 }
 
-.phoneScreen {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  right: 8px;
-  bottom: 8px;
-  background-color: white;
-  border-radius: 4px;
+.phoneImage {
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.25));
 }
 
-.laptopMockup {
-  width: 160px;
-  height: 96px;
-  background-color: #d1d5db;
-  border-radius: 4px;
-  border: 2px solid #9ca3af;
+.laptopContainer {
   position: relative;
+  z-index: 1;
 }
 
-.laptopScreen {
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  right: 4px;
-  bottom: 16px;
-  background-color: white;
-  border-radius: 2px;
+.laptopImage {
+  object-fit: contain;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.25));
 }
 
-.laptopBase {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 64px;
-  height: 8px;
-  background-color: #9ca3af;
-  border-radius: 0 0 4px 4px;
-}
-
-.serviceDescription {
-  font-size: 12px;
-  color: #6b7280;
-  margin-top: 24px;
-}
 
 /* Recruit Section */
 .recruitDescription {
@@ -461,12 +486,141 @@
     padding: 24px;
   }
   
-  .section,
-  .blackSection {
+  .serviceBlackSection {
     padding: 60px 16px;
   }
-  
-  .recruitGrid {
-    grid-template-columns: 1fr;
+
+  .serviceContainer {
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .serviceSectionTitle {
+    font-size: 24px;
+    margin-top: 0;
+    text-align: center;
+    padding-left: 20px;
+  }
+
+  .serviceSectionTitle::before {
+    left: 0;
+  }
+
+  .serviceCard {
+    width: 100%;
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+    margin-bottom: 32px;
+  }
+
+  .serviceHeaderLeft {
+    max-width: none;
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .serviceSubtitle {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .serviceTitleRow {
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .serviceLogo {
+    width: 120px;
+    height: auto;
+  }
+
+  .serviceTitleSmall {
+    font-size: 12px;
+    margin-left: 8px;
+  }
+
+  .serviceButton {
+    display: none;
+  }
+
+  .serviceHeaderRight {
+    padding-left: 0;
+    margin-top: 0;
+    width: 100%;
+  }
+
+  .deviceMockup {
+    transform: scale(0.7);
+    height: 200px;
+    gap: 10px;
+  }
+
+  .phoneContainer {
+    margin-right: -20px;
+  }
+
+  .phoneImage,
+  .laptopImage {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* デバイスモックアップの後にMoreボタンを追加 */
+  .serviceCard::after {
+    content: 'More';
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 10px 40px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 24px;
+    align-self: center;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .serviceDescription {
+    padding: 0 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .serviceDescription p {
+    margin-bottom: 12px;
+  }
+}
+
+/* 更に小さいスクリーン用 */
+@media (max-width: 480px) {
+  .serviceBlackSection {
+    padding: 40px 12px;
+  }
+
+  .serviceSectionTitle {
+    font-size: 20px;
+    padding-left: 16px;
+  }
+
+  .serviceCard {
+    padding: 24px 16px;
+  }
+
+  .serviceLogo {
+    width: 100px;
+  }
+
+  .deviceMockup {
+    transform: scale(0.6);
+    height: 150px;
+  }
+
+  .serviceDescription {
+    font-size: 12px;
+    padding: 0 12px;
   }
 }
