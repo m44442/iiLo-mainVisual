@@ -3,6 +3,7 @@
 import React from 'react';
 import styles from './IiLoCorporateSite.module.css';
 import Header from './Header';
+import Image from 'next/image';
 
 const IiLoCorporateSite = () => {
   return (
@@ -111,13 +112,15 @@ const IiLoCorporateSite = () => {
               </div>
               
               <div className={styles.serviceTitleRow}>
-                <div className={styles.serviceIcon}>
-                  <div className={styles.serviceIconDiamond}></div>
                 </div>
                 <h3 className={styles.serviceTitle}>
-                  DiiLo <span className={styles.serviceTitleSmall}>ディーロ</span>
+                  <Image
+                    src="/images/IILo-DIILo_logo_DIILo_logo-b.png"
+                    alt="DiiLo Logo"
+                    width={200}
+                    height={100}
+                  />
                 </h3>
-              </div>
             </div>
             
             {/* Device mockup */}
