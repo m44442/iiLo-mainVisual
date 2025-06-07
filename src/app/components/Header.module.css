@@ -209,21 +209,20 @@
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* ダークモード対応（オプション） */
+/* ダークモード対応 */
 @media (prefers-color-scheme: dark) {
   .header.hasBackground {
-    background-color: rgba(0, 0, 0, 0.8);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
   
-  .logo,
-  .navItem,
-  .menuLine {
-    color: white;
-    background-color: white;
+  .header.scrolled {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   
-  .menuItem {
-    color: black;  /* モバイルメニューは白背景なので黒文字 */
+  .mobileMenu {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 }

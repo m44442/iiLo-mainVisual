@@ -24,73 +24,83 @@ const IiLoCorporateSite = () => {
       {/* Mission Section */}
       <section id="mission" className={styles.section}>
         <div className={styles.container1024}>
-          <h2 className={styles.sectionTitle}>
-            iiLoの<br />
-            Mission<span style={{ fontSize: '18px' }}>は</span>
-          </h2>
-          
-          {/* 5つの円形要素 */}
-          <div className={styles.circleContainer}>
-            <div className={styles.circleRowTop}>
-              <div className={styles.circle}>
-                <div className={styles.circleTextLarge}>AI</div>
-              </div>
-              <div className={styles.circle}>
-                <div>
-                  <div className={styles.circleText}>Web</div>
-                  <div className={styles.circleText}>アプリケーション</div>
-                  <div className={styles.circleText}>開発</div>
-                </div>
+          {/* Header Section */}
+          <div className={styles.missionHeader}>
+            <div className={styles.missionLogoContainer}>
+              <Image
+                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                alt="IILO Logo"
+                width={440}
+                height={220}
+                className={styles.missionLogo}
+              />
+              <div className={styles.missionTextContainer}>
+                <div className={styles.missionSubtitle}>イーロの</div>
+                <div className={styles.missionMainTitle}>Mission<span className={styles.missionTitleSmall}>は</span></div>
               </div>
             </div>
-            
-            <div className={styles.circleRowBottom}>
-              <div className={styles.circle}>
-                <div className={styles.circleText}>クラウドインフラ</div>
+          </div>
+          
+          {/* Service Areas - 5 circles in horizontal layout */}
+          <div className={styles.missionCircleContainer}>
+            <div className={styles.missionCircle}>
+              <div className={styles.missionCircleText}>AI</div>
+            </div>
+            <div className={styles.missionCircle}>
+              <div className={styles.missionCircleText}>
+                Web<br />アプリケーション<br />開発
               </div>
-              <div className={styles.circle}>
-                <div>
-                  <div className={styles.circleText}>セキュリティ・</div>
-                  <div className={styles.circleText}>プライバシー設計</div>
-                </div>
+            </div>
+            <div className={styles.missionCircle}>
+              <div className={styles.missionCircleText}>
+                クラウド<br />インフラ
               </div>
-              <div className={styles.circle}>
-                <div>
-                  <div className={styles.circleText}>API・</div>
-                  <div className={styles.circleText}>外部連携基盤</div>
-                </div>
+            </div>
+            <div className={styles.missionCircle}>
+              <div className={styles.missionCircleText}>
+                セキュリティ・<br />プライバシー<br />設計
+              </div>
+            </div>
+            <div className={styles.missionCircle}>
+              <div className={styles.missionCircleText}>
+                API・<br />外部連携<br />基盤
               </div>
             </div>
           </div>
 
-          <div className={styles.textBox}>
-            <h3 className={styles.textBoxTitle}>
+          {/* Catchphrase Section */}
+          <div className={styles.missionCatchphrase}>
+            <h3 className={styles.missionCatchphraseText}>
               すべての業界に<br />
               "もうひとりのAIスタッフ"を提供する
             </h3>
+          </div>
+          
+          {/* Description Section */}
+          <div className={styles.missionDescription}>
+            <p className={styles.missionParagraph}>
+              IILo（イーロ）は、AI・Web技術・クラウドインフラを用いて、<br />
+              業界特化型のスマートSaaSを開発・提供するテクノロジーカンパニーです。
+            </p>
             
-            <div>
-              <p className={styles.textContent}>
-                IILo（イーロ）は、AI・Web技術・クラウドインフラを用いて、<br />
-                業界特化型のスマートSaaSを開発・提供するテクノロジーカンパニーです。
-              </p>
-              
-              <p className={styles.textContent}>
-                私たちは、現場で本当に使われるプロダクトにこだわり、<br />
-                医療・教育・店舗業などの現場に寄り添ったプロダクト設計を行っています。
-              </p>
-              
-              <p className={styles.textContent}>
-                第一弾として、歯科業界に特化したLINE連携型SaaS「DiiLo（ディーロ）」をリリース。
-              </p>
-              
-              <p className={styles.textContent}>
-                今後も、現場に根ざしたテクノロジーを届けることで、<br />
-                すべての業界に"もうひとりのAIスタッフ"を提供することを目指しています。
-              </p>
-            </div>
+            <p className={styles.missionParagraph}>
+              私たちは、現場で本当に使われるプロダクトにこだわり、<br />
+              医療・教育・店舗業などの現場に寄り添ったプロダクト設計を行っています。
+            </p>
             
-            <button className={styles.button}>
+            <p className={styles.missionParagraph}>
+              第一弾として、歯科業界に特化したLINE連携型SaaS「DiiLo（ディーロ）」をリリース。
+            </p>
+            
+            <p className={styles.missionParagraph}>
+              今後も、現場に根ざしたテクノロジーを届けることで、<br />
+              すべての業界に"もうひとりのAIスタッフ"を提供することを目指しています。
+            </p>
+          </div>
+          
+          {/* Footer */}
+          <div className={styles.missionFooter}>
+            <button type="button" className={styles.missionButton}>
               More
             </button>
           </div>
@@ -168,8 +178,8 @@ const IiLoCorporateSite = () => {
       {/* Recruit Section */}
       <section id="recruit" className={styles.section}>
         <div className={styles.container1024}>
-          <h2 className={styles.sectionTitleCenter}>
-            • Recruit
+          <h2 className={styles.sectionTitleWhiteBg}>
+            Recruit
           </h2>
           
           <div className={styles.recruitDescription}>
@@ -208,8 +218,8 @@ const IiLoCorporateSite = () => {
       {/* Contact Section */}
       <section id="contact" className={styles.blackSection}>
         <div className={styles.container1024}>
-          <h2 className={styles.sectionTitleCenter}>
-            • Contact
+          <h2 className={styles.serviceSectionTitle}>
+            Contact
           </h2>
           
           <div style={{ textAlign: 'center' }}>
@@ -227,8 +237,8 @@ const IiLoCorporateSite = () => {
       {/* Company Section */}
       <section className={styles.section}>
         <div className={styles.container1024}>
-          <h2 className={styles.sectionTitleCenter}>
-            • Company
+          <h2 className={styles.sectionTitleWhiteBg}>
+            Company
           </h2>
           
           <div className={styles.companyTable}>
@@ -259,8 +269,8 @@ const IiLoCorporateSite = () => {
       {/* News Section */}
       <section id="news" className={styles.blackSection}>
         <div className={styles.container1024}>
-          <h2 className={styles.sectionTitleCenter}>
-            • News
+          <h2 className={styles.serviceSectionTitle}>
+            News
           </h2>
           
           
@@ -291,33 +301,54 @@ const IiLoCorporateSite = () => {
       <footer className={styles.footer}>
         <div className={styles.footerContainer}>
           <div className={styles.footerGrid}>
-            <div className={styles.footerColumn}>
-              <h3>iiLo</h3>
+            {/* Left Section - Logo */}
+            <div className={styles.footerLeft}>
+              <Image
+                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                alt="IILO Logo"
+                width={80}
+                height={40}
+                className={styles.footerLogo}
+              />
+              <div className={styles.copyright}>
+                ©2025 - IILO
+              </div>
             </div>
-            <div className={styles.footerColumn}>
-              <h4>Mission</h4>
-              <ul className={styles.footerList}>
-                <li><a href="#mission" className={styles.footerLink}>Overview</a></li>
-                <li><a href="#service" className={styles.footerLink}>Service</a></li>
-                <li><a href="#news" className={styles.footerLink}>News</a></li>
-              </ul>
+            
+            {/* Center Section - Navigation Links */}
+            <div className={styles.footerCenter}>
+              <div className={styles.footerNavLeft}>
+                <ul className={styles.footerList}>
+                  <li><a href="#mission" className={styles.footerLink}>Mission</a></li>
+                  <li><a href="#service" className={styles.footerLink}>Service</a></li>
+                  <li><a href="#recruit" className={styles.footerLink}>Recruit</a></li>
+                </ul>
+              </div>
+              <div className={styles.footerNavRight}>
+                <ul className={styles.footerList}>
+                  <li><a href="#contact" className={styles.footerLink}>Contact</a></li>
+                  <li><a href="#news" className={styles.footerLink}>News</a></li>
+                </ul>
+              </div>
             </div>
-            <div className={styles.footerColumn}>
-              <h4>Contact</h4>
-              <ul className={styles.footerList}>
-                <li><a href="#contact" className={styles.footerLink}>Contact</a></li>
-                <li><a href="#company" className={styles.footerLink}>Company</a></li>
-              </ul>
+            
+            {/* Right Section - SNS and Page Top */}
+            <div className={styles.footerRight}>
+              <div className={styles.footerRightTop}>
+                <ul className={styles.socialList}>
+                  <li><a href="#" className={styles.socialLink}>X</a></li>
+                  <li><a href="#" className={styles.socialLink}>Instagram</a></li>
+                  <li><a href="#" className={styles.socialLink}>LINE</a></li>
+                </ul>
+                <button 
+                  type="button"
+                  className={styles.pageTopButton}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
+                  Pagetop
+                </button>
+              </div>
             </div>
-            <div className={styles.footerColumn}>
-              <ul className={styles.footerList}>
-                <li><a href="#recruit" className={styles.footerLink}>Link</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className={styles.copyright}>
-            © 2024 iiLo Inc. All rights reserved.
           </div>
         </div>
       </footer>

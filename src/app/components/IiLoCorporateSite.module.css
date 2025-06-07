@@ -38,114 +38,29 @@
   color: white;
 }
 
-.sectionTitle {
-  font-size: 48px;
-  font-weight: 300;
-  margin-bottom: 64px;
-  text-align: left;
-}
-
-.sectionTitleCenter {
-  font-size: 48px;
-  font-weight: 300;
-  margin-bottom: 64px;
-  text-align: center;
-}
 
 .container1024 {
   max-width: 1024px;
   margin: 0 auto;
 }
 
-/* Mission Section */
-.circleContainer {
-  position: relative;
-  max-width: 600px;
-  margin: 0 auto 64px;
-}
 
-.circleRowTop {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  margin-bottom: 32px;
-}
 
-.circleRowBottom {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-}
-
-.circle {
-  width: 128px;
-  height: 128px;
-  background-color: #f3f4f6;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.circleText {
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.circleTextLarge {
-  font-size: 14px;
-  font-weight: 500;
-}
-
-.textBox {
-  background-color: white;
-  padding: 32px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.textBoxTitle {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: 24px;
-  line-height: 1.4;
-}
-
-.textContent {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-/* Buttons */
-.button {
+/* Base Button Styles */
+.buttonBase {
   padding: 12px 32px;
-  background-color: black;
-  color: white;
   border: none;
   border-radius: 24px;
   font-size: 14px;
   cursor: pointer;
-  margin-top: 32px;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #333;
+  transition: all 0.3s ease;
 }
 
 .buttonWhite {
-  padding: 12px 32px;
+  composes: buttonBase;
   background-color: transparent;
   color: white;
   border: 1px solid white;
-  border-radius: 24px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .buttonWhite:hover {
@@ -173,8 +88,8 @@
   font-weight: 600;
   color: white;
   position: relative;
-  padding-left: 24px;
   margin: 0;
+  margin-left: -40px;
   flex-shrink: 0;
   margin-top: 20px; /* カードの上部と高さを合わせる */
 }
@@ -185,17 +100,42 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  left: 0;
+  left: -15px;
   top: 50%;
   transform: translateY(-50%);
   background: #FFFFFF;
   border-radius: 50%;
 }
 
+/* 白背景用のセクションタイトル */
+.sectionTitleWhiteBg {
+  font-size: 30px;
+  font-weight: 600;
+  color: black;
+  position: relative;
+  margin: 0;
+  margin-left: -40px;
+  flex-shrink: 0;
+  margin-top: 20px;
+}
+
+/* 黒い円のスタイル */
+.sectionTitleWhiteBg::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  left: -15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000000;
+  border-radius: 50%;
+}
+
 .serviceCard {
   background-color: #e5e7eb;
   color: black;
-  padding: 40px;
+  padding: 30px;
   border-radius: 12px;
   display: flex;
   justify-content: space-between;
@@ -234,14 +174,10 @@
 }
 
 .serviceButton {
+  composes: buttonBase;
   background-color: black;
   color: white;
-  border: none;
-  border-radius: 24px;
   padding: 12px 50px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: all 0.3s ease;
 }
 
 .serviceButton:hover {
@@ -326,11 +262,11 @@
 }
 
 .recruitButton {
-  padding: 8px 16px;
   background-color: transparent;
   color: white;
   border: 1px solid white;
   border-radius: 20px;
+  padding: 8px 16px;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -402,61 +338,240 @@
 /* Footer */
 .footer {
   padding: 48px 24px;
-  background-color: #f3f4f6;
+  background-color: #f8f8f8;
+  width: 100%;
 }
 
 .footerContainer {
-  max-width: 1536px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .footerGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 24px;
-  margin-bottom: 32px;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 48px;
+  align-items: start;
 }
 
-.footerColumn h3 {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: 16px;
+/* Left Section */
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.footerColumn h4 {
-  font-weight: 500;
-  margin-bottom: 12px;
-  font-size: 14px;
+.footerLogo {
+  object-fit: contain;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Center Section */
+.footerCenter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.footerNavLeft,
+.footerNavRight {
+  display: flex;
+  flex-direction: column;
 }
 
 .footerList {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.footerList li {
-  margin-bottom: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .footerLink {
-  font-size: 12px;
-  color: #6b7280;
+  font-size: 16px;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .footerLink:hover {
-  color: #1f2937;
+  color: #6b7280;
 }
 
-.copyright {
-  text-align: center;
+/* Right Section */
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footerRightTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.socialList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pageTopButton {
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pageTopButton:hover {
+  background-color: #333;
+}
+
+.socialLink {
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.socialLink:hover {
+  color: #6b7280;
+}
+
+/* Mission Section New Design */
+.missionHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 60px;
+  margin-top: 80px;
+}
+
+.missionLogoContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.missionLogo {
+  object-fit: contain;
+  display: block;
+}
+
+.missionTextContainer {
+  position: absolute;
+  bottom: -90px;
+  left: 0;
+  right: 0;
+}
+
+.missionSubtitle {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  text-align: left;
+}
+
+.missionMainTitle {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  color: #000000;
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+.missionTitleSmall {
+  font-size: 48px;
+}
+
+.missionCircleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: -20px;
+  margin: 60px 0;
+  overflow-x: auto;
+  padding: 20px 0;
+}
+
+.missionCircle {
+  width: 150px;
+  height: 150px;
+  border: 2px solid #e5e7eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  flex-shrink: 0;
+  margin: 0 -10px;
+}
+
+.missionCircleText {
   font-size: 12px;
-  color: #9ca3af;
-  border-top: 1px solid #e5e7eb;
-  padding-top: 24px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.3;
+  color: black;
+  padding: 10px;
+}
+
+.missionCatchphrase {
+  text-align: center;
+  margin: 80px 0 60px 0;
+}
+
+.missionCatchphraseText {
+  font-size: 28px;
+  font-weight: 300;
+  color: black;
+  line-height: 1.4;
+}
+
+.missionDescription {
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.missionParagraph {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 24px;
+  color: black;
+  text-align: left;
+}
+
+.missionFooter {
+  text-align: center;
+}
+
+.missionButton {
+  composes: buttonBase;
+  background-color: black;
+  color: white;
+}
+
+.missionButton:hover {
+  background-color: #333;
 }
 
 /* Responsive Design */
@@ -465,26 +580,84 @@
     font-size: 24px;
   }
   
-  .sectionTitle,
-  .sectionTitleCenter {
-    font-size: 32px;
-    margin-bottom: 48px;
+  /* Footer responsive */
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
   }
   
-  .circleRowTop,
-  .circleRowBottom {
-    flex-wrap: wrap;
+  .footerCenter {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .footerRight {
+    align-items: center;
+  }
+  
+  .footerRightTop {
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
   }
   
-  .circle {
-    width: 100px;
-    height: 100px;
+  .socialList {
+    align-items: center;
   }
   
-  .textBox {
-    padding: 24px;
+  /* Mission responsive */
+  .missionHeader {
+    margin-top: 40px;
   }
+  
+  .missionLogo {
+    width: 280px;
+    height: 140px;
+  }
+  
+  .missionTextContainer {
+    bottom: -60px;
+  }
+  
+  .missionSubtitle {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
+  
+  .missionMainTitle {
+    font-size: 28px;
+  }
+  
+  .missionTitleSmall {
+    font-size: 28px;
+  }
+  
+  .missionCircleContainer {
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 40px 0;
+  }
+  
+  .missionCircle {
+    width: 120px;
+    height: 120px;
+    margin: 0;
+  }
+  
+  .missionCircleText {
+    font-size: 11px;
+  }
+  
+  .missionCatchphraseText {
+    font-size: 22px;
+  }
+  
+  .missionParagraph {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
   
   .serviceBlackSection {
     padding: 60px 16px;

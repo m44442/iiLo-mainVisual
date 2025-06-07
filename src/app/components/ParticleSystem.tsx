@@ -12,6 +12,8 @@ attribute vec3 two;
 uniform float uPoint01;
 uniform float uTime;
 uniform float uSize;
+uniform vec2 uMouse;
+uniform float uScrollY;
 
 uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
@@ -82,10 +84,40 @@ float PI = 3.14159265;
 void main() {
 //mix関数で線形補完
  vec3 morphing = mix(position, two, uPoint01);
- //シンプレックスノイズ
+ //シンプレックスノイズ（元の動きを保持）
  morphing.x = snoise(normalize(morphing.xy)) * sin(morphing.y + uTime * PI);
  morphing.y = snoise(normalize(morphing.xy)) * cos(morphing.x + uTime * PI);
  morphing.z = morphing.z + snoise(normalize(morphing.xy)) * sin(morphing.y + uTime * PI);
+
+ // モダンなマウスインタラクション
+ vec2 mousePos = uMouse * 10.0; // マウス座標をワールド座標に変換
+ vec2 particlePos = morphing.xy;
+ vec2 mouseToParticle = particlePos - mousePos;
+ float distanceToMouse = length(mouseToParticle);
+ 
+ // マウス周辺での引力/斥力効果（距離に応じて減衰）
+ float mouseRange = 15.0;
+ if (distanceToMouse < mouseRange) {
+   float strength = (mouseRange - distanceToMouse) / mouseRange;
+   vec2 direction = normalize(mouseToParticle);
+   
+   // 引力効果（マウスに向かって引き寄せられる）
+   float attraction = strength * 0.3 * sin(uTime * PI * 2.0);
+   morphing.xy -= direction * attraction;
+   
+   // 波紋効果（マウス周辺で波状の動き）
+   float ripple = sin(distanceToMouse * 0.5 - uTime * PI * 3.0) * strength * 0.2;
+   morphing.z += ripple;
+ }
+ 
+ // グローバルなマウス影響（全体的な流動効果）
+ float globalInfluence = length(uMouse) * 0.1;
+ morphing.x += globalInfluence * sin(uTime * PI + morphing.y);
+ morphing.y += globalInfluence * cos(uTime * PI + morphing.x);
+ 
+ // スクロール効果（完璧との評価を維持）
+ float scrollInfluence = uScrollY * 0.01;
+ morphing.y += scrollInfluence * cos(uTime * PI + morphing.y);
 
  gl_Position = projectionMatrix * modelViewMatrix * vec4(morphing, 1.0 );
  gl_PointSize = uSize;
@@ -108,6 +140,8 @@ void main() {
 export default function ParticleSystem() {
   const materialRef = useRef<THREE.RawShaderMaterial>(null)
   const pointsRef = useRef<THREE.Points>(null)
+  const mouseRef = useRef({ x: 0, y: 0 })
+  const scrollRef = useRef(0)
 
   const { geometry, material } = useMemo(() => {
     const particleNumber = 100000
@@ -151,6 +185,8 @@ export default function ParticleSystem() {
       uPoint01: { value: 1.0 }, // 1.0で散らばった状態に
       uTime: { value: 0.0 },
       uSize: { value: 0.05 }, // 少し小さめサイズから開始
+      uMouse: { value: new THREE.Vector2(0, 0) },
+      uScrollY: { value: 0 },
     },
     transparent: true,
     blending: THREE.NormalBlending,
@@ -161,6 +197,26 @@ export default function ParticleSystem() {
     material: shaderMaterial
   }
   }, [])
+
+  // Mouse and Scroll Event Listeners (独立したuseEffect)
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1
+      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1
+    }
+
+    const handleScroll = () => {
+      scrollRef.current = window.scrollY
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('scroll', handleScroll)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, []) // 依存関係なし、一度だけ実行
 
   // GSAP Animation
  useEffect(() => {
@@ -218,6 +274,9 @@ export default function ParticleSystem() {
   useFrame(() => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value += 0.0005
+      // マウスとスクロールの値をシェーダーに送信
+      materialRef.current.uniforms.uMouse.value.set(mouseRef.current.x, mouseRef.current.y)
+      materialRef.current.uniforms.uScrollY.value = scrollRef.current
     }
   })
 
@@ -232,6 +291,8 @@ export default function ParticleSystem() {
         uPoint01: { value: 30.0 }, // 散らばった状態から開始
         uTime: { value: 0.0 },
         uSize: { value: 2.0 }, // 少し小さめから開始
+        uMouse: { value: new THREE.Vector2(0, 0) },
+        uScrollY: { value: 0 },
       }}
       transparent
       blending={THREE.NormalBlending}
