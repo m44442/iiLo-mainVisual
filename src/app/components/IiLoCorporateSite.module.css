@@ -473,34 +473,95 @@
   display: block;
 }
 
+/* IILO カスタムロゴ */
+.iiloLogo {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  font-size: 120px;
+  font-weight: 900;
+  will-change: transform;
+}
+
+.logoI1, .logoI2 {
+  width: 23px;
+  height: 190px;
+  background-color: black;
+  margin-right: 20px;
+  will-change: transform;
+}
+
+.logoL {
+  width: 80px;
+  height: 20px;
+  background-color: black;
+  position: relative;
+  will-change: transform;
+}
+
+.logoL::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 190px;
+  background-color: var(--before-bg, black);
+}
+
+.logoO {
+  width: 150px;
+  height: 150px;
+  border: 20px solid black;
+  border-radius: 50%;
+  background: transparent;
+  margin-left: -20px;
+  will-change: transform;
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  .logoI1, .logoI2, .logoL, .logoL::before {
+    background-color: black;
+  }
+  
+  .logoO {
+    border-color: black;
+  }
+}
+
 .missionTextContainer {
   position: absolute;
-  bottom: -90px;
+  bottom: -115px;
   left: 0;
   right: 0;
+  ;
 }
 
 .missionSubtitle {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 700;
   color: #000000;
   letter-spacing: 0.5px;
-  margin-bottom: 8px;
+  margin-bottom: 3px;
   text-align: left;
+  will-change: transform;
 }
 
 .missionMainTitle {
   font-family: 'Noto Sans JP', sans-serif;
   font-size: 48px;
-  font-weight: 400;
+  font-weight: 700;
   color: #000000;
   letter-spacing: 1px;
   text-align: right;
+  will-change: transform;
 }
 
 .missionTitleSmall {
   font-size: 48px;
+  will-change: transform;
 }
 
 .missionCircleContainer {
@@ -508,7 +569,7 @@
   justify-content: center;
   align-items: center;
   gap: -20px;
-  margin: 60px 0;
+  margin: 200px 0;
   overflow-x: auto;
   padding: 20px 0;
 }
@@ -615,18 +676,48 @@
     width: 280px;
     height: 140px;
   }
+
+  /* IILO ロゴモバイル対応 */
+  .iiloLogo {
+    gap: 12px;
+    font-size: 80px;
+  }
+
+  .logoI1, .logoI2 {
+    width: 12px;
+    height: 100px;
+  }
+
+  .logoL {
+    width: 53px;
+    height: 8px;
+  }
+
+  .logoL::before {
+    width: 8px;
+    height: 100px;
+  }
+
+  .logoO {
+    width: 80px;
+    height: 80px;
+    border: 12px solid black;
+    margin-bottom: 27px;
+  }
   
   .missionTextContainer {
-    bottom: -60px;
+    bottom: -75px;
   }
   
   .missionSubtitle {
     font-size: 16px;
-    margin-bottom: 6px;
+    margin-bottom: 1px;
+    font-weight: 700;
   }
   
   .missionMainTitle {
     font-size: 28px;
+    font-weight: 700;
   }
   
   .missionTitleSmall {

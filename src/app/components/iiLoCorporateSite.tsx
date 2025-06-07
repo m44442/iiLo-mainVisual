@@ -1,11 +1,221 @@
 'use client'
 
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import styles from './IiLoCorporateSite.module.css';
 import Header from './Header';
 import Image from 'next/image';
+import { gsap } from 'gsap';
 
 const IiLoCorporateSite = () => {
+  // スクロール連動アニメーション用のrefs
+  const missionSectionRef = useRef<HTMLElement>(null);
+  const logoI1Ref = useRef<HTMLDivElement>(null);
+  const logoI2Ref = useRef<HTMLDivElement>(null);
+  const logoLRef = useRef<HTMLDivElement>(null);
+  const logoORef = useRef<HTMLDivElement>(null);
+  const missionSubtitleRef = useRef<HTMLDivElement>(null);
+  const missionMainTitleRef = useRef<HTMLDivElement>(null);
+  const missionTitleSmallRef = useRef<HTMLSpanElement>(null);
+  const missionHeaderRef = useRef<HTMLDivElement>(null);
+  const blackOverlayRef = useRef<HTMLDivElement>(null);
+  const diagonalLine1Ref = useRef<HTMLDivElement>(null);
+  const diagonalLine2Ref = useRef<HTMLDivElement>(null);
+  const diagonalLine3Ref = useRef<HTMLDivElement>(null);
+
+  // 文字出現アニメーション実装
+  useEffect(() => {
+    const elements = [
+      logoI1Ref.current,
+      logoI2Ref.current,
+      logoLRef.current,
+      logoORef.current,
+      missionSubtitleRef.current,
+      missionMainTitleRef.current,
+      missionTitleSmallRef.current,
+      missionHeaderRef.current
+    ];
+
+    if (elements.some(el => !el)) return;
+
+    // 初期状態設定：全要素を非表示状態に設定
+    gsap.set([logoI1Ref.current, logoI2Ref.current, logoLRef.current, logoORef.current], {
+      opacity: 0,
+      y: 80,
+      scale: 0.95
+    });
+
+    gsap.set([missionSubtitleRef.current, missionMainTitleRef.current, missionTitleSmallRef.current], {
+      opacity: 0,
+      y: 50,
+      scale: 0.9
+    });
+
+    let hasAnimated = false;
+
+    // Intersection Observer設定
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          
+          // アニメーション実行
+          const executeAnimation = () => {
+            // 第1段階: ロゴパーツ順次出現（I → I → L → O）- 横から激しく飛び出し
+            const logoElements = [logoI1Ref, logoI2Ref, logoLRef, logoORef];
+            logoElements.forEach((element, index) => {
+              // 初期状態：新幹線のように遠くから高速で飛び出し
+              gsap.set(element.current, {
+                opacity: 0,
+                x: -800,
+                y: 80,
+                scale: 0.3,
+                rotation: -15,
+                filter: "blur(20px)"
+              });
+
+              // 新幹線のように激しく高速で飛び出すアニメーション
+              gsap.to(element.current, {
+                opacity: 1,
+                x: 0,
+                y: 0,
+                scale: 1,
+                rotation: 0,
+                filter: "blur(0px)",
+                duration: 0.8,
+                delay: index * 0.05,
+                ease: "power4.out"
+              });
+
+              // 着地時のインパクト効果
+              gsap.to(element.current, {
+                scale: 1.2,
+                duration: 0.1,
+                delay: index * 0.05 + 0.8,
+                ease: "power2.out"
+              });
+
+              gsap.to(element.current, {
+                scale: 1,
+                duration: 0.2,
+                delay: index * 0.05 + 0.9,
+                ease: "elastic.out(1.5, 0.3)"
+              });
+            });
+
+            // 第2段階: 「イーロの」出現（0.8秒後）
+            gsap.to(missionSubtitleRef.current, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              delay: 0.8,
+              ease: "power1.out"
+            });
+
+            // 第3段階: 「Mission」出現（1.2秒後）
+            gsap.to(missionMainTitleRef.current, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.7,
+              delay: 1.2,
+              ease: "power2.out"
+            });
+
+            // 第4段階: 「は」出現（1.6秒後）
+            gsap.to(missionTitleSmallRef.current, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.4,
+              delay: 1.6,
+              ease: "back.out(1.2)"
+            });
+
+            // 第5段階: 激しい斜め線インパクトエフェクト（1.5秒後）
+            setTimeout(() => {
+              // 複数の斜め線が連続で出現
+              const diagonalLines = [diagonalLine1Ref, diagonalLine2Ref, diagonalLine3Ref];
+              
+              diagonalLines.forEach((lineRef, index) => {
+                if (lineRef.current) {
+                  gsap.set(lineRef.current, {
+                    opacity: 1,
+                    scaleX: 0,
+                    rotation: 45 + (index * 30)
+                  });
+                  
+                  gsap.to(lineRef.current, {
+                    scaleX: 1,
+                    duration: 0.15,
+                    delay: index * 0.1,
+                    ease: "power4.out"
+                  });
+                  
+                  gsap.to(lineRef.current, {
+                    opacity: 0,
+                    duration: 0.2,
+                    delay: index * 0.1 + 0.15
+                  });
+                }
+              });
+
+              // 文字を一旦小さくする
+              gsap.to([logoI1Ref.current, logoI2Ref.current, logoLRef.current, logoORef.current], {
+                scale: 0.6,
+                duration: 0.25,
+                ease: "power3.out"
+              });
+
+              gsap.to([missionSubtitleRef.current, missionMainTitleRef.current, missionTitleSmallRef.current], {
+                scale: 0.6,
+                duration: 0.25,
+                ease: "power3.out"
+              });
+
+              // 元のサイズに戻す（より激しく）
+              gsap.to([logoI1Ref.current, logoI2Ref.current, logoLRef.current, logoORef.current], {
+                scale: 1,
+                duration: 0.4,
+                delay: 0.4,
+                ease: "back.out(2.5)"
+              });
+
+              gsap.to([missionSubtitleRef.current, missionMainTitleRef.current, missionTitleSmallRef.current], {
+                scale: 1,
+                duration: 0.4,
+                delay: 0.4,
+                ease: "back.out(2.5)"
+              });
+
+            }, 1500);
+
+            // 完了後エフェクト（3秒後に微妙な浮遊効果開始）
+            setTimeout(() => {
+              gsap.to(missionHeaderRef.current, {
+                y: -2,
+                duration: 3,
+                ease: "power1.inOut",
+                repeat: -1,
+                yoyo: true
+              });
+            }, 3000);
+          };
+
+          executeAnimation();
+          observer.disconnect();
+        }
+      });
+    }, { 
+      threshold: 0.7
+    });
+
+    if (missionHeaderRef.current) {
+      observer.observe(missionHeaderRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
   return (
     <div className={styles.container}>
       {/* Header Component */}
@@ -22,21 +232,71 @@ const IiLoCorporateSite = () => {
       </section>
 
       {/* Mission Section */}
-      <section id="mission" className={styles.section}>
+      <section id="mission" className={styles.section} ref={missionSectionRef}>
         <div className={styles.container1024}>
           {/* Header Section */}
-          <div className={styles.missionHeader}>
+          <div className={styles.missionHeader} ref={missionHeaderRef}>
             <div className={styles.missionLogoContainer}>
-              <Image
-                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
-                alt="IILO Logo"
-                width={440}
-                height={220}
-                className={styles.missionLogo}
-              />
+              {/* 斜め線エフェクト1 */}
+              <div 
+                ref={diagonalLine1Ref}
+                style={{
+                  position: 'absolute',
+                  top: '40%',
+                  left: '30%',
+                  width: '400px',
+                  height: '6px',
+                  backgroundColor: '#ff6b6b',
+                  opacity: 0,
+                  transformOrigin: 'center left',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10
+                }}
+              ></div>
+              
+              {/* 斜め線エフェクト2 */}
+              <div 
+                ref={diagonalLine2Ref}
+                style={{
+                  position: 'absolute',
+                  top: '60%',
+                  left: '70%',
+                  width: '350px',
+                  height: '5px',
+                  backgroundColor: '#4ecdc4',
+                  opacity: 0,
+                  transformOrigin: 'center left',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10
+                }}
+              ></div>
+              
+              {/* 斜め線エフェクト3 */}
+              <div 
+                ref={diagonalLine3Ref}
+                style={{
+                  position: 'absolute',
+                  top: '30%',
+                  left: '80%',
+                  width: '300px',
+                  height: '4px',
+                  backgroundColor: '#ffe66d',
+                  opacity: 0,
+                  transformOrigin: 'center left',
+                  transform: 'translate(-50%, -50%)',
+                  zIndex: 10
+                }}
+              ></div>
+              
+              <div className={styles.iiloLogo}>
+                <div className={styles.logoI1} ref={logoI1Ref}></div>
+                <div className={styles.logoI2} ref={logoI2Ref}></div>
+                <div className={styles.logoL} ref={logoLRef}></div>
+                <div className={styles.logoO} ref={logoORef}></div>
+              </div>
               <div className={styles.missionTextContainer}>
-                <div className={styles.missionSubtitle}>イーロの</div>
-                <div className={styles.missionMainTitle}>Mission<span className={styles.missionTitleSmall}>は</span></div>
+                <div className={styles.missionSubtitle} ref={missionSubtitleRef}>イーロの</div>
+                <div className={styles.missionMainTitle} ref={missionMainTitleRef}>Mission<span className={styles.missionTitleSmall} ref={missionTitleSmallRef}>は</span></div>
               </div>
             </div>
           </div>
