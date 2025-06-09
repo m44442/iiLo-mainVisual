@@ -26,6 +26,7 @@
   max-width: 400px;
 }
 
+
 /* Sections */
 .section {
   padding: 80px 24px;
@@ -457,33 +458,325 @@
 /* Mission Section New Design */
 .missionHeader {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-bottom: 60px;
   margin-top: 80px;
-}
-
-.missionLogoContainer {
   position: relative;
-  display: inline-block;
 }
 
-.missionLogo {
-  object-fit: contain;
-  display: block;
+/* IILO 5段階アニメーション */
+.iiloAnimationContainer {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 40px;
 }
 
-/* IILO カスタムロゴ */
-.iiloLogo {
+/* Phase 1: 稲妻スライド */
+.phase1Container {
+  position: relative;
+}
+
+.afterimage1, .afterimage2, .mainSlide {
+  position: absolute;
+  background-color: black;
+  padding: 8px 16px;
+  top: -100px;
+}
+
+.afterimage1 {
+  opacity: 0.3;
+  filter: blur(4px);
+  animation: slideAfterimage1 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.afterimage2 {
+  opacity: 0.2;
+  filter: blur(8px);
+  animation: slideAfterimage2 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.mainSlide {
+  animation: slideRight 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Phase 1: 稲妻スライドロゴデザイン（最終サイズと同じ） */
+.compressedLogoContainer {
   display: flex;
   align-items: flex-end;
   gap: 20px;
-  font-size: 120px;
-  font-weight: 900;
   will-change: transform;
 }
 
-.logoI1, .logoI2 {
+.compressedI1, .compressedI2 {
+  width: 23px;
+  height: 190px;
+  background-color: white;
+  margin-right: 20px;
+}
+
+.compressedL {
+  width: 80px;
+  height: 20px;
+  background-color: white;
+  position: relative;
+}
+
+.compressedL::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 190px;
+  background-color: white;
+}
+
+.compressedO {
+  width: 150px;
+  height: 150px;
+  border: 20px solid white;
+  border-radius: 50%;
+  background: transparent;
+  margin-left: -20px;
+}
+
+@keyframes slideRight {
+  from { transform: translateX(-500px); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideAfterimage1 {
+  from { transform: translateX(-450px); }
+  to { transform: translateX(-50px); }
+}
+
+@keyframes slideAfterimage2 {
+  from { transform: translateX(-400px); }
+  to { transform: translateX(-100px); }
+}
+
+/* Phase 3: 上下交互スライド + 芸術エフェクト */
+.phase3Container {
+  position: relative;
+}
+
+.effectsContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 128px;
+}
+
+/* 文字周りに配置されたエフェクト */
+.effectLine1 {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: black;
+  top: 8px;
+  left: 48px;
+  transform: rotate(15deg);
+  animation: flash 0.3s ease-in-out;
+}
+
+.effectLine2 {
+  position: absolute;
+  width: 64px;
+  height: 2px;
+  background: black;
+  top: 24px;
+  left: 80px;
+  transform: rotate(-30deg);
+  animation: flash 0.3s ease-in-out 0.075s;
+}
+
+.effectCircle1 {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border: 8px solid black;
+  border-radius: 50%;
+  top: 32px;
+  left: 128px;
+  animation: flash 0.3s ease-in-out 0.15s;
+}
+
+.effectLine3 {
+  position: absolute;
+  width: 96px;
+  height: 2px;
+  background: black;
+  bottom: 32px;
+  left: 64px;
+  transform: rotate(45deg);
+  animation: flash 0.3s ease-in-out 0.1s;
+}
+
+.effectLine4 {
+  position: absolute;
+  width: 72px;
+  height: 2px;
+  background: black;
+  bottom: 16px;
+  left: 112px;
+  transform: rotate(-60deg);
+  animation: flash 0.3s ease-in-out 0.2s;
+}
+
+.effectCircle2 {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 8px solid black;
+  top: 16px;
+  right: 80px;
+  transform: rotate(45deg);
+  animation: flash 0.3s ease-in-out 0.05s;
+}
+
+.effectLine5 {
+  position: absolute;
+  width: 88px;
+  height: 2px;
+  background: black;
+  top: 48px;
+  right: 64px;
+  transform: rotate(75deg);
+  animation: flash 0.3s ease-in-out 0.175s;
+}
+
+.effectLine6 {
+  position: absolute;
+  width: 80px;
+  height: 2px;
+  background: black;
+  bottom: 48px;
+  right: 48px;
+  transform: rotate(-20deg);
+  animation: flash 0.3s ease-in-out 0.125s;
+}
+
+.effectLine7 {
+  position: absolute;
+  width: 56px;
+  height: 2px;
+  background: black;
+  top: 0;
+  left: 160px;
+  transform: rotate(90deg);
+  animation: flash 0.3s ease-in-out 0.09s;
+}
+
+.effectCircle3 {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 8px solid black;
+  border-radius: 50%;
+  bottom: 8px;
+  right: 32px;
+  animation: flash 0.3s ease-in-out 0.18s;
+}
+
+/* Phase 3: 文字コンテナ（通常サイズ） */
+.lettersContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.letterI1 {
+  width: 23px;
+  height: 190px;
+  background-color: black;
+  margin-right: 20px;
+  animation: slideDownUp 0.6s ease-out forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.letterI2 {
+  width: 23px;
+  height: 190px;
+  background-color: black;
+  margin-right: 20px;
+  animation: slideUpDown 0.6s ease-out 0.1s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.letterL {
+  width: 80px;
+  height: 20px;
+  background-color: black;
+  position: relative;
+  animation: slideDownUp 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.letterL::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 190px;
+  background-color: black;
+}
+
+.letterO {
+  width: 150px;
+  height: 150px;
+  border: 20px solid black;
+  border-radius: 50%;
+  background: transparent;
+  margin-left: -20px;
+  animation: slideUpDown 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@keyframes flash {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+@keyframes slideDownUp {
+  0% { transform: translateY(-100px); opacity: 0; }
+  50% { transform: translateY(20px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideUpDown {
+  0% { transform: translateY(100px); opacity: 0; }
+  50% { transform: translateY(-20px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Phase 4: 元サイズ復帰 */
+.phase4Container {
+  transform: scale(1);
+  transition: transform 0.5s ease;
+}
+
+/* Phase 4: 通常サイズロゴデザイン */
+.normalLogoContainer {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.normalI1, .normalI2 {
   width: 23px;
   height: 190px;
   background-color: black;
@@ -491,7 +784,7 @@
   will-change: transform;
 }
 
-.logoL {
+.normalL {
   width: 80px;
   height: 20px;
   background-color: black;
@@ -499,17 +792,17 @@
   will-change: transform;
 }
 
-.logoL::before {
+.normalL::before {
   content: '';
   position: absolute;
   left: 0;
   bottom: 0;
   width: 20px;
   height: 190px;
-  background-color: var(--before-bg, black);
+  background-color: black;
 }
 
-.logoO {
+.normalO {
   width: 150px;
   height: 150px;
   border: 20px solid black;
@@ -519,23 +812,184 @@
   will-change: transform;
 }
 
-/* ダークモード対応 */
-@media (prefers-color-scheme: dark) {
-  .logoI1, .logoI2, .logoL, .logoL::before {
-    background-color: black;
-  }
-  
-  .logoO {
-    border-color: black;
-  }
+/* Phase 5: 斜め分割スライド */
+/* Phase 5: 斜め分割スライド */
+.finalLetters {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
 }
+
+/* I1の分割コンテナ */
+.letterSplitI1 {
+  position: relative;
+  overflow: hidden;
+  width: 23px;
+  height: 190px;
+  margin-right: 20px;
+}
+
+/* I2の分割コンテナ */
+.letterSplitI2 {
+  position: relative;
+  overflow: hidden;
+  width: 23px;
+  height: 190px;
+  margin-right: 20px;
+}
+
+/* Lの分割コンテナ */
+.letterSplitL {
+  position: relative;
+  overflow: hidden;
+  width: 80px;
+  height: 190px;
+}
+
+/* Oの分割コンテナ */
+.letterSplitO {
+  position: relative;
+  overflow: hidden;
+  width: 170px;
+  height: 170px;
+  margin-left: -20px;
+}
+
+/* I1の分割要素 */
+.splitLeftI1, .splitRightI1 { 
+  position: absolute; 
+  width: 23px; 
+  height: 190px;
+  background-color: black;
+  top: 0;
+  left: 0;
+}
+.splitLeftI1 { 
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+  transform: translate(24px, -24px);
+  animation: diagonalSlideLeft 0.6s ease-out forwards;
+  z-index: 2;
+}
+.splitRightI1 { 
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+  transform: translate(-24px, 24px);
+  animation: diagonalSlideRight 0.6s ease-out forwards;
+  z-index: 1;
+}
+
+/* I2の分割要素 */
+.splitLeftI2, .splitRightI2 { 
+  position: absolute; 
+  width: 23px; 
+  height: 190px;
+  background-color: black;
+  top: 0;
+  left: 0;
+}
+.splitLeftI2 { 
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+  transform: translate(24px, -24px);
+  animation: diagonalSlideLeft 0.6s ease-out 0.05s forwards;
+  z-index: 2;
+}
+.splitRightI2 { 
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+  transform: translate(-24px, 24px);
+  animation: diagonalSlideRight 0.6s ease-out 0.05s forwards;
+  z-index: 1;
+}
+
+/* Lの分割要素 */
+.splitLeftL, .splitRightL { 
+  position: absolute; 
+  width: 80px; 
+  height: 190px;
+  top: 0;
+  left: 0;
+}
+.splitLeftL::before, .splitRightL::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20px;
+  height: 190px;
+  background-color: black;
+}
+.splitLeftL::after, .splitRightL::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 80px;
+  height: 20px;
+  background-color: black;
+}
+.splitLeftL { 
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+  transform: translate(24px, -24px);
+  animation: diagonalSlideLeft 0.6s ease-out 0.1s forwards;
+  z-index: 2;
+}
+.splitRightL { 
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+  transform: translate(-24px, 24px);
+  animation: diagonalSlideRight 0.6s ease-out 0.1s forwards;
+  z-index: 1;
+}
+
+/* Oの分割要素 */
+.splitLeftO, .splitRightO { 
+  position: absolute; 
+  width: 170px; 
+  height: 170px;
+  border: 20px solid black;
+  border-radius: 50%;
+  background: transparent;
+  top: 0;
+  left: 0;
+}
+.splitLeftO { 
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+  transform: translate(24px, -24px);
+  animation: diagonalSlideLeft 0.6s ease-out 0.15s forwards;
+  z-index: 2;
+}
+.splitRightO { 
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+  transform: translate(-24px, 24px);
+  animation: diagonalSlideRight 0.6s ease-out 0.15s forwards;
+  z-index: 1;
+}
+
+@keyframes diagonalSlideLeft {
+  from { transform: translate(24px, -24px); opacity: 1; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+
+@keyframes diagonalSlideRight {
+  from { transform: translate(-24px, 24px); opacity: 1; }
+  to { transform: translate(0, 0); opacity: 1; }
+}
+
+
+/* パフォーマンス最適化 */
+.iiloAnimationContainer * {
+  will-change: transform;
+}
+
+/* 浮遊エフェクト */
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-5px); }
+}
+
 
 .missionTextContainer {
   position: absolute;
-  bottom: -115px;
+  top: 320px;
   left: 0;
   right: 0;
-  ;
 }
 
 .missionSubtitle {
@@ -546,6 +1000,7 @@
   letter-spacing: 0.5px;
   margin-bottom: 3px;
   text-align: left;
+  margin-left: 20px;
   will-change: transform;
 }
 
@@ -555,7 +1010,8 @@
   font-weight: 700;
   color: #000000;
   letter-spacing: 1px;
-  text-align: right;
+  text-align: left;
+  margin-left: 120px;
   will-change: transform;
 }
 
@@ -672,42 +1128,64 @@
     margin-top: 40px;
   }
   
-  .missionLogo {
-    width: 280px;
-    height: 140px;
+  .iiloAnimationContainer {
+    height: 200px;
   }
-
-  /* IILO ロゴモバイル対応 */
-  .iiloLogo {
-    gap: 12px;
-    font-size: 80px;
+  
+  .compressedLogoContainer,
+  .normalLogoContainer,
+  .lettersContainer,
+  .finalLetters {
+    transform: scale(0.5);
   }
-
-  .logoI1, .logoI2 {
+  
+  .effectsContainer {
+    width: 160px;
+    height: 64px;
+  }
+  
+  .letterSplitI1, .letterSplitI2 {
     width: 12px;
     height: 100px;
   }
-
-  .logoL {
+  
+  .letterSplitL {
     width: 53px;
-    height: 8px;
+    height: 100px;
   }
-
-  .logoL::before {
+  
+  .letterSplitO {
+    width: 92px;
+    height: 92px;
+  }
+  
+  .splitLeftI1, .splitRightI1,
+  .splitLeftI2, .splitRightI2 {
+    width: 12px;
+    height: 100px;
+  }
+  
+  .splitLeftL, .splitRightL {
+    width: 53px;
+    height: 100px;
+  }
+  
+  .splitLeftL::before, .splitRightL::before {
     width: 8px;
     height: 100px;
   }
-
-  .logoO {
+  
+  .splitLeftL::after, .splitRightL::after {
+    width: 53px;
+    height: 8px;
+  }
+  
+  .splitLeftO, .splitRightO {
     width: 80px;
     height: 80px;
     border: 12px solid black;
-    margin-bottom: 27px;
   }
   
-  .missionTextContainer {
-    bottom: -75px;
-  }
   
   .missionSubtitle {
     font-size: 16px;
