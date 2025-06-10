@@ -35,6 +35,8 @@ const Footer = () => {
               width={80}
               height={40}
               className={styles.footerLogo}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              style={{ cursor: 'pointer' }}
             />
             <div className={styles.copyright}>
               ©2025 - IILO
