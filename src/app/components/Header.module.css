@@ -119,15 +119,11 @@
 
 /* ハンバーガーメニューのアニメーション */
 .menuButton.open .menuLine:nth-child(1) {
-  transform: rotate(45deg) translate(6px, 6px);
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
 .menuButton.open .menuLine:nth-child(2) {
-  opacity: 0;
-}
-
-.menuButton.open .menuLine:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg) translate(5px, -5px);
 }
 
 /* Mobile Menu */
@@ -278,4 +274,48 @@
 /* モバイルメニューの白背景のハンバーガーボタン用 */
 .menuButton.menuOpen .menuLine {
   background-color: white;
+}
+
+/* SP対応（480px以下） */
+@media (max-width: 480px) {
+  .mobileMenuContent {
+    flex-direction: column;
+    padding: 60px 24px 40px 24px;
+    gap: 40px;
+  }
+  
+  .mobileMenuLeft {
+    order: 2;
+    margin-top: 40px;
+  }
+  
+  .mobileMenuRight {
+    order: 1;
+    text-align: center;
+  }
+  
+  .menuItem {
+    font-size: 28px;
+    padding: 12px 0;
+    text-align: center;
+  }
+  
+  .officeTitle {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .officeAddress {
+    font-size: 12px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  }
+  
+  .socialLinks {
+    gap: 8px;
+  }
+  
+  .socialLink {
+    font-size: 12px;
+  }
 }

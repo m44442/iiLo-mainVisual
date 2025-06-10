@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './IiLoCorporateSite.module.css';
 import Header from './Header';
+import Footer from './Footer';
 import Image from 'next/image';
 
 const IiLoCorporateSite = () => {
@@ -459,60 +460,7 @@ const IiLoCorporateSite = () => {
       </section>
 
       {/* Footer */}
-      <footer className={styles.footer}>
-        <div className={styles.footerContainer}>
-          <div className={styles.footerGrid}>
-            {/* Left Section - Logo */}
-            <div className={styles.footerLeft}>
-              <Image
-                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
-                alt="IILO Logo"
-                width={80}
-                height={40}
-                className={styles.footerLogo}
-              />
-              <div className={styles.copyright}>
-                ©2025 - IILO
-              </div>
-            </div>
-            
-            {/* Center Section - Navigation Links */}
-            <div className={styles.footerCenter}>
-              <div className={styles.footerNavLeft}>
-                <ul className={styles.footerList}>
-                  <li><a href="#mission" className={styles.footerLink}>Mission</a></li>
-                  <li><a href="#service" className={styles.footerLink}>Service</a></li>
-                  <li><a href="#recruit" className={styles.footerLink}>Recruit</a></li>
-                </ul>
-              </div>
-              <div className={styles.footerNavRight}>
-                <ul className={styles.footerList}>
-                  <li><a href="#contact" className={styles.footerLink}>Contact</a></li>
-                  <li><a href="#news" className={styles.footerLink}>News</a></li>
-                </ul>
-              </div>
-            </div>
-            
-            {/* Right Section - SNS and Page Top */}
-            <div className={styles.footerRight}>
-              <div className={styles.footerRightTop}>
-                <ul className={styles.socialList}>
-                  <li><a href="#" className={styles.socialLink}>X</a></li>
-                  <li><a href="#" className={styles.socialLink}>Instagram</a></li>
-                  <li><a href="#" className={styles.socialLink}>LINE</a></li>
-                </ul>
-                <button 
-                  type="button"
-                  className={styles.pageTopButton}
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                >
-                  Pagetop
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

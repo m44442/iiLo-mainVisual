@@ -1,0 +1,152 @@
+/* Footer Styles */
+.footer {
+  padding: 48px 24px;
+  background-color: #f8f8f8;
+  width: 100%;
+}
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Left Section */
+.footerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerLogo {
+  object-fit: contain;
+}
+
+.copyright {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Center Section */
+.footerCenter {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+
+.footerNavLeft,
+.footerNavRight {
+  display: flex;
+  flex-direction: column;
+}
+
+.footerList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footerLink {
+  font-size: 16px;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footerLink:hover {
+  color: #6b7280;
+}
+
+/* Right Section */
+.footerRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.footerRightTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.socialList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pageTopButton {
+  background-color: #000;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pageTopButton:hover {
+  background-color: #333;
+}
+
+.socialLink {
+  font-size: 14px;
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.socialLink:hover {
+  color: #6b7280;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+  
+  .footerCenter {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .footerRight {
+    align-items: center;
+  }
+  
+  .footerRightTop {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .socialList {
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 32px 12px;
+  }
+}

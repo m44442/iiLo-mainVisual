@@ -56,7 +56,6 @@ const Header = () => {
         >
           <div className={styles.menuLine}></div>
           <div className={styles.menuLine}></div>
-          <div className={styles.menuLine}></div>
         </button>
       </div>
 

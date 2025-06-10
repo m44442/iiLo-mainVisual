@@ -1093,8 +1093,21 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .heroSection {
+    margin-left: 50px;
+    padding: 0 16px;
+  }
+  
   .heroText {
     font-size: 24px;
+  }
+  
+  .section {
+    padding: 60px 16px;
+  }
+  
+  .blackSection {
+    padding: 60px 16px;
   }
   
   /* Footer responsive */
@@ -1129,61 +1142,20 @@
   }
   
   .iiloAnimationContainer {
-    height: 200px;
+    height: 250px;
   }
   
   .compressedLogoContainer,
   .normalLogoContainer,
   .lettersContainer,
   .finalLetters {
-    transform: scale(0.5);
+    transform: scale(0.7);
   }
   
   .effectsContainer {
-    width: 160px;
-    height: 64px;
-  }
-  
-  .letterSplitI1, .letterSplitI2 {
-    width: 12px;
-    height: 100px;
-  }
-  
-  .letterSplitL {
-    width: 53px;
-    height: 100px;
-  }
-  
-  .letterSplitO {
-    width: 92px;
-    height: 92px;
-  }
-  
-  .splitLeftI1, .splitRightI1,
-  .splitLeftI2, .splitRightI2 {
-    width: 12px;
-    height: 100px;
-  }
-  
-  .splitLeftL, .splitRightL {
-    width: 53px;
-    height: 100px;
-  }
-  
-  .splitLeftL::before, .splitRightL::before {
-    width: 8px;
-    height: 100px;
-  }
-  
-  .splitLeftL::after, .splitRightL::after {
-    width: 53px;
-    height: 8px;
-  }
-  
-  .splitLeftO, .splitRightO {
-    width: 80px;
-    height: 80px;
-    border: 12px solid black;
+    width: 224px;
+    height: 90px;
+    transform: scale(0.7);
   }
   
   
@@ -1191,11 +1163,13 @@
     font-size: 16px;
     margin-bottom: 1px;
     font-weight: 700;
+    margin-left: 150px;
   }
   
   .missionMainTitle {
     font-size: 28px;
     font-weight: 700;
+    margin-left: 240px;
   }
   
   .missionTitleSmall {
@@ -1243,10 +1217,23 @@
     margin-top: 0;
     text-align: center;
     padding-left: 20px;
+    margin-left: 0;
   }
 
   .serviceSectionTitle::before {
-    left: 0;
+    left: calc(50% - 40px);
+  }
+  
+  .sectionTitleWhiteBg {
+    font-size: 24px;
+    margin-top: 0;
+    text-align: center;
+    padding-left: 20px;
+    margin-left: 0;
+  }
+
+  .sectionTitleWhiteBg::before {
+    left: calc(50% - 40px);
   }
 
   .serviceCard {
@@ -1339,6 +1326,76 @@
 
 /* 更に小さいスクリーン用 */
 @media (max-width: 480px) {
+  .heroSection {
+    margin-left: 24px;
+    padding: 0 12px;
+  }
+  
+  .heroText {
+    font-size: 20px;
+    max-width: 300px;
+  }
+  
+  .section {
+    padding: 40px 12px;
+  }
+  
+  .blackSection {
+    padding: 40px 12px;
+  }
+  
+  .missionSubtitle {
+    font-size: 14px;
+    margin-left: 80px;
+  }
+  
+  .missionMainTitle {
+    font-size: 24px;
+    margin-left: 140px;
+  }
+  
+  .missionCircle {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .missionCircleText {
+    font-size: 10px;
+  }
+  
+  .missionCatchphraseText {
+    font-size: 18px;
+  }
+  
+  .missionParagraph {
+    font-size: 13px;
+    padding: 0 12px;
+  }
+  
+  .recruitDescription {
+    font-size: 12px;
+    padding: 0 12px;
+  }
+  
+  .recruitCardDescription {
+    font-size: 20px;
+    margin-bottom: 50px;
+  }
+  
+  .newsDescription {
+    font-size: 12px;
+    padding: 0 12px;
+  }
+  
+  .companyTable {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+  
+  .footer {
+    padding: 32px 12px;
+  }
+
   .serviceBlackSection {
     padding: 40px 12px;
   }
@@ -1346,6 +1403,23 @@
   .serviceSectionTitle {
     font-size: 20px;
     padding-left: 16px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .serviceSectionTitle::before {
+    left: calc(50% - 60px);
+  }
+  
+  .sectionTitleWhiteBg {
+    font-size: 20px;
+    padding-left: 16px;
+    margin-left: 0;
+    text-align: center;
+  }
+
+  .sectionTitleWhiteBg::before {
+    left: calc(50% - 60px);
   }
 
   .serviceCard {
