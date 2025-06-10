@@ -77,12 +77,14 @@ select {
   z-index: 999999;
   transform: translate(-50%, -50%);
   will-change: transform;
+  box-shadow: 0 0 10px #4fb3ff, 0 0 20px #4fb3ff, 0 0 30px #4fb3ff;
 }
 
 .custom-cursor.active {
   border-color: #E80262;
   transform: translate(-50%, -50%) scale(1.5);
   transition: border-color 0.1s ease, transform 0.1s ease;
+  box-shadow: 0 0 15px #E80262, 0 0 25px #E80262, 0 0 35px #E80262;
 }
 
 /* モバイルデバイスでカスタムカーソルを無効にする */
