@@ -30,19 +30,31 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
-          <a href="#mission" className={styles.navItem} onClick={handleMenuClick}>Mission</a>
-          <a href="#service" className={styles.navItem} onClick={handleMenuClick}>Service</a>
-          <a href="#recruit" className={styles.navItem} onClick={handleMenuClick}>Recruit</a>
-          <a href="#contact" className={styles.navItem} onClick={handleMenuClick}>Contact</a>
-          <a href="#news" className={styles.navItem} onClick={handleMenuClick}>News</a>
+          <a href="#mission" className={styles.navItem} data-text="Mission" onClick={handleMenuClick}>
+            <span>Mission</span>
+          </a>
+          <a href="#service" className={styles.navItem} data-text="Service" onClick={handleMenuClick}>
+            <span>Service</span>
+          </a>
+          <a href="#recruit" className={styles.navItem} data-text="Recruit" onClick={handleMenuClick}>
+            <span>Recruit</span>
+          </a>
+          <a href="#contact" className={styles.navItem} data-text="Contact" onClick={handleMenuClick}>
+            <span>Contact</span>
+          </a>
+          <a href="#news" className={styles.navItem} data-text="News" onClick={handleMenuClick}>
+            <span>News</span>
+          </a>
         </nav>
         
         {/* Mobile Menu Button */}
         <button 
-          className={styles.menuButton}
+          type="button"
+          className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''} ${isMenuOpen ? styles.menuOpen : ''}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label="Toggle menu"
         >
+          <div className={styles.menuLine}></div>
           <div className={styles.menuLine}></div>
           <div className={styles.menuLine}></div>
         </button>
@@ -52,11 +64,30 @@ const Header = () => {
       {isMenuOpen && (
         <nav className={styles.mobileMenu}>
           <div className={styles.mobileMenuContent}>
-            <a href="#mission" className={styles.menuItem} onClick={handleMenuClick}>Mission</a>
-            <a href="#service" className={styles.menuItem} onClick={handleMenuClick}>Service</a>
-            <a href="#recruit" className={styles.menuItem} onClick={handleMenuClick}>Recruit</a>
-            <a href="#contact" className={styles.menuItem} onClick={handleMenuClick}>Contact</a>
-            <a href="#news" className={styles.menuItem} onClick={handleMenuClick}>News</a>
+            {/* Left Side - Office Info & Social Links */}
+            <div className={styles.mobileMenuLeft}>
+              <div className={styles.officeInfo}>
+                <h3 className={styles.officeTitle}>Office</h3>
+                <div className={styles.officeAddress}>
+                  東京都千代田区永田町<br />
+                  一丁目1番1号
+                </div>
+                <div className={styles.socialLinks}>
+                  <a href="#" className={styles.socialLink}>Twitter</a>
+                  <a href="#" className={styles.socialLink}>Instagram</a>
+                  <a href="#" className={styles.socialLink}>LinkedIn</a>
+                </div>
+              </div>
+            </div>
+            
+            {/* Right Side - Navigation Menu */}
+            <div className={styles.mobileMenuRight}>
+              <a href="#mission" className={styles.menuItem} onClick={handleMenuClick}>Mission</a>
+              <a href="#service" className={styles.menuItem} onClick={handleMenuClick}>Service</a>
+              <a href="#recruit" className={styles.menuItem} onClick={handleMenuClick}>Recruit</a>
+              <a href="#contact" className={styles.menuItem} onClick={handleMenuClick}>Contact</a>
+              <a href="#news" className={styles.menuItem} onClick={handleMenuClick}>News</a>
+            </div>
           </div>
         </nav>
       )}
