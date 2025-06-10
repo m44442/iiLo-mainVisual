@@ -73,9 +73,9 @@ const Header = () => {
                   一丁目1番1号
                 </div>
                 <div className={styles.socialLinks}>
-                  <a href="#" className={styles.socialLink}>Twitter</a>
+                  <a href="#" className={styles.socialLink}>X</a>
                   <a href="#" className={styles.socialLink}>Instagram</a>
-                  <a href="#" className={styles.socialLink}>LinkedIn</a>
+                  <a href="#" className={styles.socialLink}>Line</a>
                 </div>
               </div>
             </div>
