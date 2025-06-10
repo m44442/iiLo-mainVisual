@@ -203,29 +203,63 @@ const IiLoCorporateSite = () => {
             </div>
           </div>
           
-          {/* Service Areas - 5 circles in horizontal layout */}
+          {/* Service Areas - 5 circles layout */}
           <div className={styles.missionCircleContainer}>
-            <div className={styles.missionCircle}>
-              <div className={styles.missionCircleText}>AI</div>
-            </div>
-            <div className={styles.missionCircle}>
-              <div className={styles.missionCircleText}>
-                Web<br />アプリケーション<br />開発
+            {/* Desktop: horizontal layout */}
+            <div className={`${styles.missionCircleRow} ${styles.missionCircleDesktop}`}>
+              <div className={styles.missionCircle}>
+                <div className={styles.missionCircleText}>AI</div>
+              </div>
+              <div className={styles.missionCircle}>
+                <div className={styles.missionCircleText}>
+                  Web<br />アプリケーション<br />開発
+                </div>
+              </div>
+              <div className={styles.missionCircle}>
+                <div className={styles.missionCircleText}>
+                  クラウド<br />インフラ
+                </div>
+              </div>
+              <div className={styles.missionCircle}>
+                <div className={styles.missionCircleText}>
+                  セキュリティ・<br />プライバシー<br />設計
+                </div>
+              </div>
+              <div className={styles.missionCircle}>
+                <div className={styles.missionCircleText}>
+                  API・<br />外部連携<br />基盤
+                </div>
               </div>
             </div>
-            <div className={styles.missionCircle}>
-              <div className={styles.missionCircleText}>
-                クラウド<br />インフラ
+            
+            {/* Mobile: 2-3 layout */}
+            <div className={`${styles.missionCircleMobile}`}>
+              <div className={`${styles.missionCircleRow} ${styles.missionCircleRowTop}`}>
+                <div className={styles.missionCircle}>
+                  <div className={styles.missionCircleText}>AI</div>
+                </div>
+                <div className={styles.missionCircle}>
+                  <div className={styles.missionCircleText}>
+                    Web<br />アプリケーション<br />開発
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className={styles.missionCircle}>
-              <div className={styles.missionCircleText}>
-                セキュリティ・<br />プライバシー<br />設計
-              </div>
-            </div>
-            <div className={styles.missionCircle}>
-              <div className={styles.missionCircleText}>
-                API・<br />外部連携<br />基盤
+              <div className={`${styles.missionCircleRow} ${styles.missionCircleRowBottom}`}>
+                <div className={styles.missionCircle}>
+                  <div className={styles.missionCircleText}>
+                    クラウド<br />インフラ
+                  </div>
+                </div>
+                <div className={styles.missionCircle}>
+                  <div className={styles.missionCircleText}>
+                    セキュリティ・<br />プライバシー<br />設計
+                  </div>
+                </div>
+                <div className={styles.missionCircle}>
+                  <div className={styles.missionCircleText}>
+                    API・<br />外部連携<br />基盤
+                  </div>
+                </div>
               </div>
             </div>
           </div>

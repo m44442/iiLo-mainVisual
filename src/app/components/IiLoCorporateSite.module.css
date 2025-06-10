@@ -182,7 +182,11 @@
 }
 
 .serviceButton:hover {
-  background-color: #333;
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  transform: none;
+  transition: none;
 }
 
 .serviceHeaderRight {
@@ -1024,24 +1028,55 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: -20px;
+  gap: 0;
   margin: 200px 0;
   overflow-x: auto;
   padding: 20px 0;
 }
 
+.missionCircleDesktop {
+  display: flex;
+}
+
+.missionCircleMobile {
+  display: none;
+}
+
+.missionCircleRow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .missionCircle {
-  width: 150px;
-  height: 150px;
-  border: 2px solid #e5e7eb;
+  width: 180px;
+  height: 180px;
+  border: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
+  background-color: transparent;
   flex-shrink: 0;
-  margin: 0 -10px;
+  margin: 0 -15px;
+  position: relative;
 }
+
+
+.missionCircle::after {
+  content: '';
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 50%;
+  background: transparent;
+  z-index: 2;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+}
+
 
 .missionCircleText {
   font-size: 12px;
@@ -1050,6 +1085,15 @@
   line-height: 1.3;
   color: black;
   padding: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
 }
 
 .missionCatchphrase {
@@ -1074,7 +1118,7 @@
   line-height: 1.8;
   margin-bottom: 24px;
   color: black;
-  text-align: left;
+  text-align: center;
 }
 
 .missionFooter {
@@ -1088,7 +1132,12 @@
 }
 
 .missionButton:hover {
-  background-color: #333;
+  background-color: transparent;
+  color: black;
+  border: 1px solid black;
+  transform: none;
+  scale: 1;
+  transition: none;
 }
 
 /* Responsive Design */
@@ -1139,10 +1188,16 @@
   /* Mission responsive */
   .missionHeader {
     margin-top: 40px;
+    margin-bottom: 20px;
   }
   
   .iiloAnimationContainer {
-    height: 250px;
+    height: 200px;
+    margin-bottom: 10px;
+  }
+  
+  .missionTextContainer {
+    top: 180px;
   }
   
   .compressedLogoContainer,
@@ -1177,19 +1232,50 @@
   }
   
   .missionCircleContainer {
-    flex-wrap: wrap;
-    gap: 16px;
-    margin: 40px 0;
+    margin: 80px 0 40px 0;
+  }
+  
+  .missionCircleDesktop {
+    display: none;
+  }
+  
+  .missionCircleMobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: center;
+    position: relative;
+  }
+  
+  .missionCircleRowTop {
+    gap: 0;
+    position: relative;
+    z-index: 2;
+    margin-bottom: -20px;
+  }
+  
+  .missionCircleRowBottom {
+    gap: 0;
+    position: relative;
+    z-index: 1;
   }
   
   .missionCircle {
-    width: 120px;
-    height: 120px;
-    margin: 0;
+    width: 100px;
+    height: 100px;
+    margin: 0 -4px;
+  }
+  
+  .missionCircle::after {
+    width: 100px;
+    height: 100px;
+    border: 1.5px solid #e5e7eb;
   }
   
   .missionCircleText {
-    font-size: 11px;
+    font-size: 9px;
+    width: 50px;
+    height: 50px;
   }
   
   .missionCatchphraseText {
@@ -1312,6 +1398,14 @@
     transition: all 0.3s ease;
   }
 
+  .serviceCard:hover::after {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    transform: none;
+    transition: none;
+  }
+
   .serviceDescription {
     padding: 0 16px;
     font-size: 13px;
@@ -1345,12 +1439,12 @@
   }
   
   .missionSubtitle {
-    font-size: 14px;
+    font-size: 28px;
     margin-left: 80px;
   }
   
   .missionMainTitle {
-    font-size: 24px;
+    font-size: 32px;
     margin-left: 140px;
   }
   
@@ -1370,6 +1464,7 @@
   .missionParagraph {
     font-size: 13px;
     padding: 0 12px;
+    text-align: center;
   }
   
   .recruitDescription {
