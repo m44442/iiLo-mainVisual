@@ -94,7 +94,7 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
+      {shouldRender && (
         <nav className={`${styles.mobileMenu} ${isClosing ? styles.closing : ''}`}>
           <div className={styles.mobileMenuContent}>
             {/* Left Side - Office Info & Social Links */}
