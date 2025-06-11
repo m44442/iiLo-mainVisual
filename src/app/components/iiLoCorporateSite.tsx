@@ -16,6 +16,7 @@ const IiLoCorporateSite = () => {
 
   // IILO 5段階ロゴアニメーション実装（CSS keyframes版）
   const [currentPhase, setCurrentPhase] = useState(0);
+  const [showMissionText, setShowMissionText] = useState(false);
   
   useEffect(() => {
     let hasAnimated = false;
@@ -29,18 +30,7 @@ const IiLoCorporateSite = () => {
 
       // テキスト要素のアニメーション（別途実行）
       setTimeout(() => {
-        if (missionSubtitleRef.current) {
-          missionSubtitleRef.current.style.opacity = '1';
-          missionSubtitleRef.current.style.transform = 'translateY(0) scale(1)';
-        }
-        if (missionMainTitleRef.current) {
-          missionMainTitleRef.current.style.opacity = '1';
-          missionMainTitleRef.current.style.transform = 'translateY(0) scale(1)';
-        }
-        if (missionTitleSmallRef.current) {
-          missionTitleSmallRef.current.style.opacity = '1';
-          missionTitleSmallRef.current.style.transform = 'translateY(0) scale(1)';
-        }
+        setShowMissionText(true);
       }, 2000);
 
       // 浮遊エフェクト（3秒後）
@@ -198,8 +188,8 @@ const IiLoCorporateSite = () => {
             </div>
             
             <div className={styles.missionTextContainer}>
-              <div className={styles.missionSubtitle} ref={missionSubtitleRef}>イーロの</div>
-              <div className={styles.missionMainTitle} ref={missionMainTitleRef}>Mission<span className={styles.missionTitleSmall} ref={missionTitleSmallRef}>は</span></div>
+              <div className={`${styles.missionSubtitle} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionSubtitleRef}>イーロの</div>
+              <div className={`${styles.missionMainTitle} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionMainTitleRef}>Mission<span className={`${styles.missionTitleSmall} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionTitleSmallRef}>は</span></div>
             </div>
           </div>
           

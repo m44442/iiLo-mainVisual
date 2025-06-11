@@ -133,6 +133,33 @@
   transform: rotate(-45deg) translate(5px, -5px);
 }
 
+/* ハンバーガーメニュー閉じる時のアニメーション */
+.menuButton.closing .menuLine:nth-child(1) {
+  animation: closeLine1 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.menuButton.closing .menuLine:nth-child(2) {
+  animation: closeLine2 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes closeLine1 {
+  0% {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+  100% {
+    transform: rotate(0deg) translate(0px, 0px);
+  }
+}
+
+@keyframes closeLine2 {
+  0% {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+  100% {
+    transform: rotate(0deg) translate(0px, 0px);
+  }
+}
+
 /* Mobile Menu */
 .mobileMenu {
   position: fixed;
@@ -150,8 +177,7 @@
 }
 
 .mobileMenu.closing {
-  animation: none;
-  animation: expandFromCenter 0.25s cubic-bezier(0.7, 0, 0.84, 0) reverse;
+  animation: contractToCenter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .mobileMenuContent {
@@ -267,6 +293,41 @@
   }
 }
 
+/* 閉じる時のアニメーション - 全体から対角線の一点に収束 */
+@keyframes contractToCenter {
+  0% {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  10% {
+    opacity: 0.95;
+    clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 90%);
+  }
+  25% {
+    opacity: 0.9;
+    clip-path: polygon(0% 0%, 100% 25%, 100% 100%, 0% 75%);
+  }
+  40% {
+    opacity: 0.8;
+    clip-path: polygon(0% 0%, 100% 40%, 100% 100%, 0% 60%);
+  }
+  55% {
+    opacity: 0.7;
+    clip-path: polygon(0% 0%, 100% 55%, 100% 100%, 0% 45%);
+  }
+  70% {
+    opacity: 0.5;
+    clip-path: polygon(0% 0%, 100% 70%, 100% 100%, 0% 30%);
+  }
+  85% {
+    opacity: 0.3;
+    clip-path: polygon(0% 0%, 100% 85%, 100% 100%, 0% 15%);
+  }
+  100% {
+    opacity: 0;
+    clip-path: polygon(0% 0%, 100% 100%, 100% 100%, 0% 0%);
+  }
+}
 
 /* デスクトップでの調整 */
 @media (min-width: 768px) {

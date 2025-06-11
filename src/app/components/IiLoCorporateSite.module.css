@@ -1,5 +1,18 @@
 /* IiLo Corporate Site Styles */
 
+/* Mission Text Animations */
+.hiddenText {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fadeInUp {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 .container {
   min-height: 100vh;
   color: black;
@@ -991,7 +1004,7 @@
 
 .missionTextContainer {
   position: absolute;
-  top: 320px;
+  top: 260px;
   left: 0;
   right: 0;
 }
@@ -1004,7 +1017,7 @@
   letter-spacing: 0.5px;
   margin-bottom: 3px;
   text-align: left;
-  margin-left: 300px;
+  margin-left: 350px;
   will-change: transform;
 }
 
@@ -1015,7 +1028,7 @@
   color: #000000;
   letter-spacing: 1px;
   text-align: left;
-  margin-left: 480px;
+  margin-left: 420px;
   will-change: transform;
 }
 
