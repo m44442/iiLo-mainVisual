@@ -115,9 +115,10 @@ void main() {
  morphing.x += globalInfluence * sin(uTime * PI + morphing.y);
  morphing.y += globalInfluence * cos(uTime * PI + morphing.x);
  
- // スクロール効果（完璧との評価を維持）
- float scrollInfluence = uScrollY * 0.01;
- morphing.y += scrollInfluence * cos(uTime * PI + morphing.y);
+ // スクロール効果（拡大効果）
+ float scrollInfluence = uScrollY * 0.001;
+ float scale = 1.0 + scrollInfluence;
+ morphing.xyz *= scale;
 
  gl_Position = projectionMatrix * modelViewMatrix * vec4(morphing, 1.0 );
  gl_PointSize = uSize;
