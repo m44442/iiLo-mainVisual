@@ -12,7 +12,7 @@
 
 .footerGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 40% 1fr;
   gap: 48px;
   align-items: start;
 }
@@ -36,15 +36,18 @@
 
 /* Center Section */
 .footerCenter {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  display: flex;
+  gap: 60px;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 100%;
 }
 
 .footerNavLeft,
 .footerNavRight {
   display: flex;
   flex-direction: column;
+
 }
 
 .footerList {
@@ -122,17 +125,26 @@
   .footerGrid {
     grid-template-columns: 1fr;
     gap: 32px;
-    text-align: center;
+  }
+  
+  .copyright {
+    text-align: left;
   }
   
   .footerCenter {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    gap: 40px;
+    justify-content: flex-start;
+    padding-left: 20px;
+  }
+  
+  .footerNavRight {
+    margin-left: 30px;
   }
   
   .footerRight {
     align-items: center;
   }
+  
   
   .footerRightTop {
     flex-direction: column;
