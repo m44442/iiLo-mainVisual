@@ -5,6 +5,8 @@ import styles from './Header.module.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -16,6 +18,23 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const openMenu = () => {
+    setIsMenuOpen(true);
+    setShouldRender(true);
+    setIsClosing(false);
+  };
+
+  const closeMenu = () => {
+    console.log('Closing menu'); // デバッグ用
+    setIsClosing(true);
+    setTimeout(() => {
+      console.log('Menu closed'); // デバッグ用
+      setIsMenuOpen(false);
+      setShouldRender(false);
+      setIsClosing(false);
+    }, 250); // アニメーション時間と同じ
+  };
 
   const handleMenuClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -29,7 +48,7 @@ const Header = () => {
         });
       }
     }
-    setIsMenuOpen(false);
+    closeMenu();
   };
 
   return (
@@ -66,7 +85,7 @@ const Header = () => {
         <button 
           type="button"
           className={`${styles.menuButton} ${isMenuOpen ? styles.open : ''} ${isMenuOpen ? styles.menuOpen : ''}`}
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => isMenuOpen ? closeMenu() : openMenu()}
           aria-label="Toggle menu"
         >
           <div className={styles.menuLine}></div>
@@ -76,7 +95,7 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <nav className={styles.mobileMenu}>
+        <nav className={`${styles.mobileMenu} ${isClosing ? styles.closing : ''}`}>
           <div className={styles.mobileMenuContent}>
             {/* Left Side - Office Info & Social Links */}
             <div className={styles.mobileMenuLeft}>
