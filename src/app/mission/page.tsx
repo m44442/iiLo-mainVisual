@@ -4,13 +4,10 @@ import React from 'react';
 import styles from '../components/IiLoCorporateSite.module.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MissionSection from '../components/MissionSection';
-import ServiceSection from '../components/ServiceSection';
 import ContactSection from '../components/ContactSection';
-import CompanySection from '../components/CompanySection';
-import NewsSection from '../components/NewsSection';
 import MissionStatement from '../components/MissionStatement';
 import MissionDetailPage from '../components/MissionDetailPage';
+import ServiceSectionNew from '../components/ServiceSectionNew';
 
 const MissionPage = () => {
   return (
@@ -44,11 +41,9 @@ const MissionPage = () => {
       <div style={{ marginTop: '-80px' }}>
         <MissionDetailPage />
       </div>
-      <ServiceSection />
+      <ServiceSectionNew />
       <MissionStatement />
       <ContactSection />
-      <CompanySection />
-      <NewsSection />
       
       <Footer />
     </div>
