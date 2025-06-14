@@ -286,9 +286,11 @@ const IiLoCorporateSite = () => {
           
           {/* Footer */}
           <div className={styles.missionFooter}>
-            <button type="button" className={styles.missionButton}>
-              More
-            </button>
+            <a href="/mission">
+              <button type="button" className={styles.missionButton}>
+                More
+              </button>
+            </a>
           </div>
         </div>
       </section>

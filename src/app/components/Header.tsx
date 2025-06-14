@@ -64,7 +64,7 @@ const Header = () => {
         
         {/* Desktop Navigation */}
         <nav className={styles.desktopNav}>
-          <a href="#mission" className={styles.navItem} data-text="Mission" onClick={handleMenuClick}>
+          <a href="/mission" className={styles.navItem} data-text="Mission">
             <span>Mission</span>
           </a>
           <a href="#service" className={styles.navItem} data-text="Service" onClick={handleMenuClick}>
@@ -115,7 +115,7 @@ const Header = () => {
             
             {/* Right Side - Navigation Menu */}
             <div className={styles.mobileMenuRight}>
-              <a href="#mission" className={styles.menuItem} onClick={handleMenuClick}>Mission</a>
+              <a href="/mission" className={styles.menuItem}>Mission</a>
               <a href="#service" className={styles.menuItem} onClick={handleMenuClick}>Service</a>
               <a href="#recruit" className={styles.menuItem} onClick={handleMenuClick}>Recruit</a>
               <a href="#contact" className={styles.menuItem} onClick={handleMenuClick}>Contact</a>

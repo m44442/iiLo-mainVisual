@@ -1,5 +1,31 @@
 /* IiLo Corporate Site Styles */
 
+/* Mission Page Styles */
+.missionPageContainer {
+  min-height: 100vh;
+  padding-top: 120px;
+  background-color: #f8f8f8;
+}
+
+.missionPageHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.missionPageTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.missionPageLine {
+  width: 100px;
+  height: 2px;
+  background-color: #333;
+  margin: 0 auto;
+}
+
 /* Mission Text Animations */
 .hiddenText {
   opacity: 0;
@@ -478,8 +504,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 60px;
-  margin-top: 80px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   position: relative;
 }
 
@@ -1004,7 +1030,7 @@
 
 .missionTextContainer {
   position: absolute;
-  top: 260px;
+  top: 270px;
   left: 0;
   right: 0;
 }
@@ -1017,18 +1043,18 @@
   letter-spacing: 0.5px;
   margin-bottom: 3px;
   text-align: left;
-  margin-left: 350px;
+  margin-left: 330px;
   will-change: transform;
 }
 
 .missionMainTitle {
   font-family: 'Noto Sans JP', sans-serif;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 700;
   color: #000000;
   letter-spacing: 1px;
   text-align: left;
-  margin-left: 420px;
+  margin-left: 455px;
   will-change: transform;
 }
 
@@ -1042,7 +1068,7 @@
   justify-content: center;
   align-items: center;
   gap: 0;
-  margin: 200px 0;
+  margin: 120px 0;
   overflow-x: auto;
   padding: 20px 0;
 }
