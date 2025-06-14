@@ -1,19 +1,14 @@
-'use client'
+"use client";
 
-import React from 'react';
-import styles from '../components/IiLoCorporateSite.module.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import ContactSection from '../components/ContactSection';
-import MissionStatement from '../components/MissionStatement';
-import MissionDetailPage from '../components/MissionDetailPage';
-import ServiceSectionNew from '../components/ServiceSectionNew';
-
+import React from "react";
+import Footer from "../components/Footer";
+import ContactSection from "../components/ContactSection";
+import MissionStatement from "../components/MissionStatement";
+import MissionDetailPage from "../components/MissionDetailPage";
+import ServiceSectionNew from "../components/ServiceSectionNew";
 const MissionPage = () => {
   return (
-    <div style={{ backgroundColor: 'white', minHeight: '100vh' }}>
-      <Header />
-      
+    <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
       <div style={{ 
         paddingTop: '150px',
         marginBottom: '20px'
@@ -23,7 +18,7 @@ const MissionPage = () => {
           fontWeight: 'bold',
           color: '#333',
           marginBottom: '30px',
-          marginLeft: '125px'
+          marginLeft: '140px'
         }}>
           ・Mission
         </h1>
@@ -37,14 +32,11 @@ const MissionPage = () => {
           transform: 'translateX(-50%)'
         }}></div>
       </div>
-      
-      <div style={{ marginTop: '-80px' }}>
-        <MissionDetailPage />
-      </div>
+      <MissionDetailPage />
       <ServiceSectionNew />
       <MissionStatement />
       <ContactSection />
-      
+
       <Footer />
     </div>
   );

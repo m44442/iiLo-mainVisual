@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState } from 'react';
 import styles from './IiLoCorporateSite.module.css';
-import Header from './Header';
 import Footer from './Footer';
 import Image from 'next/image';
 
@@ -62,8 +61,6 @@ const IiLoCorporateSite = () => {
   }, []);
   return (
     <div className={styles.container}>
-      {/* Header Component */}
-      <Header />
 
       {/* Hero Section */}
       <section className={styles.heroSection}>

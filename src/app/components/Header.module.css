@@ -339,7 +339,7 @@
 /* スマートフォン版の調整 */
 @media (max-width: 767px) {
   .logo {
-    margin-top: -22px;
+    margin-top: -17px;
   }
   
   .menuButton {
