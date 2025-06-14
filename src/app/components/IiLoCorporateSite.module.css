@@ -1584,10 +1584,11 @@
   }
 }
 
+
 /* ServiceSectionNew Styles */
 .serviceNewIntroduction {
-  text-align: center;
   margin: 40px 0 60px 0;
+  position: relative;
 }
 
 .serviceNewIntroText {
@@ -1595,6 +1596,8 @@
   font-size: 16px;
   margin-bottom: 30px;
   font-weight: 400;
+  text-align: left;
+  margin-left: 15%; /* 線の開始位置（70%の線なので、残り30%の半分 = 15%）に合わせる */
 }
 
 .serviceNewIntroLine {
@@ -1669,6 +1672,9 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  .serviceNewIntroText {
+    margin-left: 7.5%; /* 線の幅85%に対応（残り15%の半分 = 7.5%） */
+  }
   .serviceNewIntroduction {
     margin: 30px 0 40px 0;
   }
@@ -1705,6 +1711,9 @@
 }
 
 @media (max-width: 480px) {
+  .serviceNewIntroText {
+    margin-left: 2.5%; /* 線の幅95%に対応（残り5%の半分 = 2.5%） */
+  }
   .serviceNewIntroduction {
     margin: 20px 0 30px 0;
   }
