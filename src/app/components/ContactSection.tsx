@@ -1,24 +1,21 @@
 'use client'
 
 import React from 'react';
-import styles from './IiLoCorporateSite.module.css';
+import styles from './ContactSection.module.css';
 
 const ContactSection = () => {
   return (
-    <section id="contact" className={styles.blackSection}>
-      <div className={styles.container1024}>
-        <h2 className={styles.serviceSectionTitle}>
-          Contact
-        </h2>
-        
-        <div style={{ textAlign: 'center' }}>
-          <p className={styles.newsDescription}>
-            ご質問・お問い合わせ
-          </p>
-          
-          <button className={styles.buttonWhite}>
-            お問い合わせ
-          </button>
+    <section className={styles.contactSection}>
+      <div className={styles.container}>
+        <h3 className={styles.contactTitle}>Contact</h3>
+        <div className={styles.contactCard}>
+          <div className={styles.contactContent}>
+            <h4 className={styles.contactCardTitle}>ご質問・お問い合わせ</h4>
+            <p className={styles.contactDescription}>
+              お気軽にお問い合わせください。
+            </p>
+            <button className={styles.contactButton}>お問い合わせ</button>
+          </div>
         </div>
       </div>
     </section>

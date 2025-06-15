@@ -45,6 +45,8 @@
   width: 100%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.6;
+  margin: 0;
+  padding: 0;
 }
 
 /* Hero Section */
@@ -70,12 +72,14 @@
 .section {
   padding: 80px 24px;
   background-color: white;
+  margin: 0;
 }
 
 .blackSection {
   padding: 80px 24px;
   background-color: black;
   color: white;
+  margin: 0;
 }
 
 
@@ -109,10 +113,19 @@
 }
 
 /* Service Section */
+.serviceDescription {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 30px;
+  font-weight: 400;
+  text-align: left;
+  margin-left: calc(10% + 10px); /* 15% + 20px に変更 */
+}
 .serviceBlackSection {
   padding: 80px 24px;
   background-color: black;
   color: white;
+  margin: 0;
 }
 
 .serviceContainer {
@@ -321,62 +334,201 @@
   color: black;
 }
 
-/* Company Section */
+/* Company Section - New Design */
+.companySection {
+  padding: 80px 0;
+  background-color: white;
+  margin: 0;
+}
+
+.companySectionHeader {
+  display: flex;
+  align-items: center;
+  margin-left: 183px;
+  margin-bottom: 40px;
+}
+
+.companyDot {
+  width: 8px;
+  height: 8px;
+  background-color: #000000;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.companyTitle {
+  font-family: 'General Sans Variable', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  color: #000000;
+  margin: 0;
+}
+
 .companyTable {
-  max-width: 600px;
+  max-width: 1200px;
   margin: 0 auto;
-  font-size: 14px;
+  padding: 0 414px 0 414px;
 }
 
 .companyRow {
   display: flex;
-  padding: 12px 0;
-  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 28px;
+  align-items: center;
 }
 
 .companyLabel {
-  width: 96px;
-  font-weight: 500;
-  color: #6b7280;
-  flex-shrink: 0;
+  min-width: 120px;
+  margin-right: 40px;
+}
+
+.companyLabel span {
+  display: inline-block;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  padding: 0 16px;
+  white-space: nowrap;
 }
 
 .companyValue {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 27px;
+  color: #000000;
   flex: 1;
 }
 
-/* News Section */
-.newsDescription {
-  text-align: center;
-  color: #d1d5db;
-  font-size: 14px;
-  margin-bottom: 48px;
+/* News Section - New Design */
+.newsSection {
+  padding: 80px 0;
+  background-color: #000000;
+  margin: 0;
 }
 
-.newsContainer {
-  max-width: 600px;
-  margin: 0 auto;
+.newsSectionHeader {
+  display: flex;
+  align-items: center;
+  margin-left: 183px;
+  margin-bottom: 40px;
 }
 
-.newsItem {
-  padding-bottom: 16px;
-  border-bottom: 1px solid #374151;
-  margin-bottom: 24px;
-}
-
-.newsDate {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 8px;
+.newsDot {
+  width: 8px;
+  height: 8px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  margin-right: 15px;
 }
 
 .newsTitle {
-  font-size: 14px;
+  font-family: 'General Sans Variable', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 45px;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.newsContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.newsItem {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.newsDate {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #FFFFFF;
+  margin-right: 40px;
+  white-space: nowrap;
+  min-width: 90px;
+}
+
+.newsContent {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #FFFFFF;
+  flex: 1;
+}
+
+.newsLine {
+  width: 100%;
+  height: 1px;
+  background-color: #FFFFFF;
+  margin: 0;
+}
+
+.newsButtonContainer {
+  text-align: left;
+  margin-top: 40px;
+  padding-left: 414px;
 }
 
 .newsButton {
-  text-align: center;
-  margin-top: 48px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: none;
+  border-radius: 35px;
+  padding: 12px 32px;
+  font-family: 'General Sans Variable', system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 26px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 120px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.newsButton:hover {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+
+/* News Section Responsive */
+@media (max-width: 768px) {
+  .newsSectionHeader {
+    margin-left: 24px;
+  }
+  
+  .newsContainer {
+    padding: 0 24px;
+  }
+  
+  .newsItem {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 0;
+  }
+  
+  .newsDate {
+    margin-right: 0;
+    margin-bottom: 8px;
+    min-width: auto;
+  }
+  
+  .newsButtonContainer {
+    padding-left: 24px;
+  }
 }
 
 /* Footer */
@@ -1455,6 +1607,7 @@
     font-size: 13px;
     line-height: 1.6;
     text-align: left;
+    margin-left: calc(7.5% + 20px); 
   }
 
   .serviceDescription p {
@@ -1579,8 +1732,43 @@
   }
 
   .serviceDescription {
+    margin-left: calc(2.5% + 20px); 
     font-size: 12px;
     padding: 0 12px;
+  }
+
+  .companySectionHeader {
+    margin-left: 24px;
+  }
+
+  .companyTable {
+    padding: 0 24px;
+  }
+
+  .companyRow {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .companyLabel {
+    margin-right: 0;
+    margin-bottom: 8px;
+  }
+
+  .newsSectionHeader {
+    margin-left: 24px;
+  }
+
+  .newsItem {
+    padding: 0 24px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .newsDate {
+    margin-right: 0;
+    margin-bottom: 8px;
   }
 }
 

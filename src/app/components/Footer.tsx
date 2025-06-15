@@ -25,91 +25,56 @@ const Footer = () => {
 
   return (
     <footer className={styles.footer}>
+      <div className={styles.topLine}></div>
       <div className={styles.footerContainer}>
-        <div className={styles.footerGrid}>
-          {/* Left Section */}
-          <div className={styles.footerLeft}>
-            <Image
-              src="/images/IILo-DIILo_logo_IILo_logo-b.png"
-              alt="IILO Logo"
-              width={80}
-              height={40}
-              className={styles.footerLogo}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              style={{ cursor: 'pointer' }}
-            />
-            <div className={styles.copyright}>
-              ©2025 - IILO
-            </div>
-          </div>
-
-          {/* Center Section */}
-          <div className={styles.footerCenter}>
-            <div className={styles.footerNavLeft}>
-              <ul className={styles.footerList}>
-                <li>
-                  <a href="#mission" className={styles.footerLink} onClick={handleMenuClick}>
-                    Mission
-                  </a>
-                </li>
-                <li>
-                  <a href="#service" className={styles.footerLink} onClick={handleMenuClick}>
-                    Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#recruit" className={styles.footerLink} onClick={handleMenuClick}>
-                    Recruit
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className={styles.footerNavRight}>
-              <ul className={styles.footerList}>
-                <li>
-                  <a href="#contact" className={styles.footerLink} onClick={handleMenuClick}>
-                    Contact
-                  </a>
-                </li>
-                <li>
-                  <a href="#news" className={styles.footerLink} onClick={handleMenuClick}>
-                    News
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Right Section */}
-          <div className={styles.footerRight}>
-            <div className={styles.footerRightTop}>
-              <ul className={styles.socialList}>
-                <li>
-                  <a href="#" className={styles.socialLink}>
-                    X
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.socialLink}>
-                    Instagram
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className={styles.socialLink}>
-                    Line
-                  </a>
-                </li>
-              </ul>
-              <button 
-                type="button"
-                className={styles.pageTopButton}
-                onClick={handleScrollToTop}
-              >
-                Pagetop
-              </button>
-            </div>
-          </div>
+        {/* Logo Section */}
+        <div className={styles.logoSection}>
+          <Image
+            src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+            alt="IILO Logo"
+            width={80}
+            height={37.5}
+            className={styles.footerLogo}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
+
+        {/* Copyright */}
+        <div className={styles.copyright}>
+          ©2025 - IILO
+        </div>
+
+        {/* Navigation Links - Individual positioning */}
+        <a href="#mission" className={styles.missionLink} onClick={handleMenuClick}>
+          Mission
+        </a>
+        <a href="#service" className={styles.serviceLink} onClick={handleMenuClick}>
+          Service
+        </a>
+        <a href="#recruit" className={styles.recruitLink} onClick={handleMenuClick}>
+          Recruit
+        </a>
+        <a href="#contact" className={styles.contactLink} onClick={handleMenuClick}>
+          Contact
+        </a>
+        <a href="#news" className={styles.newsLink} onClick={handleMenuClick}>
+          News
+        </a>
+
+        {/* Social Links - Individual positioning */}
+        <a href="#" className={styles.xLink}>X</a>
+        <a href="#" className={styles.instagramLink}>Instagram</a>
+        <a href="#" className={styles.lineLink}>LINE</a>
+
+        {/* Page Top Button */}
+        <button 
+          type="button"
+          className={styles.pageTopButton}
+          onClick={handleScrollToTop}
+        >
+          Pagetop
+        </button>
       </div>
     </footer>
   );

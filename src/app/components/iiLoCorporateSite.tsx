@@ -1,11 +1,15 @@
 'use client'
 
 import React, { useRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './IiLoCorporateSite.module.css';
 import Footer from './Footer';
+import ContactSection from './ContactSection';
 import Image from 'next/image';
 
 const IiLoCorporateSite = () => {
+  const router = useRouter();
+  
   // スクロール連動アニメーション用のrefs
   const missionSectionRef = useRef<HTMLElement>(null);
   const missionSubtitleRef = useRef<HTMLDivElement>(null);
@@ -16,6 +20,15 @@ const IiLoCorporateSite = () => {
   // IILO 5段階ロゴアニメーション実装（CSS keyframes版）
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showMissionText, setShowMissionText] = useState(false);
+
+  // Recruit button handlers
+  const handleEngineerRecruitClick = () => {
+    router.push('/recruit/engineer');
+  };
+
+  const handleStaffRecruitClick = () => {
+    router.push('/recruit/staff');
+  };
   
   useEffect(() => {
     let hasAnimated = false;
@@ -380,7 +393,10 @@ const IiLoCorporateSite = () => {
               <p className={styles.recruitCardDescription}>
                 エンジニア
               </p>
-              <button className={styles.recruitButton}>
+              <button 
+                className={styles.recruitButton}
+                onClick={handleEngineerRecruitClick}
+              >
                 more
               </button>
             </div>
@@ -392,7 +408,10 @@ const IiLoCorporateSite = () => {
               <p className={styles.recruitCardDescription}>
                 DIILOスタッフ
               </p>
-              <button className={styles.recruitButton}>
+              <button 
+                className={styles.recruitButton}
+                onClick={handleStaffRecruitClick}
+              >
                 more
               </button>
             </div>
@@ -401,84 +420,84 @@ const IiLoCorporateSite = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className={styles.blackSection}>
-        <div className={styles.container1024}>
-          <h2 className={styles.serviceSectionTitle}>
-            Contact
-          </h2>
-          
-          <div style={{ textAlign: 'center' }}>
-            <p className={styles.newsDescription}>
-              ご質問・お問い合わせ
-            </p>
-            
-            <button className={styles.buttonWhite}>
-              お問い合わせ
-            </button>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
 
       {/* Company Section */}
-      <section className={styles.section}>
-        <div className={styles.container1024}>
-          <h2 className={styles.sectionTitleWhiteBg}>
-            Company
-          </h2>
-          
-          <div className={styles.companyTable}>
-            <div className={styles.companyRow}>
-              <div className={styles.companyLabel}>会社名</div>
-              <div className={styles.companyValue}>株式会社IILo</div>
+      <section className={styles.companySection}>
+        <div className={styles.companySectionHeader}>
+          <div className={styles.companyDot}></div>
+          <h2 className={styles.companyTitle}>Company</h2>
+        </div>
+        
+        <div className={styles.companyTable}>
+          <div className={styles.companyRow}>
+            <div className={styles.companyLabel}>
+              <span>会社名</span>
             </div>
-            <div className={styles.companyRow}>
-              <div className={styles.companyLabel}>代表</div>
-              <div className={styles.companyValue}>名前</div>
+            <div className={styles.companyValue}>合同会社IILo</div>
+          </div>
+          <div className={styles.companyRow}>
+            <div className={styles.companyLabel}>
+              <span>代表</span>
             </div>
-            <div className={styles.companyRow}>
-              <div className={styles.companyLabel}>設立</div>
-              <div className={styles.companyValue}>設立年</div>
+            <div className={styles.companyValue}>名前 名前</div>
+          </div>
+          <div className={styles.companyRow}>
+            <div className={styles.companyLabel}>
+              <span>設立</span>
             </div>
-            <div className={styles.companyRow}>
-              <div className={styles.companyLabel}>住所</div>
-              <div className={styles.companyValue}>住所</div>
+            <div className={styles.companyValue}>2025年◯月</div>
+          </div>
+          <div className={styles.companyRow}>
+            <div className={styles.companyLabel}>
+              <span>住所</span>
             </div>
-            <div className={styles.companyRow}>
-              <div className={styles.companyLabel}>電話</div>
-              <div className={styles.companyValue}>電話番号</div>
+            <div className={styles.companyValue}>〒000-0000　住所住所住所住所住所住所</div>
+          </div>
+          <div className={styles.companyRow}>
+            <div className={styles.companyLabel}>
+              <span>電話</span>
             </div>
+            <div className={styles.companyValue}>00-0000-0000</div>
           </div>
         </div>
       </section>
 
       {/* News Section */}
-      <section id="news" className={styles.blackSection}>
-        <div className={styles.container1024}>
-          <h2 className={styles.serviceSectionTitle}>
-            News
-          </h2>
-          
-          
-          <div className={styles.newsContainer}>
-            <div className={styles.newsItem}>
-              <div className={styles.newsDate}>日付</div>
-              <div className={styles.newsTitle}>タイトル</div>
-            </div>
-            <div className={styles.newsItem}>
-              <div className={styles.newsDate}>日付</div>
-              <div className={styles.newsTitle}>タイトル</div>
-            </div>
-            <div className={styles.newsItem}>
-              <div className={styles.newsDate}>日付</div>
-              <div className={styles.newsTitle}>タイトル</div>
+      <section id="news" className={styles.newsSection}>
+        <div className={styles.newsSectionHeader}>
+          <div className={styles.newsDot}></div>
+          <h2 className={styles.newsTitle}>News</h2>
+        </div>
+        
+        <div className={styles.newsContainer}>
+          <div className={styles.newsItem}>
+            <div className={styles.newsDate}>YYYY.MM.DD</div>
+            <div className={styles.newsContent}>
+              最新情報タイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイ…
             </div>
           </div>
+          <div className={styles.newsLine}></div>
           
-          <div className={styles.newsButton}>
-            <button className={styles.buttonWhite}>
-              ニュース一覧
-            </button>
+          <div className={styles.newsItem}>
+            <div className={styles.newsDate}>YYYY.MM.DD</div>
+            <div className={styles.newsContent}>
+              最新情報タイトル
+            </div>
           </div>
+          <div className={styles.newsLine}></div>
+          
+          <div className={styles.newsItem}>
+            <div className={styles.newsDate}>YYYY.MM.DD</div>
+            <div className={styles.newsContent}>
+              最新情報タイトル
+            </div>
+          </div>
+          <div className={styles.newsLine}></div>
+        </div>
+        
+        <div className={styles.newsButtonContainer}>
+          <button className={styles.newsButton}>More</button>
         </div>
       </section>
 
