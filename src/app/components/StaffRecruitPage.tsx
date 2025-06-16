@@ -49,6 +49,8 @@ const StaffRecruitPage = () => {
             </div>
           </div>
 
+          <div className={styles.sectionLine}></div>
+
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
               <span>仕事の魅力</span>
@@ -58,6 +60,8 @@ const StaffRecruitPage = () => {
               <p className={styles.fadedText}>・GoやReactといったモダンな技術スタックを使って開発できる</p>
             </div>
           </div>
+
+          <div className={styles.sectionLine}></div>
 
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
@@ -69,6 +73,8 @@ const StaffRecruitPage = () => {
               <p className={styles.fadedText}>・IaaSを用いたインフラ開発やサービス運用経験1年以上</p>
             </div>
           </div>
+
+          <div className={styles.sectionLine}></div>
 
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
@@ -102,6 +108,8 @@ const StaffRecruitPage = () => {
             </div>
           </div>
 
+          <div className={styles.sectionLine}></div>
+
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
               <span>勤務地</span>
@@ -110,6 +118,8 @@ const StaffRecruitPage = () => {
               <p>勤務地記載</p>
             </div>
           </div>
+
+          <div className={styles.sectionLine}></div>
 
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
@@ -120,6 +130,8 @@ const StaffRecruitPage = () => {
             </div>
           </div>
 
+          <div className={styles.sectionLine}></div>
+
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
               <span>勤務時間</span>
@@ -129,6 +141,8 @@ const StaffRecruitPage = () => {
             </div>
           </div>
 
+          <div className={styles.sectionLine}></div>
+
           <div className={styles.detailRow}>
             <div className={styles.detailLabel}>
               <span>休日・休暇</span>
@@ -137,6 +151,8 @@ const StaffRecruitPage = () => {
               <p>土曜、日曜、祝日</p>
             </div>
           </div>
+
+          <div className={styles.sectionLine}></div>
         </div>
       </div>
 

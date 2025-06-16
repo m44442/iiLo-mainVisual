@@ -254,19 +254,21 @@ export default function ParticleSystem() {
       
       // ここでは形状を0.0で維持したまま別の微妙な動きを与える
       // 例: 少しだけ形状を変えて元に戻す
-      loopAnimation.to(materialRef.current!.uniforms.uPoint01, {
-        value: 0.05, // ほんの少し変形
-        ease: "power1.inOut",
-        duration: 2
-      });
-      
-      loopAnimation.to(materialRef.current!.uniforms.uPoint01, {
-        value: 0.0, // 元に戻す
-        ease: "power1.inOut",
-        duration: 2
-      });
-      
-      loopAnimation.play();
+      if (materialRef.current && materialRef.current.uniforms) {
+        loopAnimation.to(materialRef.current.uniforms.uPoint01, {
+          value: 0.05, // ほんの少し変形
+          ease: "power1.inOut",
+          duration: 2
+        });
+        
+        loopAnimation.to(materialRef.current.uniforms.uPoint01, {
+          value: 0.0, // 元に戻す
+          ease: "power1.inOut",
+          duration: 2
+        });
+        
+        loopAnimation.play();
+      }
     });
   }
 }, [])

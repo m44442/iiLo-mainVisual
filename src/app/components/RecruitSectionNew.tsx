@@ -1,26 +1,61 @@
 'use client'
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './IiLoCorporateSite.module.css';
+import EngineerRecruitModal from './EngineerRecruitModal';
+import StaffRecruitModal from './StaffRecruitModal';
 
 const RecruitSectionNew = () => {
   const router = useRouter();
+  const [engineerModalOpen, setEngineerModalOpen] = useState(false);
+  const [staffModalOpen, setStaffModalOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<'modal' | 'page'>('modal'); // Default to modal
 
   const handleEngineerRecruitClick = () => {
-    router.push('/recruit/engineer');
+    if (viewMode === 'modal') {
+      setEngineerModalOpen(true);
+    } else {
+      router.push('/recruit/engineer');
+    }
   };
 
   const handleStaffRecruitClick = () => {
-    router.push('/recruit/staff');
+    if (viewMode === 'modal') {
+      setStaffModalOpen(true);
+    } else {
+      router.push('/recruit/staff');
+    }
+  };
+
+  const toggleViewMode = () => {
+    setViewMode(viewMode === 'modal' ? 'page' : 'modal');
   };
 
   return (
-    <section id="recruit" className={styles.section}>
-      <div className={styles.container1024}>
-        <h2 className={styles.sectionTitleWhiteBg}>
-          Recruit
-        </h2>
+    <>
+      <section id="recruit" className={styles.section}>
+        <div className={styles.container1024}>
+          <h2 className={styles.sectionTitleWhiteBg}>
+            Recruit
+          </h2>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+            <button 
+              onClick={toggleViewMode}
+              style={{
+                padding: '8px 16px',
+                background: viewMode === 'modal' ? '#333' : '#f5f5f5',
+                color: viewMode === 'modal' ? 'white' : '#333',
+                border: '1px solid #333',
+                borderRadius: '4px',
+                cursor: 'pointer',
+                fontSize: '0.9rem',
+                transition: 'all 0.2s ease'
+              }}
+            >
+              {viewMode === 'modal' ? 'モーダル表示' : 'ページ表示'}
+            </button>
+          </div>
         
         <div className={styles.recruitDescription}>
           IILoは、医療やサービス業など"現場で働く人たち"の手間と課題をテクノロジーで解決する会社です。<br />
@@ -64,6 +99,17 @@ const RecruitSectionNew = () => {
         </div>
       </div>
     </section>
+
+    {/* Modals */}
+    <EngineerRecruitModal 
+      isOpen={engineerModalOpen} 
+      onClose={() => setEngineerModalOpen(false)} 
+    />
+    <StaffRecruitModal 
+      isOpen={staffModalOpen} 
+      onClose={() => setStaffModalOpen(false)} 
+    />
+  </>
   );
 };
 
