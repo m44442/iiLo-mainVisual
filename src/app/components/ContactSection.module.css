@@ -11,23 +11,47 @@
   padding: 0 164px;
 }
 
+.contactContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contactSectionHeader {
+  display: flex;
+  align-items: center;
+  margin-left: -40px;
+  flex-shrink: 0;
+  margin-top: 20px;
+}
+
+.contactDot {
+  width: 8px;
+  height: 8px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
 .contactTitle {
   font-family: 'General Sans Variable', system-ui, sans-serif;
-  font-weight: 500;
-  font-size: 25px;
+  font-weight: 600;
+  font-size: 30px;
   line-height: 45px;
   color: #FFFFFF;
-  margin: 0 0 40px 0;
+  margin: 0;
 }
 
 .contactCard {
-  max-width: 900px;
-  height: 350px;
-  margin: 0 auto;
   background-color: #E7E7E7;
   border-radius: 12px;
   position: relative;
   overflow: hidden;
+  flex: 1;
+  padding: 30px;
+  margin-top: 35px;
 }
 
 .contactCard::before {
@@ -48,8 +72,7 @@
 .contactContent {
   position: relative;
   z-index: 2;
-  padding: 80px 60px;
-  height: 100%;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: center;

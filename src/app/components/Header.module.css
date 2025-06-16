@@ -37,6 +37,14 @@
   z-index: 51;
   align-self: flex-start;
   margin-top: -34px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.logoAnimated {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Desktop Navigation - デスクトップで表示 */
@@ -46,6 +54,39 @@
   align-items: flex-start;
   margin-left: auto;
   margin-top: -15px;
+}
+
+.navItem {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.navItem1 {
+  animation: slideInDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.1s forwards;
+}
+
+.navItem2 {
+  animation: slideInDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+.navItem3 {
+  animation: slideInDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.navItem4 {
+  animation: slideInDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+
+.navItem5 {
+  animation: slideInDown 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+}
+
+@keyframes slideInDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (min-width: 768px) {
@@ -107,9 +148,19 @@
   padding: 10px;
   margin-left: 30px;
   z-index: 51;
-  transition: transform 0.3s ease;
   align-self: flex-start;
-  margin-top: -18px;
+  margin-top: -23px;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+
+.menuButtonAnimated {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .menuButton:hover {
@@ -117,20 +168,39 @@
 }
 
 .menuLine {
-  width: 35px;
+  width: 30px;
   height: 3px;
   background-color: black;
   transition: all 0.3s ease;
   transform-origin: center;
+  position: absolute;
+}
+
+.menuLine:nth-child(1) {
+  top: 12px;
+}
+
+.menuLine:nth-child(2) {
+  top: 20px;
 }
 
 /* ハンバーガーメニューのアニメーション */
 .menuButton.open .menuLine:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .menuButton.open .menuLine:nth-child(2) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  transform: rotate(-45deg);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 /* ハンバーガーメニュー閉じる時のアニメーション */
@@ -172,12 +242,12 @@
   background-color: rgba(0, 0, 0, 0.95);
   -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
-  animation: expandFromCenter 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: expandFromCenter 0.1s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 49;
 }
 
 .mobileMenu.closing {
-  animation: contractToCenter 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: contractToCenter 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .mobileMenuContent {
