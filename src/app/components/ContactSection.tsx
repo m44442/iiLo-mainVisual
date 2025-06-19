@@ -18,7 +18,7 @@ const ContactSection = () => {
               <p className={styles.contactDescription}>
                 お気軽にお問い合わせください。
               </p>
-              <button className={styles.contactButton}>お問い合わせ</button>
+              <button className={styles.contactButton}>more</button>
             </div>
           </div>
         </div>

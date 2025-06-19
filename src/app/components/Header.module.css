@@ -13,11 +13,11 @@
 
 /* スクロール時にすりガラス風背景 */
 .header.scrolled {
-  background: rgba(255, 255, 255, 0.15);
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.01);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .headerContent {
@@ -478,7 +478,7 @@
 
 /* モバイルメニューの白背景のハンバーガーボタン用 */
 .menuButton.menuOpen .menuLine {
-  background-color: white;
+  background-color: #E7E7E7;
 }
 
 /* SP対応（480px以下） */

@@ -2,65 +2,75 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from './IiLoCorporateSite.module.css';
-import Header from './Header';
 
-interface HeroSectionProps {
-  particleAnimationComplete: boolean;
-  onHeaderAnimationComplete: (completed: boolean) => void;
-  onHeroAnimationComplete: (completed: boolean) => void;
-}
-
-const HeroSection = ({ 
-  particleAnimationComplete, 
-  onHeaderAnimationComplete, 
-  onHeroAnimationComplete 
-}: HeroSectionProps) => {
-  const [headerVisible, setHeaderVisible] = useState(false);
-  const [heroTextVisible, setHeroTextVisible] = useState(false);
+const HeroSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (particleAnimationComplete) {
-      // パーティクル完了100ms後にヘッダー表示
-      const headerTimer = setTimeout(() => {
-        setHeaderVisible(true);
-        
-        // ヘッダーアニメーション完了300ms後にヒーローテキスト表示
-        const heroTimer = setTimeout(() => {
-          setHeroTextVisible(true);
-          
-          // ヒーローテキストアニメーション完了1秒後にスクロール可能
-          const scrollTimer = setTimeout(() => {
-            onHeroAnimationComplete(true);
-          }, 1000);
-          
-          return () => clearTimeout(scrollTimer);
-        }, 300);
-        
-        onHeaderAnimationComplete(true);
-        return () => clearTimeout(heroTimer);
-      }, 100);
+    // ParticleSystemの完了後に開始
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 2200); // 2.2秒後に開始
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // スクロール制御（既存コードに影響しない独立したuseEffect）
+  useEffect(() => {
+    // より強力なスクロール禁止（複数要素に適用）
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    
+    // スクロールイベント自体をブロック
+    const preventScroll = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    };
+    
+    document.addEventListener('wheel', preventScroll, { passive: false });
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+    
+    // ヒーローアニメーション完了後にスクロール許可
+    const scrollTimer = setTimeout(() => {
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
       
-      return () => clearTimeout(headerTimer);
-    }
-  }, [particleAnimationComplete, onHeaderAnimationComplete, onHeroAnimationComplete]);
+      document.removeEventListener('wheel', preventScroll);
+      document.removeEventListener('touchmove', preventScroll);
+    }, 4000); // 3秒（テキスト表示） + 1秒（アニメーション完了）のマージン
+
+    return () => {
+      clearTimeout(scrollTimer);
+      // クリーンアップで確実に復元
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.position = 'static';
+      document.body.style.width = 'auto';
+      
+      document.removeEventListener('wheel', preventScroll);
+      document.removeEventListener('touchmove', preventScroll);
+    };
+  }, []);
 
   return (
-    <>
-      <Header isVisible={headerVisible} />
-      <section className={styles.heroSection}>
-        <div>
-          <p className={`${styles.heroText} ${heroTextVisible ? styles.heroTextAnimated : ''}`}>
-            <span className={`${styles.heroLine1} ${heroTextVisible ? styles.heroLine1Animated : ''}`}>
-              あなたの現場に、
-            </span>
-            <br />
-            <span className={`${styles.heroLine2} ${heroTextVisible ? styles.heroLine2Animated : ''}`}>
-              もうひとつの頭脳を。
-            </span>
-          </p>
-        </div>
-      </section>
-    </>
+    <section className={styles.heroSection}>
+      <div>
+        <p className={`${styles.heroText} ${isVisible ? styles.heroTextAnimated : ''}`}>
+          <span className={`${styles.heroLine1} ${isVisible ? styles.heroLine1Animated : ''}`}>
+            あなたの現場に、
+          </span>
+          <br />
+          <span className={`${styles.heroLine2} ${isVisible ? styles.heroLine2Animated : ''}`}>
+            もうひとつの頭脳を。
+          </span>
+        </p>
+      </div>
+    </section>
   );
 };
 

@@ -1,28 +1,11 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { Suspense, useState, useEffect } from 'react'
+import { Suspense } from 'react'
 import ParticleSystem from './components/ParticleSystem'
 import IiLoCorporateSite from './components/iiLoCorporateSite'
 
 export default function Home() {
-  const [particleAnimationComplete, setParticleAnimationComplete] = useState(false)
-  const [headerAnimationComplete, setHeaderAnimationComplete] = useState(false)
-  const [heroAnimationComplete, setHeroAnimationComplete] = useState(false)
-  
-  // スクロール制御
-  useEffect(() => {
-    if (!heroAnimationComplete) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [heroAnimationComplete])
-  
   return (
     <div style={{ 
       position: 'relative', 
@@ -46,7 +29,7 @@ export default function Home() {
           left: 0,
           right: 0,
           bottom: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, transparent 70%, white 100%)',
+          background: 'linear-gradient(to bottom, transparent 0%, transparent 70%, #E7E7E7 100%)',
           pointerEvents: 'none',
           zIndex: 1
         }} />
@@ -65,7 +48,7 @@ export default function Home() {
           style={{ background: 'transparent' }}
         >
           <Suspense fallback={null}>
-            <ParticleSystem onAnimationComplete={setParticleAnimationComplete} />
+            <ParticleSystem />
           </Suspense>
         </Canvas>
       </div>
@@ -76,11 +59,7 @@ export default function Home() {
         zIndex: 10,
         width: '100%'
       }}>
-        <IiLoCorporateSite 
-          particleAnimationComplete={particleAnimationComplete}
-          onHeaderAnimationComplete={setHeaderAnimationComplete}
-          onHeroAnimationComplete={setHeroAnimationComplete}
-        />
+        <IiLoCorporateSite />
       </div>
     </div>
   )
