@@ -11,10 +11,24 @@ import RecruitSectionNew from './RecruitSectionNew';
 import CompanySectionNew from './CompanySectionNew';
 import NewsSectionNew from './NewsSectionNew';
 
-const IiLoCorporateSite = () => {
+interface IiLoCorporateSiteProps {
+  particleAnimationComplete: boolean;
+  onHeaderAnimationComplete: (completed: boolean) => void;
+  onHeroAnimationComplete: (completed: boolean) => void;
+}
+
+const IiLoCorporateSite = ({ 
+  particleAnimationComplete, 
+  onHeaderAnimationComplete, 
+  onHeroAnimationComplete 
+}: IiLoCorporateSiteProps) => {
   return (
     <div className={styles.container}>
-      <HeroSection />
+      <HeroSection 
+        particleAnimationComplete={particleAnimationComplete}
+        onHeaderAnimationComplete={onHeaderAnimationComplete}
+        onHeroAnimationComplete={onHeroAnimationComplete}
+      />
       <MissionSectionWithAnimation />
       <ServiceSectionDiiLo />
       <RecruitSectionNew />

@@ -158,26 +158,55 @@ const MissionSectionWithAnimation = () => {
         </div>
         
         <div className={styles.missionCircleContainer}>
+          {/* Dotted Line Background */}
+          <div className={styles.missionLine}>
+            <svg width="1200" height="1" viewBox="0 0 1200 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="#BDBDBD" strokeLinejoin="round" strokeDasharray="6 4"/>
+            </svg>
+          </div>
+          
+          {/* Arrow */}
+          <div className={styles.missionArrow}>
+            <svg width="13" height="25" viewBox="0 0 13 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0.5 1L12 12.5L0.5 24" stroke="#BDBDBD"/>
+            </svg>
+          </div>
+          
           <div className={`${styles.missionCircleRow} ${styles.missionCircleDesktop}`}>
             <div className={styles.missionCircle}>
+              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
+              </svg>
               <div className={styles.missionCircleText}>AI</div>
             </div>
             <div className={styles.missionCircle}>
+              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
+              </svg>
               <div className={styles.missionCircleText}>
                 Web<br />アプリケーション<br />開発
               </div>
             </div>
             <div className={styles.missionCircle}>
+              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
+              </svg>
               <div className={styles.missionCircleText}>
                 クラウド<br />インフラ
               </div>
             </div>
             <div className={styles.missionCircle}>
+              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
+              </svg>
               <div className={styles.missionCircleText}>
                 セキュリティ・<br />プライバシー設計
               </div>
             </div>
             <div className={styles.missionCircle}>
+              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
+              </svg>
               <div className={styles.missionCircleText}>
                 API・<br />外部連携基盤
               </div>

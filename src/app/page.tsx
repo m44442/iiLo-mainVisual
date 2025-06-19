@@ -1,11 +1,28 @@
 'use client'
 
 import { Canvas } from '@react-three/fiber'
-import { Suspense } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import ParticleSystem from './components/ParticleSystem'
 import IiLoCorporateSite from './components/iiLoCorporateSite'
 
 export default function Home() {
+  const [particleAnimationComplete, setParticleAnimationComplete] = useState(false)
+  const [headerAnimationComplete, setHeaderAnimationComplete] = useState(false)
+  const [heroAnimationComplete, setHeroAnimationComplete] = useState(false)
+  
+  // スクロール制御
+  useEffect(() => {
+    if (!heroAnimationComplete) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [heroAnimationComplete])
+  
   return (
     <div style={{ 
       position: 'relative', 
@@ -48,7 +65,7 @@ export default function Home() {
           style={{ background: 'transparent' }}
         >
           <Suspense fallback={null}>
-            <ParticleSystem />
+            <ParticleSystem onAnimationComplete={setParticleAnimationComplete} />
           </Suspense>
         </Canvas>
       </div>
@@ -59,7 +76,11 @@ export default function Home() {
         zIndex: 10,
         width: '100%'
       }}>
-        <IiLoCorporateSite />
+        <IiLoCorporateSite 
+          particleAnimationComplete={particleAnimationComplete}
+          onHeaderAnimationComplete={setHeaderAnimationComplete}
+          onHeroAnimationComplete={setHeroAnimationComplete}
+        />
       </div>
     </div>
   )

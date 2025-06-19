@@ -5,7 +5,7 @@ import styles from './IiLoCorporateSite.module.css';
 
 const NewsSectionNew = () => {
   return (
-    <section id="news" className={styles.newsSection}>
+    <section id="news" className={`${styles.newsSection} ${styles.newsBlackSection}`}>
       <div className={styles.newsSectionHeader}>
         <div className={styles.newsDot}></div>
         <h2 className={styles.newsTitle}>News</h2>

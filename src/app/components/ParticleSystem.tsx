@@ -138,7 +138,11 @@ void main() {
 }
 `
 
-export default function ParticleSystem() {
+interface ParticleSystemProps {
+  onAnimationComplete?: (completed: boolean) => void;
+}
+
+export default function ParticleSystem({ onAnimationComplete }: ParticleSystemProps) {
   const materialRef = useRef<THREE.RawShaderMaterial>(null)
   const pointsRef = useRef<THREE.Points>(null)
   const mouseRef = useRef({ x: 0, y: 0 })
@@ -234,18 +238,21 @@ export default function ParticleSystem() {
     firstAnimation.to(materialRef.current.uniforms.uPoint01, {
       value: 0.0,
       ease: "power3.out", // よりドラマチックなイージング
-      duration: 2.5, // 長めの時間をかけて集める
+      duration: 1.8, // UX改善のため短縮
     });
 
     // パーティクルのサイズも大きくする
     firstAnimation.to(materialRef.current.uniforms.uSize, {
       value: baseSize, // モバイルでは1.5、PCでは2.0
       ease: "power1.inOut",
-      duration: 2.5,
+      duration: 1.8,
     }, 0); // 0は同時スタートの意味
     
     // 最初のアニメーションが終わったら繰り返しのアニメーション開始
     firstAnimation.call(() => {
+      // パーティクルアニメーション完了をコールバック
+      onAnimationComplete?.(true);
+      
       // 最初のアニメーションが完了したあとの繰り返しアニメーション
       const loopAnimation = gsap.timeline({
         repeat: -1,

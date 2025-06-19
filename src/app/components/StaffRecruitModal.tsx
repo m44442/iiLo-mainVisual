@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   useTransition,
   useSpring,
@@ -15,9 +15,38 @@ import ContactSection from './ContactSection';
 interface StaffRecruitModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToEngineer?: () => void;
 }
 
-const StaffRecruitModal = ({ isOpen, onClose }: StaffRecruitModalProps) => {
+const StaffRecruitModal = ({ isOpen, onClose, onSwitchToEngineer }: StaffRecruitModalProps) => {
+  // Prevent background scroll and hide header when modal is open
+  useEffect(() => {
+    const header = document.querySelector('header');
+    
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = '0px';
+      if (header) {
+        (header as HTMLElement).style.display = 'none';
+      }
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0px';
+      if (header) {
+        (header as HTMLElement).style.display = 'block';
+      }
+    }
+    
+    // Cleanup on unmount
+    return () => {
+      document.body.style.overflow = 'auto';
+      document.body.style.paddingRight = '0px';
+      if (header) {
+        (header as HTMLElement).style.display = 'block';
+      }
+    };
+  }, [isOpen]);
+
   const springApi = useSpringRef();
   const overlaySpring = useSpring({
     ref: springApi,
@@ -204,6 +233,32 @@ const StaffRecruitModal = ({ isOpen, onClose }: StaffRecruitModalProps) => {
 
             {/* Contact Section */}
             <ContactSection />
+
+            {/* Others Section */}
+            <div className={styles.othersSection}>
+              <div className={styles.othersContainer}>
+                <div className={styles.othersSectionHeader}>
+                  <div className={styles.othersDot}></div>
+                  <h3 className={styles.othersTitle}>Others</h3>
+                </div>
+                
+                <div className={styles.othersCard}>
+                  <div className={styles.othersContent}>
+                    <p className={styles.othersCardSubtitle}>正社員・インターン採用</p>
+                    <h4 className={styles.othersCardTitle}>エンジニア</h4>
+                    {onSwitchToEngineer && (
+                      <button 
+                        type="button"
+                        className={styles.othersButton}
+                        onClick={onSwitchToEngineer}
+                      >
+                        More
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </animated.div>
         ) : null

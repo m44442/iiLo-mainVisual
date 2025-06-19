@@ -4,7 +4,7 @@ import React from "react";
 import Footer from "../components/Footer";
 import ContactSection from "../components/ContactSection";
 import MissionStatement from "../components/MissionStatement";
-import MissionDetailPage from "../components/MissionDetailPage";
+import MissionSectionWithAnimation from "../components/MissionSectionWithAnimation";
 import ServiceSectionNew from "../components/ServiceSectionNew";
 const MissionPage = () => {
   return (
@@ -32,7 +32,7 @@ const MissionPage = () => {
           transform: 'translateX(-50%)'
         }}></div>
       </div>
-      <MissionDetailPage />
+      <MissionSectionWithAnimation />
       <ServiceSectionNew />
       <MissionStatement />
       <ContactSection />

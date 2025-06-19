@@ -4,12 +4,15 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"; // Next.js のルーター機能を追加
 import styles from "./Header.module.css";
 
-const Header = () => {
+interface HeaderProps {
+  isVisible?: boolean;
+}
+
+const Header = ({ isVisible = false }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
   const router = useRouter(); // ルーターを初期化
 
   useEffect(() => {
@@ -19,15 +22,9 @@ const Header = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    
-    // ページロード時のアニメーション（ParticleSystemの完了後に開始）
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 2800); // 2.5秒 + 0.3秒のマージン
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(timer);
     };
   }, []);
 
@@ -72,7 +69,7 @@ const Header = () => {
     <header className={`${styles.header} ${isScrolled ? styles.scrolled : ""}`}>
       <div className={styles.headerContent}>
         <div
-          className={`${styles.logo} ${isLoaded ? styles.logoAnimated : ''}`}
+          className={`${styles.logo} ${isVisible ? styles.logoAnimated : ''}`}
           onClick={handleLogoClick} // 修正されたハンドラーを使用
           style={{ cursor: "pointer" }}
         >
@@ -80,13 +77,13 @@ const Header = () => {
         </div>
 
         {/* Desktop Navigation */}
-        <nav className={`${styles.desktopNav} ${isLoaded ? styles.navAnimated : ''}`}>
-          <a href="/mission" className={`${styles.navItem} ${isLoaded ? styles.navItem1 : ''}`} data-text="Mission">
+        <nav className={`${styles.desktopNav} ${isVisible ? styles.navAnimated : ''}`}>
+          <a href="/mission" className={`${styles.navItem} ${isVisible ? styles.navItem1 : ''}`} data-text="Mission">
             <span>Mission</span>
           </a>
           <a
             href="#service"
-            className={`${styles.navItem} ${isLoaded ? styles.navItem2 : ''}`}
+            className={`${styles.navItem} ${isVisible ? styles.navItem2 : ''}`}
             data-text="Service"
             onClick={handleMenuClick}
           >
@@ -94,7 +91,7 @@ const Header = () => {
           </a>
           <a
             href="#recruit"
-            className={`${styles.navItem} ${isLoaded ? styles.navItem3 : ''}`}
+            className={`${styles.navItem} ${isVisible ? styles.navItem3 : ''}`}
             data-text="Recruit"
             onClick={handleMenuClick}
           >
@@ -102,7 +99,7 @@ const Header = () => {
           </a>
           <a
             href="#contact"
-            className={`${styles.navItem} ${isLoaded ? styles.navItem4 : ''}`}
+            className={`${styles.navItem} ${isVisible ? styles.navItem4 : ''}`}
             data-text="Contact"
             onClick={handleMenuClick}
           >
@@ -110,7 +107,7 @@ const Header = () => {
           </a>
           <a
             href="#news"
-            className={`${styles.navItem} ${isLoaded ? styles.navItem5 : ''}`}
+            className={`${styles.navItem} ${isVisible ? styles.navItem5 : ''}`}
             data-text="News"
             onClick={handleMenuClick}
           >
@@ -121,7 +118,7 @@ const Header = () => {
         {/* Mobile Menu Button */}
         <button
           type="button"
-          className={`${styles.menuButton} ${isMenuOpen ? styles.open : ""} ${isMenuOpen ? styles.menuOpen : ""} ${isClosing ? styles.closing : ""} ${isLoaded ? styles.menuButtonAnimated : ""}`}
+          className={`${styles.menuButton} ${isMenuOpen ? styles.open : ""} ${isMenuOpen ? styles.menuOpen : ""} ${isClosing ? styles.closing : ""} ${isVisible ? styles.menuButtonAnimated : ""}`}
           onClick={() => (isMenuOpen ? closeMenu() : openMenu())}
           aria-label="Toggle menu"
         >
