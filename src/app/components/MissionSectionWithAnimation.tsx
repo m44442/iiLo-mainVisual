@@ -1,52 +1,80 @@
-'use client'
+"use client";
 
-import React, { useRef, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import styles from './IiLoCorporateSite.module.css';
+import React, { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { Button } from "../../../components/ui/button";
 
 const MissionSectionWithAnimation = () => {
   const router = useRouter();
-  
+
   const missionSectionRef = useRef<HTMLElement>(null);
-  const missionSubtitleRef = useRef<HTMLDivElement>(null);
-  const missionMainTitleRef = useRef<HTMLDivElement>(null);
-  const missionTitleSmallRef = useRef<HTMLSpanElement>(null);
   const missionHeaderRef = useRef<HTMLDivElement>(null);
 
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showMissionText, setShowMissionText] = useState(false);
-  
+
   useEffect(() => {
     let hasAnimated = false;
 
     const startAnimation = () => {
+      // フェーズ1: 左からスライドイン（0秒）- 即座に開始
       setCurrentPhase(1);
-      setTimeout(() => setCurrentPhase(3), 300);
-      setTimeout(() => setCurrentPhase(4), 1000);
-      setTimeout(() => setCurrentPhase(5), 1300);
 
+      // フェーズ2: フェードイン + スケール（0.8秒後）
       setTimeout(() => {
-        setShowMissionText(true);
+        setCurrentPhase(2);
+      }, 800);
+
+      // フェーズ3: パルス（1.2秒後）
+      setTimeout(() => {
+        setCurrentPhase(3);
+      }, 1200);
+
+      // フェーズ4: 斜め分割（2.0秒後）
+      setTimeout(() => {
+        setCurrentPhase(4);
       }, 2000);
 
+      // フェーズ5: 斜め合体（2.5秒後）
+      setTimeout(() => {
+        setCurrentPhase(5);
+      }, 2500);
+
+      // フェーズ6: 完成・安定化（2.6秒後）
+      setTimeout(() => {
+        setCurrentPhase(6);
+      }, 2600);
+
+      // テキスト表示（2.8秒後 - ロゴアニメーション完全終了後）
+      setTimeout(() => {
+        setShowMissionText(true);
+      }, 2800);
+
+      // フローティングアニメーション開始（2.8秒後）
       setTimeout(() => {
         if (missionHeaderRef.current) {
-          missionHeaderRef.current.style.animation = 'float 3s ease-in-out infinite alternate';
+          missionHeaderRef.current.style.animation =
+            "float 3s ease-in-out infinite alternate";
         }
-      }, 3000);
+      }, 2800);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          hasAnimated = true;
-          startAnimation();
-          observer.disconnect();
-        }
-      });
-    }, { 
-      threshold: 0.7
-    });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            hasAnimated = true;
+            startAnimation();
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.3,
+        rootMargin: "0px 0px -100px 0px",
+      }
+    );
 
     if (missionHeaderRef.current) {
       observer.observe(missionHeaderRef.current);
@@ -56,228 +84,356 @@ const MissionSectionWithAnimation = () => {
   }, []);
 
   return (
-    <section id="mission" className={styles.section} ref={missionSectionRef}>
-      <div className={styles.container1024}>
-        <div className={styles.missionHeader} ref={missionHeaderRef}>
-          <div className={styles.iiloAnimationContainer}>
+    <section
+      id="mission"
+      className="py-20 px-6 bg-[#E7E7E7] m-0 lg:py-[60px] lg:px-4 md:py-10 md:px-3"
+      ref={missionSectionRef}
+    >
+      <div className="max-w-[1400px] mx-auto">
+        <div
+          className="flex flex-col justify-center items-center mb-5 mt-5 relative lg:mt-10 lg:mb-5"
+          ref={missionHeaderRef}
+        >
+          <div className="w-full h-[400px] flex items-center justify-center overflow-hidden relative mb-3 lg:h-[300px] lg:mb-2 [&_*]:will-change-transform">
+            {/* 初期状態: アニメーション開始前は何も表示しない */}
+            {currentPhase === 0 && (
+              <div className="absolute flex items-center justify-center opacity-0"></div>
+            )}
+
+            {/* Phase 1: 黒い枠が残像残しながらスライド + 白文字ロゴが勢いよく現れる */}
             {currentPhase === 1 && (
-              <div className={styles.phase1Container}>
-                <div className={styles.afterimage1}>
-                  <div className={styles.compressedLogoContainer}>
-                    <div className={styles.compressedI1}></div>
-                    <div className={styles.compressedI2}></div>
-                    <div className={styles.compressedL}></div>
-                    <div className={styles.compressedO}></div>
-                  </div>
-                </div>
-                <div className={styles.afterimage2}>
-                  <div className={styles.compressedLogoContainer}>
-                    <div className={styles.compressedI1}></div>
-                    <div className={styles.compressedI2}></div>
-                    <div className={styles.compressedL}></div>
-                    <div className={styles.compressedO}></div>
-                  </div>
-                </div>
-                <div className={styles.mainSlide}>
-                  <div className={styles.compressedLogoContainer}>
-                    <div className={styles.compressedI1}></div>
-                    <div className={styles.compressedI2}></div>
-                    <div className={styles.compressedL}></div>
-                    <div className={styles.compressedO}></div>
+              <div className="absolute flex items-center justify-center will-change-transform z-20">
+                {/* 黒い枠（残像効果付き） */}
+                <div
+                  className="w-[420px] h-[295px] bg-black border-2 border-black flex items-center justify-center"
+                  style={{
+                    animation:
+                      "slideFrameWithTrail 1.0s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards",
+                  }}
+                >
+                  {/* 実際のロゴ画像（白色フィルタ適用で白文字化） */}
+                  <div
+                    style={{
+                      animation:
+                        "logoAppearDynamic 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s forwards",
+                      opacity: 0,
+                    }}
+                  >
+                    <Image
+                      src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                      alt="IILO Logo"
+                      width={400}
+                      height={275}
+                      className="object-contain"
+                      style={{
+                        filter: "brightness(0) invert(1)",
+                      }}
+                      priority
+                    />
                   </div>
                 </div>
               </div>
             )}
 
+            {/* Phase 2: フェードイン + スケール */}
+            {currentPhase === 2 && (
+              <div className="absolute flex items-center justify-center will-change-transform z-20 animate-fade-in-scale">
+                <Image
+                  src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                  alt="IILO Logo"
+                  width={320}
+                  height={220}
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            )}
+
+            {/* Phase 3: ロゴの周りに散らしたエフェクト */}
             {currentPhase === 3 && (
-              <div className={styles.phase3Container}>
-                <div className={styles.effectsContainer}>
-                  <div className={styles.effectLine1}></div>
-                  <div className={styles.effectLine2}></div>
-                  <div className={styles.effectCircle1}></div>
-                  <div className={styles.effectLine3}></div>
-                  <div className={styles.effectLine4}></div>
-                  <div className={styles.effectCircle2}></div>
-                  <div className={styles.effectLine5}></div>
-                  <div className={styles.effectLine6}></div>
-                  <div className={styles.effectLine7}></div>
-                  <div className={styles.effectCircle3}></div>
+              <div className="absolute flex items-center justify-center will-change-transform z-10">
+                {/* ロゴの周りに散らした線と円 */}
+                <div className="absolute inset-0 pointer-events-none">
+                  {/* 上部エリアの線と円 */}
+                  <div className="absolute top-8 left-1/2 w-1 h-24 bg-black simple-burst-line-1 -translate-x-1/2 rotate-0"></div>
+                  <div className="absolute top-4 left-1/3 w-10 h-10 border border-black rounded-full simple-burst-circle-1"></div>
+                  <div className="absolute top-6 right-1/3 w-1 h-18 bg-black simple-burst-line-2 rotate-45"></div>
+
+                  {/* 右側エリアの線と円 */}
+                  <div className="absolute top-1/2 right-8 w-1 h-21 bg-black simple-burst-line-3 -translate-y-1/2 rotate-90"></div>
+                  <div className="absolute top-1/3 right-4 w-12 h-12 border border-black rounded-full simple-burst-circle-2"></div>
+                  <div className="absolute bottom-1/3 right-6 w-1 h-15 bg-black simple-burst-line-4 rotate-135"></div>
+
+                  {/* 下部エリアの線と円 */}
+                  <div className="absolute bottom-8 left-1/2 w-1 h-24 bg-black simple-burst-line-5 -translate-x-1/2 rotate-180"></div>
+                  <div className="absolute bottom-4 left-1/4 w-14 h-14 border border-black rounded-full simple-burst-circle-3"></div>
+                  <div className="absolute bottom-6 right-1/4 w-1 h-18 bg-black simple-burst-line-6 rotate-225"></div>
+
+                  {/* 左側エリアの線と円 */}
+                  <div className="absolute top-1/2 left-8 w-1 h-21 bg-black simple-burst-line-7 -translate-y-1/2 rotate-270"></div>
+                  <div className="absolute top-2/3 left-4 w-10 h-10 border border-black rounded-full simple-burst-circle-4"></div>
+                  <div className="absolute top-1/4 left-6 w-1 h-15 bg-black simple-burst-line-8 rotate-315"></div>
                 </div>
-                
-                <div className={styles.lettersContainer}>
-                  <div className={styles.letterI1}></div>
-                  <div className={styles.letterI2}></div>
-                  <div className={styles.letterL}></div>
-                  <div className={styles.letterO}></div>
-                </div>
+
+                {/* メインロゴ */}
+                <Image
+                  src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                  alt="IILO Logo"
+                  width={320}
+                  height={220}
+                  className="object-contain animate-simple-pulse relative z-20"
+                  priority
+                />
               </div>
             )}
 
+            {/* Phase 4: 全文字の上下分割 - サイズ一貫性を保つ */}
             {currentPhase === 4 && (
-              <div className={styles.phase4Container}>
-                <div className={styles.normalLogoContainer}>
-                  <div className={styles.normalI1}></div>
-                  <div className={styles.normalI2}></div>
-                  <div className={styles.normalL}></div>
-                  <div className={styles.normalO}></div>
+              <>
+                <div className="absolute flex items-center justify-center will-change-transform z-10">
+                  {/* 分割前のロゴを基準として、上下分割表示 */}
+
+                  {/* 上半分 */}
+                  <div className="absolute w-[320px] h-[220px] overflow-hidden will-change-transform character-split-top z-[15]">
+                    <Image
+                      src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                      alt="IILO Logo Top Half"
+                      width={320}
+                      height={220}
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
+
+                  {/* 下半分 */}
+                  <div className="absolute w-[320px] h-[220px] overflow-hidden will-change-transform character-split-bottom z-[14]">
+                    <Image
+                      src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                      alt="IILO Logo Bottom Half"
+                      width={320}
+                      height={220}
+                      className="object-contain"
+                      priority
+                    />
+                  </div>
                 </div>
-              </div>
+              </>
             )}
 
+            {/* Phase 5: 文字ごとの水平合体 - サイズ一貫性を保つ */}
             {currentPhase === 5 && (
-              <div className={styles.phase5Container}>
-                <div className={styles.finalLetters}>
-                  <div className={styles.letterSplitI1}>
-                    <div className={styles.splitLeftI1}></div>
-                    <div className={styles.splitRightI1}></div>
+              <>
+                <div className="absolute flex items-center justify-center will-change-transform z-10">
+                  {/* 上半分 */}
+                  <div className="absolute w-[320px] h-[220px] overflow-hidden will-change-transform character-assemble-top z-[15]">
+                    <Image
+                      src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                      alt="IILO Logo Top Half Assembly"
+                      width={320}
+                      height={220}
+                      className="object-contain"
+                      priority
+                    />
                   </div>
-                  
-                  <div className={styles.letterSplitI2}>
-                    <div className={styles.splitLeftI2}></div>
-                    <div className={styles.splitRightI2}></div>
-                  </div>
-                  
-                  <div className={styles.letterSplitL}>
-                    <div className={styles.splitLeftL}></div>
-                    <div className={styles.splitRightL}></div>
-                  </div>
-                  
-                  <div className={styles.letterSplitO}>
-                    <div className={styles.splitLeftO}></div>
-                    <div className={styles.splitRightO}></div>
+
+                  {/* 下半分 */}
+                  <div className="absolute w-[320px] h-[220px] overflow-hidden will-change-transform character-assemble-bottom z-[14]">
+                    <Image
+                      src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                      alt="IILO Logo Bottom Half Assembly"
+                      width={320}
+                      height={220}
+                      className="object-contain"
+                      priority
+                    />
                   </div>
                 </div>
+              </>
+            )}
+
+            {/* Phase 6: 完成・安定化 - サイズ一貫性を保つ */}
+            {currentPhase === 6 && (
+              <div className="absolute flex items-center justify-center will-change-transform z-10">
+                <Image
+                  src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                  alt="IILO Logo"
+                  width={320}
+                  height={220}
+                  className="object-contain static-complete"
+                  priority
+                />
               </div>
             )}
           </div>
-          
-          <div className={styles.missionTextContainer}>
-            <div className={`${styles.missionSubtitle} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionSubtitleRef}>イーロの</div>
-            <div className={`${styles.missionMainTitle} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionMainTitleRef}>Mission<span className={`${styles.missionTitleSmall} ${showMissionText ? styles.fadeInUp : styles.hiddenText}`} ref={missionTitleSmallRef}>は</span></div>
+
+          {/* テキストをロゴの真下に密着配置 - 左右段落揃え */}
+          <div className="flex flex-col w-[400px] lg:w-[320px] md:w-[280px] -mt-16 lg:-mt-12 md:-mt-10">
+            <div
+              className={`font-[NotoSansJP,sans-serif] text-[58px] font-bold text-black tracking-wide mb-[3px] will-change-transform lg:text-[26px] md:text-xl text-left ${showMissionText ? "mission-fade-up" : "opacity-0"}`}
+            >
+              イーロの
+            </div>
+            <div
+              className={`font-[NotoSansJP,sans-serif] text-[68px] font-bold text-black tracking-wide will-change-transform lg:text-[42px] md:text-[32px] text-right mr-[-30px] ${showMissionText ? "mission-fade-up-delayed" : "opacity-0"}`}
+            >
+              Missionは
+            </div>
           </div>
         </div>
-        
-        <div className={styles.missionCircleContainer}>
-          {/* Dotted Line Background */}
-          <div className={styles.missionLine}>
-            <svg width="1200" height="1" viewBox="0 0 1200 1" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0" y1="0.5" x2="1200" y2="0.5" stroke="#BDBDBD" strokeLinejoin="round" strokeDasharray="6 4"/>
-            </svg>
-          </div>
-          
-          {/* Arrow */}
-          <div className={styles.missionArrow}>
-            <svg width="13" height="25" viewBox="0 0 13 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M0.5 1L12 12.5L0.5 24" stroke="#BDBDBD"/>
-            </svg>
-          </div>
-          
-          <div className={`${styles.missionCircleRow} ${styles.missionCircleDesktop}`}>
-            <div className={styles.missionCircle}>
-              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
-              </svg>
-              <div className={styles.missionCircleText}>AI</div>
-            </div>
-            <div className={styles.missionCircle}>
-              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
-              </svg>
-              <div className={styles.missionCircleText}>
-                Web<br />アプリケーション<br />開発
-              </div>
-            </div>
-            <div className={styles.missionCircle}>
-              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
-              </svg>
-              <div className={styles.missionCircleText}>
-                クラウド<br />インフラ
-              </div>
-            </div>
-            <div className={styles.missionCircle}>
-              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
-              </svg>
-              <div className={styles.missionCircleText}>
-                セキュリティ・<br />プライバシー設計
-              </div>
-            </div>
-            <div className={styles.missionCircle}>
-              <svg width="220" height="220" viewBox="0 0 263 262" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M131.5 0.5C203.851 0.5 262.5 58.9286 262.5 131C262.5 203.071 203.851 261.5 131.5 261.5C59.1489 261.5 0.5 203.071 0.5 131C0.5 58.9286 59.1489 0.5 131.5 0.5Z" stroke="#BDBDBD"/>
-              </svg>
-              <div className={styles.missionCircleText}>
-                API・<br />外部連携基盤
+
+        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4">
+          {/* Dotted Line Background - 適切な長さで矢印が表示されるように */}
+          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-visible z-0">
+            <div className="w-[1400px] h-[1px] relative flex items-center justify-center lg:w-[1100px] md:w-[800px]">
+              <Image
+                src="/images/service-dotted-line.svg"
+                alt="Dotted Line"
+                width={2807}
+                height={1}
+                className="w-full h-auto"
+              />
+              {/* Arrow */}
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1">
+                <Image
+                  src="/images/arrow-tip.svg"
+                  alt="Arrow"
+                  width={20}
+                  height={39}
+                />
               </div>
             </div>
           </div>
-          
-          <div className={`${styles.missionCircleMobile}`}>
-            <div className={`${styles.missionCircleRow} ${styles.missionCircleRowTop}`}>
-              <div className={styles.missionCircle}>
-                <div className={styles.missionCircleText}>AI</div>
-              </div>
-              <div className={styles.missionCircle}>
-                <div className={styles.missionCircleText}>
-                  Web<br />アプリケーション<br />開発
-                </div>
+
+          {/* Circles container - 配置はそのまま */}
+          <div className="flex justify-center items-center flex-nowrap lg:flex-wrap relative z-10">
+            {/* Circle 1 - AI */}
+            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
+              <Image
+                src="/images/circle-path.svg"
+                alt="Circle"
+                width={308}
+                height={308}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg lg:text-base md:text-sm">
+                AI
               </div>
             </div>
-            <div className={`${styles.missionCircleRow} ${styles.missionCircleRowBottom}`}>
-              <div className={styles.missionCircle}>
-                <div className={styles.missionCircleText}>
-                  クラウド<br />インフラ
-                </div>
+            {/* Circle 2 - Web アプリケーション開発 */}
+            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
+              <Image
+                src="/images/circle-path.svg"
+                alt="Circle"
+                width={308}
+                height={308}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
+                Web
+                <br />
+                アプリケーション
+                <br />
+                開発
               </div>
-              <div className={styles.missionCircle}>
-                <div className={styles.missionCircleText}>
-                  セキュリティ・<br />プライバシー設計
-                </div>
+            </div>
+            {/* Circle 3 - クラウド インフラ */}
+            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
+              <Image
+                src="/images/circle-path.svg"
+                alt="Circle"
+                width={308}
+                height={308}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
+                クラウド
+                <br />
+                インフラ
               </div>
-              <div className={styles.missionCircle}>
-                <div className={styles.missionCircleText}>
-                  API・<br />外部連携基盤
-                </div>
+            </div>
+            {/* Circle 4 - セキュリティ・コンプライアンス */}
+            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
+              <Image
+                src="/images/circle-path.svg"
+                alt="Circle"
+                width={308}
+                height={308}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
+                セキュリティ・
+                <br />
+                プライバシー設計
+              </div>
+            </div>
+            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px]">
+              <Image
+                src="/images/circle-path.svg"
+                alt="Circle"
+                width={308}
+                height={308}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
+                API・
+                <br />
+                外部連携基盤
               </div>
             </div>
           </div>
         </div>
 
-        <div className={styles.missionCatchphrase}>
-          <h3 className={styles.missionCatchphraseText}>
-            すべての業界に<br />
-            "もうひとりのAIスタッフ"を提供する
+        <div className="text-center mt-16 mb-8 lg:mt-12 lg:mb-6">
+          <h3 className="text-[32px] font-bold text-black mb-3 lg:text-2xl md:text-xl">
+            <span className="bg-white px-2 py-1 rounded-sm">
+              すべての業界に
+            </span>
+            
           </h3>
+          <h3  className="text-[32px] font-bold text-black mb-4 lg:text-2xl md:text-xl"><span className="bg-white px-2 py-1 rounded-sm">
+              "もうひとりのAIスタッフ"を提供する
+            </span>
+            </h3>
         </div>
-        
-        <div className={styles.missionDescription}>
-          <p className={styles.missionParagraph}>
-            IILo（イーロ）は、AI・Web技術・クラウドインフラを用いて、<br />
+
+        <div className="max-w-4xl mx-auto px-8 text-center lg:px-6 md:px-4">
+          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm">
+            IILo（イーロ）は、AI・Web技術・クラウドインフラを用いて、
+            <br />
             業界特化型のスマートSaaSを開発・提供するテクノロジーカンパニーです。
           </p>
-          
-          <p className={styles.missionParagraph}>
-            私たちは、現場で本当に使われるプロダクトにこだわり、<br />
+
+          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm">
+            私たちは、現場で本当に使われるプロダクトにこだわり、
+            <br />
             医療・教育・店舗業などの現場に寄り添ったプロダクト設計を行っています。
           </p>
-          
-          <p className={styles.missionParagraph}>
+
+          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm">
             第一弾として、歯科業界に特化したLINE連携型SaaS「DiiLo（ディーロ）」をリリース。
           </p>
-          
-          <p className={styles.missionParagraph}>
-            今後も、現場に根ざしたテクノロジーを届けることで、<br />
-            すべての業界に"もうひとりのAIスタッフ"を提供することを目指しています。
+
+          <p className="text-[18px] leading-[1.8] text-black mb-1 lg:text-base lg:mb-1 md:text-sm">
+            <span className="bg-white px-2 py-1 rounded-sm">
+              今後も、現場に根ざしたテクノロジーを届けることで、
+            </span>
+          </p>
+          <p className="text-[18px] leading-[1.8] text-black mb-8 lg:text-base lg:mb-6 md:text-sm">
+            <span className="bg-white px-2 py-1 rounded-sm">
+              すべての業界に"もうひとりのAIスタッフ"を提供することを目指しています。
+            </span>
           </p>
         </div>
-        
-        <div className={styles.missionFooter}>
-          <a href="/mission">
-            <button type="button" className={styles.missionButton}>
-              More
-            </button>
-          </a>
+
+        <div className="text-center mt-12 lg:mt-8">
+          <Button
+            type="button"
+            onClick={() => router.push("/mission")}
+            variant="ghost"
+            className="bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base"
+          >
+            More
+          </Button>
         </div>
       </div>
     </section>

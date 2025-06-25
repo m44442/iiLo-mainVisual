@@ -1,42 +1,26 @@
 "use client";
 
 import React from "react";
+import HeaderTailwind from "../components/HeaderTailwind";
 import Footer from "../components/Footer";
-import ContactSection from "../components/ContactSection";
+import ContactSectionTailwind from "../components/ContactSectionTailwind";
 import MissionStatement from "../components/MissionStatement";
 import MissionSectionWithAnimation from "../components/MissionSectionWithAnimation";
-import ServiceSectionNew from "../components/ServiceSectionNew";
+import ServiceSectionDiiLo from "../components/ServiceSectionDiiLo";
 const MissionPage = () => {
   return (
-    <div style={{ backgroundColor: "white", minHeight: "100vh" }}>
-      <div style={{ 
-        paddingTop: '150px',
-        marginBottom: '20px'
-      }}>
-        <h1 style={{
-          fontSize: '1.5rem',
-          fontWeight: 'bold',
-          color: '#333',
-          marginBottom: '30px',
-          marginLeft: '140px'
-        }}>
+    <div className="bg-white min-h-screen">
+      <HeaderTailwind />
+      <div className="pt-[150px] mb-5">
+        <h1 className="text-2xl font-bold text-gray-800 mb-8 ml-[140px]">
           ・Mission
         </h1>
-        <div style={{
-          width: '100vw',
-          height: '1px',
-          backgroundColor: '#333',
-          margin: '30px 0 0 0',
-          position: 'relative',
-          left: '50%',
-          transform: 'translateX(-50%)'
-        }}></div>
+        <div className="w-screen h-px bg-gray-800 mt-8 relative left-1/2 transform -translate-x-1/2"></div>
       </div>
       <MissionSectionWithAnimation />
-      <ServiceSectionNew />
+      <ServiceSectionDiiLo />
       <MissionStatement />
-      <ContactSection />
-
+      <ContactSectionTailwind />
       <Footer />
     </div>
   );

@@ -1,6 +1,52 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+    --primary: oklch(0.205 0 0);
+    --primary-foreground: oklch(0.985 0 0);
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+  }
+
+  .dark {
+    --background: oklch(0.145 0 0);
+    --foreground: oklch(0.985 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.269 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+    --primary: oklch(0.922 0 0);
+    --primary-foreground: oklch(0.205 0 0);
+    --secondary: oklch(0.269 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.371 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+  }
+}
+
 * {
   box-sizing: border-box;
-  cursor: none !important;
 }
 
 ::before,
@@ -10,11 +56,8 @@
 
 html {
   line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   scroll-behavior: smooth;
-  cursor: none !important;
   margin: 0;
   padding: 0;
 }
@@ -24,24 +67,14 @@ body {
   padding: 0;
   width: 100%;
   min-height: 100vh;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   overflow-x: hidden;
-  cursor: none !important;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-}
-
-*,
-*::before,
-*::after,
-html,
-body,
-div,
-a,
-button,
-input,
-textarea,
-select {
-  cursor: none !important;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
 }
 
 /* スムーススクロールのためのスタイル */
@@ -81,27 +114,838 @@ select {
   z-index: 999999;
   transform: translate(-50%, -50%);
   will-change: transform;
-  box-shadow: 0 0 10px #4fb3ff, 0 0 20px #4fb3ff, 0 0 30px #4fb3ff;
+  box-shadow:
+    0 0 10px #4fb3ff,
+    0 0 20px #4fb3ff,
+    0 0 30px #4fb3ff;
 }
 
 .custom-cursor.active {
-  border-color: #E80262;
+  border-color: #e80262;
   transform: translate(-50%, -50%) scale(1.5);
-  transition: border-color 0.1s ease, transform 0.1s ease;
-  box-shadow: 0 0 15px #E80262, 0 0 25px #E80262, 0 0 35px #E80262;
+  transition:
+    border-color 0.1s ease,
+    transform 0.1s ease;
+  box-shadow:
+    0 0 15px #e80262,
+    0 0 25px #e80262,
+    0 0 35px #e80262;
 }
 
 /* モバイルデバイスでカスタムカーソルを無効にする */
 @media (hover: none) and (pointer: coarse) {
-  body {
-    cursor: auto;
-  }
-  
-  * {
-    cursor: auto !important;
-  }
-  
   .custom-cursor {
     display: none;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Mobile menu animations */
+@keyframes expandFromCenter {
+  0% {
+    opacity: 0;
+    clip-path: polygon(0% 0%, 100% 100%, 100% 100%, 0% 0%);
+  }
+  15% {
+    opacity: 0.3;
+    clip-path: polygon(0% 0%, 100% 85%, 100% 100%, 0% 15%);
+  }
+  30% {
+    opacity: 0.5;
+    clip-path: polygon(0% 0%, 100% 70%, 100% 100%, 0% 30%);
+  }
+  45% {
+    opacity: 0.7;
+    clip-path: polygon(0% 0%, 100% 55%, 100% 100%, 0% 45%);
+  }
+  60% {
+    opacity: 0.8;
+    clip-path: polygon(0% 0%, 100% 40%, 100% 100%, 0% 60%);
+  }
+  75% {
+    opacity: 0.9;
+    clip-path: polygon(0% 0%, 100% 25%, 100% 100%, 0% 75%);
+  }
+  90% {
+    opacity: 0.95;
+    clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 90%);
+  }
+  100% {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+}
+
+@keyframes contractToCenter {
+  0% {
+    opacity: 1;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  }
+  10% {
+    opacity: 0.95;
+    clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 0% 90%);
+  }
+  25% {
+    opacity: 0.9;
+    clip-path: polygon(0% 0%, 100% 25%, 100% 100%, 0% 75%);
+  }
+  40% {
+    opacity: 0.8;
+    clip-path: polygon(0% 0%, 100% 40%, 100% 100%, 0% 60%);
+  }
+  55% {
+    opacity: 0.7;
+    clip-path: polygon(0% 0%, 100% 55%, 100% 100%, 0% 45%);
+  }
+  70% {
+    opacity: 0.5;
+    clip-path: polygon(0% 0%, 100% 70%, 100% 100%, 0% 30%);
+  }
+  85% {
+    opacity: 0.3;
+    clip-path: polygon(0% 0%, 100% 85%, 100% 100%, 0% 15%);
+  }
+  100% {
+    opacity: 0;
+    clip-path: polygon(0% 0%, 100% 100%, 100% 100%, 0% 0%);
+  }
+}
+
+.mobile-menu-open {
+  animation: expandFromCenter 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu-closing {
+  animation: contractToCenter 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (max-width: 480px) {
+  .mobile-menu-bg {
+    background: rgba(231, 231, 231, 0.6) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .mobile-menu-bg::before {
+    content: "" !important;
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    background: #000000 !important;
+    z-index: -1 !important;
+  }
+}
+
+/* Navigation loading animations */
+.nav-loading {
+  opacity: 0 !important;
+  transform: translateY(-20px) !important;
+}
+
+.nav-loaded {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
+}
+
+/* Mission section diagonal animations */
+.diagonal-split-container {
+  position: relative;
+}
+
+.diagonal-cut-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    20deg,
+    transparent 48%,
+    black 50%,
+    transparent 52%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* 20度の斜め線で全体を正確に分割 */
+.diagonal-split-left {
+  clip-path: polygon(0% 0%, 100% 0%, 64% 100%, 0% 100%);
+  animation: diagonalSplitLeft 0.3s ease-out forwards;
+}
+
+.diagonal-split-right {
+  clip-path: polygon(100% 0%, 100% 100%, 64% 100%);
+  animation: diagonalSplitRight 0.3s ease-out forwards;
+}
+
+.diagonal-assemble-left {
+  clip-path: polygon(0% 0%, 100% 0%, 64% 100%, 0% 100%);
+  animation: diagonalAssembleLeft 0.3s ease-out forwards;
+}
+
+.diagonal-assemble-right {
+  clip-path: polygon(100% 0%, 100% 100%, 64% 100%);
+  animation: diagonalAssembleRight 0.3s ease-out forwards;
+}
+
+@keyframes diagonalSplitLeft {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(-25px) translateY(-9px);
+  }
+}
+
+@keyframes diagonalSplitRight {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  100% {
+    transform: translateX(25px) translateY(9px);
+  }
+}
+
+@keyframes diagonalAssembleLeft {
+  0% {
+    transform: translateX(-25px) translateY(-9px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+@keyframes diagonalAssembleRight {
+  0% {
+    transform: translateX(25px) translateY(9px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* Mission section animations */
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* 黒い枠の残像効果付きスライド */
+@keyframes slideFrameWithTrail {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+  30% {
+    transform: translateX(-20%);
+    opacity: 1;
+    box-shadow:
+      -20px 0 20px rgba(0, 0, 0, 0.3),
+      -40px 0 30px rgba(0, 0, 0, 0.2),
+      -60px 0 40px rgba(0, 0, 0, 0.1);
+  }
+  60% {
+    transform: translateX(10%);
+    opacity: 1;
+    box-shadow:
+      -30px 0 25px rgba(0, 0, 0, 0.4),
+      -50px 0 35px rgba(0, 0, 0, 0.3),
+      -70px 0 45px rgba(0, 0, 0, 0.2);
+  }
+  80% {
+    transform: translateX(-5%);
+    opacity: 1;
+    box-shadow:
+      -10px 0 15px rgba(0, 0, 0, 0.2),
+      -20px 0 20px rgba(0, 0, 0, 0.1);
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+/* 白文字ロゴの勢いよく現れる効果 */
+@keyframes logoAppearDynamic {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateX(-50px);
+    filter: blur(3px);
+  }
+  40% {
+    opacity: 0.8;
+    transform: scale(1.1) translateX(5px);
+    filter: blur(1px);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(0.95) translateX(-2px);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes trackingInExpand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: normal;
+  }
+}
+
+@keyframes simplePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* 文字分割アニメーション - 最もシンプルな斜め分割 */
+.character-split-top {
+  animation: characterSplitTop 0.6s ease-out forwards;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 0% 60%);
+}
+
+.character-split-bottom {
+  animation: characterSplitBottom 0.6s ease-out forwards;
+  clip-path: polygon(0% 60%, 100% 40%, 100% 100%, 0% 100%);
+}
+
+.character-assemble-top {
+  animation: characterAssembleTop 0.6s ease-out forwards;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 0% 60%);
+}
+
+.character-assemble-bottom {
+  animation: characterAssembleBottom 0.6s ease-out forwards;
+  clip-path: polygon(0% 60%, 100% 40%, 100% 100%, 0% 100%);
+}
+
+@keyframes characterSplitTop {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-60px, -60px);
+  }
+}
+
+@keyframes characterSplitBottom {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(60px, 60px);
+  }
+}
+
+@keyframes characterAssembleTop {
+  0% {
+    transform: translate(-60px, -60px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes characterAssembleBottom {
+  0% {
+    transform: translate(60px, 60px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Character split test with background colors */
+.character-split-test-top {
+  background-color: rgba(255, 0, 0, 0.3);
+  animation: characterSplitTop 0.5s ease-out forwards;
+}
+
+.character-split-test-bottom {
+  background-color: rgba(0, 0, 255, 0.3);
+  animation: characterSplitBottom 0.5s ease-out forwards;
+}
+
+/* 稲妻エフェクト */
+.lightning-flash-1 {
+  animation: lightningFlash1 0.6s ease-in-out infinite;
+  transform-origin: bottom;
+}
+
+.lightning-flash-2 {
+  animation: lightningFlash2 0.6s ease-in-out infinite 0.1s;
+  transform-origin: bottom;
+}
+
+.lightning-flash-3 {
+  animation: lightningFlash3 0.6s ease-in-out infinite 0.2s;
+  transform-origin: top;
+}
+
+.lightning-flash-4 {
+  animation: lightningFlash4 0.6s ease-in-out infinite 0.3s;
+  transform-origin: top;
+}
+
+@keyframes lightningFlash1 {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0) rotate(12deg);
+  }
+  10%,
+  20% {
+    opacity: 1;
+    transform: scaleY(1) rotate(12deg);
+  }
+  30%,
+  50% {
+    opacity: 0;
+    transform: scaleY(0.3) rotate(12deg);
+  }
+  60%,
+  70% {
+    opacity: 1;
+    transform: scaleY(1) rotate(12deg);
+  }
+}
+
+@keyframes lightningFlash2 {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0) rotate(-12deg);
+  }
+  15%,
+  25% {
+    opacity: 1;
+    transform: scaleY(1) rotate(-12deg);
+  }
+  35%,
+  55% {
+    opacity: 0;
+    transform: scaleY(0.3) rotate(-12deg);
+  }
+  65%,
+  75% {
+    opacity: 1;
+    transform: scaleY(1) rotate(-12deg);
+  }
+}
+
+@keyframes lightningFlash3 {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0) rotate(45deg);
+  }
+  20%,
+  30% {
+    opacity: 1;
+    transform: scaleY(1) rotate(45deg);
+  }
+  40%,
+  60% {
+    opacity: 0;
+    transform: scaleY(0.3) rotate(45deg);
+  }
+  70%,
+  80% {
+    opacity: 1;
+    transform: scaleY(1) rotate(45deg);
+  }
+}
+
+@keyframes lightningFlash4 {
+  0%,
+  90%,
+  100% {
+    opacity: 0;
+    transform: scaleY(0) rotate(-45deg);
+  }
+  25%,
+  35% {
+    opacity: 1;
+    transform: scaleY(1) rotate(-45deg);
+  }
+  45%,
+  65% {
+    opacity: 0;
+    transform: scaleY(0.3) rotate(-45deg);
+  }
+  75%,
+  85% {
+    opacity: 1;
+    transform: scaleY(1) rotate(-45deg);
+  }
+}
+
+/* エネルギー放射エフェクト */
+
+/* 放射状の線エフェクト */
+.energy-burst-line-1 {
+  animation: energyBurstLine 0.3s ease-out 0s forwards;
+}
+.energy-burst-line-2 {
+  animation: energyBurstLine 0.3s ease-out 0.05s forwards;
+}
+.energy-burst-line-3 {
+  animation: energyBurstLine 0.3s ease-out 0.1s forwards;
+}
+.energy-burst-line-4 {
+  animation: energyBurstLine 0.3s ease-out 0.15s forwards;
+}
+.energy-burst-line-5 {
+  animation: energyBurstLine 0.3s ease-out 0.2s forwards;
+}
+.energy-burst-line-6 {
+  animation: energyBurstLine 0.3s ease-out 0.25s forwards;
+}
+.energy-burst-line-7 {
+  animation: energyBurstLine 0.3s ease-out 0.3s forwards;
+}
+.energy-burst-line-8 {
+  animation: energyBurstLine 0.3s ease-out 0.35s forwards;
+}
+
+/* 円の拡散エフェクト */
+.energy-burst-circle-1 {
+  animation: energyBurstCircle 0.5s ease-out 0.1s forwards;
+}
+.energy-burst-circle-2 {
+  animation: energyBurstCircle 0.6s ease-out 0.2s forwards;
+}
+.energy-burst-circle-3 {
+  animation: energyBurstCircle 0.7s ease-out 0.3s forwards;
+}
+
+/* 破片エフェクト */
+.energy-fragment-1 {
+  animation: energyFragment1 0.4s ease-out 0.1s forwards;
+}
+.energy-fragment-2 {
+  animation: energyFragment2 0.4s ease-out 0.15s forwards;
+}
+.energy-fragment-3 {
+  animation: energyFragment3 0.4s ease-out 0.2s forwards;
+}
+.energy-fragment-4 {
+  animation: energyFragment4 0.4s ease-out 0.25s forwards;
+}
+.energy-fragment-5 {
+  animation: energyFragment5 0.3s ease-out 0.3s forwards;
+}
+.energy-fragment-6 {
+  animation: energyFragment6 0.3s ease-out 0.35s forwards;
+}
+
+@keyframes energyBurstLine {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes energyBurstCircle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(8);
+  }
+}
+
+@keyframes energyFragment1 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-30px, -30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-60px, -60px) scale(0);
+  }
+}
+
+@keyframes energyFragment2 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(30px, -30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(60px, -60px) scale(0);
+  }
+}
+
+@keyframes energyFragment3 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-30px, 30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-60px, 60px) scale(0);
+  }
+}
+
+@keyframes energyFragment4 {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(30px, 30px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(60px, 60px) scale(0);
+  }
+}
+
+@keyframes energyFragment5 {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-40px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-80px) scale(0);
+  }
+}
+
+@keyframes energyFragment6 {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(40px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(80px) scale(0);
+  }
+}
+
+/* 超派手なメガエネルギー爆発エフェクト */
+
+/* メガ放射状の線エフェクト - 16方向 */
+.energy-mega-burst-line-1 {
+  animation: energyMegaBurstLine 0.4s ease-out 0s forwards;
+}
+.energy-mega-burst-line-2 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.02s forwards;
+}
+.energy-mega-burst-line-3 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.04s forwards;
+}
+.energy-mega-burst-line-4 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.06s forwards;
+}
+.energy-mega-burst-line-5 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.08s forwards;
+}
+.energy-mega-burst-line-6 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.1s forwards;
+}
+.energy-mega-burst-line-7 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.12s forwards;
+}
+.energy-mega-burst-line-8 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.14s forwards;
+}
+.energy-mega-burst-line-9 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.16s forwards;
+}
+.energy-mega-burst-line-10 {
+  animation: energyMegaBurstLine 0.4s ease-out 0.18s forwards;
+}
+
+/* シンプルで綺麗なエネルギーエフェクト */
+
+/* 放射線エフェクト */
+.simple-burst-line-1 {
+  animation: simpleBurstLine 0.4s ease-out 0s forwards;
+}
+.simple-burst-line-2 {
+  animation: simpleBurstLine 0.4s ease-out 0.1s forwards;
+}
+.simple-burst-line-3 {
+  animation: simpleBurstLine 0.4s ease-out 0.2s forwards;
+}
+.simple-burst-line-4 {
+  animation: simpleBurstLine 0.4s ease-out 0.3s forwards;
+}
+
+/* 円の拡散エフェクト */
+.simple-burst-circle-1 {
+  animation: simpleBurstCircle 0.6s ease-out 0.2s forwards;
+}
+.simple-burst-circle-2 {
+  animation: simpleBurstCircle 0.8s ease-out 0.4s forwards;
+}
+.simple-burst-circle-3 {
+  animation: simpleBurstCircle 1s ease-out 0.6s forwards;
+}
+
+/* 追加の散らした線と円のアニメーション */
+.simple-burst-line-5 {
+  animation: simpleBurstLine 0.4s ease-out 0.4s forwards;
+}
+.simple-burst-line-6 {
+  animation: simpleBurstLine 0.4s ease-out 0.5s forwards;
+}
+.simple-burst-line-7 {
+  animation: simpleBurstLine 0.4s ease-out 0.6s forwards;
+}
+.simple-burst-line-8 {
+  animation: simpleBurstLine 0.4s ease-out 0.7s forwards;
+}
+
+.simple-burst-circle-4 {
+  animation: simpleBurstCircle 1.2s ease-out 0.8s forwards;
+}
+
+@keyframes simpleBurstLine {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes simpleBurstCircle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    border-width: 2px;
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    border-width: 2px;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(4);
+    border-width: 1px;
+  }
+}
+
+/* Mission text fade up animations */
+.mission-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: missionFadeUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+}
+
+.mission-fade-up-delayed {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: missionFadeUp 0.8s cubic-bezier(0.215, 0.61, 0.355, 1) 0.2s
+    forwards;
+}
+
+@keyframes missionFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
