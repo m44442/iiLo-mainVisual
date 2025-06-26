@@ -892,36 +892,39 @@ a {
   animation: simpleBurstCircle 1.2s ease-out 0.8s forwards;
 }
 
-@keyframes simpleBurstLine {
+/* スマホ版の円形要素アニメーション */
+.simple-burst-circle-mobile-1 {
+  animation: fadeInPulse 0.6s ease-in-out 0.2s both;
+}
+
+.simple-burst-circle-mobile-2 {
+  animation: fadeInPulse 0.6s ease-in-out 0.3s both;
+}
+
+.simple-burst-circle-mobile-3 {
+  animation: fadeInPulse 0.6s ease-in-out 0.4s both;
+}
+
+.simple-burst-circle-mobile-4 {
+  animation: fadeInPulse 0.6s ease-in-out 0.5s both;
+}
+
+.simple-burst-circle-mobile-5 {
+  animation: fadeInPulse 0.6s ease-in-out 0.6s both;
+}
+
+@keyframes fadeInPulse {
   0% {
     opacity: 0;
     transform: scale(0);
   }
   50% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
+    opacity: 0.8;
     transform: scale(1.2);
   }
-}
-
-@keyframes simpleBurstCircle {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0);
-    border-width: 2px;
-  }
-  50% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    border-width: 2px;
-  }
   100% {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(4);
-    border-width: 1px;
+    opacity: 1;
+    transform: scale(1);
   }
 }
 

@@ -49,10 +49,10 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     } else {
       // Show header elements
       if (header) {
-        (header as HTMLElement).style.display = "block";
+        header.removeAttribute('style');
       }
       if (navHeader) {
-        (navHeader as HTMLElement).style.display = "block";
+        navHeader.removeAttribute('style');
       }
       // Enable body scroll
       body.style.overflow = "unset";
@@ -62,10 +62,10 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     // Cleanup on unmount
     return () => {
       if (header) {
-        (header as HTMLElement).style.display = "block";
+        header.removeAttribute('style');
       }
       if (navHeader) {
-        (navHeader as HTMLElement).style.display = "block";
+        navHeader.removeAttribute('style');
       }
       body.style.overflow = "unset";
       document.documentElement.style.overflow = "unset";

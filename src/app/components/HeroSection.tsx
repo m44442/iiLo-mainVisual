@@ -59,8 +59,8 @@ const HeroSection = () => {
 
   return (
     <section className="relative h-screen w-full bg-transparent">
-      <div className="absolute top-[40vh] left-[288px] px-6 lg:left-[200px] md:left-[100px]">
-        <p className="tw text-[32px] font-[550] leading-[1.8] max-w-[400px] lg:text-[32px] md:text-[28px]">
+      <div className="absolute top-[40vh] left-[288px] px-6 lg:left-[200px] md:left-[100px] max-md:bottom-[220px] max-md:top-auto max-md:left-[23px] max-md:px-0">
+        <p className="tw text-[32px] font-[550] leading-[1.8] max-w-[400px] lg:text-[32px] md:text-[28px] max-md:text-[23px] max-md:font-semibold max-md:leading-[30px]">
           <span
             className={`tw inline-block transition-opacity duration-[600ms] ease-in-out ${isVisible ? "opacity-100 delay-[200ms]" : "opacity-0"}`}
           >

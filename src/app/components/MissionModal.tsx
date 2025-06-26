@@ -58,11 +58,11 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
       console.log("📕 Closing modal - showing elements");
       // Show header elements
       if (header) {
-        (header as HTMLElement).style.display = "block";
+        header.removeAttribute('style');
         console.log("✅ Header shown");
       }
       if (navHeader) {
-        (navHeader as HTMLElement).style.display = "block";
+        navHeader.removeAttribute('style');
         console.log("✅ Nav shown");
       }
       // Enable body scroll
@@ -74,10 +74,10 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
     // Cleanup on unmount
     return () => {
       if (header) {
-        (header as HTMLElement).style.display = "block";
+        header.removeAttribute('style');
       }
       if (navHeader) {
-        (navHeader as HTMLElement).style.display = "block";
+        navHeader.removeAttribute('style');
       }
       body.style.overflow = "unset";
       document.documentElement.style.overflow = "unset";

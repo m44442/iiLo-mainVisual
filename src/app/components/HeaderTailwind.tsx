@@ -109,7 +109,7 @@ const HeaderTailwind = () => {
           </div>
 
           {/* デスクトップナビゲーション */}
-          <nav className="hidden md:flex items-start gap-8 absolute right-[133px] top-[-7px]">
+             <nav className="max-md:hidden lg:flex items-start gap-8 absolute right-[133px] top-[-7px]">
             {[
               { href: "/mission", text: "Mission" },
               { href: "#service", text: "Service" },
