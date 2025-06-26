@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const HeaderTailwind = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,6 +30,27 @@ const HeaderTailwind = () => {
       clearTimeout(timer);
     };
   }, []);
+
+  // モバイルメニュー時の背景スクロール無効化
+  useEffect(() => {
+    const body = document.body;
+
+    if (isMenuOpen) {
+      // Disable body scroll when mobile menu is open
+      body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      // Enable body scroll when mobile menu is closed
+      body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
+    }
+
+    // Cleanup on unmount
+    return () => {
+      body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
 
   const openMenu = () => {
     console.log("Opening menu");
@@ -91,11 +113,10 @@ const HeaderTailwind = () => {
           {/* ロゴ */}
           <div
             className={`
-            absolute cursor-pointer text-black z-[51] 
-            text-[40px] font-normal left-[30px] top-[-26px]
-            md:text-[40px] lg:text-[40px]
-            max-[767px]:text-[32px] max-[767px]:top-[-8px]
-            max-[480px]:text-[28px] max-[480px]:h-[17.5px] max-[480px]:left-[6.13%] max-[480px]:top-4 max-[480px]:m-0
+            absolute cursor-pointer z-[51] 
+            left-[30px] top-[-26px]
+            max-[767px]:top-[-8px]
+            max-[480px]:left-[6.13%] max-[480px]:top-4 max-[480px]:m-0
             transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)]
             ${
               isLoaded
@@ -105,7 +126,23 @@ const HeaderTailwind = () => {
           `}
             onClick={handleLogoClick}
           >
-            IILo
+            {isMenuOpen ? (
+              <Image
+                src="/images/IILo-DIILo_logo_IILo_logo-w.png"
+                alt="IILo"
+                width={80}
+                height={28}
+                className="max-[767px]:w-[64px] max-[767px]:h-[22px] max-[480px]:w-[56px] max-[480px]:h-auto"
+              />
+            ) : (
+              <Image
+                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                alt="IILo"
+                width={80}
+                height={28}
+                className="max-[767px]:w-[64px] max-[767px]:h-[22px] max-[480px]:w-[56px] max-[480px]:h-auto"
+              />
+            )}
           </div>
 
           {/* デスクトップナビゲーション */}
@@ -201,29 +238,23 @@ const HeaderTailwind = () => {
                   <h3 className="text-white text-lg font-semibold mb-4 tracking-wide">
                     Office
                   </h3>
-                  <div className="text-white/80 text-sm leading-relaxed">
+                  <div className="text-white/80 text-sm leading-relaxed mb-6">
                     東京都千代田区永田町
                     <br />
                     一丁目1番1号
                   </div>
-                </div>
-
-                <div className="flex flex-col gap-3 max-[480px]:gap-[10px] relative">
-                  {["X", "Instagram", "Line"].map((social, index) => (
-                    <a
-                      key={social}
-                      href="#"
-                      className={`hover:opacity-70 transition-opacity duration-300 relative z-30 text-white no-underline
-                      text-sm max-[480px]:text-[13px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:font-['General_Sans_Variable']
-                      max-[480px]:absolute
-                      ${index === 0 ? "max-[480px]:top-0" : ""}
-                      ${index === 1 ? "max-[480px]:top-[32px]" : ""}
-                      ${index === 2 ? "max-[480px]:top-[64px]" : ""}
-                      `}
-                    >
-                      {social}
-                    </a>
-                  ))}
+                  {/* PC版SNSリンク */}
+                  <div className="flex flex-col gap-3">
+                    {['X', 'Instagram', 'LINE'].map((social) => (
+                      <a
+                        key={social}
+                        href="#"
+                        className="hover:opacity-70 transition-opacity duration-300 text-white no-underline text-sm"
+                      >
+                        {social}
+                      </a>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -258,6 +289,18 @@ const HeaderTailwind = () => {
                   {item.text}
                 </a>
               ))}
+              {/* スマホ版SNSリンク（Newsの下に表示・さらに200px下に） */}
+              <div className="hidden max-[480px]:flex max-[480px]:flex-col max-[480px]:gap-[10px] max-[480px]:mt-[340px] max-[480px]:mb-0 max-[480px]:block">
+                {['X', 'Instagram', 'LINE'].map((social) => (
+                  <a
+                    key={social}
+                    href="#"
+                    className="hover:opacity-70 transition-opacity duration-300 text-white no-underline text-sm max-[480px]:text-[13px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:font-['General_Sans_Variable'] max-[480px]:block max-[480px]:mb-2"
+                  >
+                    {social}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
