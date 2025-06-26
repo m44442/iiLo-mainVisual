@@ -5,7 +5,15 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 
-const MissionSectionWithAnimation = () => {
+interface MissionSectionWithAnimationProps {
+  showMoreButton?: boolean;
+  onMissionMoreClick?: () => void;
+}
+
+const MissionSectionWithAnimation: React.FC<MissionSectionWithAnimationProps> = ({ 
+  showMoreButton = true,
+  onMissionMoreClick
+}) => {
   const router = useRouter();
 
   const missionSectionRef = useRef<HTMLElement>(null);
@@ -425,16 +433,18 @@ const MissionSectionWithAnimation = () => {
           </p>
         </div>
 
-        <div className="text-center mt-12 lg:mt-8">
-          <Button
-            type="button"
-            onClick={() => router.push("/mission")}
-            variant="ghost"
-            className="bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base"
-          >
-            More
-          </Button>
-        </div>
+        {showMoreButton && (
+          <div className="text-center mt-12 lg:mt-8">
+            <Button
+              type="button"
+              onClick={onMissionMoreClick || (() => router.push("/mission"))}
+              variant="ghost"
+              className="bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base"
+            >
+              More
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -4,21 +4,37 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-const ServiceSectionDiiLo = () => {
+interface ServiceSectionDiiLoProps {
+  isInModal?: boolean;
+}
+
+const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({ 
+  isInModal = false 
+}) => {
   return (
-    <section
-      id="service"
-      className="tw relative bg-black"
-      style={{
-        position: "relative",
-        width: "1728px",
-        height: "899px",
-        left: "calc(50% - 1728px/2)",
-        background: "#000000",
-      }}
-    >
-      {/* Service タイトル */}
-      <div className="absolute left-[263px] top-[150px] flex items-center">
+    <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
+      <section
+        id="service"
+        className="tw relative bg-black"
+        style={isInModal ? {
+          position: "relative",
+          width: "1728px",
+          height: "899px",
+          background: "#000000",
+          transform: "scale(0.85)",
+          transformOrigin: "center center",
+          left: "50%",
+          marginLeft: "-864px", // 1728px / 2 = 864px
+        } : {
+          position: "relative",
+          width: "1728px",
+          height: "899px",
+          left: "calc(50% - 1728px/2)",
+          background: "#000000",
+        }}
+      >
+        {/* Service タイトル */}
+        <div className="absolute left-[263px] top-[150px] flex items-center">
         <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
         <h2 className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white">
           Service
@@ -243,7 +259,8 @@ const ServiceSectionDiiLo = () => {
       >
         「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯科DXプラットフォームです。
       </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

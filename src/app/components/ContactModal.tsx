@@ -43,12 +43,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       if (navHeader) {
         (navHeader as HTMLElement).style.display = "none";
       }
-      // Disable body scroll with multiple approaches
-      body.style.setProperty("overflow", "hidden", "important");
-      body.style.setProperty("position", "fixed", "important");
-      body.style.setProperty("width", "100%", "important");
-      body.style.setProperty("height", "100%", "important");
-      document.documentElement.style.setProperty("overflow", "hidden", "important");
+      // Disable body scroll
+      body.style.overflow = "hidden";
     } else {
       // Show header elements
       if (header) {
@@ -58,11 +54,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         (navHeader as HTMLElement).style.display = "block";
       }
       // Enable body scroll
-      body.style.removeProperty("overflow");
-      body.style.removeProperty("position");
-      body.style.removeProperty("width");
-      body.style.removeProperty("height");
-      document.documentElement.style.removeProperty("overflow");
+      body.style.overflow = "unset";
     }
 
     // Cleanup on unmount
@@ -73,11 +65,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       if (navHeader) {
         (navHeader as HTMLElement).style.display = "block";
       }
-      body.style.removeProperty("overflow");
-      body.style.removeProperty("position");
-      body.style.removeProperty("width");
-      body.style.removeProperty("height");
-      document.documentElement.style.removeProperty("overflow");
+      body.style.overflow = "unset";
     };
   }, [isOpen]);
 

@@ -1,6 +1,5 @@
 import "./globals.css";
 import CustomCursor from "./components/CustomCursor";
-import HeaderTailwind from "./components/HeaderTailwind";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -17,7 +16,6 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CustomCursor />
-        <HeaderTailwind />
         {children}
       </body>
     </html>
