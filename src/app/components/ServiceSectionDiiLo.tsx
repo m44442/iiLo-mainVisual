@@ -47,7 +47,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         {/* Service タイトル */}
         <div className="absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-8 max-md:pl-6">
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
-          <h2 className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white max-md:text-xl">
+          <h2 className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white max-md:text-3xl">
             Service
           </h2>
         </div>

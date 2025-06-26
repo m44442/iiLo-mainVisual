@@ -42,36 +42,33 @@ const ContactSectionTailwind = () => {
     }));
   };
   return (
-    <section className="bg-black py-20 m-0" id="contact">
-      <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6">
-        <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6">
+    <section className="bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
+      <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
+        <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
           {/* Section Header */}
-          <div className="flex items-center -ml-10 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0">
-            <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px]"></div>
-            <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-md:text-[20px] max-md:leading-[36px] max-[480px]:mb-[30px]">
+          <div className="flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0">
+            <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
+            <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
               Contact
             </h2>
           </div>
 
           {/* Contact Card */}
-          <div className="bg-[#E7E7E7] rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-6 max-md:max-w-none max-md:h-[300px] max-[480px]:h-[250px]">
+          <div className="bg-[#E7E7E7] rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0">
             {/* Backdrop overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-[#1e1e1e]/90 opacity-90 blur-[2.5px] z-[1]"></div>
 
             {/* Content */}
-            <div className="relative z-[2] p-[30px] flex flex-col justify-center max-md:p-10 max-[480px]:p-5">
-              <h4 className="font-['Noto_Sans_JP'] font-medium text-[28px] leading-[21px] text-white m-0 mb-5 max-md:text-[24px] max-md:leading-[28px] max-[480px]:text-[20px] max-[480px]:leading-[24px] max-[480px]:mb-[15px]">
-                ご質問・お問い合わせ
+            <div className="relative z-[2] p-[80px] flex flex-col justify-center max-md:p-10 max-[480px]:p-[23px] max-[480px]:h-full max-[480px]:justify-start max-[480px]:pt-[25px]">
+              <h4 className="font-['Noto_Sans_JP'] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+                ご相談・お問合せ
               </h4>
-              <p className="font-['Noto_Sans_JP'] font-normal text-base leading-[27px] text-white m-0 mb-[60px] max-md:text-sm max-md:leading-[24px] max-md:mb-10 max-[480px]:text-[13px] max-[480px]:leading-5 max-[480px]:mb-[30px]">
-                お気軽にお問い合わせください。
-              </p>
               <Button
                 onClick={openModal}
                 variant="ghost"
-                className="bg-[#E7E7E7] text-black border-none rounded-[35px] py-3 px-8 font-['General_Sans_Variable'] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[100px] max-[480px]:h-9 max-[480px]:text-xs max-[480px]:py-2 max-[480px]:px-4"
+                className="bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable'] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
               >
-                more
+                More
               </Button>
             </div>
           </div>
