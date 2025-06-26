@@ -52,6 +52,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
       }
       // Disable body scroll
       body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
       console.log("✅ Body scroll disabled");
     } else {
       console.log("📕 Closing modal - showing elements");
@@ -66,6 +67,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
       }
       // Enable body scroll
       body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
       console.log("✅ Body scroll enabled");
     }
 
@@ -78,6 +80,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
         (navHeader as HTMLElement).style.display = "block";
       }
       body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     };
   }, [isOpen]);
 

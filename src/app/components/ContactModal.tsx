@@ -45,6 +45,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       }
       // Disable body scroll
       body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
     } else {
       // Show header elements
       if (header) {
@@ -55,6 +56,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       }
       // Enable body scroll
       body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     }
 
     // Cleanup on unmount
@@ -66,6 +68,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         (navHeader as HTMLElement).style.display = "block";
       }
       body.style.overflow = "unset";
+      document.documentElement.style.overflow = "unset";
     };
   }, [isOpen]);
 
