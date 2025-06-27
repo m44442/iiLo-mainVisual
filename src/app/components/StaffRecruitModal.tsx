@@ -326,32 +326,40 @@ const StaffRecruitModal = ({
               <ContactSectionTailwind />
 
               {/* Others Section */}
-              <div className="tw mt-[60px] mb-[60px] max-[480px]:mt-6 max-[480px]:mb-6 max-[480px]:pb-30">
-                <div className="tw max-w-[1200px] mx-auto px-[60px] pl-[200px] flex items-start gap-10 max-[480px]:px-6 max-[480px]:pl-6 max-[480px]:flex-col max-[480px]:gap-6">
-                  <div className="tw flex items-center mt-5 shrink-0 max-[480px]:mt-0">
-                    <div className="tw w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-3"></div>
-                    <h3 className="tw font-[GeneralSansVariable,system-ui,sans-serif] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-[24px] max-[480px]:leading-[32px]">
-                      Others
-                    </h3>
-                  </div>
+              <div className="tw bg-[#E7E7E7] py-20 m-0 max-[480px]:py-[40px] max-[480px]:mt-6 max-[480px]:mb-6 max-[480px]:pb-30">
+                <div className="tw max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
+                  <div className="tw flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
+                    {/* Section Header */}
+                    <div className="tw flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0">
+                      <div className="tw w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:bg-black"></div>
+                      <h2 className="tw font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
+                        Others
+                      </h2>
+                    </div>
 
-                  <div className="tw bg-[#D0D0D0] rounded-xl relative overflow-hidden w-[696px] h-[285px] before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/pc-background.jpg')] before:bg-cover before:bg-center before:filter before:blur-[1px] before:z-[1] max-[480px]:w-full max-[480px]:h-[240px]">
-                    <div className="tw relative z-[2] p-[40px_50px] h-full flex flex-col justify-center max-[480px]:p-6">
-                      <p className="tw font-[NotoSansJP,sans-serif] font-bold text-lg leading-[21px] text-white m-0 mb-[10px] max-[480px]:text-base max-[480px]:leading-[18px]">
-                        正社員・インターン採用
-                      </p>
-                      <h4 className="tw font-[NotoSansJP,sans-serif] font-bold text-[28px] leading-[21px] text-white m-0 mb-10 max-[480px]:text-[22px] max-[480px]:leading-[24px] max-[480px]:mb-6">
-                        エンジニア
-                      </h4>
-                      {onSwitchToEngineer && (
-                        <Button
-                          variant="ghost"
-                          onClick={onSwitchToEngineer}
-                          className="tw bg-white text-black border-none rounded-[35px] px-8 py-3 font-[GeneralSansVariable,system-ui,sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 w-[120px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:px-6 max-[480px]:py-2 max-[480px]:text-sm"
-                        >
-                          More
-                        </Button>
-                      )}
+                    {/* Others Card */}
+                    <div className="tw bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0">
+                      {/* Backdrop overlay */}
+                      <div className="tw absolute inset-0 bg-gradient-to-br from-black/80 to-[#1e1e1e]/90 opacity-10 blur-[2.5px] z-[1]"></div>
+
+                      {/* Content */}
+                      <div className="tw relative z-[2] p-[80px] flex flex-col justify-center max-md:p-10 max-[480px]:p-[23px] max-[480px]:h-full max-[480px]:justify-start max-[480px]:pt-[25px]">
+                        <h4 className="tw font-['Noto_Sans_JP'] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+                          正社員・インターン採用
+                        </h4>
+                        <p className="tw font-['Noto_Sans_JP'] ml-[-63px] font-bold text-[32px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[28px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[16px] max-[480px]:leading-[20px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+                          エンジニア
+                        </p>
+                        {onSwitchToEngineer && (
+                          <Button
+                            onClick={onSwitchToEngineer}
+                            variant="ghost"
+                            className="tw bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable'] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
+                          >
+                            More
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>

@@ -83,7 +83,7 @@ const RecruitSectionNew = () => {
           {/* Cards section */}
           <div className="relative h-[350px] max-[480px]:h-auto max-[480px]:flex max-[480px]:flex-col max-[480px]:gap-[40px]">
             {/* Engineer Card */}
-            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[#D0D0D0] rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
+            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[34px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
@@ -106,7 +106,7 @@ const RecruitSectionNew = () => {
             </div>
 
             {/* Staff Card */}
-            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[#D0D0D0] rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
+            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[url('/pc-1207886_1280%201%20(2).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[32px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">

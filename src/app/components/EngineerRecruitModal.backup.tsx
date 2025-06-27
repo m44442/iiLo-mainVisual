@@ -339,7 +339,7 @@ const EngineerRecruitModal = ({
 
               {/* Others Section */}
               <div className="tw mt-[60px] mb-[60px]">
-                <div className="tw max-w-[1200px] mx-auto px-[60px] pl-[200px] flex items-start gap-10">
+                <div className="tw max-w-[1200px] mx-auto px-[60px] pl-[200px] flex items-start gap-10 bg-[#898989]">
                   <div className="tw flex items-center mt-5 shrink-0">
                     <div className="tw w-2 h-2 bg-black rounded-full mr-[15px]"></div>
                     <h3 className="tw font-[GeneralSansVariable,system-ui,sans-serif] font-semibold text-[30px] leading-[45px] text-black m-0">
