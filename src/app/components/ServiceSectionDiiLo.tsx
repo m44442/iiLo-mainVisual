@@ -12,10 +12,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
   isInModal = false,
 }) => {
   const [isDesktop, setIsDesktop] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkDevice = () => {
       setIsDesktop(window.innerWidth >= 768);
+      setIsMobile(window.innerWidth <= 480);
     };
 
     checkDevice();
@@ -32,10 +34,11 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
             ? {
                 position: "relative",
                 background: "#000000",
-                transform: "scale(0.85)",
+                transform: isMobile ? "none" : "scale(0.85)",
                 transformOrigin: "center center",
-                left: "50%",
-                marginLeft: "-864px",
+                left: isMobile ? "auto" : "50%",
+                marginLeft: isMobile ? "0" : "-864px",
+                width: isMobile ? "100%" : undefined,
               }
             : {
                 position: "relative",

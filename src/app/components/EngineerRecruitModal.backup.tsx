@@ -14,17 +14,17 @@ import ContactSectionTailwind from "./ContactSectionTailwind";
 import { Button } from "../../../components/ui/button";
 import { useBodyFixed } from "../hooks/useBodyFixed";
 
-interface StaffRecruitModalProps {
+interface EngineerRecruitModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSwitchToEngineer?: () => void;
+  onSwitchToStaff?: () => void;
 }
 
-const StaffRecruitModal = ({
+const EngineerRecruitModal = ({
   isOpen,
   onClose,
-  onSwitchToEngineer,
-}: StaffRecruitModalProps) => {
+  onSwitchToStaff,
+}: EngineerRecruitModalProps) => {
   const { bodyFixed, setBodyFixed } = useBodyFixed();
 
   // ヘッダーの表示/非表示制御
@@ -126,13 +126,13 @@ const StaffRecruitModal = ({
               {/* Job Header */}
               <div className="tw my-10 pl-[60px] max-[480px]:my-6 max-[480px]:pl-6">
                 <p className="tw font-[NotoSansJP,sans-serif] font-medium text-base leading-6 text-[#898989] m-0 mb-[6px] max-[480px]:text-sm">
-                  アルバイト採用
+                  正社員・インターン採用
                 </p>
                 <h2 className="tw font-[NotoSansJP,sans-serif] font-bold text-[30px] leading-[35px] text-black m-0 mb-5 max-[480px]:text-[24px] max-[480px]:leading-[28px] max-[480px]:mb-3">
-                  DIILoスタッフ
+                  エンジニア
                 </h2>
                 <p className="tw font-[NotoSansJP,sans-serif] font-medium text-base leading-[27px] text-black m-0 max-w-[500px] max-[480px]:text-sm max-[480px]:leading-[24px]">
-                  自社サービスの運用を担当していただきます。
+                  自社サービスのプロダクトの開発、運用を担当していただきます。
                 </p>
               </div>
 
@@ -153,10 +153,19 @@ const StaffRecruitModal = ({
                     </div>
                     <div className="tw flex-1">
                       <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
-                        ・サービス運営管理
+                        ・自社SaaSの開発
                       </p>
                       <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
-                        ・顧客サポート
+                        ・TypeScript（Reactなど）を用いたフロントエンド開発
+                      </p>
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
+                        ・Go（Gin、GORMなど）、MySQLを用いたバックエンド開発
+                      </p>
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
+                        ・AWS（ECS、Auroraなど）を用いたインフラ開発やサービス運用
+                      </p>
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
+                        ・Dockerを用いた開発環境構築
                       </p>
                     </div>
                   </div>
@@ -170,10 +179,10 @@ const StaffRecruitModal = ({
                       </span>
                     </div>
                     <div className="tw flex-1">
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・成長真っ只中のBtoB SaaSの自社開発に幅広く関われる
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・GoやReactといったモダンな技術スタックを使って開発できる
                       </p>
                     </div>
@@ -188,13 +197,13 @@ const StaffRecruitModal = ({
                       </span>
                     </div>
                     <div className="tw flex-1">
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・RDBMSを用いたバックエンド開発経験1年以上
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・Reactを用いたフロントエンド開発経験1年以上
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・IaaSを用いたインフラ開発やサービス運用経験1年以上
                       </p>
                     </div>
@@ -209,16 +218,16 @@ const StaffRecruitModal = ({
                       </span>
                     </div>
                     <div className="tw flex-1">
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・自社SaaSの開発や運用の経験
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・Goを用いたバックエンド開発経験
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・TypeScriptを用いたフロントエンド開発経験
                       </p>
-                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-[#999] m-0 mb-2">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
                         ・AWSを用いたインフラ開発やサービス運用経験
                       </p>
                     </div>
@@ -283,7 +292,10 @@ const StaffRecruitModal = ({
                     </div>
                     <div className="tw flex-1">
                       <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
-                        アルバイト
+                        正社員
+                      </p>
+                      <p className="tw font-[NotoSansJP,sans-serif] font-normal text-base leading-[27px] text-black m-0 mb-2 last:mb-0 max-[480px]:text-sm max-[480px]:leading-[24px]">
+                        インターン
                       </p>
                     </div>
                   </div>
@@ -318,7 +330,7 @@ const StaffRecruitModal = ({
                     </div>
                   </div>
 
-                  <div className="tw w-full h-px bg-[#898989] m-0 mb-10 max-[480px]:hidden"></div>
+                  <div className="tw w-full h-px bg-[#898989] m-0 mb-10"></div>
                 </div>
               </div>
 
@@ -326,28 +338,28 @@ const StaffRecruitModal = ({
               <ContactSectionTailwind />
 
               {/* Others Section */}
-              <div className="tw mt-[60px] mb-[60px] max-[480px]:mt-6 max-[480px]:mb-6 max-[480px]:pb-30">
-                <div className="tw max-w-[1200px] mx-auto px-[60px] pl-[200px] flex items-start gap-10 max-[480px]:px-6 max-[480px]:pl-6 max-[480px]:flex-col max-[480px]:gap-6">
-                  <div className="tw flex items-center mt-5 shrink-0 max-[480px]:mt-0">
-                    <div className="tw w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-3"></div>
-                    <h3 className="tw font-[GeneralSansVariable,system-ui,sans-serif] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-[24px] max-[480px]:leading-[32px]">
+              <div className="tw mt-[60px] mb-[60px]">
+                <div className="tw max-w-[1200px] mx-auto px-[60px] pl-[200px] flex items-start gap-10">
+                  <div className="tw flex items-center mt-5 shrink-0">
+                    <div className="tw w-2 h-2 bg-black rounded-full mr-[15px]"></div>
+                    <h3 className="tw font-[GeneralSansVariable,system-ui,sans-serif] font-semibold text-[30px] leading-[45px] text-black m-0">
                       Others
                     </h3>
                   </div>
 
-                  <div className="tw bg-[#D0D0D0] rounded-xl relative overflow-hidden w-[696px] h-[285px] before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/pc-background.jpg')] before:bg-cover before:bg-center before:filter before:blur-[1px] before:z-[1] max-[480px]:w-full max-[480px]:h-[240px]">
-                    <div className="tw relative z-[2] p-[40px_50px] h-full flex flex-col justify-center max-[480px]:p-6">
-                      <p className="tw font-[NotoSansJP,sans-serif] font-bold text-lg leading-[21px] text-white m-0 mb-[10px] max-[480px]:text-base max-[480px]:leading-[18px]">
-                        正社員・インターン採用
+                  <div className="tw bg-[#D0D0D0] rounded-xl relative overflow-hidden w-[696px] h-[285px] before:content-[''] before:absolute before:inset-0 before:bg-[url('/images/pc-background.jpg')] before:bg-cover before:bg-center before:filter before:blur-[1px] before:z-[1]">
+                    <div className="tw relative z-[2] p-[40px_50px] h-full flex flex-col justify-center">
+                      <p className="tw font-[NotoSansJP,sans-serif] font-bold text-lg leading-[21px] text-white m-0 mb-[10px]">
+                        アルバイト採用
                       </p>
-                      <h4 className="tw font-[NotoSansJP,sans-serif] font-bold text-[28px] leading-[21px] text-white m-0 mb-10 max-[480px]:text-[22px] max-[480px]:leading-[24px] max-[480px]:mb-6">
-                        エンジニア
+                      <h4 className="tw font-[NotoSansJP,sans-serif] font-bold text-[28px] leading-[21px] text-white m-0 mb-10">
+                        DIILoスタッフ
                       </h4>
-                      {onSwitchToEngineer && (
+                      {onSwitchToStaff && (
                         <Button
                           variant="ghost"
-                          onClick={onSwitchToEngineer}
-                          className="tw bg-white text-black border-none rounded-[35px] px-8 py-3 font-[GeneralSansVariable,system-ui,sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 w-[120px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:px-6 max-[480px]:py-2 max-[480px]:text-sm"
+                          onClick={onSwitchToStaff}
+                          className="tw bg-white text-black border-none rounded-[35px] px-8 py-3 font-[GeneralSansVariable,system-ui,sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 w-[120px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white"
                         >
                           More
                         </Button>
@@ -364,4 +376,4 @@ const StaffRecruitModal = ({
   );
 };
 
-export default StaffRecruitModal;
+export default EngineerRecruitModal;
