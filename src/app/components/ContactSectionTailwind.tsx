@@ -14,7 +14,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ContactModal from "./ContactModal";
 import AnimatedTitle from "./AnimatedTitle";
-import WebGLAnimatedTitle from "./WebGLAnimatedTitle";
 import WebGLTitle from "./WebGLTitle";
 
 const ContactSectionTailwind = () => {

@@ -26,7 +26,9 @@
   position: relative;
 }
 
-.afterimage1, .afterimage2, .mainSlide {
+.afterimage1,
+.afterimage2,
+.mainSlide {
   position: absolute;
   background-color: black;
   padding: 8px 16px;
@@ -36,13 +38,15 @@
 .afterimage1 {
   opacity: 0.3;
   filter: blur(4px);
-  animation: slideAfterimage1 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideAfterimage1 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    forwards;
 }
 
 .afterimage2 {
   opacity: 0.2;
   filter: blur(8px);
-  animation: slideAfterimage2 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: slideAfterimage2 0.08s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    forwards;
 }
 
 .mainSlide {
@@ -57,28 +61,29 @@
   will-change: transform;
 }
 
-.compressedI1, .compressedI2 {
+.compressedI1,
+.compressedI2 {
   width: 23px;
   height: 190px;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   margin-right: 20px;
 }
 
 .compressedL {
   width: 80px;
   height: 20px;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
   position: relative;
 }
 
 .compressedL::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
   width: 20px;
   height: 190px;
-  background-color: #E7E7E7;
+  background-color: #e7e7e7;
 }
 
 .compressedO {
@@ -91,18 +96,30 @@
 }
 
 @keyframes slideRight {
-  from { transform: translateX(-500px); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-500px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideAfterimage1 {
-  from { transform: translateX(-450px); }
-  to { transform: translateX(-50px); }
+  from {
+    transform: translateX(-450px);
+  }
+  to {
+    transform: translateX(-50px);
+  }
 }
 
 @keyframes slideAfterimage2 {
-  from { transform: translateX(-400px); }
-  to { transform: translateX(-100px); }
+  from {
+    transform: translateX(-400px);
+  }
+  to {
+    transform: translateX(-100px);
+  }
 }
 
 /* Phase 3: 上下交互スライド + 芸術エフェクト */
@@ -268,7 +285,7 @@
 }
 
 .letterL::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -290,20 +307,43 @@
 }
 
 @keyframes flash {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDownUp {
-  0% { transform: translateY(-100px); opacity: 0; }
-  50% { transform: translateY(20px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideUpDown {
-  0% { transform: translateY(100px); opacity: 0; }
-  50% { transform: translateY(-20px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Phase 4: 元サイズ復帰 */
@@ -319,7 +359,8 @@
   gap: 20px;
 }
 
-.normalI1, .normalI2 {
+.normalI1,
+.normalI2 {
   width: 23px;
   height: 190px;
   background-color: black;
@@ -336,7 +377,7 @@
 }
 
 .normalL::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -398,59 +439,63 @@
 }
 
 /* I1の分割要素 */
-.splitLeftI1, .splitRightI1 { 
-  position: absolute; 
-  width: 23px; 
+.splitLeftI1,
+.splitRightI1 {
+  position: absolute;
+  width: 23px;
   height: 190px;
   background-color: black;
   top: 0;
   left: 0;
 }
-.splitLeftI1 { 
-  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+.splitLeftI1 {
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%);
   transform: translate(24px, -24px);
   animation: diagonalSlideLeft 0.6s ease-out forwards;
   z-index: 2;
 }
-.splitRightI1 { 
-  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+.splitRightI1 {
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%);
   transform: translate(-24px, 24px);
   animation: diagonalSlideRight 0.6s ease-out forwards;
   z-index: 1;
 }
 
 /* I2の分割要素 */
-.splitLeftI2, .splitRightI2 { 
-  position: absolute; 
-  width: 23px; 
+.splitLeftI2,
+.splitRightI2 {
+  position: absolute;
+  width: 23px;
   height: 190px;
   background-color: black;
   top: 0;
   left: 0;
 }
-.splitLeftI2 { 
-  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+.splitLeftI2 {
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%);
   transform: translate(24px, -24px);
   animation: diagonalSlideLeft 0.6s ease-out 0.05s forwards;
   z-index: 2;
 }
-.splitRightI2 { 
-  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+.splitRightI2 {
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%);
   transform: translate(-24px, 24px);
   animation: diagonalSlideRight 0.6s ease-out 0.05s forwards;
   z-index: 1;
 }
 
 /* Lの分割要素 */
-.splitLeftL, .splitRightL { 
-  position: absolute; 
-  width: 80px; 
+.splitLeftL,
+.splitRightL {
+  position: absolute;
+  width: 80px;
   height: 190px;
   top: 0;
   left: 0;
 }
-.splitLeftL::before, .splitRightL::before {
-  content: '';
+.splitLeftL::before,
+.splitRightL::before {
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -458,8 +503,9 @@
   height: 190px;
   background-color: black;
 }
-.splitLeftL::after, .splitRightL::after {
-  content: '';
+.splitLeftL::after,
+.splitRightL::after {
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
@@ -467,23 +513,24 @@
   height: 20px;
   background-color: black;
 }
-.splitLeftL { 
-  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+.splitLeftL {
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%);
   transform: translate(24px, -24px);
   animation: diagonalSlideLeft 0.6s ease-out 0.1s forwards;
   z-index: 2;
 }
-.splitRightL { 
-  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+.splitRightL {
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%);
   transform: translate(-24px, 24px);
   animation: diagonalSlideRight 0.6s ease-out 0.1s forwards;
   z-index: 1;
 }
 
 /* Oの分割要素 */
-.splitLeftO, .splitRightO { 
-  position: absolute; 
-  width: 170px; 
+.splitLeftO,
+.splitRightO {
+  position: absolute;
+  width: 170px;
   height: 170px;
   border: 20px solid black;
   border-radius: 50%;
@@ -491,27 +538,39 @@
   top: 0;
   left: 0;
 }
-.splitLeftO { 
-  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%); 
+.splitLeftO {
+  clip-path: polygon(0 0, 70% 0, 40% 100%, 0 100%);
   transform: translate(24px, -24px);
   animation: diagonalSlideLeft 0.6s ease-out 0.15s forwards;
   z-index: 2;
 }
-.splitRightO { 
-  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%); 
+.splitRightO {
+  clip-path: polygon(70% 0, 100% 0, 100% 100%, 40% 100%);
   transform: translate(-24px, 24px);
   animation: diagonalSlideRight 0.6s ease-out 0.15s forwards;
   z-index: 1;
 }
 
 @keyframes diagonalSlideLeft {
-  from { transform: translate(24px, -24px); opacity: 1; }
-  to { transform: translate(0, 0); opacity: 1; }
+  from {
+    transform: translate(24px, -24px);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 @keyframes diagonalSlideRight {
-  from { transform: translate(-24px, 24px); opacity: 1; }
-  to { transform: translate(0, 0); opacity: 1; }
+  from {
+    transform: translate(-24px, 24px);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 /* パフォーマンス最適化 */
@@ -521,8 +580,12 @@
 
 /* 浮遊エフェクト */
 @keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-5px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
 }
 
 .missionTextContainer {
@@ -533,7 +596,7 @@
 }
 
 .missionSubtitle {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: 30px;
   font-weight: 700;
   color: #000000;
@@ -546,7 +609,7 @@
 }
 
 .missionMainTitle {
-  font-family: 'Noto Sans JP', sans-serif;
+  font-family: "Noto Sans JP", sans-serif;
   font-size: 40px;
   font-weight: 700;
   color: #000000;
@@ -581,43 +644,55 @@
     margin-top: 40px;
     margin-bottom: 20px;
   }
-  
+
   .iiloAnimationContainer {
     height: 200px;
     margin-bottom: 10px;
   }
-  
+
   .missionTextContainer {
     top: 180px;
   }
-  
+
   .compressedLogoContainer,
   .normalLogoContainer,
   .lettersContainer,
   .finalLetters {
     transform: scale(0.7);
   }
-  
+
   .effectsContainer {
     width: 224px;
     height: 90px;
     transform: scale(0.7);
   }
-  
+
   .missionSubtitle {
     font-size: 16px;
     margin-bottom: 1px;
     font-weight: 700;
     margin-left: 150px;
   }
-  
+
   .missionMainTitle {
     font-size: 28px;
     font-weight: 700;
     margin-left: 240px;
   }
-  
+
   .missionTitleSmall {
     font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .missionSubtitle {
+    margin-left: 0 !important;
+  }
+  .missionMainTitle {
+    margin-left: 0 !important;
+  }
+  .missionTextContainer {
+    margin-bottom: 120px;
   }
 }

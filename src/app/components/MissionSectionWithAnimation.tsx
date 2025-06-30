@@ -4,7 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
-import styles from './AnimationTest.module.css';
+import styles from "./AnimationTest.module.css";
 
 interface MissionSectionWithAnimationProps {
   showMoreButton?: boolean;
@@ -37,7 +37,8 @@ const MissionSectionWithAnimation: React.FC<
 
       setTimeout(() => {
         if (missionHeaderRef.current) {
-          missionHeaderRef.current.style.animation = 'float 3s ease-in-out infinite alternate';
+          missionHeaderRef.current.style.animation =
+            "float 3s ease-in-out infinite alternate";
         }
       }, 3000);
     };
@@ -52,8 +53,8 @@ const MissionSectionWithAnimation: React.FC<
           }
         });
       },
-      { 
-        threshold: 0.7
+      {
+        threshold: 0.7,
       }
     );
 
@@ -75,30 +76,62 @@ const MissionSectionWithAnimation: React.FC<
           className={`flex flex-col justify-center items-center mb-5 mt-5 relative lg:mt-10 lg:mb-5 max-md:mt-8 max-md:mb-4 ${styles.missionHeader}`}
           ref={missionHeaderRef}
         >
-          <div className={`w-full h-[300px] flex items-center justify-center overflow-hidden relative mb-10 ${styles.iiloAnimationContainer}`}>
+          <div
+            className={`w-full h-[300px] flex items-center justify-center overflow-hidden relative mb-10 md:h-[200px] md:mb-[10px] max-[480px]:h-[150px] max-[480px]:mb-[8px] ${styles.iiloAnimationContainer}`}
+          >
             {currentPhase === 1 && (
               <div className="relative">
-                <div className={`${styles.afterimage1} absolute bg-black py-2 px-4 top-[-100px]`}>
-                  <div className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}>
-                    <div className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedL} bg-[#E7E7E7] relative`} />
+                <div
+                  className={`${styles.afterimage1} absolute bg-black py-2 px-4 top-[-100px]`}
+                >
+                  <div
+                    className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}
+                  >
+                    <div
+                      className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedL} bg-[#E7E7E7] relative`}
+                    />
                     <div className={`${styles.compressedO} ml-[-20px]`} />
                   </div>
                 </div>
-                <div className={`${styles.afterimage2} absolute bg-black py-2 px-4 top-[-100px]`}>
-                  <div className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}>
-                    <div className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedL} bg-[#E7E7E7] relative`} />
+                <div
+                  className={`${styles.afterimage2} absolute bg-black py-2 px-4 top-[-100px]`}
+                >
+                  <div
+                    className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}
+                  >
+                    <div
+                      className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedL} bg-[#E7E7E7] relative`}
+                    />
                     <div className={`${styles.compressedO} ml-[-20px]`} />
                   </div>
                 </div>
-                <div className={`${styles.mainSlide} absolute bg-black py-2 px-4 top-[-100px]`}>
-                  <div className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}>
-                    <div className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`} />
-                    <div className={`${styles.compressedL} bg-[#E7E7E7] relative`} />
+                <div
+                  className={`${styles.mainSlide} absolute bg-black py-2 px-4 top-[-100px]`}
+                >
+                  <div
+                    className={`flex items-end gap-[20px] ${styles.compressedLogoContainer}`}
+                  >
+                    <div
+                      className={`${styles.compressedI1} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedI2} bg-[#E7E7E7] mr-[20px]`}
+                    />
+                    <div
+                      className={`${styles.compressedL} bg-[#E7E7E7] relative`}
+                    />
                     <div className={`${styles.compressedO} ml-[-20px]`} />
                   </div>
                 </div>
@@ -119,7 +152,9 @@ const MissionSectionWithAnimation: React.FC<
                   <div className={styles.effectLine7}></div>
                   <div className={styles.effectCircle3}></div>
                 </div>
-                <div className={`flex items-end gap-[20px] ${styles.lettersContainer}`}>
+                <div
+                  className={`flex items-end gap-[20px] ${styles.lettersContainer}`}
+                >
                   <div className={styles.letterI1}></div>
                   <div className={styles.letterI2}></div>
                   <div className={styles.letterL}></div>
@@ -129,8 +164,12 @@ const MissionSectionWithAnimation: React.FC<
             )}
 
             {currentPhase === 4 && (
-              <div className={`scale-100 transition-transform duration-500 ease-in-out ${styles.phase4Container}`}>
-                <div className={`flex items-end gap-[20px] ${styles.normalLogoContainer}`}>
+              <div
+                className={`scale-100 transition-transform duration-500 ease-in-out ${styles.phase4Container}`}
+              >
+                <div
+                  className={`flex items-end gap-[20px] ${styles.normalLogoContainer}`}
+                >
                   <div className={styles.normalI1}></div>
                   <div className={styles.normalI2}></div>
                   <div className={styles.normalL}></div>
@@ -140,7 +179,9 @@ const MissionSectionWithAnimation: React.FC<
             )}
 
             {currentPhase === 5 && (
-              <div className={`flex items-end gap-[20px] ${styles.phase5Container} ${styles.finalLetters}`}>
+              <div
+                className={`flex items-end gap-[20px] ${styles.phase5Container} ${styles.finalLetters}`}
+              >
                 <div className={styles.letterSplitI1}>
                   <div className={styles.splitLeftI1}></div>
                   <div className={styles.splitRightI1}></div>
@@ -161,20 +202,23 @@ const MissionSectionWithAnimation: React.FC<
             )}
           </div>
 
-          <div className={`absolute left-0 right-0 top-[270px] md:top-[180px] ${styles.missionTextContainer}`}>
-            <div className={`font-bold text-[30px] text-black tracking-[0.5px] mb-[3px] text-left ml-[510px] mt-[-10px] font-sans md:text-base md:mb-px md:font-bold md:ml-[150px] ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionSubtitle}`}>
+          <div
+            className={`absolute left-0 right-0 top-[270px] md:top-[180px] max-md:top-[200px] max-[480px]:top-[150px] text-center max-[480px]:mb-8 max-md:mb-10 max-[480px]:text-right ${styles.missionTextContainer}`}
+          >
+            <div
+              className={`font-bold text-[30px] text-black tracking-[0.5px] mb-[3px] mt-[-10px] font-sans md:text-base md:mb-px md:font-bold max-md:text-sm max-[480px]:text-xs ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionSubtitle}`}
+            >
               イーロの
             </div>
-            <div className={`font-bold text-[40px] text-black tracking-[1px] text-left ml-[685px] mt-[-10px] font-sans md:text-[28px] md:font-bold md:ml-[240px] ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionMainTitle}`}>
-              Mission
-              <span className={`text-[48px] md:text-[28px] ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionTitleSmall}`}>
-                は
-              </span>
+            <div
+              className={`font-bold text-[40px] text-black tracking-[1px] mt-[-10px] font-sans md:text-[28px] md:font-bold max-md:text-[20px] max-[480px]:text-[16px] ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionMainTitle}`}
+            >
+              Missionは
             </div>
           </div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4 max-md:mt-8 max-md:px-2">
+        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4 max-md:mt-8 max-md:px-2 max-[480px]:mt-16">
           {/* Dotted Line Background - 適切な長さで矢印が表示されるように */}
           <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-visible z-0 hidden md:block">
             <div className="w-[1400px] h-[1px] relative flex items-center justify-center lg:w-[1100px] md:w-[800px] max-md:w-[600px]">
