@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import styles from "./AnimationTest.module.css";
+import pictFlowStyles from "./MissionSectionWithAnimation.module.css";
 
 interface MissionSectionWithAnimationProps {
   showMoreButton?: boolean;
@@ -21,6 +22,7 @@ const MissionSectionWithAnimation: React.FC<
 
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showMissionText, setShowMissionText] = useState(false);
+  const [showPictFlow, setShowPictFlow] = useState(false);
 
   useEffect(() => {
     let hasAnimated = false;
@@ -34,6 +36,10 @@ const MissionSectionWithAnimation: React.FC<
       setTimeout(() => {
         setShowMissionText(true);
       }, 2000);
+
+      setTimeout(() => {
+        setShowPictFlow(true);
+      }, 2500);
 
       setTimeout(() => {
         if (missionHeaderRef.current) {
@@ -217,211 +223,239 @@ const MissionSectionWithAnimation: React.FC<
           </div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4 max-md:mt-1 max-md:px-2">
-          {/* Dotted Line Background - 適切な長さで矢印が表示されるように */}
-          <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-visible z-0 hidden md:block">
-            <div className="w-[1400px] h-[1px] relative flex items-center justify-center lg:w-[1100px] md:w-[800px] max-md:w-[600px]">
-              <Image
-                src="/images/service-dotted-line.svg"
-                alt="Dotted Line"
-                width={2807}
-                height={1}
-                className="w-full h-auto"
-              />
-              {/* Arrow */}
-              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-1">
-                <Image
-                  src="/images/arrow-tip.svg"
-                  alt="Arrow"
-                  width={20}
-                  height={39}
-                />
+        {/* PictFlow アニメーション - PC/タブレット版 */}
+        <div className="hidden md:block relative mt-20 lg:mt-10 lg:px-4">
+          <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
+            <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "350px", width: "100%" }}>
+              {[
+                { text: "AI" },
+                { text: "Web\nアプリケーション\n開発" },
+                { text: "クラウド\nインフラ" },
+                { text: "セキュリティ・\nプライバシー設計" },
+                { text: "API・\n外部連携基盤" },
+              ].map((item, i) => {
+                const total = 5;
+                const baseLeft = 50;
+                const spacing = 220;
+                const offset = (i - (total - 1) / 2) * spacing;
+                return (
+                  <div
+                    key={i}
+                    className={pictFlowStyles["pict-flow"]}
+                    style={{
+                      position: "absolute",
+                      top: "50%",
+                      left: `calc(${baseLeft}% + ${offset}px)`,
+                      transform: "translate(-50%, -50%)",
+                      width: "270px",
+                      height: "270px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      zIndex: 1,
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 840 840"
+                      width="270"
+                      height="270"
+                      style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                    >
+                      <circle
+                        cx="420"
+                        cy="420"
+                        r="350"
+                        className={pictFlowStyles.animatedPath}
+                        transform="rotate(-90 420 420)"
+                      />
+                    </svg>
+                    <div
+                      className={pictFlowStyles["pict-flow-txt"]}
+                      style={{
+                        position: "relative",
+                        zIndex: 2,
+                        width: "100%",
+                        height: "100%",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <div className="o">
+                        <div className={`${pictFlowStyles.t} text-black font-bold text-lg text-center whitespace-pre-line`}>
+                          {item.text}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              <div
+                className={pictFlowStyles["pict-flow-arrow"]}
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: 0,
+                  width: "100%",
+                  transform: "translateY(-50%)",
+                  zIndex: 0,
+                }}
+              >
+                <div className={pictFlowStyles["pict-flow-arrow-body"]}>
+                  <svg viewBox="0 0 2811.84 52.39" width="100%" height="52">
+                    <path className="cls-1" d="M3.75,26.2H2803.34" />
+                    <path className="cls-2" d="M2783.64,6.5l19.7,19.7-19.7,19.69" />
+                  </svg>
+                </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Circles container - PC/タブレット版 */}
-          <div className="hidden max-md:hidden md:flex justify-center items-center flex-nowrap lg:flex-wrap md:flex-wrap relative z-10">
-            {/* Circle 1 - AI */}
-            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] max-md:w-[144px] max-md:h-[144px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px] max-md:-mr-[20px]">
-              <Image
-                src="/images/circle-path.svg"
-                alt="Circle"
-                width={308}
-                height={308}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg lg:text-base md:text-sm">
-                AI
-              </div>
-            </div>
-            {/* Circle 2 - Web アプリケーション開発 */}
-            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
-              <Image
-                src="/images/circle-path.svg"
-                alt="Circle"
-                width={308}
-                height={308}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
-                Web
-                <br />
-                アプリケーション
-                <br />
-                開発
-              </div>
-            </div>
-            {/* Circle 3 - クラウド インフラ */}
-            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
-              <Image
-                src="/images/circle-path.svg"
-                alt="Circle"
-                width={308}
-                height={308}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
-                クラウド
-                <br />
-                インフラ
-              </div>
-            </div>
-            {/* Circle 4 - セキュリティ・コンプライアンス */}
-            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px] -mr-[35px] lg:-mr-[30px] md:-mr-[25px]">
-              <Image
-                src="/images/circle-path.svg"
-                alt="Circle"
-                width={308}
-                height={308}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
-                セキュリティ・
-                <br />
-                プライバシー設計
-              </div>
-            </div>
-            <div className="w-[270px] h-[270px] flex items-center justify-center relative lg:w-[210px] lg:h-[210px] md:w-[180px] md:h-[180px]">
-              <Image
-                src="/images/circle-path.svg"
-                alt="Circle"
-                width={308}
-                height={308}
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-lg text-center lg:text-base md:text-sm">
-                API・
-                <br />
-                外部連携基盤
-              </div>
-            </div>
-          </div>
-
-          {/* Circles container - スマホ版 */}
-          <div className="block md:hidden relative z-10">
-            {/* 点線SVG - 上段の円の中心を通る線 */}
-            <div className="absolute top-[60px] left-0 right-0 flex justify-center z-0">
-              <Image
-                src="/images/service-dotted-line.svg"
-                alt="Dotted Line"
-                width={300}
-                height={20}
-                className="object-contain"
-              />
-            </div>
-
-            {/* 点線SVG - 下段の円の中心を通る線 */}
-            <div className="absolute bottom-[60px] left-0 right-0 flex justify-center z-0">
-              <Image
-                src="/images/service-dotted-line.svg"
-                alt="Dotted Line"
-                width={300}
-                height={20}
-                className="object-contain"
-              />
-            </div>
-
-            {/* 上段 - 2個の円 */}
-            <div className="flex justify-center items-center mb-[-33px]">
-              {/* Circle 1 - AI */}
-              <div className="w-[120px] h-[120px] flex items-center justify-center relative mr-[-18px]">
-                <Image
-                  src="/images/circle-path.svg"
-                  alt="Circle"
-                  width={308}
-                  height={308}
-                  className="absolute inset-0 w-full h-full"
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-sm">
-                  AI
+        {/* PictFlow アニメーション - スマホ版 */}
+        <div className="block md:hidden relative mt-1 px-2">
+          <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"} style={{ transform: "scale(0.8)", transformOrigin: "center" }}>
+            <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "400px", width: "100%" }}>
+              {/* 上段 2個 */}
+              {[
+                { text: "AI", x: -100, y: -80 },
+                { text: "Web\nアプリケーション\n開発", x: 100, y: -80 },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={pictFlowStyles["pict-flow"]}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(calc(-50% + ${item.x}px), calc(-50% + ${item.y}px))`,
+                    width: "150px",
+                    height: "150px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 1,
+                  }}
+                >
+                  <svg
+                    viewBox="0 0 840 840"
+                    width="150"
+                    height="150"
+                    style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                  >
+                    <circle
+                      cx="420"
+                      cy="420"
+                      r="350"
+                      className={pictFlowStyles.animatedPath}
+                      transform="rotate(-90 420 420)"
+                    />
+                  </svg>
+                  <div
+                    className={pictFlowStyles["pict-flow-txt"]}
+                    style={{
+                      position: "relative",
+                      zIndex: 2,
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="o">
+                      <div className={`${pictFlowStyles.t} text-black font-bold text-xs text-center whitespace-pre-line`}>
+                        {item.text}
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              {/* Circle 2 - Web アプリケーション開発 */}
-              <div className="w-[120px] h-[120px] flex items-center justify-center relative">
-                <Image
-                  src="/images/circle-path.svg"
-                  alt="Circle"
-                  width={308}
-                  height={308}
-                  className="absolute inset-0 w-full h-full"
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xs text-center">
-                  Web
-                  <br />
-                  アプリケーション
-                  <br />
-                  開発
+              ))}
+              {/* 下段 3個 */}
+              {[
+                { text: "クラウド\nインフラ", x: -130, y: 80 },
+                { text: "セキュリティ・\nプライバシー設計", x: 0, y: 80 },
+                { text: "API・\n外部連携基盤", x: 130, y: 80 },
+              ].map((item, i) => (
+                <div
+                  key={i + 2}
+                  className={pictFlowStyles["pict-flow"]}
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(calc(-50% + ${item.x}px), calc(-50% + ${item.y}px))`,
+                    width: "150px",
+                    height: "150px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    zIndex: 1,
+                  }}
+                >
+                  <svg
+                    viewBox="0 0 840 840"
+                    width="150"
+                    height="150"
+                    style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                  >
+                    <circle
+                      cx="420"
+                      cy="420"
+                      r="350"
+                      className={pictFlowStyles.animatedPath}
+                      transform="rotate(-90 420 420)"
+                    />
+                  </svg>
+                  <div
+                    className={pictFlowStyles["pict-flow-txt"]}
+                    style={{
+                      position: "relative",
+                      zIndex: 2,
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div className="o">
+                      <div className={`${pictFlowStyles.t} text-black font-bold text-xs text-center whitespace-pre-line`}>
+                        {item.text}
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              ))}
+              {/* 矢印 - 上段 */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(50% - 80px)",
+                  left: "50%",
+                  width: "120px",
+                  transform: "translateX(-50%)",
+                  zIndex: 0,
+                }}
+              >
+                <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
+                  <path className="cls-1" d="M3.75,26.2H2803.34" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
+                </svg>
               </div>
-            </div>
-
-            {/* 下段 - 3個の円 */}
-            <div className="flex justify-center items-center">
-              {/* Circle 3 - クラウド インフラ */}
-              <div className="w-[120px] h-[120px] flex items-center justify-center relative mr-[-18px]">
-                <Image
-                  src="/images/circle-path.svg"
-                  alt="Circle"
-                  width={308}
-                  height={308}
-                  className="absolute inset-0 w-full h-full"
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xs text-center">
-                  クラウド
-                  <br />
-                  インフラ
-                </div>
-              </div>
-              {/* Circle 4 - セキュリティ・プライバシー設計 */}
-              <div className="w-[120px] h-[120px] flex items-center justify-center relative mr-[-18px]">
-                <Image
-                  src="/images/circle-path.svg"
-                  alt="Circle"
-                  width={308}
-                  height={308}
-                  className="absolute inset-0 w-full h-full"
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xs text-center">
-                  セキュリティ・
-                  <br />
-                  プライバシー設計
-                </div>
-              </div>
-              {/* Circle 5 - API・外部連携基盤 */}
-              <div className="w-[120px] h-[120px] flex items-center justify-center relative">
-                <Image
-                  src="/images/circle-path.svg"
-                  alt="Circle"
-                  width={308}
-                  height={308}
-                  className="absolute inset-0 w-full h-full"
-                />
-                <div className="absolute inset-0 flex items-center justify-center text-black font-bold text-xs text-center">
-                  API・
-                  <br />
-                  外部連携基盤
-                </div>
+              {/* 矢印 - 下段 */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(50% + 80px)",
+                  left: "50%",
+                  width: "180px",
+                  transform: "translateX(-50%)",
+                  zIndex: 0,
+                }}
+              >
+                <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
+                  <path className="cls-1" d="M3.75,26.2H2803.34" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
+                </svg>
               </div>
             </div>
           </div>

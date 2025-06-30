@@ -1,0 +1,238 @@
+.pict {
+  overflow: hidden;
+  position: relative;
+}
+
+.pict line,
+.pict path,
+.pict polyline {
+  stroke-width: 1.5px;
+  fill: none;
+  stroke: #000;
+}
+
+.pict-flow-arrow path {
+  stroke-width: 3.5px;
+  stroke: #000;
+}
+
+.pict-flow-wrap {
+  height: 22.91667vw;
+  position: relative;
+  z-index: 2;
+}
+
+.pict-flow-arrow {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  padding: 0 4.16667vw;
+  transform: translateY(-50%);
+}
+
+.pict-flow-arrow-body {
+  overflow: hidden;
+}
+
+.pict-flow-arrow .cls-1 {
+  stroke-dasharray: 12;
+}
+
+.pict-flow {
+  position: absolute;
+  width: 22.91667vw;
+  height: 22.91667vw;
+}
+
+.pict-flow-txt .t {
+  transform-origin: center left;
+  transition: all 1s cubic-bezier(0.48, 0.04, 0.52, 0.96);
+  transform: translateY(130%) rotate(15deg);
+  text-align: center;
+  opacity: 0;
+}
+
+.pict-flow-arrow svg {
+  transition: all 2.5s cubic-bezier(0.32, 0.94, 0.6, 1);
+  transform: translate(-100%);
+}
+
+.pict-flow path {
+  transition: all 1s cubic-bezier(0.48, 0.04, 0.52, 0.96);
+  stroke-dasharray: 880px;
+  stroke-dashoffset: 880px;
+  stroke: #000;
+}
+
+[data-shown="1"] .pict-flow-arrow svg,
+[data-shown="1"] .pict-flow-txt .t {
+  transform: translate(0);
+  opacity: 1;
+}
+
+[data-shown="1"] .pict-flow path {
+  stroke-dashoffset: 0px;
+}
+
+.animatedCircle {
+  stroke-dasharray: 251.2px;
+  stroke-dashoffset: 251.2px;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.48, 0.04, 0.52, 0.96);
+}
+
+[data-shown="1"] .animatedCircle {
+  stroke-dashoffset: 0;
+}
+
+.pict-flow .animatedPath {
+  stroke-dasharray: 2199.1px;
+  stroke-dashoffset: 2199.1px;
+  transition: stroke-dashoffset 1.2s cubic-bezier(0.48, 0.04, 0.52, 0.96);
+  stroke-linecap: butt;
+  fill: none;
+  stroke: #000;
+}
+
+[data-shown="1"] .pict-flow:nth-child(1) .animatedPath {
+  transition-delay: 0s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(2) .animatedPath {
+  transition-delay: 0.2s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(3) .animatedPath {
+  transition-delay: 0.4s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(4) .animatedPath {
+  transition-delay: 0.6s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(5) .animatedPath {
+  transition-delay: 0.8s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(6) .animatedPath {
+  transition-delay: 1s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(7) .animatedPath {
+  transition-delay: 1.2s;
+  stroke-dashoffset: 0;
+}
+
+[data-shown="1"] .pict-flow:nth-child(8) .animatedPath {
+  transition-delay: 1.4s;
+  stroke-dashoffset: 0;
+}
+
+.pict-flow svg {
+  overflow: visible;
+}
+
+.pict-flow:nth-child(2n) svg {
+  transform: scaleX(-1) rotate(90deg);
+}
+
+.pict-flow:nth-child(0) .pict-flow-txt .t,
+.pict-flow:nth-child(0) path {
+  transition-delay: -0.2s;
+}
+
+.pict-flow:first-child .pict-flow-txt .t,
+.pict-flow:first-child path {
+  transition-delay: 0s;
+}
+
+.pict-flow:nth-child(2) .pict-flow-txt .t,
+.pict-flow:nth-child(2) path {
+  transition-delay: 0.2s;
+}
+
+.pict-flow:nth-child(3) .pict-flow-txt .t,
+.pict-flow:nth-child(3) path {
+  transition-delay: 0.4s;
+}
+
+.pict-flow:nth-child(4) .pict-flow-txt .t,
+.pict-flow:nth-child(4) path {
+  transition-delay: 0.6s;
+}
+
+.pict-flow:nth-child(5) .pict-flow-txt .t,
+.pict-flow:nth-child(5) path {
+  transition-delay: 0.8s;
+}
+
+.pict-flow:nth-child(6) .pict-flow-txt .t,
+.pict-flow:nth-child(6) path {
+  transition-delay: 1s;
+}
+
+.pict-flow:nth-child(7) .pict-flow-txt .t,
+.pict-flow:nth-child(7) path {
+  transition-delay: 1.2s;
+}
+
+.pict-flow:nth-child(8) .pict-flow-txt .t,
+.pict-flow:nth-child(8) path {
+  transition-delay: 1.4s;
+}
+
+.pict-flow:nth-child(0) {
+  left: -8.04167vw;
+}
+
+.pict-flow:first-child {
+  left: 7.5vw;
+}
+
+.pict-flow:nth-child(2) {
+  left: 23.04167vw;
+}
+
+.pict-flow:nth-child(3) {
+  left: 38.58333vw;
+}
+
+.pict-flow:nth-child(4) {
+  left: 54.125vw;
+}
+
+.pict-flow:nth-child(5) {
+  left: 69.66667vw;
+}
+
+.pict-flow:nth-child(6) {
+  left: 85.20833vw;
+}
+
+.pict-flow:nth-child(7) {
+  left: 100.75vw;
+}
+
+.pict-flow:nth-child(8) {
+  left: 116.29167vw;
+}
+
+.pict-flow-txt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.animatedPath,
+.pict-flow-arrow path,
+.pict-flow-arrow polyline,
+.animatedCircle {
+  stroke-dasharray: 8;
+  stroke-linecap: round;
+}
