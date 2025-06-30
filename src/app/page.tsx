@@ -4,7 +4,6 @@ import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
 import ParticleSystem from "./components/ParticleSystem";
 import IiLoCorporateSite from "./components/iiLoCorporateSite";
-
 export default function Home() {
   return (
     <div

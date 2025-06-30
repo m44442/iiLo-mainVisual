@@ -13,6 +13,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ContactModal from "./ContactModal";
+import AnimatedTitle from "./AnimatedTitle";
+import WebGLAnimatedTitle from "./WebGLAnimatedTitle";
+import WebGLTitle from "./WebGLTitle";
 
 const ContactSectionTailwind = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,15 +45,21 @@ const ContactSectionTailwind = () => {
     }));
   };
   return (
-    <section className="bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
+    <>
+      
+      <section className="bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
       <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
         <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
           {/* Section Header */}
           <div className="flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0">
             <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
-            <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
+            <AnimatedTitle
+              textColor="white"
+              animationType="once"
+              className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
+            >
               Contact
-            </h2>
+            </AnimatedTitle>
           </div>
 
           {/* Contact Card */}
@@ -78,6 +87,7 @@ const ContactSectionTailwind = () => {
       {/* Contact Modal */}
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </section>
+    </>
   );
 };
 
