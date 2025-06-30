@@ -73,7 +73,7 @@ const MissionSectionWithAnimation: React.FC<
     >
       <div className="max-w-[1400px] mx-auto">
         <div
-          className={`flex flex-col justify-center items-center mb-5 mt-5 relative lg:mt-10 lg:mb-5 max-md:mt-8 max-md:mb-4 ${styles.missionHeader}`}
+          className={`flex flex-col justify-center items-center mb-5 mt-5 relative lg:mt-10 lg:mb-5 max-md:mt-8 max-md:mb-4`}
           ref={missionHeaderRef}
         >
           <div
@@ -203,22 +203,21 @@ const MissionSectionWithAnimation: React.FC<
           </div>
 
           <div
-            className={`absolute left-0 right-0 top-[270px] md:top-[180px] max-md:top-[200px] max-[480px]:top-[150px] text-center max-[480px]:mb-8 max-md:mb-10 max-[480px]:text-right ${styles.missionTextContainer}`}
-          >
+            className={`w-full flex flex-col items-start md:items-center lg:mt-[-90px] lg:mb-10`}>
             <div
-              className={`font-bold text-[30px] text-black tracking-[0.5px] mb-[3px] mt-[-10px] font-sans md:text-base md:mb-px md:font-bold max-md:text-sm max-[480px]:text-xs ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionSubtitle}`}
+              className={`font-bold text-[30px] lg:ml-[-240px] lg:text-[38px] text-black tracking-[0.5px] mb-[3px] mt-[-10px] font-sans m md:font-bold max-md:text-4xl max-md:ml-9 ${showMissionText ? styles.fadeInUp : styles.hiddenText}`}
             >
               イーロの
             </div>
             <div
-              className={`font-bold text-[40px] text-black tracking-[1px] mt-[-10px] font-sans md:text-[28px] md:font-bold max-md:text-[20px] max-[480px]:text-[16px] ${showMissionText ? styles.fadeInUp : styles.hiddenText} ${styles.missionMainTitle}`}
+              className={`lg:font-semibold lg:text-[50px] lg:ml-40 lg:mt-[-10px] text-black tracking-[1px] max-md:mt-[10px] font-sans max-md:text-semibold max-md:text-5xl max-md:mb-10 max-md:ml-28 ${showMissionText ? styles.fadeInUp : styles.hiddenText}`}
             >
               Missionは
             </div>
           </div>
         </div>
 
-        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4 max-md:mt-8 max-md:px-2 max-[480px]:mt-16">
+        <div className="relative flex flex-col items-center justify-center mt-20 lg:mt-10 lg:px-4 max-md:mt-1 max-md:px-2">
           {/* Dotted Line Background - 適切な長さで矢印が表示されるように */}
           <div className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none overflow-visible z-0 hidden md:block">
             <div className="w-[1400px] h-[1px] relative flex items-center justify-center lg:w-[1100px] md:w-[800px] max-md:w-[600px]">

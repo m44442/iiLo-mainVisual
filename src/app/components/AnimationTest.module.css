@@ -1,13 +1,5 @@
 /* Mission Animation Test Styles */
-.missionHeader {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  position: relative;
-}
+
 
 /* IILO 5段階アニメーション */
 .iiloAnimationContainer {
@@ -588,37 +580,6 @@
   }
 }
 
-.missionTextContainer {
-  position: absolute;
-  top: 270px;
-  left: 0;
-  right: 0;
-}
-
-.missionSubtitle {
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 30px;
-  font-weight: 700;
-  color: #000000;
-  letter-spacing: 0.5px;
-  margin-bottom: 3px;
-  text-align: left;
-  margin-left: 510px;
-  will-change: transform;
-  margin-top: -10px;
-}
-
-.missionMainTitle {
-  font-family: "Noto Sans JP", sans-serif;
-  font-size: 40px;
-  font-weight: 700;
-  color: #000000;
-  letter-spacing: 1px;
-  text-align: left;
-  margin-left: 685px;
-  will-change: transform;
-  margin-top: -10px;
-}
 
 .missionTitleSmall {
   font-size: 48px;
@@ -667,32 +628,45 @@
     transform: scale(0.7);
   }
 
-  .missionSubtitle {
-    font-size: 16px;
-    margin-bottom: 1px;
-    font-weight: 700;
-    margin-left: 150px;
-  }
-
-  .missionMainTitle {
-    font-size: 28px;
-    font-weight: 700;
-    margin-left: 240px;
-  }
-
   .missionTitleSmall {
     font-size: 28px;
   }
 }
 
 @media (max-width: 480px) {
-  .missionSubtitle {
-    margin-left: 0 !important;
-  }
-  .missionMainTitle {
-    margin-left: 0 !important;
-  }
   .missionTextContainer {
     margin-bottom: 120px;
+  }
+
+  /* phase3のエフェクト・ロゴ全体を中央基準で同率縮小 */
+  .phase3Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100vw;
+    min-width: 0;
+    min-height: 0;
+  }
+  .effectsContainer {
+    width: 320px;
+    height: 128px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.45);
+    /* PCと同じ比率で縮小 */
+  }
+  .lettersContainer {
+    transform: scale(0.45);
+    /* PCと同じ比率で縮小 */
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  /* 余白やズレを防ぐため、親の高さも調整 */
+  .iiloAnimationContainer {
+    height: 150px;
+    min-height: 0;
+    margin-bottom: 8px;
   }
 }
