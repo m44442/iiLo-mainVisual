@@ -1,6 +1,5 @@
 import AnimationTest from "../components/AnimationTest";
 import PictFlowTestSection from "../components/PictFlowTestSection";
-import PictFlowTestSectionOriginal from "./PictFlowTestSection_original";
 
 export default function TestPage() {
   return (
