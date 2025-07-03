@@ -4,7 +4,7 @@ import React from "react";
 
 const CompanySectionNew = () => {
   return (
-    <section className="pt-[180px] pb-[180px] bg-[#E7E7E7] m-0 max-[480px]:pt-[60px] max-[480px]:pb-[60px]">
+    <section className="font-sans pt-[180px] pb-[180px] bg-[#E7E7E7] m-0 max-[480px]:pt-[60px] max-[480px]:pb-[60px]">
       <div className="flex items-center ml-[183px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4">
         <div className="w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-2"></div>
         <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">

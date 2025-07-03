@@ -45,7 +45,7 @@ const ContactSectionTailwind = () => {
   return (
     <>
       
-      <section className="bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
+      <section className="font-sans bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
       <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
         <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
           {/* Section Header */}

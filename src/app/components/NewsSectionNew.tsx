@@ -7,7 +7,7 @@ const NewsSectionNew = () => {
   return (
     <section
       id="news"
-      className="pt-[200px] pb-[200px] bg-[#000000] text-[#ffffff] m-0 w-full relative block max-[480px]:pt-[60px] max-[480px]:pb-[60px]"
+      className="font-sans pt-[200px] pb-[200px] bg-[#000000] text-[#ffffff] m-0 w-full relative block max-[480px]:pt-[60px] max-[480px]:pb-[60px]"
     >
       <div className="flex items-center ml-[183px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4">
         <div className="w-2 h-2 bg-white rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-2"></div>

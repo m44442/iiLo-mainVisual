@@ -24,7 +24,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative w-full h-[330px] bg-[#E7E7E7] max-[480px]:h-[480px] max-[480px]:pb-20">
+    <footer className="font-sans relative w-full h-[330px] bg-[#E7E7E7] max-[480px]:h-[480px] max-[480px]:pb-20">
       <div className="absolute w-full h-px top-0 bg-black max-[480px]:left-0"></div>
       <div className="relative w-full h-full max-w-[1728px] mx-auto">
         {/* Logo Section */}

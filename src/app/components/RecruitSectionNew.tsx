@@ -52,7 +52,7 @@ const RecruitSectionNew = () => {
     <>
       <section
         id="recruit"
-        className="w-full pt-[220px] pb-[220px] px-6 bg-[#E7E7E7] m-0 max-[480px]:pt-[30px] max-[480px]:pb-[30px] max-[480px]:px-[23px] max-[480px]:w-full"
+        className="font-sans w-full pt-[220px] pb-[220px] px-6 bg-[#E7E7E7] m-0 max-[480px]:pt-[30px] max-[480px]:pb-[30px] max-[480px]:px-[23px] max-[480px]:w-full"
       >
         <div className="max-w-[1400px] mx-auto">
           <div className="relative h-[260px] mb-[60px] max-[480px]:h-auto max-[480px]:mb-[30px] max-[480px]:mt-[50px]">
