@@ -33,8 +33,8 @@ export default function PictFlowTestSection() {
         pict-flowアニメーション テストセクション（本家構造）
       </h2>
       <div className={styles.pict} data-shown={shown ? "1" : "0"}>
-        {/* 矢印部分 */}
-        <div className={styles["pict-flow-arrow"]}>
+        {/* 矢印部分 - PC版のみ表示 */}
+        <div className={`${styles["pict-flow-arrow"]} hidden md:block`}>
           <div className={styles["pict-flow-arrow-body"]}>
             <svg viewBox="0 0 2811.84 52.39" width="100%" height="52">
               <path className="cls-1" d="M3.75,26.2H2803.34" />
@@ -42,9 +42,9 @@ export default function PictFlowTestSection() {
             </svg>
           </div>
         </div>
-        {/* pict-flow本家構造 */}
+        {/* PC版 - pict-flow本家構造 */}
         <div
-          className={styles["pict-flow-wrap"]}
+          className={`${styles["pict-flow-wrap"]} hidden md:block`}
           style={{ position: "relative", height: "600px", width: "100%" }}
         >
           {pictFlowData.map((item, i) => {
@@ -101,12 +101,133 @@ export default function PictFlowTestSection() {
               </div>
             );
           })}
-          {/* 矢印 */}
+        </div>
+
+        {/* スマホ版 - レスポンシブレイアウト */}
+        <div
+          className={`${styles["pict-flow-wrap"]} block md:hidden`}
+          style={{ position: "relative", height: "400px", width: "100%" }}
+        >
+          {/* 上段 2個の円 - より近く配置 */}
+          {pictFlowData.slice(0, 2).map((item, i) => {
+            const spacing = 80; // 下段と同じ重なり具合に調整
+            const xPosition = (i - 0.5) * spacing; // 中央から左右に配置
+            return (
+              <div
+                key={i}
+                className={styles["pict-flow"]}
+                style={{
+                  position: "absolute",
+                  top: "calc(50% - 40px)", // 上段
+                  left: "50%",
+                  transform: `translate(calc(-50% + ${xPosition}px), -50%)`,
+                  width: "120px",
+                  height: "120px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 1,
+                }}
+              >
+                <svg
+                  viewBox="0 0 840 840"
+                  width="120"
+                  height="120"
+                  style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                >
+                  <circle
+                    cx="420"
+                    cy="420"
+                    r="350"
+                    className={styles.animatedPath}
+                    transform="rotate(-90 420 420)"
+                  />
+                </svg>
+                <div
+                  className={styles["pict-flow-txt"]}
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div className="o">
+                    <div className={`${styles.t} text-xs text-center whitespace-pre-line`}>
+                      {item.text}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          
+          {/* 下段 3個の円 */}
+          {pictFlowData.slice(2).map((item, i) => {
+            const spacing = 80;
+            const xPosition = (i - 1) * spacing; // 3個なので中央が0、左が-80、右が80
+            return (
+              <div
+                key={i + 2}
+                className={styles["pict-flow"]}
+                style={{
+                  position: "absolute",
+                  top: "calc(50% + 40px)", // 下段
+                  left: "50%",
+                  transform: `translate(calc(-50% + ${xPosition}px), -50%)`,
+                  width: "120px",
+                  height: "120px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  zIndex: 1,
+                }}
+              >
+                <svg
+                  viewBox="0 0 840 840"
+                  width="120"
+                  height="120"
+                  style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
+                >
+                  <circle
+                    cx="420"
+                    cy="420"
+                    r="350"
+                    className={styles.animatedPath}
+                    transform="rotate(-90 420 420)"
+                  />
+                </svg>
+                <div
+                  className={styles["pict-flow-txt"]}
+                  style={{
+                    position: "relative",
+                    zIndex: 2,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div className="o">
+                    <div className={`${styles.t} text-xs text-center whitespace-pre-line`}>
+                      {item.text}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+          
+          {/* 上段の矢印 - 矢印先端なし、画面端まで突き抜け */}
           <div
             className={styles["pict-flow-arrow"]}
             style={{
               position: "absolute",
-              top: "50%",
+              top: "calc(50% - 40px)",
               left: 0,
               width: "100%",
               transform: "translateY(-50%)",
@@ -114,9 +235,28 @@ export default function PictFlowTestSection() {
             }}
           >
             <div className={styles["pict-flow-arrow-body"]}>
-              <svg viewBox="0 0 2811.84 52.39" width="100%" height="52">
-                <path className="cls-1" d="M3.75,26.2H2803.34" />
-                <path className="cls-2" d="M2783.64,6.5l19.7,19.7-19.7,19.69" />
+              <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
+                <path className="cls-1" d="M0,26.2H2811.84" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
+              </svg>
+            </div>
+          </div>
+          
+          {/* 下段の矢印 - 矢印先端あり、左端突き抜け、右端余白 */}
+          <div
+            className={styles["pict-flow-arrow"]}
+            style={{
+              position: "absolute",
+              top: "calc(50% + 40px)",
+              left: 0,
+              width: "calc(100% - 20px)",
+              transform: "translateY(-50%)",
+              zIndex: 0,
+            }}
+          >
+            <div className={styles["pict-flow-arrow-body"]}>
+              <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
+                <path className="cls-1" d="M0,26.2H2783.34" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
+                <path className="cls-2" d="M2763.64,6.5l19.7,19.7-19.7,19.69" stroke="#000" strokeWidth="2" fill="none" />
               </svg>
             </div>
           </div>
