@@ -101,7 +101,7 @@ const HeaderTailwind = () => {
         transition-all duration-300 ease-in-out
         md:px-6 md:py-8 lg:px-8 lg:py-10
         max-[767px]:h-[50px] max-[767px]:px-6 max-[767px]:py-2
-        max-[480px]:w-[375px] max-[480px]:h-[50px] max-[480px]:p-0 max-[480px]:bg-white/[0.01]
+        max-[480px]:w-full max-[480px]:h-[50px] max-[480px]:p-0 max-[480px]:bg-white/[0.01]
         ${
           isScrolled
             ? "bg-white/[0.01] backdrop-blur-sm border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
