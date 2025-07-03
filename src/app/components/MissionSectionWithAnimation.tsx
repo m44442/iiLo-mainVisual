@@ -313,7 +313,7 @@ const MissionSectionWithAnimation: React.FC<
         </div>
 
         {/* PictFlow アニメーション - スマホ版 */}
-        <div className="block md:hidden relative mt-1 px-2">
+        <div className="block md:hidden relative mt-1">
           <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
             <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "400px", width: "100%" }}>
               {/* 上段 2個の円 */}
@@ -321,7 +321,7 @@ const MissionSectionWithAnimation: React.FC<
                 { text: "AI" },
                 { text: "Web\nアプリケーション\n開発" },
               ].map((item, i) => {
-                const spacing = 95;
+                const spacing = 108;
                 const xPosition = (i - 0.5) * spacing;
                 return (
                   <div
@@ -329,11 +329,11 @@ const MissionSectionWithAnimation: React.FC<
                     className={pictFlowStyles["pict-flow"]}
                     style={{
                       position: "absolute",
-                      top: "calc(50% - 40px)",
+                      top: "calc(50% - 55px)",
                       left: "50%",
                       transform: `translate(calc(-50% + ${xPosition}px), -50%)`,
-                      width: "120px",
-                      height: "120px",
+                      width: "140px",
+                      height: "140px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -342,8 +342,8 @@ const MissionSectionWithAnimation: React.FC<
                   >
                     <svg
                       viewBox="0 0 840 840"
-                      width="120"
-                      height="120"
+                      width="140"
+                      height="140"
                       style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
                     >
                       <circle
@@ -382,7 +382,7 @@ const MissionSectionWithAnimation: React.FC<
                 { text: "セキュリティ・\nプライバシー設計" },
                 { text: "API・\n外部連携基盤" },
               ].map((item, i) => {
-                const spacing = 95;
+                const spacing = 108;
                 const xPosition = (i - 1) * spacing;
                 return (
                   <div
@@ -393,8 +393,8 @@ const MissionSectionWithAnimation: React.FC<
                       top: "calc(50% + 40px)",
                       left: "50%",
                       transform: `translate(calc(-50% + ${xPosition}px), -50%)`,
-                      width: "120px",
-                      height: "120px",
+                      width: "140px",
+                      height: "140px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -403,8 +403,8 @@ const MissionSectionWithAnimation: React.FC<
                   >
                     <svg
                       viewBox="0 0 840 840"
-                      width="120"
-                      height="120"
+                      width="140"
+                      height="140"
                       style={{ position: "absolute", top: 0, left: 0, zIndex: 1 }}
                     >
                       <circle
@@ -443,8 +443,8 @@ const MissionSectionWithAnimation: React.FC<
                 style={{
                   position: "absolute",
                   top: "calc(50% - 40px)",
-                  left: 0,
-                  width: "100%",
+                  left: "-100vw",
+                  width: "200vw",
                   transform: "translateY(-50%)",
                   zIndex: 0,
                 }}
@@ -462,8 +462,8 @@ const MissionSectionWithAnimation: React.FC<
                 style={{
                   position: "absolute",
                   top: "calc(50% + 40px)",
-                  left: 0,
-                  width: "calc(100% - 5px)",
+                  left: "-100vw",
+                  width: "calc(200vw - 15px)",
                   transform: "translateY(-50%)",
                   zIndex: 0,
                 }}
