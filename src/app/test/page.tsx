@@ -1,9 +1,12 @@
 import AnimationTest from "../components/AnimationTest";
 import PictFlowTestSection from "../components/PictFlowTestSection";
+import ScrollWaveBars from "../components/ScrollWaveBars";
 
 export default function TestPage() {
   return (
-    <div className="min-h-screen bg-[#f0f0f0] p-5">
+    <>
+      <ScrollWaveBars />
+      <div className="min-h-screen bg-[#f0f0f0] p-5">
       <h1 className="text-center mb-12 text-2xl text-[#333]">
         アニメーションテストページ
       </h1>
@@ -33,6 +36,7 @@ export default function TestPage() {
       <div className="h-[50vh]"></div>
 
       <p className="text-center text-[#666]">アニメーション確認用ページ</p>
-    </div>
+      </div>
+    </>
   );
 }

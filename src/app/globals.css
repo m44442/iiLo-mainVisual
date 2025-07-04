@@ -88,22 +88,27 @@ body {
   }
 }
 
-/* カスタムスクロールバー（オプション） */
+/* スクロールバーを非表示にする */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 0px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: transparent;
+}
+
+/* Firefox用スクロールバー非表示 */
+html {
+  scrollbar-width: none;
 }
 
 /* カスタムカーソル */

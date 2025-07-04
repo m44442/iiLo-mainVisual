@@ -8,6 +8,7 @@ import MissionSectionWithAnimation from "./MissionSectionWithAnimation";
 import ServiceSectionDiiLo from "./ServiceSectionDiiLo";
 import RecruitSectionNew from "./RecruitSectionNew";
 import CompanySectionNew from "./CompanySectionNew";
+import ScrollWaveBars from "./ScrollWaveBars";
 import NewsSectionNew from "./NewsSectionNew";
 import MissionModal from "./MissionModal";
 import HeaderTailwind from "./HeaderTailwind";
@@ -18,7 +19,9 @@ const IiLoCorporateSite = () => {
   console.log("🏠 IiLoCorporateSite render, missionModalOpen:", missionModalOpen);
 
   return (
-    <div className="tw min-h-screen text-black w-full font-sans leading-relaxed m-0 p-0">
+    <>
+      <ScrollWaveBars />
+      <div className="tw min-h-screen text-black w-full font-sans leading-relaxed m-0 p-0">
       <HeaderTailwind />
       <HeroSection />
       <MissionSectionWithAnimation 
@@ -40,7 +43,8 @@ const IiLoCorporateSite = () => {
         onClose={() => setMissionModalOpen(false)}
       />
 
-    </div>
+      </div>
+    </>
   );
 };
 
