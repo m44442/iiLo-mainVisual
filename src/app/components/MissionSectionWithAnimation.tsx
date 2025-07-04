@@ -313,7 +313,7 @@ const MissionSectionWithAnimation: React.FC<
         </div>
 
         {/* PictFlow アニメーション - スマホ版 */}
-        <div className="block md:hidden relative mt-1">
+        <div className="block md:hidden relative mt-[-60px]">
           <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
             <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "400px", width: "100%" }}>
               {/* 上段 2個の円 */}
@@ -479,13 +479,13 @@ const MissionSectionWithAnimation: React.FC<
           </div>
         </div>
 
-        <div className="text-center mt-16 mb-8 lg:mt-12 lg:mb-6">
-          <h3 className="text-[32px] font-bold text-black mb-3 lg:text-2xl md:text-xl">
+        <div className="text-center mt-16 mb-8 lg:mt-12 lg:mb-6 max-md:mt-[-30px] max-md:mb-4">
+          <h3 className="font-bold text-black mb-3 lg:text-2xl max-md:text-xl">
             <span className="bg-white px-2 py-1 rounded-sm">
               すべての業界に
             </span>
           </h3>
-          <h3 className="text-[32px] font-bold text-black mb-4 lg:text-2xl md:text-xl">
+          <h3 className="font-bold text-black mb-4 lg:text-2xl max-md:text-xl">
             <span className="bg-white px-2 py-1 rounded-sm">
               "もうひとりのAIスタッフ"を提供する
             </span>
