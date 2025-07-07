@@ -22,17 +22,27 @@ const ScrollWaveBars: React.FC = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
   const [windowHeight, setWindowHeight] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // 初期化とリサイズ対応
   useEffect(() => {
     setWindowHeight(window.innerHeight);
+    
+    // HeroSectionのスクロール解除タイミング（2.9秒）後に表示開始
+    const loadTimer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 3000); // HeroSectionより少し後に設定
     
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
     };
     
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    
+    return () => {
+      clearTimeout(loadTimer);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   // スクロール検知とタイムアウト管理
@@ -86,9 +96,9 @@ const ScrollWaveBars: React.FC = () => {
 
   // バー表示/非表示のアニメーション
   const [barContainerStyles] = useSpring(() => ({
-    opacity: isScrolling ? 1 : 0,
+    opacity: isLoaded && isScrolling ? 1 : 0,
     config: { tension: 280, friction: 20 }
-  }), [isScrolling]);
+  }), [isLoaded, isScrolling]);
 
   return (
     <div 
