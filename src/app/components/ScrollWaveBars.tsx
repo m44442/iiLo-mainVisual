@@ -6,10 +6,34 @@ import { useSpring, animated } from '@react-spring/web';
 const X_LINES = 40;
 const INITIAL_WIDTH = 20;
 
+// セクション情報の定義
+const SECTIONS = [
+  { id: 'hero', isDark: false },
+  { id: 'mission', isDark: false },
+  { id: 'service', isDark: true },    // 黒背景
+  { id: 'recruit', isDark: false },
+  { id: 'company', isDark: false },
+  { id: 'news', isDark: true },       // 黒背景
+  { id: 'contact', isDark: true },    // 黒背景
+];
+
 const ScrollWaveBars: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [windowHeight, setWindowHeight] = useState(0);
+
+  // 初期化とリサイズ対応
+  useEffect(() => {
+    setWindowHeight(window.innerHeight);
+    
+    const handleResize = () => {
+      setWindowHeight(window.innerHeight);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // スクロール検知とタイムアウト管理
   useEffect(() => {
@@ -43,6 +67,22 @@ const ScrollWaveBars: React.FC = () => {
       }
     };
   }, [scrollTimeout]);
+
+  // 指定された縦位置のセクションが黒背景かどうかを判定
+  const getSectionAtPosition = (yPosition: number): boolean => {
+    if (typeof window === 'undefined') return false; // SSR対応
+    
+    for (const section of SECTIONS) {
+      const element = document.getElementById(section.id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        if (yPosition >= rect.top && yPosition <= rect.bottom) {
+          return section.isDark;
+        }
+      }
+    }
+    return false; // デフォルトは明るい背景
+  };
 
   // バー表示/非表示のアニメーション
   const [barContainerStyles] = useSpring(() => ({
@@ -82,14 +122,23 @@ const ScrollWaveBars: React.FC = () => {
           const percentilePosition = (i + 1) / X_LINES;
           const width = INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
           
+          // 各バーの縦位置を計算
+          const barVerticalPosition = (i / X_LINES) * windowHeight;
+          
+          // その位置のセクションが黒背景かどうかで色を決定
+          const isDarkSection = windowHeight > 0 ? getSectionAtPosition(barVerticalPosition) : false;
+          const barColor = isDarkSection 
+            ? 'rgba(255, 255, 255, 1)'    // 真っ白
+            : 'rgba(0, 0, 0, 1)';         // 真っ黒
+          
           return (
             <div
               key={i}
               style={{
                 height: '1vh',
                 width: `${Math.max(width, 5)}px`,
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                transition: 'width 0.1s ease-out',
+                backgroundColor: barColor,
+                transition: 'width 0.1s ease-out, background-color 0.3s ease-out',
               }}
             />
           );
@@ -116,14 +165,23 @@ const ScrollWaveBars: React.FC = () => {
           const percentilePosition = 1 - (i + 1) / X_LINES;
           const width = INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
           
+          // 各バーの縦位置を計算
+          const barVerticalPosition = (i / X_LINES) * windowHeight;
+          
+          // その位置のセクションが黒背景かどうかで色を決定
+          const isDarkSection = windowHeight > 0 ? getSectionAtPosition(barVerticalPosition) : false;
+          const barColor = isDarkSection 
+            ? 'rgba(255, 255, 255, 1)'    // 真っ白
+            : 'rgba(0, 0, 0, 1)';         // 真っ黒
+          
           return (
             <div
               key={i}
               style={{
                 height: '1vh',
                 width: `${Math.max(width, 5)}px`,
-                backgroundColor: 'rgba(0, 0, 0, 0.4)',
-                transition: 'width 0.1s ease-out',
+                backgroundColor: barColor,
+                transition: 'width 0.1s ease-out, background-color 0.3s ease-out',
               }}
             />
           );
