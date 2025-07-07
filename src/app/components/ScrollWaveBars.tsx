@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useSpring, animated } from '@react-spring/web';
 
-const X_LINES = 40;
-const INITIAL_WIDTH = 20;
+const X_LINES = 60;
+const INITIAL_WIDTH = 40;
 
 // セクション情報の定義
 const SECTIONS = [
@@ -115,12 +115,12 @@ const ScrollWaveBars: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'flex-end',
           justifyContent: 'space-between',
-          paddingRight: '2vw',
+          paddingRight: '0',
         }}
       >
         {Array.from({ length: X_LINES }).map((_, i) => {
           const percentilePosition = (i + 1) / X_LINES;
-          const width = INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
+          const width = INITIAL_WIDTH / 4 + 80 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
           
           // 各バーの縦位置を計算
           const barVerticalPosition = (i / X_LINES) * windowHeight;
@@ -138,7 +138,7 @@ const ScrollWaveBars: React.FC = () => {
                 height: '1vh',
                 width: `${Math.max(width, 5)}px`,
                 backgroundColor: barColor,
-                transition: 'width 0.1s ease-out, background-color 0.3s ease-out',
+                transition: 'background-color 0.3s ease-out',
               }}
             />
           );
@@ -158,12 +158,12 @@ const ScrollWaveBars: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'flex-start',
           justifyContent: 'space-between',
-          paddingLeft: '2vw',
+          paddingLeft: '0',
         }}
       >
         {Array.from({ length: X_LINES }).map((_, i) => {
           const percentilePosition = 1 - (i + 1) / X_LINES;
-          const width = INITIAL_WIDTH / 4 + 40 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
+          const width = INITIAL_WIDTH / 4 + 80 * Math.cos(((percentilePosition - scrollY) * Math.PI) / 1.5) ** 32;
           
           // 各バーの縦位置を計算
           const barVerticalPosition = (i / X_LINES) * windowHeight;
@@ -181,7 +181,7 @@ const ScrollWaveBars: React.FC = () => {
                 height: '1vh',
                 width: `${Math.max(width, 5)}px`,
                 backgroundColor: barColor,
-                transition: 'width 0.1s ease-out, background-color 0.3s ease-out',
+                transition: 'background-color 0.3s ease-out',
               }}
             />
           );

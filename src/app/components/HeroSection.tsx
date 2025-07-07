@@ -15,9 +15,8 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // スクロール制御（既存コードに影響しない独立したuseEffect）
+  // スクロール制御
   useEffect(() => {
-    // より強力なスクロール禁止（複数要素に適用）
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
     document.body.style.position = "fixed";
@@ -42,7 +41,7 @@ const HeroSection = () => {
 
       document.removeEventListener("wheel", preventScroll);
       document.removeEventListener("touchmove", preventScroll);
-    }, 4000); // 3秒（テキスト表示） + 1秒（アニメーション完了）のマージン
+    }, 2900); // 3秒（テキスト表示） + 1秒（アニメーション完了）のマージン
 
     return () => {
       clearTimeout(scrollTimer);
