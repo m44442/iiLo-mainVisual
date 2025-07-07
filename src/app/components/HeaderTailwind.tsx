@@ -232,24 +232,24 @@ const HeaderTailwind = () => {
 
           <div className="p-[80px_60px_40px_60px] flex justify-between items-start h-full gap-10 md:p-[120px_80px_60px_80px] lg:p-[140px_120px_80px_120px] max-[480px]:p-0 max-[480px]:h-full max-[480px]:block max-[480px]:relative max-[480px]:w-full relative z-20 text-white">
             {/* 左側 - オフィス情報 */}
-            <div className="flex flex-col gap-6 flex-1 relative z-10 max-[480px]:absolute max-[480px]:left-[23px] max-[480px]:bottom-[100px] max-[480px]:flex-none">
-              <div className="space-y-6 max-[480px]:space-y-0">
+            <div className="flex flex-col gap-6 md:gap-8 lg:gap-10 flex-1 relative z-10 lg:mt-20 ml-8 md:ml-12 lg:ml-16 max-[480px]:absolute max-[480px]:left-[23px] max-[480px]:bottom-[100px] max-[480px]:flex-none max-[480px]:ml-0">
+              <div className="space-y-6 md:space-y-8 lg:space-y-10 max-[480px]:space-y-0">
                 <div className="max-[480px]:hidden">
-                  <h3 className="text-white text-lg font-semibold mb-4 tracking-wide">
+                  <h3 className="text-gray-400 text-lg md:text-xl lg:text-2xl md:font-bold lg:font-light md:mb-6 lg:mb-3 tracking-wide md:tracking-wider lg:tracking-widest">
                     Office
                   </h3>
-                  <div className="text-white/80 text-sm leading-relaxed mb-6">
+                  <div className="text-white/80 md:text-white/85 lg:text-white/90 text-sm md:text-base lg:text-lg leading-relaxed md:leading-loose lg:leading-loose mb-6 md:mb-8 lg:mb-10">
                     東京都千代田区永田町
                     <br />
                     一丁目1番1号
                   </div>
                   {/* PC版SNSリンク */}
-                  <div className="flex flex-col gap-3">
+                  <div className="text-gray-400 flex flex-col gap-3 md:gap-4 lg:gap-5 lg:mt-20">
                     {['X', 'Instagram', 'LINE'].map((social) => (
                       <a
                         key={social}
                         href="#"
-                        className="hover:opacity-70 transition-opacity duration-300 text-white no-underline text-sm"
+                        className="lg:ease-in-out hover:opacity-70 md:hover:opacity-60 lg:hover:opacity-50 lg:hover:translate-x-1 transition-opacity duration-300 md:duration-400 lg:duration-300 text-white no-underline text-sm md:text-base lg:text-lg"
                       >
                         {social}
                       </a>
@@ -260,7 +260,7 @@ const HeaderTailwind = () => {
             </div>
 
             {/* 右側 - ナビゲーション */}
-            <div className="flex flex-col gap-2 flex-1 relative z-30 text-white max-[480px]:absolute max-[480px]:left-[23px] max-[480px]:top-[117px] max-[480px]:block max-[480px]:flex-none">
+            <div className="flex flex-col gap-2 flex-1 relative z-30 text-white max-[480px]:absolute max-[480px]:left-[23px] max-[480px]:top-[117px] max-[480px]:block max-[480px]:flex-none lg:mt-15 lg:mr-20">
               {[
                 { href: "/mission", text: "Mission" },
                 { href: "#service", text: "Service" },
@@ -274,7 +274,7 @@ const HeaderTailwind = () => {
                   className={`block py-4 px-0 cursor-pointer text-white no-underline
                            transition-all duration-300 ease-in-out border-none bg-transparent text-left
                            hover:opacity-70 hover:translate-x-2 relative z-40
-                           text-[36px] font-light md:text-[42px] md:py-5 lg:text-[48px] lg:py-6
+                           text-[36px] font-light lg:font-medium md:text-[42px] md:py-5 lg:text-[48px] lg:py-2
                            max-[480px]:text-[23px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:p-0 max-[480px]:mb-[55px] max-[480px]:block max-[480px]:absolute max-[480px]:font-['General_Sans_Variable']
                            ${index === 0 ? "max-[480px]:top-0" : ""}
                            ${index === 1 ? "max-[480px]:top-[55px]" : ""}
