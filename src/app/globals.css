@@ -111,6 +111,16 @@ html {
   scrollbar-width: none;
 }
 
+/* 通常のカーソルを非表示にする */
+* {
+  cursor: none !important;
+}
+
+/* 入力フィールドではテキストカーソルを表示 */
+input, textarea {
+  cursor: text !important;
+}
+
 /* カスタムカーソル */
 .custom-cursor {
   position: fixed;
