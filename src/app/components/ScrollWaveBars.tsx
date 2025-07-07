@@ -23,10 +23,12 @@ const ScrollWaveBars: React.FC = () => {
   const [scrollTimeout, setScrollTimeout] = useState<NodeJS.Timeout | null>(null);
   const [windowHeight, setWindowHeight] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   // 初期化とリサイズ対応
   useEffect(() => {
     setWindowHeight(window.innerHeight);
+    setIsMobile(window.innerWidth <= 768);
     
     // HeroSectionのスクロール解除タイミング（2.9秒）後に表示開始
     const loadTimer = setTimeout(() => {
@@ -35,6 +37,7 @@ const ScrollWaveBars: React.FC = () => {
     
     const handleResize = () => {
       setWindowHeight(window.innerHeight);
+      setIsMobile(window.innerWidth <= 768);
     };
     
     window.addEventListener('resize', handleResize);
@@ -100,6 +103,12 @@ const ScrollWaveBars: React.FC = () => {
     config: { tension: 280, friction: 20 }
   }), [isLoaded, isScrolling]);
 
+  // バーの幅を動的に設定（スマホは1/3の幅）
+  const getBarWidth = (width: number) => {
+    const adjustedWidth = isMobile ? width / 3 : width;
+    return Math.max(adjustedWidth, isMobile ? 2 : 5); // 最小幅もスマホで調整
+  };
+
   return (
     <div 
       style={{
@@ -146,7 +155,7 @@ const ScrollWaveBars: React.FC = () => {
               key={i}
               style={{
                 height: '1vh',
-                width: `${Math.max(width, 5)}px`,
+                width: `${getBarWidth(width)}px`,
                 backgroundColor: barColor,
                 transition: 'background-color 0.3s ease-out',
               }}
@@ -189,7 +198,7 @@ const ScrollWaveBars: React.FC = () => {
               key={i}
               style={{
                 height: '1vh',
-                width: `${Math.max(width, 5)}px`,
+                width: `${getBarWidth(width)}px`,
                 backgroundColor: barColor,
                 transition: 'background-color 0.3s ease-out',
               }}

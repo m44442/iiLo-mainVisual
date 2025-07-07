@@ -2,6 +2,7 @@
 
 import React from "react";
 import { HoverButton } from "../../../components/ui/hover-button";
+import AnimatedTitle from "./AnimatedTitle";
 
 const NewsSectionNew = () => {
   return (
@@ -11,9 +12,13 @@ const NewsSectionNew = () => {
     >
       <div className="flex items-center ml-[183px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4">
         <div className="w-2 h-2 bg-white rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-2"></div>
-        <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] !text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
+        <AnimatedTitle
+          textColor="white"
+          animationType="once"
+          className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
+        >
           News
-        </h2>
+        </AnimatedTitle>
       </div>
 
       <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full">

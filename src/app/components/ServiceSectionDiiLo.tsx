@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import AnimatedTitle from "./AnimatedTitle";
 
 interface ServiceSectionDiiLoProps {
   isInModal?: boolean;
@@ -13,6 +14,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isCardVisible, setIsCardVisible] = useState(false);
+  const [hasCardAnimated, setHasCardAnimated] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkDevice = () => {
@@ -24,6 +28,34 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     window.addEventListener("resize", checkDevice);
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
+
+  // カードアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!cardRef.current || isInModal) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasCardAnimated) {
+            setIsCardVisible(true);
+            setHasCardAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 1.0,
+        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+      }
+    );
+
+    observer.observe(cardRef.current);
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, [hasCardAnimated, isInModal]);
   return (
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
       <section
@@ -50,14 +82,21 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         {/* Service タイトル */}
         <div className="absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-8 max-md:pl-6">
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
-          <h2 className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white max-md:text-3xl">
+          <AnimatedTitle
+            textColor="white"
+            animationType="once"
+            className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white max-md:text-3xl"
+          >
             Service
-          </h2>
+          </AnimatedTitle>
         </div>
 
         {/* DIILoプロダクトエリア */}
         <div
-          className="tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8"
+          ref={cardRef}
+          className={`tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8 overflow-hidden ${
+            isCardVisible ? 'animate-expand-right' : 'scale-x-0'
+          }`}
           style={{
             ...(isDesktop && {
               width: "800px",
@@ -65,6 +104,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               left: "490px",
               top: "162px",
             }),
+            transformOrigin: 'left center',
           }}
         >
           {/* 背景 */}

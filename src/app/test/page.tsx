@@ -1,6 +1,7 @@
 import AnimationTest from "../components/AnimationTest";
 import PictFlowTestSection from "../components/PictFlowTestSection";
 import ScrollWaveBars from "../components/ScrollWaveBars";
+import ServiceCardAnimationTest from "../components/ServiceCardAnimationTest";
 
 export default function TestPage() {
   return (
@@ -31,6 +32,17 @@ export default function TestPage() {
       {/* 分離・本家構造pict-flowテスト */}
       <div className="my-24">
         <PictFlowTestSection />
+      </div>
+
+      {/* Serviceカード展開アニメーションテスト */}
+      <div className="my-24">
+        <h2 className="text-center mb-8 text-lg text-[#333]">
+          Serviceカード 引き出しアニメーションテスト
+        </h2>
+        <p className="text-center text-[#888] mb-8">
+          左から右に展開するカードアニメーション（0.6秒）
+        </p>
+        <ServiceCardAnimationTest />
       </div>
 
       <div className="h-[50vh]"></div>

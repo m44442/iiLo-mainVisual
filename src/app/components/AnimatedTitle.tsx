@@ -53,7 +53,7 @@ const AnimatedTitle: React.FC<AnimatedTitleProps> = ({
           });
         },
         {
-          threshold: 0.5,
+          threshold: 1.0,
         }
       );
 

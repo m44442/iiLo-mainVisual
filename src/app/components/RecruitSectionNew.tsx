@@ -1,13 +1,17 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EngineerRecruitModal from "./EngineerRecruitModal";
 import StaffRecruitModal from "./StaffRecruitModal";
 import { HoverButton } from "../../../components/ui/hover-button";
+import AnimatedTitle from "./AnimatedTitle";
 
 const RecruitSectionNew = () => {
   const [engineerModalOpen, setEngineerModalOpen] = useState(false);
   const [staffModalOpen, setStaffModalOpen] = useState(false);
+  const [areCardsVisible, setAreCardsVisible] = useState(false);
+  const [haveCardsAnimated, setHaveCardsAnimated] = useState(false);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   const switchToStaffModal = () => {
     setEngineerModalOpen(false);
@@ -48,6 +52,34 @@ const RecruitSectionNew = () => {
     };
   }, [engineerModalOpen, staffModalOpen]);
 
+  // カードアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!cardsRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !haveCardsAnimated) {
+            setAreCardsVisible(true);
+            setHaveCardsAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 1.0,
+        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+      }
+    );
+
+    observer.observe(cardsRef.current);
+
+    return () => {
+      if (cardsRef.current) {
+        observer.unobserve(cardsRef.current);
+      }
+    };
+  }, [haveCardsAnimated]);
+
   return (
     <>
       <section
@@ -59,9 +91,13 @@ const RecruitSectionNew = () => {
             {/* Title with dot */}
             <div className="absolute left-[53px] top-0 flex items-center max-[480px]:relative max-[480px]:left-[12px] max-[480px]:top-0">
               <div className="w-2 h-2 bg-black rounded-full mr-[15px]"></div>
-              <h2 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl">
+              <AnimatedTitle
+                textColor="black"
+                animationType="once"
+                className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl"
+              >
                 Recruit
-              </h2>
+              </AnimatedTitle>
             </div>
 
             {/* Text content */}
@@ -81,9 +117,11 @@ const RecruitSectionNew = () => {
             </div>
           </div>
           {/* Cards section */}
-          <div className="relative h-[350px] max-[480px]:h-auto max-[480px]:flex max-[480px]:flex-col max-[480px]:gap-[40px]">
+          <div ref={cardsRef} className="relative h-[350px] max-[480px]:h-auto max-[480px]:flex max-[480px]:flex-col max-[480px]:gap-[40px]">
             {/* Engineer Card */}
-            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
+            <div className={`absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto ${
+              areCardsVisible ? 'animate-expand-right' : 'scale-x-0'
+            }`} style={{ transformOrigin: 'left center' }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[34px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
@@ -106,7 +144,9 @@ const RecruitSectionNew = () => {
             </div>
 
             {/* Staff Card */}
-            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[url('/pc-1207886_1280%201%20(2).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto">
+            <div className={`absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[url('/pc-1207886_1280%201%20(2).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto ${
+              areCardsVisible ? 'animate-expand-right' : 'scale-x-0'
+            }`} style={{ transformOrigin: 'left center' }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[32px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">

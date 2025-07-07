@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,9 @@ const ContactSectionTailwind = () => {
     company: "",
     message: "",
   });
+  const [isCardVisible, setIsCardVisible] = useState(false);
+  const [hasCardAnimated, setHasCardAnimated] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -42,6 +45,34 @@ const ContactSectionTailwind = () => {
       [name]: value,
     }));
   };
+
+  // カードアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasCardAnimated) {
+            setIsCardVisible(true);
+            setHasCardAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 1.0,
+        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+      }
+    );
+
+    observer.observe(cardRef.current);
+
+    return () => {
+      if (cardRef.current) {
+        observer.unobserve(cardRef.current);
+      }
+    };
+  }, [hasCardAnimated]);
   return (
     <>
       
@@ -61,7 +92,9 @@ const ContactSectionTailwind = () => {
           </div>
 
           {/* Contact Card */}
-          <div className="bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0">
+          <div ref={cardRef} className={`bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0 ${
+            isCardVisible ? 'animate-expand-right' : 'scale-x-0'
+          }`} style={{ transformOrigin: 'left center' }}>
             {/* Backdrop overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-[#1e1e1e]/90 opacity-10 blur-[2.5px] z-[1]"></div>
 
