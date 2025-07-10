@@ -100,7 +100,7 @@ const MissionSectionWithAnimation: React.FC<
       {
         threshold: 0,
         root: isInModal ? (textRef.current?.closest('.overflow-y-auto') as Element) || null : null,
-        rootMargin: isInModal ? '0px 0px 50px 0px' : '0px 0px 100px 0px',
+        rootMargin: isInModal ? '0px 0px 150px 0px' : '0px 0px 200px 0px',
       }
     );
 
