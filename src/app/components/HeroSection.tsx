@@ -36,8 +36,8 @@ const HeroSection = () => {
     const scrollTimer = setTimeout(() => {
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
-      document.body.style.position = "static";
-      document.body.style.width = "auto";
+      document.body.style.removeProperty("position");
+      document.body.style.removeProperty("width");
 
       document.removeEventListener("wheel", preventScroll);
       document.removeEventListener("touchmove", preventScroll);
@@ -48,8 +48,8 @@ const HeroSection = () => {
       // クリーンアップで確実に復元
       document.body.style.overflow = "auto";
       document.documentElement.style.overflow = "auto";
-      document.body.style.position = "static";
-      document.body.style.width = "auto";
+      document.body.style.removeProperty("position");
+      document.body.style.removeProperty("width");
 
       document.removeEventListener("wheel", preventScroll);
       document.removeEventListener("touchmove", preventScroll);

@@ -10,11 +10,12 @@ import pictFlowStyles from "./MissionSectionWithAnimation.module.css";
 interface MissionSectionWithAnimationProps {
   showMoreButton?: boolean;
   onMissionMoreClick?: () => void;
+  isInModal?: boolean;
 }
 
 const MissionSectionWithAnimation: React.FC<
   MissionSectionWithAnimationProps
-> = ({ showMoreButton = true, onMissionMoreClick }) => {
+> = ({ showMoreButton = true, onMissionMoreClick, isInModal = false }) => {
   const router = useRouter();
 
   const missionSectionRef = useRef<HTMLElement>(null);
@@ -23,6 +24,12 @@ const MissionSectionWithAnimation: React.FC<
   const [currentPhase, setCurrentPhase] = useState(0);
   const [showMissionText, setShowMissionText] = useState(false);
   const [showPictFlow, setShowPictFlow] = useState(false);
+  const [isMoreButtonVisible, setIsMoreButtonVisible] = useState(false);
+  const [hasMoreButtonAnimated, setHasMoreButtonAnimated] = useState(false);
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [hasTextAnimated, setHasTextAnimated] = useState(false);
+  const moreButtonRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let hasAnimated = false;
@@ -47,6 +54,7 @@ const MissionSectionWithAnimation: React.FC<
             "float 3s ease-in-out infinite alternate";
         }
       }, 3000);
+
     };
 
     const observer = new IntersectionObserver(
@@ -60,7 +68,8 @@ const MissionSectionWithAnimation: React.FC<
         });
       },
       {
-        threshold: 0.7,
+        threshold: isInModal ? 0.3 : 0.7,
+        root: isInModal ? (missionHeaderRef.current?.closest('.overflow-y-auto') as Element) || null : null,
       }
     );
 
@@ -69,7 +78,41 @@ const MissionSectionWithAnimation: React.FC<
     }
 
     return () => observer.disconnect();
-  }, []);
+  }, [isInModal]);
+
+  // テキストアニメーション用のIntersectionObserver（テキスト要素監視）
+  useEffect(() => {
+    if (!textRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTextAnimated) {
+            setIsTextVisible(true);
+            setHasTextAnimated(true);
+            setTimeout(() => {
+              setIsMoreButtonVisible(true);
+              setHasMoreButtonAnimated(true);
+            }, 500);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        root: isInModal ? (textRef.current?.closest('.overflow-y-auto') as Element) || null : null,
+        rootMargin: isInModal ? '0px 0px 50px 0px' : '0px 0px 100px 0px',
+      }
+    );
+
+    observer.observe(textRef.current);
+
+    return () => {
+      if (textRef.current) {
+        observer.unobserve(textRef.current);
+      }
+    };
+  }, [hasTextAnimated, isInModal]);
+
 
   return (
     <section
@@ -479,7 +522,11 @@ const MissionSectionWithAnimation: React.FC<
           </div>
         </div>
 
-        <div className="text-center mt-16 mb-8 lg:mt-12 lg:mb-6 max-md:mt-[-30px] max-md:mb-4">
+        <div className={`text-center mt-16 mb-8 lg:mt-12 lg:mb-6 max-md:mt-[-30px] max-md:mb-4 ${
+          !isTextVisible ? '!opacity-0' : ''
+        } ${
+          isTextVisible ? 'animate-fade-up' : ''
+        }`}>
           <h3 className="font-bold text-black mb-3 lg:text-2xl max-md:text-xl">
             <span className="bg-white px-2 py-1 rounded-sm">
               すべての業界に
@@ -492,29 +539,49 @@ const MissionSectionWithAnimation: React.FC<
           </h3>
         </div>
 
-        <div className="max-w-4xl mx-auto px-8 text-center lg:px-6 md:px-4">
-          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs">
+        <div ref={textRef} className="max-w-4xl mx-auto px-8 text-center lg:px-6 md:px-4">
+          <p className={`text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs ${
+            !isTextVisible ? '!opacity-0' : ''
+          } ${
+            isTextVisible ? 'animate-fade-up' : ''
+          }`}>
             IILo（イーロ）は、AI・Web技術・クラウドインフラを用いて、
             <br className="hidden md:block" />
             業界特化型のスマートSaaSを開発・提供するテクノロジーカンパニーです。
           </p>
 
-          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs">
+          <p className={`text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs ${
+            !isTextVisible ? '!opacity-0' : ''
+          } ${
+            isTextVisible ? 'animate-fade-up' : ''
+          }`}>
             私たちは、現場で本当に使われるプロダクトにこだわり、
             <br className="hidden md:block" />
             医療・教育・店舗業などの現場に寄り添ったプロダクト設計を行っています。
           </p>
 
-          <p className="text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs">
+          <p className={`text-[18px] leading-[1.8] text-black mb-6 lg:text-base lg:mb-4 md:text-sm max-md:text-xs ${
+            !isTextVisible ? '!opacity-0' : ''
+          } ${
+            isTextVisible ? 'animate-fade-up' : ''
+          }`}>
             第一弾として、歯科業界に特化したLINE連携型SaaS「DiiLo（ディーロ）」をリリース。
           </p>
 
-          <p className="text-[18px] leading-[1.8] text-black mb-1 lg:text-base lg:mb-1 md:text-sm max-md:text-xs">
+          <p className={`text-[18px] leading-[1.8] text-black mb-1 lg:text-base lg:mb-1 md:text-sm max-md:text-xs ${
+            !isTextVisible ? '!opacity-0' : ''
+          } ${
+            isTextVisible ? 'animate-fade-up' : ''
+          }`}>
             <span className="bg-white px-2 py-1 rounded-sm">
               今後も、現場に根ざしたテクノロジーを届けることで、
             </span>
           </p>
-          <p className="text-[18px] leading-[1.8] text-black mb-8 lg:text-base lg:mb-6 md:text-sm max-md:text-xs">
+          <p className={`text-[18px] leading-[1.8] text-black mb-8 lg:text-base lg:mb-6 md:text-sm max-md:text-xs ${
+            !isTextVisible ? '!opacity-0' : ''
+          } ${
+            isTextVisible ? 'animate-fade-up' : ''
+          }`}>
             <span className="bg-white px-2 py-1 rounded-sm">
               すべての業界に"もうひとりのAIスタッフ"を提供することを目指しています。
             </span>
@@ -522,7 +589,11 @@ const MissionSectionWithAnimation: React.FC<
         </div>
 
         {showMoreButton && (
-          <div className="text-center mt-12 lg:mt-8">
+          <div ref={moreButtonRef} className={`text-center mt-12 lg:mt-8 ${
+            !isMoreButtonVisible ? '!opacity-0' : ''
+          } ${
+            isMoreButtonVisible ? 'animate-fade-up' : ''
+          }`}>
             <Button
               type="button"
               onClick={onMissionMoreClick || (() => router.push("/mission"))}

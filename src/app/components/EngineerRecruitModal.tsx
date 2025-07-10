@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useScrollLock } from "../hooks/useScrollLock";
 import {
   useTransition,
   useSpring,
@@ -12,7 +13,6 @@ import {
 // import styles from "./RecruitModal.module.css"; // Replaced with Tailwind classes
 import ContactSectionTailwind from "./ContactSectionTailwind";
 import { Button } from "../../../components/ui/button";
-import { useBodyFixed } from "../hooks/useBodyFixed";
 
 interface EngineerRecruitModalProps {
   isOpen: boolean;
@@ -25,7 +25,6 @@ const EngineerRecruitModal = ({
   onClose,
   onSwitchToStaff,
 }: EngineerRecruitModalProps) => {
-  const { bodyFixed, setBodyFixed } = useBodyFixed();
 
   // ヘッダーの表示/非表示制御
   useEffect(() => {
@@ -61,10 +60,8 @@ const EngineerRecruitModal = ({
     };
   }, [isOpen]);
 
-  // bodyFixedの制御
-  useEffect(() => {
-    setBodyFixed(isOpen);
-  }, [isOpen, setBodyFixed]);
+  // モーダル表示時の背景スクロール制御
+  useScrollLock(isOpen);
 
   const springApi = useSpringRef();
   const overlaySpring = useSpring({
@@ -100,7 +97,7 @@ const EngineerRecruitModal = ({
         item ? (
           <animated.div
             style={style}
-            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1200px] max-h-[90vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[1000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
+            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1280px] max-h-[80vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[1000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
             onClick={(e) => e.stopPropagation()}
           >
             <button

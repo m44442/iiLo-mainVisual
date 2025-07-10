@@ -11,7 +11,10 @@ const RecruitSectionNew = () => {
   const [staffModalOpen, setStaffModalOpen] = useState(false);
   const [areCardsVisible, setAreCardsVisible] = useState(false);
   const [haveCardsAnimated, setHaveCardsAnimated] = useState(false);
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [hasTextAnimated, setHasTextAnimated] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   const switchToStaffModal = () => {
     setEngineerModalOpen(false);
@@ -31,26 +34,6 @@ const RecruitSectionNew = () => {
     setStaffModalOpen(true);
   };
 
-  // モーダル表示時の背景スクロール制御
-  useEffect(() => {
-    const isAnyModalOpen = engineerModalOpen || staffModalOpen;
-
-    if (isAnyModalOpen) {
-      // モーダルが開いているときは背景のスクロールを無効化
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      // モーダルが閉じているときはスクロールを復元
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
-    }
-
-    // クリーンアップ関数
-    return () => {
-      document.body.style.overflow = "auto";
-      document.documentElement.style.overflow = "auto";
-    };
-  }, [engineerModalOpen, staffModalOpen]);
 
   // カードアニメーション用のIntersectionObserver
   useEffect(() => {
@@ -80,6 +63,34 @@ const RecruitSectionNew = () => {
     };
   }, [haveCardsAnimated]);
 
+  // テキストアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!textRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTextAnimated) {
+            setIsTextVisible(true);
+            setHasTextAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: '0px 0px -150px 0px',
+      }
+    );
+
+    observer.observe(textRef.current);
+
+    return () => {
+      if (textRef.current) {
+        observer.unobserve(textRef.current);
+      }
+    };
+  }, [hasTextAnimated]);
+
   return (
     <>
       <section
@@ -101,7 +112,11 @@ const RecruitSectionNew = () => {
             </div>
 
             {/* Text content */}
-            <div className="absolute w-[900px] h-[200px] left-[calc(50%-900px/2)] top-1 font-['Noto_Sans_JP'] font-normal text-base leading-[27px] text-black max-[480px]:relative max-[480px]:w-[330px] max-[480px]:h-auto max-[480px]:mt-[20px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:left-0 max-[480px]:mx-auto">
+            <div ref={textRef} className={`absolute w-[900px] h-[200px] left-[calc(50%-900px/2)] top-1 font-['Noto_Sans_JP'] font-normal text-base leading-[27px] text-black max-[480px]:relative max-[480px]:w-[330px] max-[480px]:h-auto max-[480px]:mt-[20px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:left-0 max-[480px]:mx-auto ${
+              !isTextVisible ? '!opacity-0' : ''
+            } ${
+              isTextVisible ? 'animate-fade-up' : ''
+            }`}>
               IILoは、医療やサービス業など"現場で働く人たち"の手間と課題をテクノロジーで解決する会社です。
               <br />
               <br />

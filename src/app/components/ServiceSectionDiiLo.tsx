@@ -16,7 +16,10 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
   const [isMobile, setIsMobile] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [hasCardAnimated, setHasCardAnimated] = useState(false);
+  const [isTextVisible, setIsTextVisible] = useState(false);
+  const [hasTextAnimated, setHasTextAnimated] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkDevice = () => {
@@ -31,7 +34,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
   // カードアニメーション用のIntersectionObserver
   useEffect(() => {
-    if (!cardRef.current || isInModal) return;
+    if (!cardRef.current) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -43,8 +46,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         });
       },
       {
-        threshold: 1.0,
-        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+        threshold: isInModal ? 0.3 : 1.0,
+        rootMargin: isInModal ? '0px 0px -50px 0px' : '-100px 0px -100px 0px',
+        root: isInModal ? (cardRef.current?.closest('.overflow-y-auto') as Element) || null : null,
       }
     );
 
@@ -56,11 +60,41 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
       }
     };
   }, [hasCardAnimated, isInModal]);
+
+  // テキストアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!textRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasTextAnimated) {
+            setIsTextVisible(true);
+            setHasTextAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: 0,
+        rootMargin: isInModal ? '0px 0px 50px 0px' : '0px 0px 100px 0px',
+        root: isInModal ? (cardRef.current?.closest('.overflow-y-auto') as Element) || null : null,
+      }
+    );
+
+    observer.observe(textRef.current);
+
+    return () => {
+      if (textRef.current) {
+        observer.unobserve(textRef.current);
+      }
+    };
+  }, [hasTextAnimated, isInModal]);
+
   return (
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
       <section
         id="service"
-        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[1100px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-220"
+        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-220"
         style={
           isInModal
             ? {
@@ -94,8 +128,10 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         {/* DIILoプロダクトエリア */}
         <div
           ref={cardRef}
-          className={`tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8 overflow-hidden ${
-            isCardVisible ? 'animate-expand-right' : 'scale-x-0'
+          className={`tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8 ${
+            !isCardVisible ? 'opacity-0' : ''
+          } ${
+            isCardVisible ? 'animate-expand-right' : ''
           }`}
           style={{
             ...(isDesktop && {
@@ -296,86 +332,105 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         </div>
 
         {/* 説明テキスト群 */}
-        {/* 1行目 */}
-        <div
-          className="tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px]"
-          style={{
-            ...(isDesktop && {
-              width: "900px",
-              height: "27px",
-              left: "calc(50% - 760px/2)",
-              top: "542px",
-            }),
-            ...(!isDesktop && {
-              top: "450px",
-              left: "0",
-              right: "0",
-            }),
-          }}
-        >
-          DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
-        </div>
+        <div>
+          {/* 1行目 */}
+          <div
+            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+              !isTextVisible ? '!opacity-0' : ''
+            } ${
+              isTextVisible ? 'animate-fade-up' : ''
+            }`}
+            style={{
+              ...(isDesktop && {
+                width: "900px",
+                height: "27px",
+                left: "calc(50% - 760px/2)",
+                top: "542px",
+              }),
+              ...(!isDesktop && {
+                top: "450px",
+                left: "0",
+                right: "0",
+              }),
+            }}
+          >
+            DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
+          </div>
 
-        {/* 2行目 */}
-        <div
-          className="tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px]"
-          style={{
-            ...(isDesktop && {
-              width: "900px",
-              height: "54px",
-              left: "calc(50% - 760px/2)",
-              top: "584px",
-            }),
-            ...(!isDesktop && {
-              top: "530px",
-              left: "0",
-              right: "0",
-            }),
-          }}
-        >
-          患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
-          <br />
-          さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
-        </div>
+          {/* 2行目 */}
+          <div
+            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+              !isTextVisible ? '!opacity-0' : ''
+            } ${
+              isTextVisible ? 'animate-fade-up' : ''
+            }`}
+            style={{
+              ...(isDesktop && {
+                width: "900px",
+                height: "54px",
+                left: "calc(50% - 760px/2)",
+                top: "584px",
+              }),
+              ...(!isDesktop && {
+                top: "530px",
+                left: "0",
+                right: "0",
+              }),
+            }}
+          >
+            患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
+            <br />
+            さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
+          </div>
 
-        {/* 3行目 */}
-        <div
-          className="tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px]"
-          style={{
-            ...(isDesktop && {
-              width: "900px",
-              height: "27px",
-              left: "calc(50% - 760px/2)",
-              top: "653px",
-            }),
-            ...(!isDesktop && {
-              top: "680px",
-              left: "0",
-              right: "0",
-            }),
-          }}
-        >
-          従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で"その日から使える"設計に。
-        </div>
+          {/* 3行目 */}
+          <div
+            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+              !isTextVisible ? '!opacity-0' : ''
+            } ${
+              isTextVisible ? 'animate-fade-up' : ''
+            }`}
+            style={{
+              ...(isDesktop && {
+                width: "900px",
+                height: "27px",
+                left: "calc(50% - 760px/2)",
+                top: "653px",
+              }),
+              ...(!isDesktop && {
+                top: "680px",
+                left: "0",
+                right: "0",
+              }),
+            }}
+          >
+            従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で"その日から使える"設計に。
+          </div>
 
-        {/* 4行目 */}
-        <div
-          className="tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px]"
-          style={{
-            ...(isDesktop && {
-              width: "900px",
-              height: "54px",
-              left: "calc(50% - 760px/2)",
-              top: "695px",
-            }),
-            ...(!isDesktop && {
-              top: "760px",
-              left: "0",
-              right: "0",
-            }),
-          }}
-        >
-          「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯科DXプラットフォームです。
+          {/* 4行目 */}
+          <div
+            ref={textRef}
+            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+              !isTextVisible ? '!opacity-0' : ''
+            } ${
+              isTextVisible ? 'animate-fade-up' : ''
+            }`}
+            style={{
+              ...(isDesktop && {
+                width: "900px",
+                height: "54px",
+                left: "calc(50% - 760px/2)",
+                top: "695px",
+              }),
+              ...(!isDesktop && {
+                top: "760px",
+                left: "0",
+                right: "0",
+              }),
+            }}
+          >
+            「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯科DXプラットフォームです。
+          </div>
         </div>
       </section>
     </div>

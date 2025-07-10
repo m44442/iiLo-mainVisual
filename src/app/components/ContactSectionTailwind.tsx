@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import { useScrollLock } from "../hooks/useScrollLock";
 import {
   Dialog,
   DialogContent,
@@ -45,6 +46,9 @@ const ContactSectionTailwind = () => {
       [name]: value,
     }));
   };
+
+  // モーダル表示時の背景スクロール制御
+  useScrollLock(isModalOpen);
 
   // カードアニメーション用のIntersectionObserver
   useEffect(() => {

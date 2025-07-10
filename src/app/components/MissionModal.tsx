@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
+import { useScrollLock } from "../hooks/useScrollLock";
 import {
   useTransition,
   useSpring,
@@ -13,7 +14,6 @@ import MissionSectionWithAnimation from "./MissionSectionWithAnimation";
 import ServiceSectionDiiLo from "./ServiceSectionDiiLo";
 import MissionStatement from "./MissionStatement";
 import ContactSectionTailwind from "./ContactSectionTailwind";
-import { useBodyFixed } from "../hooks/useBodyFixed";
 
 interface MissionModalProps {
   isOpen: boolean;
@@ -21,7 +21,6 @@ interface MissionModalProps {
 }
 
 const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
-  const { bodyFixed, setBodyFixed } = useBodyFixed();
 
   // ヘッダーの表示/非表示制御
   useEffect(() => {
@@ -57,10 +56,8 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
     };
   }, [isOpen]);
 
-  // bodyFixedの制御
-  useEffect(() => {
-    setBodyFixed(isOpen);
-  }, [isOpen, setBodyFixed]);
+  // モーダル表示時の背景スクロール制御
+  useScrollLock(isOpen);
 
   const springApi = useSpringRef();
   const overlaySpring = useSpring({
@@ -96,7 +93,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
         item ? (
           <animated.div
             style={style}
-            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1200px] max-h-[90vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[1000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
+            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1280px] max-h-[80vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[1000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
             onClick={(e) => e.stopPropagation()}
           >
             {/* 閉じるボタン */}
@@ -122,7 +119,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
               </div>
 
               {/* MissionSectionWithAnimation - Moreボタンなし */}
-              <MissionSectionWithAnimation showMoreButton={false} />
+              <MissionSectionWithAnimation showMoreButton={false} isInModal={true} />
 
               {/* ServiceSectionDiiLo - モーダル用レイアウト */}
               <ServiceSectionDiiLo isInModal={true} />

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useScrollLock } from "../hooks/useScrollLock";
 
 const HeaderTailwind = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,25 +33,7 @@ const HeaderTailwind = () => {
   }, []);
 
   // モバイルメニュー時の背景スクロール無効化
-  useEffect(() => {
-    const body = document.body;
-
-    if (isMenuOpen) {
-      // Disable body scroll when mobile menu is open
-      body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-    } else {
-      // Enable body scroll when mobile menu is closed
-      body.style.overflow = "unset";
-      document.documentElement.style.overflow = "unset";
-    }
-
-    // Cleanup on unmount
-    return () => {
-      body.style.overflow = "unset";
-      document.documentElement.style.overflow = "unset";
-    };
-  }, [isMenuOpen]);
+  useScrollLock(isMenuOpen);
 
   const openMenu = () => {
     console.log("Opening menu");

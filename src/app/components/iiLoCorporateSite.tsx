@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import ContactSectionTailwind from "./ContactSectionTailwind";
 import HeroSection from "./HeroSection";
@@ -17,6 +17,7 @@ const IiLoCorporateSite = () => {
   const [missionModalOpen, setMissionModalOpen] = useState(false);
 
   console.log("🏠 IiLoCorporateSite render, missionModalOpen:", missionModalOpen);
+
 
   return (
     <>
