@@ -36,17 +36,17 @@ const MissionSectionWithAnimation: React.FC<
 
     const startAnimation = () => {
       setCurrentPhase(1);
-      setTimeout(() => setCurrentPhase(3), 300);
-      setTimeout(() => setCurrentPhase(4), 1000);
-      setTimeout(() => setCurrentPhase(5), 1300);
+      setTimeout(() => setCurrentPhase(3), 250);
+      setTimeout(() => setCurrentPhase(4), 800);
+      setTimeout(() => setCurrentPhase(5), 1100);
 
       setTimeout(() => {
         setShowMissionText(true);
-      }, 2000);
+      }, 1200);
 
       setTimeout(() => {
         setShowPictFlow(true);
-      }, 2500);
+      }, 1300);
 
       setTimeout(() => {
         if (missionHeaderRef.current) {
@@ -68,7 +68,7 @@ const MissionSectionWithAnimation: React.FC<
         });
       },
       {
-        threshold: isInModal ? 0.3 : 0.7,
+        threshold: isInModal ? 0.1 : 0.5,
         root: isInModal ? (missionHeaderRef.current?.closest('.overflow-y-auto') as Element) || null : null,
       }
     );
@@ -80,9 +80,10 @@ const MissionSectionWithAnimation: React.FC<
     return () => observer.disconnect();
   }, [isInModal]);
 
-  // テキストアニメーション用のIntersectionObserver（テキスト要素監視）
+  // テキストアニメーション用のIntersectionObserver（セクション最下部監視）
   useEffect(() => {
-    if (!textRef.current) return;
+    const targetElement = showMoreButton ? moreButtonRef.current : textRef.current;
+    if (!targetElement) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -99,19 +100,19 @@ const MissionSectionWithAnimation: React.FC<
       },
       {
         threshold: 0,
-        root: isInModal ? (textRef.current?.closest('.overflow-y-auto') as Element) || null : null,
-        rootMargin: isInModal ? '0px 0px 150px 0px' : '0px 0px 200px 0px',
+        root: isInModal ? (targetElement?.closest('.overflow-y-auto') as Element) || null : null,
+        rootMargin: '0px 0px 0px 0px',
       }
     );
 
-    observer.observe(textRef.current);
+    observer.observe(targetElement);
 
     return () => {
-      if (textRef.current) {
-        observer.unobserve(textRef.current);
+      if (targetElement) {
+        observer.unobserve(targetElement);
       }
     };
-  }, [hasTextAnimated, isInModal]);
+  }, [hasTextAnimated, isInModal, showMoreButton]);
 
 
   return (
