@@ -28,8 +28,10 @@ const MissionSectionWithAnimation: React.FC<
   const [hasMoreButtonAnimated, setHasMoreButtonAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
+  const [hasPictFlowAnimated, setHasPictFlowAnimated] = useState(false);
   const moreButtonRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
+  const pictFlowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let hasAnimated = false;
@@ -44,9 +46,6 @@ const MissionSectionWithAnimation: React.FC<
         setShowMissionText(true);
       }, 1200);
 
-      setTimeout(() => {
-        setShowPictFlow(true);
-      }, 1300);
 
       setTimeout(() => {
         if (missionHeaderRef.current) {
@@ -113,6 +112,35 @@ const MissionSectionWithAnimation: React.FC<
       }
     };
   }, [hasTextAnimated, isInModal, showMoreButton]);
+
+  // PictFlowアニメーション用のIntersectionObserver
+  useEffect(() => {
+    if (!pictFlowRef.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasPictFlowAnimated) {
+            setShowPictFlow(true);
+            setHasPictFlowAnimated(true);
+          }
+        });
+      },
+      {
+        threshold: isInModal ? 0.4 : 0.7,
+        root: isInModal ? (pictFlowRef.current?.closest('.overflow-y-auto') as Element) || null : null,
+        rootMargin: '0px 0px 50px 0px',
+      }
+    );
+
+    observer.observe(pictFlowRef.current);
+
+    return () => {
+      if (pictFlowRef.current) {
+        observer.unobserve(pictFlowRef.current);
+      }
+    };
+  }, [hasPictFlowAnimated, isInModal]);
 
 
   return (
@@ -268,7 +296,7 @@ const MissionSectionWithAnimation: React.FC<
         </div>
 
         {/* PictFlow アニメーション - PC/タブレット版 */}
-        <div className="hidden md:block relative mt-20 lg:mt-10 lg:px-4">
+        <div ref={pictFlowRef} className="hidden md:block relative mt-20 lg:mt-10 lg:px-4">
           <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
             <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "350px", width: "100%" }}>
               {[
