@@ -117,7 +117,8 @@ html {
 }
 
 /* 入力フィールドではテキストカーソルを表示 */
-input, textarea {
+input,
+textarea {
   cursor: text !important;
 }
 
@@ -538,50 +539,101 @@ a {
 
 /* AnimationTest keyframes - IILO 5段階アニメーション */
 @keyframes slideRight {
-  from { transform: translateX(-500px); }
-  to { transform: translateX(0); }
+  from {
+    transform: translateX(-500px);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideAfterimage1 {
-  from { transform: translateX(-450px); }
-  to { transform: translateX(-50px); }
+  from {
+    transform: translateX(-450px);
+  }
+  to {
+    transform: translateX(-50px);
+  }
 }
 
 @keyframes slideAfterimage2 {
-  from { transform: translateX(-400px); }
-  to { transform: translateX(-100px); }
+  from {
+    transform: translateX(-400px);
+  }
+  to {
+    transform: translateX(-100px);
+  }
 }
 
 @keyframes flash {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes slideDownUp {
-  0% { transform: translateY(-100px); opacity: 0; }
-  50% { transform: translateY(20px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideUpDown {
-  0% { transform: translateY(100px); opacity: 0; }
-  50% { transform: translateY(-20px); opacity: 1; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(-20px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes diagonalSlideLeft {
-  from { transform: translate(24px, -24px); opacity: 1; }
-  to { transform: translate(0, 0); opacity: 1; }
+  from {
+    transform: translate(24px, -24px);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 @keyframes diagonalSlideRight {
-  from { transform: translate(-24px, 24px); opacity: 1; }
-  to { transform: translate(0, 0); opacity: 1; }
+  from {
+    transform: translate(-24px, 24px);
+    opacity: 1;
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
 }
 
 @keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-5px); }
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-5px);
+  }
 }
 
 /* 稲妻エフェクト */
@@ -1068,20 +1120,49 @@ body.modal-open {
   right: 0 !important;
 }
 
-/* Card expand animation - 左から右に展開 */
-@keyframes expandRight {
+/* Card expand animation - 左から右に引き戸アニメーション（七段階加速、控えめの最高速） */
+@keyframes expandRightAccelerated {
   0% {
-    transform: scaleX(0);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
     opacity: 0;
   }
+  12% {
+    clip-path: polygon(0% 0%, 0.01% 0%, 0.01% 100%, 0% 100%);
+    opacity: 0.05;
+  }
+  25% {
+    clip-path: polygon(0% 0%, 0.05% 0%, 0.05% 100%, 0% 100%);
+    opacity: 0.1;
+  }
+  40% {
+    clip-path: polygon(0% 0%, 0.3% 0%, 0.3% 100%, 0% 100%);
+    opacity: 0.2;
+  }
+  55% {
+    clip-path: polygon(0% 0%, 3% 0%, 3% 100%, 0% 100%);
+    opacity: 0.4;
+  }
+  70% {
+    clip-path: polygon(0% 0%, 25% 0%, 25% 100%, 0% 100%);
+    opacity: 0.7;
+  }
+  82% {
+    clip-path: polygon(0% 0%, 70% 0%, 70% 100%, 0% 100%);
+    opacity: 0.9;
+  }
+  88% {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    opacity: 1;
+  }
   100% {
-    transform: scaleX(1);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     opacity: 1;
   }
 }
 
 .animate-expand-right {
-  animation: expandRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  animation: expandRightAccelerated 0.7s cubic-bezier(0.01, 0.02, 0.8, 1)
+    forwards;
 }
 
 /* Fade in animation */
@@ -1097,4 +1178,3 @@ body.modal-open {
 .animate-fade-up {
   animation: fadeIn 1s ease-in-out forwards;
 }
-

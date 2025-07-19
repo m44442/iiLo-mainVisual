@@ -16,8 +16,6 @@ import HeaderTailwind from "./HeaderTailwind";
 const IiLoCorporateSite = () => {
   const [missionModalOpen, setMissionModalOpen] = useState(false);
 
-  console.log("🏠 IiLoCorporateSite render, missionModalOpen:", missionModalOpen);
-
 
   return (
     <>
@@ -27,7 +25,6 @@ const IiLoCorporateSite = () => {
       <HeroSection />
       <MissionSectionWithAnimation 
         onMissionMoreClick={() => {
-          console.log("🚀 More button clicked, opening MissionModal");
           setMissionModalOpen(true);
         }}
       />

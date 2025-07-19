@@ -33,7 +33,6 @@ const ContactSectionTailwind = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("フォーム送信:", formData);
     alert("お問い合わせを送信しました。ありがとうございます。");
   };
 

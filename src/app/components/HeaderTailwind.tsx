@@ -36,7 +36,6 @@ const HeaderTailwind = () => {
   useScrollLock(isMenuOpen);
 
   const openMenu = () => {
-    console.log("Opening menu");
     setShouldRender(true);
     setIsClosing(false);
     // DOM要素が作成された後にアニメーションを開始
@@ -46,10 +45,8 @@ const HeaderTailwind = () => {
   };
 
   const closeMenu = () => {
-    console.log("Closing menu");
     setIsClosing(true);
     setTimeout(() => {
-      console.log("Menu closed");
       setIsMenuOpen(false);
       setShouldRender(false);
       setIsClosing(false);

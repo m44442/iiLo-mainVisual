@@ -4,8 +4,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
-import styles from "./AnimationTest.module.css";
-import pictFlowStyles from "./MissionSectionWithAnimation.module.css";
+import styles from "./MissionSectionWithAnimation.module.css";
 
 interface MissionSectionWithAnimationProps {
   showMoreButton?: boolean;
@@ -114,6 +113,7 @@ const MissionSectionWithAnimation: React.FC<
       }
     };
   }, [hasTextAnimated, isInModal, showMoreButton]);
+
 
 
 
@@ -271,8 +271,8 @@ const MissionSectionWithAnimation: React.FC<
 
         {/* PictFlow アニメーション - PC/タブレット版 */}
         <div className="hidden md:block relative mt-20 lg:mt-10 lg:px-4">
-          <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
-            <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "350px", width: "100%" }}>
+          <div className={styles.pict} data-shown={showPictFlow ? "1" : "0"}>
+            <div className={styles["pict-flow-wrap"]} style={{ position: "relative", height: "350px", width: "100%" }}>
               {[
                 { text: "AI" },
                 { text: "Web\nアプリケーション\n開発" },
@@ -287,7 +287,7 @@ const MissionSectionWithAnimation: React.FC<
                 return (
                   <div
                     key={i}
-                    className={pictFlowStyles["pict-flow"]}
+                    className={styles["pict-flow"]}
                     style={{
                       position: "absolute",
                       top: "50%",
@@ -311,12 +311,12 @@ const MissionSectionWithAnimation: React.FC<
                         cx="420"
                         cy="420"
                         r="350"
-                        className={pictFlowStyles.animatedPath}
+                        className={styles.animatedPath}
                         transform="rotate(-90 420 420)"
                       />
                     </svg>
                     <div
-                      className={pictFlowStyles["pict-flow-txt"]}
+                      className={styles["pict-flow-txt"]}
                       style={{
                         position: "relative",
                         zIndex: 2,
@@ -328,7 +328,7 @@ const MissionSectionWithAnimation: React.FC<
                       }}
                     >
                       <div className="o">
-                        <div className={`${pictFlowStyles.t} text-black font-bold text-lg text-center whitespace-pre-line`}>
+                        <div className={`${styles.t} text-black font-bold text-lg text-center whitespace-pre-line`}>
                           {item.text}
                         </div>
                       </div>
@@ -337,7 +337,7 @@ const MissionSectionWithAnimation: React.FC<
                 );
               })}
               <div
-                className={pictFlowStyles["pict-flow-arrow"]}
+                className={styles["pict-flow-arrow"]}
                 style={{
                   position: "absolute",
                   top: "50%",
@@ -347,7 +347,7 @@ const MissionSectionWithAnimation: React.FC<
                   zIndex: 0,
                 }}
               >
-                <div className={pictFlowStyles["pict-flow-arrow-body"]}>
+                <div className={styles["pict-flow-arrow-body"]}>
                   <svg viewBox="0 0 2811.84 52.39" width="100%" height="52">
                     <path className="cls-1" d="M3.75,26.2H2803.34" />
                     <path className="cls-2" d="M2783.64,6.5l19.7,19.7-19.7,19.69" />
@@ -360,8 +360,8 @@ const MissionSectionWithAnimation: React.FC<
 
         {/* PictFlow アニメーション - スマホ版 */}
         <div className="block md:hidden relative mt-[-60px]">
-          <div className={pictFlowStyles.pict} data-shown={showPictFlow ? "1" : "0"}>
-            <div className={pictFlowStyles["pict-flow-wrap"]} style={{ position: "relative", height: "400px", width: "100%" }}>
+          <div className={styles.pict} data-shown={showPictFlow ? "1" : "0"}>
+            <div className={styles["pict-flow-wrap"]} style={{ position: "relative", height: "400px", width: "100%" }}>
               {/* 上段 2個の円 */}
               {[
                 { text: "AI" },
@@ -372,7 +372,7 @@ const MissionSectionWithAnimation: React.FC<
                 return (
                   <div
                     key={i}
-                    className={pictFlowStyles["pict-flow"]}
+                    className={styles["pict-flow"]}
                     style={{
                       position: "absolute",
                       top: "calc(50% - 55px)",
@@ -396,12 +396,12 @@ const MissionSectionWithAnimation: React.FC<
                         cx="420"
                         cy="420"
                         r="350"
-                        className={pictFlowStyles.animatedPath}
+                        className={styles.animatedPath}
                         transform="rotate(-90 420 420)"
                       />
                     </svg>
                     <div
-                      className={pictFlowStyles["pict-flow-txt"]}
+                      className={styles["pict-flow-txt"]}
                       style={{
                         position: "relative",
                         zIndex: 2,
@@ -413,7 +413,7 @@ const MissionSectionWithAnimation: React.FC<
                       }}
                     >
                       <div className="o">
-                        <div className={`${pictFlowStyles.t} text-black font-medium text-[10px] text-center whitespace-pre-line`}>
+                        <div className={`${styles.t} text-black font-medium text-[10px] text-center whitespace-pre-line`}>
                           {item.text}
                         </div>
                       </div>
@@ -433,7 +433,7 @@ const MissionSectionWithAnimation: React.FC<
                 return (
                   <div
                     key={i + 2}
-                    className={pictFlowStyles["pict-flow"]}
+                    className={styles["pict-flow"]}
                     style={{
                       position: "absolute",
                       top: "calc(50% + 40px)",
@@ -457,12 +457,12 @@ const MissionSectionWithAnimation: React.FC<
                         cx="420"
                         cy="420"
                         r="350"
-                        className={pictFlowStyles.animatedPath}
+                        className={styles.animatedPath}
                         transform="rotate(-90 420 420)"
                       />
                     </svg>
                     <div
-                      className={pictFlowStyles["pict-flow-txt"]}
+                      className={styles["pict-flow-txt"]}
                       style={{
                         position: "relative",
                         zIndex: 2,
@@ -474,7 +474,7 @@ const MissionSectionWithAnimation: React.FC<
                       }}
                     >
                       <div className="o">
-                        <div className={`${pictFlowStyles.t} text-black font-medium text-[10px] text-center whitespace-pre-line`}>
+                        <div className={`${styles.t} text-black font-medium text-[10px] text-center whitespace-pre-line`}>
                           {item.text}
                         </div>
                       </div>
@@ -485,7 +485,7 @@ const MissionSectionWithAnimation: React.FC<
               
               {/* 上段の矢印 - 矢印先端なし、画面端まで突き抜け */}
               <div
-                className={pictFlowStyles["pict-flow-arrow"]}
+                className={styles["pict-flow-arrow"]}
                 style={{
                   position: "absolute",
                   top: "calc(50% - 40px)",
@@ -495,7 +495,7 @@ const MissionSectionWithAnimation: React.FC<
                   zIndex: 0,
                 }}
               >
-                <div className={pictFlowStyles["pict-flow-arrow-body"]}>
+                <div className={styles["pict-flow-arrow-body"]}>
                   <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
                     <path className="cls-1" d="M0,26.2H2811.84" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
                   </svg>
@@ -504,7 +504,7 @@ const MissionSectionWithAnimation: React.FC<
               
               {/* 下段の矢印 - 矢印先端あり、左端突き抜け、右端余白 */}
               <div
-                className={pictFlowStyles["pict-flow-arrow"]}
+                className={styles["pict-flow-arrow"]}
                 style={{
                   position: "absolute",
                   top: "calc(50% + 40px)",
@@ -514,7 +514,7 @@ const MissionSectionWithAnimation: React.FC<
                   zIndex: 0,
                 }}
               >
-                <div className={pictFlowStyles["pict-flow-arrow-body"]}>
+                <div className={styles["pict-flow-arrow-body"]}>
                   <svg viewBox="0 0 2811.84 52.39" width="100%" height="20">
                     <path className="cls-1" d="M0,26.2H2783.34" stroke="#000" strokeWidth="2" fill="none" strokeDasharray="8" />
                     <path className="cls-2" d="M2763.64,6.5l19.7,19.7-19.7,19.69" stroke="#000" strokeWidth="2" fill="none" />
