@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import AnimatedTitle from "./AnimatedTitle";
+import GradientTextAnimation from "./GradientTextAnimation";
 
 interface ServiceSectionDiiLoProps {
   isInModal?: boolean;
@@ -19,6 +20,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
   const [hasCardAnimated, setHasCardAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
+  const [startGradientAnimation, setStartGradientAnimation] = useState(false);
 
   // デバッグ用: hasTextAnimatedの変化を監視
   useEffect(() => {
@@ -100,6 +102,11 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
             console.log("✅ Text fadeup triggered");
             setIsTextVisible(true);
             setHasTextAnimated(true);
+            // fadeup完了後にグラデーションアニメーション開始
+            setTimeout(() => {
+              console.log("🌈 Starting one-time gradient animation");
+              setStartGradientAnimation(true);
+            }, 500);
           }
         });
       },
@@ -420,7 +427,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         </div>
 
         {/* 説明テキスト群 */}
-        <div>
+        <div className={startGradientAnimation ? 'tw animate-text-gradient' : ''}>
           {/* 1行目 */}
           <div
             className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
@@ -442,7 +449,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
+            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
+              DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
+            </GradientTextAnimation>
           </div>
 
           {/* 2行目 */}
@@ -466,9 +475,13 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
+            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
+              患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
+            </GradientTextAnimation>
             <br />
-            さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
+            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
+              さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
+            </GradientTextAnimation>
           </div>
 
           {/* 3行目 */}
@@ -492,7 +505,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で「その日から使える」設計に。
+            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
+              従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で「その日から使える」設計に。
+            </GradientTextAnimation>
           </div>
 
           {/* 4行目 */}
@@ -517,7 +532,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
+            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
+              「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
+            </GradientTextAnimation>
           </div>
         </div>
       </section>
