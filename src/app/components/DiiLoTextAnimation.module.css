@@ -1,0 +1,147 @@
+.container {
+  display: inline;
+  font-family: 'Noto_Sans_JP';
+  font-weight: normal;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: inherit;
+  word-spacing: inherit;
+  letter-spacing: inherit;
+}
+
+.textTitle {
+  display: inline;
+  color: #fff;
+  font-family: 'Noto_Sans_JP';
+  font-weight: normal;
+  font-size: inherit;
+  line-height: inherit;
+  white-space: inherit;
+  word-spacing: inherit;
+  letter-spacing: inherit;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  background: linear-gradient(
+    180deg,
+    #fff 0%,
+    #fff 30%,
+    #ff2a2a 30%,
+    #ff2a2a 70%,
+    #fff 70%,
+    #fff 100%
+  ) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-size: 100% 400% !important;
+  background-position-y: -50% !important;
+  transition: background-position 0.4s cubic-bezier(0.7, 0, 0.3, 1) !important;
+}
+
+.textTitle.active {
+  background-position-y: 150% !important;
+}
+
+/* 文字数に応じた遅延時間 */
+.char1 { transition-delay: 0s; }
+.char2 { transition-delay: 0.04s; }
+.char3 { transition-delay: 0.08s; }
+.char4 { transition-delay: 0.12s; }
+.char5 { transition-delay: 0.16s; }
+.char6 { transition-delay: 0.2s; }
+.char7 { transition-delay: 0.24s; }
+.char8 { transition-delay: 0.28s; }
+.char9 { transition-delay: 0.32s; }
+.char10 { transition-delay: 0.36s; }
+.char11 { transition-delay: 0.4s; }
+.char12 { transition-delay: 0.44s; }
+.char13 { transition-delay: 0.48s; }
+.char14 { transition-delay: 0.52s; }
+.char15 { transition-delay: 0.56s; }
+.char16 { transition-delay: 0.6s; }
+.char17 { transition-delay: 0.64s; }
+.char18 { transition-delay: 0.68s; }
+.char19 { transition-delay: 0.72s; }
+.char20 { transition-delay: 0.76s; }
+.char21 { transition-delay: 0.8s; }
+.char22 { transition-delay: 0.84s; }
+.char23 { transition-delay: 0.88s; }
+.char24 { transition-delay: 0.92s; }
+.char25 { transition-delay: 0.96s; }
+.char26 { transition-delay: 1s; }
+.char27 { transition-delay: 1.04s; }
+.char28 { transition-delay: 1.08s; }
+.char29 { transition-delay: 1.12s; }
+.char30 { transition-delay: 1.16s; }
+.char31 { transition-delay: 1.2s; }
+.char32 { transition-delay: 1.24s; }
+.char33 { transition-delay: 1.28s; }
+.char34 { transition-delay: 1.32s; }
+.char35 { transition-delay: 1.36s; }
+.char36 { transition-delay: 1.4s; }
+.char37 { transition-delay: 1.44s; }
+.char38 { transition-delay: 1.48s; }
+.char39 { transition-delay: 1.52s; }
+.char40 { transition-delay: 1.56s; }
+.char41 { transition-delay: 1.6s; }
+.char42 { transition-delay: 1.64s; }
+.char43 { transition-delay: 1.68s; }
+.char44 { transition-delay: 1.72s; }
+.char45 { transition-delay: 1.76s; }
+.char46 { transition-delay: 1.8s; }
+.char47 { transition-delay: 1.84s; }
+.char48 { transition-delay: 1.88s; }
+.char49 { transition-delay: 1.92s; }
+.char50 { transition-delay: 1.96s; }
+.char51 { transition-delay: 2s; }
+.char52 { transition-delay: 2.04s; }
+.char53 { transition-delay: 2.08s; }
+.char54 { transition-delay: 2.12s; }
+.char55 { transition-delay: 2.16s; }
+.char56 { transition-delay: 2.2s; }
+.char57 { transition-delay: 2.24s; }
+.char58 { transition-delay: 2.28s; }
+.char59 { transition-delay: 2.32s; }
+.char60 { transition-delay: 2.36s; }
+.char61 { transition-delay: 2.4s; }
+.char62 { transition-delay: 2.44s; }
+.char63 { transition-delay: 2.48s; }
+.char64 { transition-delay: 2.52s; }
+.char65 { transition-delay: 2.56s; }
+.char66 { transition-delay: 2.6s; }
+.char67 { transition-delay: 2.64s; }
+.char68 { transition-delay: 2.68s; }
+.char69 { transition-delay: 2.72s; }
+.char70 { transition-delay: 2.76s; }
+.char71 { transition-delay: 2.8s; }
+.char72 { transition-delay: 2.84s; }
+.char73 { transition-delay: 2.88s; }
+.char74 { transition-delay: 2.92s; }
+.char75 { transition-delay: 2.96s; }
+.char76 { transition-delay: 3s; }
+.char77 { transition-delay: 3.04s; }
+.char78 { transition-delay: 3.08s; }
+.char79 { transition-delay: 3.12s; }
+.char80 { transition-delay: 3.16s; }
+.char81 { transition-delay: 3.2s; }
+.char82 { transition-delay: 3.24s; }
+.char83 { transition-delay: 3.28s; }
+.char84 { transition-delay: 3.32s; }
+.char85 { transition-delay: 3.36s; }
+.char86 { transition-delay: 3.4s; }
+.char87 { transition-delay: 3.44s; }
+.char88 { transition-delay: 3.48s; }
+.char89 { transition-delay: 3.52s; }
+.char90 { transition-delay: 3.56s; }
+.char91 { transition-delay: 3.6s; }
+.char92 { transition-delay: 3.64s; }
+.char93 { transition-delay: 3.68s; }
+.char94 { transition-delay: 3.72s; }
+.char95 { transition-delay: 3.76s; }
+.char96 { transition-delay: 3.8s; }
+.char97 { transition-delay: 3.84s; }
+.char98 { transition-delay: 3.88s; }
+.char99 { transition-delay: 3.92s; }
+.char100 { transition-delay: 3.96s; }

@@ -14,17 +14,27 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isDeviceReady, setIsDeviceReady] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [hasCardAnimated, setHasCardAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
+
+  // デバッグ用: hasTextAnimatedの変化を監視
+  useEffect(() => {
+    console.log("🕵️ hasTextAnimated changed:", hasTextAnimated);
+  }, [hasTextAnimated]);
   const cardRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const checkDevice = () => {
-      setIsDesktop(window.innerWidth >= 768);
-      setIsMobile(window.innerWidth <= 480);
+      const width = window.innerWidth;
+      console.log("📱 Device check - window.innerWidth:", width);
+      setIsDesktop(width >= 768);
+      setIsMobile(width <= 480);
+      setIsDeviceReady(true);
+      console.log("📱 Device state:", { isDesktop: width >= 768, isMobile: width <= 480 });
     };
 
     checkDevice();
@@ -32,23 +42,32 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  // カードアニメーション用のIntersectionObserver
+  // カードアニメーション用のIntersectionObserver（スマホ・デスクトップ両対応）
   useEffect(() => {
-    if (!cardRef.current) return;
+    if (!cardRef.current || !isDeviceReady) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
+          console.log("📱 Card intersection Debug:", {
+            isIntersecting: entry.isIntersecting,
+            hasCardAnimated: hasCardAnimated,
+            isMobile: isMobile,
+            isDesktop: isDesktop,
+            boundingClientRect: entry.boundingClientRect,
+            intersectionRatio: entry.intersectionRatio,
+            target: entry.target.className
+          });
           if (entry.isIntersecting && !hasCardAnimated) {
+            console.log("🚀 Card animation triggered for device:", isMobile ? "mobile" : "desktop");
             setIsCardVisible(true);
             setHasCardAnimated(true);
           }
         });
       },
       {
-        threshold: isInModal ? 0.3 : 1.0,
-        rootMargin: isInModal ? '0px 0px -50px 0px' : '-100px 0px -100px 0px',
-        root: isInModal ? (cardRef.current?.closest('.overflow-y-auto') as Element) || null : null,
+        threshold: isMobile ? 0.3 : 1.0,
+        rootMargin: isMobile ? '0px 0px -50px 0px' : '-100px 0px -100px 0px',
       }
     );
 
@@ -59,7 +78,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         observer.unobserve(cardRef.current);
       }
     };
-  }, [hasCardAnimated, isInModal]);
+  }, [hasCardAnimated, isMobile, isDeviceReady]);
 
   // テキストアニメーション用のIntersectionObserver
   useEffect(() => {
@@ -68,7 +87,17 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && !hasTextAnimated) {
+          console.log("🔥 Text intersection Debug:", {
+            isIntersecting: entry.isIntersecting,
+            hasTextAnimated: hasTextAnimated,
+            isMobile: isMobile,
+            isDesktop: isDesktop,
+            boundingClientRect: entry.boundingClientRect,
+            intersectionRatio: entry.intersectionRatio,
+            target: entry.target.className
+          });
+          if (entry.isIntersecting) {
+            console.log("✅ Text fadeup triggered");
             setIsTextVisible(true);
             setHasTextAnimated(true);
           }
@@ -76,8 +105,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
       },
       {
         threshold: 0,
-        rootMargin: isInModal ? '0px 0px 50px 0px' : '0px 0px 100px 0px',
-        root: isInModal ? (cardRef.current?.closest('.overflow-y-auto') as Element) || null : null,
+        rootMargin: '0px 0px 200px 0px',
       }
     );
 
@@ -88,7 +116,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         observer.unobserve(textRef.current);
       }
     };
-  }, [hasTextAnimated, isInModal]);
+  }, [hasTextAnimated]);
 
   return (
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
@@ -129,9 +157,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         <div
           ref={cardRef}
           className={`tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8 ${
-            !isCardVisible ? 'opacity-0' : ''
+            !isCardVisible ? 'opacity-0' : 'opacity-100'
           } ${
-            isCardVisible ? 'animate-expand-right' : ''
+            isCardVisible && hasCardAnimated ? 'animate-expand-right' : ''
           }`}
           style={{
             ...(isDesktop && {
@@ -139,6 +167,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               height: "310px",
               left: "490px",
               top: "162px",
+            }),
+            ...(!isDesktop && {
+              minHeight: "330px",
             }),
             transformOrigin: 'left center',
           }}
@@ -153,6 +184,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 left: "0px",
                 top: "0px",
               }),
+              ...(!isDesktop && {
+                width: "330px",
+                height: "330px",
+                left: "23px",
+                top: "0px",
+              }),
             }}
           />
 
@@ -165,6 +202,14 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 height: "60px",
                 left: "53px",
                 top: "40px",
+              }),
+              ...(!isDesktop && {
+                width: "200px",
+                height: "44px",
+                left: "46px",
+                top: "23px",
+                fontSize: "15px",
+                lineHeight: "22px",
               }),
             }}
           >
@@ -182,6 +227,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 height: "78px",
                 left: "54px",
                 top: "119px",
+              }),
+              ...(!isDesktop && {
+                width: "129.6px",
+                height: "63px",
+                left: "46px",
+                top: "81px",
               }),
             }}
           >
@@ -204,6 +255,13 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 left: "225px",
                 top: "176px",
               }),
+              ...(!isDesktop && {
+                width: "48px",
+                height: "21px",
+                left: "182px",
+                top: "126px",
+                fontSize: "12px",
+              }),
             }}
           >
             ディーロ
@@ -218,6 +276,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 height: "208px",
                 left: "361px",
                 top: "46px",
+              }),
+              ...(!isDesktop && {
+                width: "200px",
+                height: "104px",
+                left: "160px",
+                top: "170px",
               }),
             }}
           >
@@ -240,6 +304,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 left: "325px",
                 top: "115px",
               }),
+              ...(!isDesktop && {
+                width: "40px",
+                height: "72px",
+                left: "140px",
+                top: "204px",
+              }),
             }}
           >
             <Image
@@ -260,6 +330,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 height: "35px",
                 left: "75px",
                 top: "233px",
+              }),
+              ...(!isDesktop && {
+                width: "80px",
+                height: "35px",
+                left: "46px",
+                top: "273px",
               }),
             }}
           >
@@ -296,6 +372,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 left: "382px",
                 top: "208px",
               }),
+              ...(!isDesktop && {
+                width: "179px",
+                height: "65px",
+                left: "170px",
+                top: "251px",
+              }),
             }}
           >
             <Image
@@ -318,6 +400,12 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 height: "81px",
                 left: "330px",
                 top: "236px",
+              }),
+              ...(!isDesktop && {
+                width: "36px",
+                height: "41px",
+                left: "141px",
+                top: "266px",
               }),
             }}
           >
@@ -404,7 +492,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で"その日から使える"設計に。
+            従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で「その日から使える」設計に。
           </div>
 
           {/* 4行目 */}
@@ -429,7 +517,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯科DXプラットフォームです。
+            「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
           </div>
         </div>
       </section>
