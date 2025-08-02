@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import { HoverButton } from "../../../../components/ui/hover-button";
+import { HoverButton } from "../ui/hover-button";
 
 const Footer = () => {
   const handleScrollToTop = () => {

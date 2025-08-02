@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { HoverButton } from "../../../../components/ui/hover-button";
+import { HoverButton } from "../ui/hover-button";
 import MorphingText from "../effects/MorphingText";
 
 const NewsSectionNew = () => {

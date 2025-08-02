@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import EngineerRecruitModal from "../modals/EngineerRecruitModal";
 import StaffRecruitModal from "../modals/StaffRecruitModal";
 import ContactModal from "../modals/ContactModal";
-import { HoverButton } from "../../../../components/ui/hover-button";
+import { HoverButton } from "../ui/hover-button";
 import MorphingText from "../effects/MorphingText";
 
 const RecruitSectionNew = () => {

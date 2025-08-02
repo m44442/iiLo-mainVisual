@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Button } from "../../../components/ui/button";
+import { Button } from "./ui/button";
 import styles from "./MissionSectionWithAnimation.module.css";
 
 interface MissionSectionWithAnimationProps {

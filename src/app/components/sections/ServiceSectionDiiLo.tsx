@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import MorphingText from "../effects/MorphingText";
 
 interface ServiceSectionDiiLoProps {

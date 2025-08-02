@@ -12,7 +12,7 @@ import {
 } from "@react-spring/web";
 // import styles from "./RecruitModal.module.css"; // Replaced with Tailwind classes
 import ContactSectionTailwind from "../sections/ContactSectionTailwind";
-import { Button } from "../../../../components/ui/button";
+import { Button } from "../ui/button";
 
 interface StaffRecruitModalProps {
   isOpen: boolean;
