@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import EngineerRecruitModal from "./EngineerRecruitModal";
 import StaffRecruitModal from "./StaffRecruitModal";
 import { HoverButton } from "../../../components/ui/hover-button";
-import AnimatedTitle from "./AnimatedTitle";
+import MorphingText from "./MorphingText";
 
 const RecruitSectionNew = () => {
   const [engineerModalOpen, setEngineerModalOpen] = useState(false);
@@ -13,6 +13,7 @@ const RecruitSectionNew = () => {
   const [haveCardsAnimated, setHaveCardsAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
+  const [startTitleMorphing, setStartTitleMorphing] = useState(false);
   const cardsRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -49,8 +50,8 @@ const RecruitSectionNew = () => {
         });
       },
       {
-        threshold: 1.0,
-        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+        threshold: 0.3,
+        rootMargin: '0px 0px 100px 0px', // 下に100px早めに発火
       }
     );
 
@@ -71,8 +72,11 @@ const RecruitSectionNew = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasTextAnimated) {
-            setIsTextVisible(true);
-            setHasTextAnimated(true);
+            setStartTitleMorphing(true);
+            setTimeout(() => {
+              setIsTextVisible(true);
+              setHasTextAnimated(true);
+            }, 400);
           }
         });
       },
@@ -100,15 +104,16 @@ const RecruitSectionNew = () => {
         <div className="max-w-[1400px] mx-auto">
           <div className="relative h-[260px] mb-[60px] max-[480px]:h-auto max-[480px]:mb-[30px] max-[480px]:mt-[50px]">
             {/* Title with dot */}
-            <div className="absolute left-[53px] top-0 flex items-center max-[480px]:relative max-[480px]:left-[12px] max-[480px]:top-0">
+            <div className={`absolute left-[53px] top-0 flex items-center max-[480px]:relative max-[480px]:left-[12px] max-[480px]:top-0 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
               <div className="w-2 h-2 bg-black rounded-full mr-[15px]"></div>
-              <AnimatedTitle
-                textColor="black"
-                animationType="once"
+              <MorphingText
+                targetText="Recruit"
+                speed={60}
+                autoStart={startTitleMorphing}
                 className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl"
-              >
-                Recruit
-              </AnimatedTitle>
+                chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
+                incrementRate={0.4}
+              />
             </div>
 
             {/* Text content */}
@@ -134,9 +139,13 @@ const RecruitSectionNew = () => {
           {/* Cards section */}
           <div ref={cardsRef} className="relative h-[350px] max-[480px]:h-auto max-[480px]:flex max-[480px]:flex-col max-[480px]:gap-[40px]">
             {/* Engineer Card */}
-            <div className={`absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto ${
-              areCardsVisible ? 'animate-expand-right' : 'scale-x-0'
-            }`} style={{ transformOrigin: 'left center' }}>
+            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2-232px)] top-0 bg-[url('/software-developer-6521720_1280%201%20(1).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto" style={{
+              clipPath: areCardsVisible ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
+              transition: areCardsVisible ? 'clip-path 1.5s var(--ease-explosive)' : 'none',
+              willChange: 'clip-path',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+            }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[34px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
@@ -159,9 +168,13 @@ const RecruitSectionNew = () => {
             </div>
 
             {/* Staff Card */}
-            <div className={`absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[url('/pc-1207886_1280%201%20(2).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto ${
-              areCardsVisible ? 'animate-expand-right' : 'scale-x-0'
-            }`} style={{ transformOrigin: 'left center' }}>
+            <div className="absolute w-[436px] h-[350px] left-[calc(50%-436px/2+232px)] top-0 bg-[url('/pc-1207886_1280%201%20(2).svg')] bg-cover bg-center rounded-xl overflow-hidden max-[480px]:relative max-[480px]:left-0 max-[480px]:w-[330px] max-[480px]:h-[220px] max-[480px]:mx-auto" style={{
+              clipPath: areCardsVisible ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
+              transition: areCardsVisible ? 'clip-path 1.5s var(--ease-explosive)' : 'none',
+              willChange: 'clip-path',
+              transform: 'translateZ(0)',
+              backfaceVisibility: 'hidden',
+            }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
                 <h3 className="absolute left-[32px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">

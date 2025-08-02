@@ -3,8 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import AnimatedTitle from "./AnimatedTitle";
-import GradientTextAnimation from "./GradientTextAnimation";
+import MorphingText from "./MorphingText";
 
 interface ServiceSectionDiiLoProps {
   isInModal?: boolean;
@@ -15,17 +14,14 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 }) => {
   const [isDesktop, setIsDesktop] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [isDeviceReady, setIsDeviceReady] = useState(false);
   const [isCardVisible, setIsCardVisible] = useState(false);
-  const [hasCardAnimated, setHasCardAnimated] = useState(false);
-  const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
-  const [startGradientAnimation, setStartGradientAnimation] = useState(false);
+  const [isText1Visible, setIsText1Visible] = useState(false);
+  const [isText2Visible, setIsText2Visible] = useState(false);
+  const [isText3Visible, setIsText3Visible] = useState(false);
+  const [isText4Visible, setIsText4Visible] = useState(false);
+  const [startMorphing, setStartMorphing] = useState(false);
 
-  // デバッグ用: hasTextAnimatedの変化を監視
-  useEffect(() => {
-    console.log("🕵️ hasTextAnimated changed:", hasTextAnimated);
-  }, [hasTextAnimated]);
   const cardRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
 
@@ -35,7 +31,6 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
       console.log("📱 Device check - window.innerWidth:", width);
       setIsDesktop(width >= 768);
       setIsMobile(width <= 480);
-      setIsDeviceReady(true);
       console.log("📱 Device state:", { isDesktop: width >= 768, isMobile: width <= 480 });
     };
 
@@ -44,43 +39,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  // カードアニメーション用のIntersectionObserver（スマホ・デスクトップ両対応）
-  useEffect(() => {
-    if (!cardRef.current || !isDeviceReady) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          console.log("📱 Card intersection Debug:", {
-            isIntersecting: entry.isIntersecting,
-            hasCardAnimated: hasCardAnimated,
-            isMobile: isMobile,
-            isDesktop: isDesktop,
-            boundingClientRect: entry.boundingClientRect,
-            intersectionRatio: entry.intersectionRatio,
-            target: entry.target.className
-          });
-          if (entry.isIntersecting && !hasCardAnimated) {
-            console.log("🚀 Card animation triggered for device:", isMobile ? "mobile" : "desktop");
-            setIsCardVisible(true);
-            setHasCardAnimated(true);
-          }
-        });
-      },
-      {
-        threshold: isMobile ? 0.3 : 1.0,
-        rootMargin: isMobile ? '0px 0px -50px 0px' : '-100px 0px -100px 0px',
-      }
-    );
-
-    observer.observe(cardRef.current);
-
-    return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
-    };
-  }, [hasCardAnimated, isMobile, isDeviceReady]);
 
   // テキストアニメーション用のIntersectionObserver
   useEffect(() => {
@@ -100,13 +59,20 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
           });
           if (entry.isIntersecting) {
             console.log("✅ Text fadeup triggered");
-            setIsTextVisible(true);
+            // テキストアニメーションとタイトルモーフィングをほぼ同時に発動
             setHasTextAnimated(true);
-            // fadeup完了後にグラデーションアニメーション開始
             setTimeout(() => {
-              console.log("🌈 Starting one-time gradient animation");
-              setStartGradientAnimation(true);
-            }, 500);
+              setStartMorphing(true);
+            }, 100);
+            // カードアニメーションを早めに発動（0.4秒後）
+            setTimeout(() => {
+              setIsCardVisible(true);
+            }, 400);
+            // テキスト各行を順次表示（カード後から開始）
+            setTimeout(() => setIsText1Visible(true), 1000);
+            setTimeout(() => setIsText2Visible(true), 1150);
+            setTimeout(() => setIsText3Visible(true), 1300);
+            setTimeout(() => setIsText4Visible(true), 1450);
           }
         });
       },
@@ -149,25 +115,22 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         }
       >
         {/* Service タイトル */}
-        <div className="absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-8 max-md:pl-6">
+        <div className={`absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-8 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
-          <AnimatedTitle
-            textColor="white"
-            animationType="once"
-            className="font-['General_Sans_Variable'] font-semibold text-[25px] leading-[45px] text-white max-md:text-3xl"
-          >
-            Service
-          </AnimatedTitle>
+          <MorphingText
+            targetText="Service"
+            speed={60}
+            autoStart={startMorphing}
+            className="font-['General_Sans_Variable'] font-semibold text-[32px] leading-[50px] text-white max-md:text-3xl"
+            chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
+            incrementRate={0.4}
+          />
         </div>
 
         {/* DIILoプロダクトエリア */}
         <div
           ref={cardRef}
-          className={`tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8 ${
-            !isCardVisible ? 'opacity-0' : 'opacity-100'
-          } ${
-            isCardVisible && hasCardAnimated ? 'animate-expand-right' : ''
-          }`}
+          className="tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8"
           style={{
             ...(isDesktop && {
               width: "800px",
@@ -178,7 +141,11 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
             ...(!isDesktop && {
               minHeight: "330px",
             }),
-            transformOrigin: 'left center',
+            clipPath: isCardVisible ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
+            transition: isCardVisible ? 'clip-path 1.5s var(--ease-explosive)' : 'none',
+            willChange: 'clip-path',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
           }}
         >
           {/* 背景 */}
@@ -427,13 +394,13 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         </div>
 
         {/* 説明テキスト群 */}
-        <div className={startGradientAnimation ? 'tw animate-text-gradient' : ''}>
+        <div>
           {/* 1行目 */}
           <div
             className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
-              !isTextVisible ? '!opacity-0' : ''
+              !isText1Visible ? '!opacity-0' : ''
             } ${
-              isTextVisible ? 'animate-fade-up' : ''
+              isText1Visible ? 'animate-fade-up' : ''
             }`}
             style={{
               ...(isDesktop && {
@@ -449,17 +416,15 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
-              DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
-            </GradientTextAnimation>
+            DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
           </div>
 
           {/* 2行目 */}
           <div
             className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
-              !isTextVisible ? '!opacity-0' : ''
+              !isText2Visible ? '!opacity-0' : ''
             } ${
-              isTextVisible ? 'animate-fade-up' : ''
+              isText2Visible ? 'animate-fade-up' : ''
             }`}
             style={{
               ...(isDesktop && {
@@ -475,21 +440,17 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
-              患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
-            </GradientTextAnimation>
+            患者データ管理、予約、保険証のアップロード、患者アンケート、セグメント別のメッセージ配信、個別チャット。
             <br />
-            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
-              さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
-            </GradientTextAnimation>
+            さらにリッチメニューの自動生成や、Stripe決済機能までを一元管理。さらにそれらを用いたマーケティング情報の獲得。
           </div>
 
           {/* 3行目 */}
           <div
             className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
-              !isTextVisible ? '!opacity-0' : ''
+              !isText3Visible ? '!opacity-0' : ''
             } ${
-              isTextVisible ? 'animate-fade-up' : ''
+              isText3Visible ? 'animate-fade-up' : ''
             }`}
             style={{
               ...(isDesktop && {
@@ -505,18 +466,16 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
-              従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で「その日から使える」設計に。
-            </GradientTextAnimation>
+            従来の汎用ツールと異なり、導入時点からテンプレートが整っており、専門知識不要で「その日から使える」設計に。
           </div>
 
           {/* 4行目 */}
           <div
             ref={textRef}
             className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
-              !isTextVisible ? '!opacity-0' : ''
+              !isText4Visible ? '!opacity-0' : ''
             } ${
-              isTextVisible ? 'animate-fade-up' : ''
+              isText4Visible ? 'animate-fade-up' : ''
             }`}
             style={{
               ...(isDesktop && {
@@ -532,9 +491,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            <GradientTextAnimation trigger={startGradientAnimation} delay={0}>
-              「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
-            </GradientTextAnimation>
+            「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
           </div>
         </div>
       </section>

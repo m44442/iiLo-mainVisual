@@ -14,7 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import ContactModal from "./ContactModal";
-import AnimatedTitle from "./AnimatedTitle";
+import MorphingText from "./MorphingText";
 
 const ContactSectionTailwind = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,6 +26,7 @@ const ContactSectionTailwind = () => {
   });
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [hasCardAnimated, setHasCardAnimated] = useState(false);
+  const [startTitleMorphing, setStartTitleMorphing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const openModal = () => setIsModalOpen(true);
@@ -49,31 +50,32 @@ const ContactSectionTailwind = () => {
   // モーダル表示時の背景スクロール制御
   useScrollLock(isModalOpen);
 
-  // カードアニメーション用のIntersectionObserver
+  // タイトル要素を監視してタイトルとカードを連動
   useEffect(() => {
-    if (!cardRef.current) return;
+    const titleElement = document.querySelector('#contact .flex.items-center');
+    if (!titleElement) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasCardAnimated) {
-            setIsCardVisible(true);
-            setHasCardAnimated(true);
+            setStartTitleMorphing(true);
+            setTimeout(() => {
+              setIsCardVisible(true);
+              setHasCardAnimated(true);
+            }, 400);
           }
         });
       },
       {
-        threshold: 1.0,
-        rootMargin: '-100px 0px -100px 0px', // 上下100pxずつ遅延
+        threshold: 0.5,
       }
     );
 
-    observer.observe(cardRef.current);
+    observer.observe(titleElement);
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      observer.unobserve(titleElement);
     };
   }, [hasCardAnimated]);
   return (
@@ -83,21 +85,26 @@ const ContactSectionTailwind = () => {
       <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
         <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
           {/* Section Header */}
-          <div className="flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0">
+          <div className={`flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
             <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
-            <AnimatedTitle
-              textColor="white"
-              animationType="once"
+            <MorphingText
+              targetText="Contact"
+              speed={60}
+              autoStart={startTitleMorphing}
               className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
-            >
-              Contact
-            </AnimatedTitle>
+              chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
+              incrementRate={0.4}
+            />
           </div>
 
           {/* Contact Card */}
-          <div ref={cardRef} className={`bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0 ${
-            isCardVisible ? 'animate-expand-right' : 'scale-x-0'
-          }`} style={{ transformOrigin: 'left center' }}>
+          <div ref={cardRef} className="bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0" style={{
+            clipPath: isCardVisible ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
+            transition: isCardVisible ? 'clip-path 1.5s var(--ease-explosive)' : 'none',
+            willChange: 'clip-path',
+            transform: 'translateZ(0)',
+            backfaceVisibility: 'hidden',
+          }}>
             {/* Backdrop overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-[#1e1e1e]/90 opacity-10 blur-[2.5px] z-[1]"></div>
 
