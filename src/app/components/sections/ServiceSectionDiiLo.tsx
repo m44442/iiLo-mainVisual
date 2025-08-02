@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import MorphingText from "./MorphingText";
+import MorphingText from "../effects/MorphingText";
 
 interface ServiceSectionDiiLoProps {
   isInModal?: boolean;
@@ -119,11 +119,11 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
           <MorphingText
             targetText="Service"
-            speed={60}
+            speed={50}
             autoStart={startMorphing}
-            className="font-['General_Sans_Variable'] font-semibold text-[32px] leading-[50px] text-white max-md:text-3xl"
+            className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[32px] leading-[50px] text-white max-md:text-3xl"
             chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
-            incrementRate={0.4}
+            incrementRate={0.33}
           />
         </div>
 
@@ -169,7 +169,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
           {/* 歯科クリニック特化 LINEマーケティングSaaS */}
           <div
-            className="tw absolute font-['Noto_Sans_JP'] font-normal text-[15px] leading-[30px] text-black md:w-[255px] md:h-[60px] md:left-[53px] md:top-[40px] max-md:w-[200px] max-md:h-[44px] max-md:left-[46px] max-md:top-[23px] max-md:text-[15px] max-md:leading-[22px]"
+            className="tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[15px] leading-[30px] text-black md:w-[255px] md:h-[60px] md:left-[53px] md:top-[40px] max-md:w-[200px] max-md:h-[44px] max-md:left-[46px] max-md:top-[23px] max-md:text-[15px] max-md:leading-[22px]"
             style={{
               ...(isDesktop && {
                 width: "255px",
@@ -221,7 +221,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
           {/* ディーロ */}
           <div
-            className="tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[21px] text-black md:w-[63px] md:h-[21px] md:left-[225px] md:top-[176px] max-md:w-[48px] max-md:h-[21px] max-md:left-[182px] max-md:top-[126px] max-md:text-[12px]"
+            className="tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[16px] leading-[21px] text-black md:w-[63px] md:h-[21px] md:left-[225px] md:top-[176px] max-md:w-[48px] max-md:h-[21px] max-md:left-[182px] max-md:top-[126px] max-md:text-[12px]"
             style={{
               ...(isDesktop && {
                 width: "63px",
@@ -397,7 +397,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         <div>
           {/* 1行目 */}
           <div
-            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+            className={`tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
               !isText1Visible ? '!opacity-0' : ''
             } ${
               isText1Visible ? 'animate-fade-up' : ''
@@ -421,7 +421,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
           {/* 2行目 */}
           <div
-            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+            className={`tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
               !isText2Visible ? '!opacity-0' : ''
             } ${
               isText2Visible ? 'animate-fade-up' : ''
@@ -447,7 +447,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
           {/* 3行目 */}
           <div
-            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+            className={`tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[27px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
               !isText3Visible ? '!opacity-0' : ''
             } ${
               isText3Visible ? 'animate-fade-up' : ''
@@ -472,7 +472,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
           {/* 4行目 */}
           <div
             ref={textRef}
-            className={`tw absolute font-['Noto_Sans_JP'] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
+            className={`tw absolute font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-[16px] leading-[27px] text-white md:w-[900px] md:h-[54px] max-md:w-full max-md:px-6 max-md:text-[14px] max-md:leading-[24px] ${
               !isText4Visible ? '!opacity-0' : ''
             } ${
               isText4Visible ? 'animate-fade-up' : ''

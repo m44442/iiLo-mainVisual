@@ -3,9 +3,13 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useScrollLock } from "../hooks/useScrollLock";
+import { useScrollLock } from "../../hooks/useScrollLock";
 
-const HeaderTailwind = () => {
+interface HeaderTailwindProps {
+  onMissionClick?: () => void;
+}
+
+const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
@@ -147,9 +151,14 @@ const HeaderTailwind = () => {
                       : "opacity-0 -translate-y-5"
                   }
                 `}
-                onClick={
-                  item.href.startsWith("#") ? handleMenuClick : undefined
-                }
+                onClick={(e) => {
+                  if (item.text === "Mission") {
+                    e.preventDefault();
+                    onMissionClick?.();
+                  } else if (item.href.startsWith("#")) {
+                    handleMenuClick(e);
+                  }
+                }}
               >
                 <span className="block transition-all duration-300 origin-left group-hover:rotate-[-60deg] group-hover:opacity-0">
                   {item.text}
@@ -255,16 +264,22 @@ const HeaderTailwind = () => {
                            transition-all duration-300 ease-in-out border-none bg-transparent text-left
                            hover:opacity-70 hover:translate-x-2 relative z-40
                            text-[36px] font-light lg:font-medium md:text-[42px] md:py-5 lg:text-[48px] lg:py-2
-                           max-[480px]:text-[23px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:p-0 max-[480px]:mb-[55px] max-[480px]:block max-[480px]:absolute max-[480px]:font-['General_Sans_Variable']
+                           max-[480px]:text-[23px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:p-0 max-[480px]:mb-[55px] max-[480px]:block max-[480px]:absolute max-[480px]:font-['General_Sans_Variable','General_Sans',sans-serif]
                            ${index === 0 ? "max-[480px]:top-0" : ""}
                            ${index === 1 ? "max-[480px]:top-[55px]" : ""}
                            ${index === 2 ? "max-[480px]:top-[110px]" : ""}
                            ${index === 3 ? "max-[480px]:top-[165px]" : ""}
                            ${index === 4 ? "max-[480px]:top-[220px]" : ""}
                            `}
-                  onClick={
-                    item.href.startsWith("#") ? handleMenuClick : undefined
-                  }
+                  onClick={(e) => {
+                    if (item.text === "Mission") {
+                      e.preventDefault();
+                      onMissionClick?.();
+                      closeMenu();
+                    } else if (item.href.startsWith("#")) {
+                      handleMenuClick(e);
+                    }
+                  }}
                 >
                   {item.text}
                 </a>
@@ -275,7 +290,7 @@ const HeaderTailwind = () => {
                   <a
                     key={social}
                     href="#"
-                    className="hover:opacity-70 transition-opacity duration-300 text-white no-underline text-sm max-[480px]:text-[13px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:font-['General_Sans_Variable'] max-[480px]:block max-[480px]:mb-2"
+                    className="hover:opacity-70 transition-opacity duration-300 text-white no-underline text-sm max-[480px]:text-[13px] max-[480px]:font-medium max-[480px]:leading-[22px] max-[480px]:font-['General_Sans_Variable','General_Sans',sans-serif] max-[480px]:block max-[480px]:mb-2"
                   >
                     {social}
                   </a>

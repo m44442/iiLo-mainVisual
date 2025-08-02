@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { useScrollLock } from "../hooks/useScrollLock";
+import { useScrollLock } from "../../hooks/useScrollLock";
 import {
   Dialog,
   DialogContent,
@@ -13,10 +13,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import ContactModal from "./ContactModal";
-import MorphingText from "./MorphingText";
+import ContactModal from "../modals/ContactModal";
+import MorphingText from "../effects/MorphingText";
 
-const ContactSectionTailwind = () => {
+interface ContactSectionTailwindProps {
+  onContactClick?: () => void;
+  isInModal?: boolean;
+}
+
+const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSectionTailwindProps = {}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -52,6 +57,16 @@ const ContactSectionTailwind = () => {
 
   // タイトル要素を監視してタイトルとカードを連動
   useEffect(() => {
+    // モーダル内では即座にアニメーションを開始
+    if (isInModal) {
+      setStartTitleMorphing(true);
+      setTimeout(() => {
+        setIsCardVisible(true);
+        setHasCardAnimated(true);
+      }, 100);
+      return;
+    }
+
     const titleElement = document.querySelector('#contact .flex.items-center');
     if (!titleElement) return;
 
@@ -77,7 +92,7 @@ const ContactSectionTailwind = () => {
     return () => {
       observer.unobserve(titleElement);
     };
-  }, [hasCardAnimated]);
+  }, [hasCardAnimated, isInModal]);
   return (
     <>
       
@@ -89,11 +104,11 @@ const ContactSectionTailwind = () => {
             <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
             <MorphingText
               targetText="Contact"
-              speed={60}
+              speed={50}
               autoStart={startTitleMorphing}
-              className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
+              className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
               chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
-              incrementRate={0.4}
+              incrementRate={0.33}
             />
           </div>
 
@@ -110,13 +125,13 @@ const ContactSectionTailwind = () => {
 
             {/* Content */}
             <div className="relative z-[2] p-[80px] flex flex-col justify-center max-md:p-10 max-[480px]:p-[23px] max-[480px]:h-full max-[480px]:justify-start max-[480px]:pt-[25px]">
-              <h4 className="font-['Noto_Sans_JP'] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+              <h4 className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
                 ご相談・お問合せ
               </h4>
               <Button
-                onClick={openModal}
+                onClick={onContactClick || openModal}
                 variant="ghost"
-                className="bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable'] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
+                className="bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
               >
                 More
               </Button>
@@ -125,8 +140,8 @@ const ContactSectionTailwind = () => {
         </div>
       </div>
 
-      {/* Contact Modal */}
-      <ContactModal isOpen={isModalOpen} onClose={closeModal} />
+      {/* Contact Modal - only show if no external handler */}
+      {!onContactClick && <ContactModal isOpen={isModalOpen} onClose={closeModal} />}
     </section>
     </>
   );

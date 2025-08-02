@@ -1,5 +1,5 @@
 import "./globals.css";
-import CustomCursor from "./components/CustomCursor";
+import CustomCursor from "./components/effects/CustomCursor";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 

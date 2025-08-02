@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useScrollLock } from "../hooks/useScrollLock";
+import { useScrollLock } from "../../hooks/useScrollLock";
 import {
   useTransition,
   useSpring,
@@ -11,19 +11,21 @@ import {
   useSpringRef,
 } from "@react-spring/web";
 // import styles from "./RecruitModal.module.css"; // Replaced with Tailwind classes
-import ContactSectionTailwind from "./ContactSectionTailwind";
-import { Button } from "../../../components/ui/button";
+import ContactSectionTailwind from "../sections/ContactSectionTailwind";
+import { Button } from "../../../../components/ui/button";
 
 interface StaffRecruitModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToEngineer?: () => void;
+  onContactClick?: () => void;
 }
 
 const StaffRecruitModal = ({
   isOpen,
   onClose,
   onSwitchToEngineer,
+  onContactClick,
 }: StaffRecruitModalProps) => {
 
   // ヘッダーの表示/非表示制御
@@ -320,7 +322,7 @@ const StaffRecruitModal = ({
               </div>
 
               {/* Contact Section */}
-              <ContactSectionTailwind />
+              <ContactSectionTailwind onContactClick={onContactClick} />
 
               {/* Others Section */}
               <div className="tw bg-[#E7E7E7] py-20 m-0 max-[480px]:py-[40px] max-[480px]:mt-6 max-[480px]:mb-6 max-[480px]:pb-30">
@@ -329,7 +331,7 @@ const StaffRecruitModal = ({
                     {/* Section Header */}
                     <div className="tw flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0">
                       <div className="tw w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:bg-black"></div>
-                      <h2 className="tw font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
+                      <h2 className="tw font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-black m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]">
                         Others
                       </h2>
                     </div>
@@ -341,17 +343,17 @@ const StaffRecruitModal = ({
 
                       {/* Content */}
                       <div className="tw relative z-[2] p-[80px] flex flex-col justify-center max-md:p-10 max-[480px]:p-[23px] max-[480px]:h-full max-[480px]:justify-start max-[480px]:pt-[25px]">
-                        <h4 className="tw font-['Noto_Sans_JP'] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+                        <h4 className="tw font-['Noto_Sans_JP','Noto_Sans',sans-serif] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
                           正社員・インターン採用
                         </h4>
-                        <p className="tw font-['Noto_Sans_JP'] ml-[-63px] font-bold text-[32px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[28px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[16px] max-[480px]:leading-[20px] max-[480px]:mb-[20px] max-[480px]:ml-0">
+                        <p className="tw font-['Noto_Sans_JP','Noto_Sans',sans-serif] ml-[-63px] font-bold text-[32px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[28px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[16px] max-[480px]:leading-[20px] max-[480px]:mb-[20px] max-[480px]:ml-0">
                           エンジニア
                         </p>
                         {onSwitchToEngineer && (
                           <Button
                             onClick={onSwitchToEngineer}
                             variant="ghost"
-                            className="tw bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable'] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
+                            className="tw bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
                           >
                             More
                           </Button>

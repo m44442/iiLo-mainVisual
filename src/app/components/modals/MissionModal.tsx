@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { useScrollLock } from "../hooks/useScrollLock";
+import { useScrollLock } from "../../hooks/useScrollLock";
 import {
   useTransition,
   useSpring,
@@ -10,17 +10,18 @@ import {
   animated,
   useSpringRef,
 } from "@react-spring/web";
-import MissionSectionWithAnimation from "./MissionSectionWithAnimation";
-import ServiceSectionDiiLo from "./ServiceSectionDiiLo";
-import MissionStatement from "./MissionStatement";
-import ContactSectionTailwind from "./ContactSectionTailwind";
+import MissionSectionWithAnimation from "../MissionSectionWithAnimation";
+import ServiceSectionDiiLo from "../sections/ServiceSectionDiiLo";
+import MissionStatement from "../MissionStatement";
+import ContactSectionTailwind from "../sections/ContactSectionTailwind";
 
 interface MissionModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSwitchToContact?: () => void;
 }
 
-const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
+const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose, onSwitchToContact }) => {
 
   // ヘッダーの表示/非表示制御
   useEffect(() => {
@@ -128,7 +129,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose }) => {
               <MissionStatement />
 
               {/* ContactSectionTailwind */}
-              <ContactSectionTailwind />
+              <ContactSectionTailwind isInModal={true} onContactClick={onSwitchToContact} />
             </div>
           </animated.div>
         ) : null

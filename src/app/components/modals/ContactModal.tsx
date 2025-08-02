@@ -9,18 +9,17 @@ import {
   animated,
   useSpringRef,
 } from "@react-spring/web";
-import { Button } from "../../../components/ui/button";
-import { Input } from "../../../components/ui/input";
-import { Label } from "../../../components/ui/label";
-import { Textarea } from "../../../components/ui/textarea";
-import { useBodyFixed } from "../hooks/useBodyFixed";
+import { Button } from "../../../../components/ui/button";
+import { Input } from "../../../../components/ui/input";
+import { Label } from "../../../../components/ui/label";
+import { Textarea } from "../../../../components/ui/textarea";
+import { useScrollLock } from "../../hooks/useScrollLock";
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
-  const { bodyFixed, setBodyFixed } = useBodyFixed();
   const [formData, setFormData] = useState({
     inquiryType: "service", // "service" or "recruitment"
     firstName: "",
@@ -65,10 +64,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     };
   }, [isOpen]);
 
-  // bodyFixedの制御
-  useEffect(() => {
-    setBodyFixed(isOpen);
-  }, [isOpen, setBodyFixed]);
+  // モーダル表示時の背景スクロール制御
+  useScrollLock(isOpen);
 
   const springApi = useSpringRef();
   const overlaySpring = useSpring({
@@ -120,19 +117,19 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   return (
     <animated.div
       style={overlaySpring}
-      className="tw fixed inset-0 bg-black/60 flex justify-center items-center z-[999999] p-5 backdrop-blur-sm max-[480px]:p-0"
+      className="tw fixed inset-0 bg-black/60 flex justify-center items-center z-[9999999] p-5 backdrop-blur-sm max-[480px]:p-0"
       onClick={onClose}
     >
       {contentTransition((style, item) =>
         item ? (
           <animated.div
             style={style}
-            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1200px] max-h-[90vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[1000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
+            className="tw bg-[#E7E7E7] rounded-2xl w-full max-w-[1200px] max-h-[90vh] overflow-y-auto relative shadow-[0_25px_50px_rgba(0,0,0,0.25)] border border-white/20 font-sans z-[10000000] max-[480px]:rounded-none max-[480px]:max-w-none max-[480px]:w-screen max-[480px]:h-screen max-[480px]:max-h-none"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
-              className="tw absolute top-6 right-6 bg-black/5 border-none text-xl cursor-pointer z-[1000000] text-[#666] w-11 h-11 flex items-center justify-center rounded-full transition-all duration-200 backdrop-blur-[10px] hover:bg-black/10 hover:text-[#333] hover:scale-105 active:scale-95 max-[480px]:top-4 max-[480px]:right-4 max-[480px]:w-8 max-[480px]:h-8 max-[480px]:text-lg"
+              className="tw absolute top-6 right-6 bg-black/5 border-none text-xl cursor-pointer z-[10000001] text-[#666] w-11 h-11 flex items-center justify-center rounded-full transition-all duration-200 backdrop-blur-[10px] hover:bg-black/10 hover:text-[#333] hover:scale-105 active:scale-95 max-[480px]:top-4 max-[480px]:right-4 max-[480px]:w-8 max-[480px]:h-8 max-[480px]:text-lg"
               onClick={onClose}
             >
               ×

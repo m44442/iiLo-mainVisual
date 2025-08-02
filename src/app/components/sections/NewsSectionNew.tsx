@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { HoverButton } from "../../../components/ui/hover-button";
-import MorphingText from "./MorphingText";
+import { HoverButton } from "../../../../components/ui/hover-button";
+import MorphingText from "../effects/MorphingText";
 
 const NewsSectionNew = () => {
   const [startTitleMorphing, setStartTitleMorphing] = useState(false);
@@ -44,7 +44,7 @@ const NewsSectionNew = () => {
           targetText="News"
           speed={60}
           autoStart={startTitleMorphing}
-          className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
+          className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px]"
           chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
           incrementRate={0.4}
         />
@@ -52,28 +52,28 @@ const NewsSectionNew = () => {
 
       <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full">
         <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
             YYYY.MM.DD
           </div>
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
             最新情報タイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイ…
           </div>
         </div>
         <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
         <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
             YYYY.MM.DD
           </div>
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
             最新情報タイトル
           </div>
         </div>
         <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
         <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
             YYYY.MM.DD
           </div>
-          <div className="font-['Noto_Sans_JP'] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
             最新情報タイトル
           </div>
         </div>
@@ -85,7 +85,7 @@ const NewsSectionNew = () => {
           normalText="#000000"
           hoverBg="transparent"
           hoverText="#FFFFFF"
-          className="w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable'] font-medium text-base leading-[26px] flex items-center justify-center border border-transparent hover:border-white max-[480px]:w-[80px] max-[480px]:h-[32px] max-[480px]:rounded-[16px] max-[480px]:text-[11px] max-[480px]:leading-[32px]"
+          className="w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] flex items-center justify-center border border-transparent hover:border-white max-[480px]:w-[80px] max-[480px]:h-[32px] max-[480px]:rounded-[16px] max-[480px]:text-[11px] max-[480px]:leading-[32px]"
         >
           More
         </HoverButton>

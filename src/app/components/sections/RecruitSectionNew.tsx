@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import EngineerRecruitModal from "./EngineerRecruitModal";
-import StaffRecruitModal from "./StaffRecruitModal";
-import { HoverButton } from "../../../components/ui/hover-button";
-import MorphingText from "./MorphingText";
+import EngineerRecruitModal from "../modals/EngineerRecruitModal";
+import StaffRecruitModal from "../modals/StaffRecruitModal";
+import ContactModal from "../modals/ContactModal";
+import { HoverButton } from "../../../../components/ui/hover-button";
+import MorphingText from "../effects/MorphingText";
 
 const RecruitSectionNew = () => {
   const [engineerModalOpen, setEngineerModalOpen] = useState(false);
   const [staffModalOpen, setStaffModalOpen] = useState(false);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
   const [areCardsVisible, setAreCardsVisible] = useState(false);
   const [haveCardsAnimated, setHaveCardsAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
@@ -26,6 +28,13 @@ const RecruitSectionNew = () => {
     setStaffModalOpen(false);
     setEngineerModalOpen(true);
   };
+
+  const openContactModal = () => {
+    setEngineerModalOpen(false);
+    setStaffModalOpen(false);
+    setContactModalOpen(true);
+  };
+
 
   const handleEngineerRecruitClick = () => {
     setEngineerModalOpen(true);
@@ -108,16 +117,16 @@ const RecruitSectionNew = () => {
               <div className="w-2 h-2 bg-black rounded-full mr-[15px]"></div>
               <MorphingText
                 targetText="Recruit"
-                speed={60}
+                speed={50}
                 autoStart={startTitleMorphing}
-                className="font-['General_Sans_Variable'] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl"
+                className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl"
                 chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
-                incrementRate={0.4}
+                incrementRate={0.33}
               />
             </div>
 
             {/* Text content */}
-            <div ref={textRef} className={`absolute w-[900px] h-[200px] left-[calc(50%-900px/2)] top-1 font-['Noto_Sans_JP'] font-normal text-base leading-[27px] text-black max-[480px]:relative max-[480px]:w-[330px] max-[480px]:h-auto max-[480px]:mt-[20px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:left-0 max-[480px]:mx-auto ${
+            <div ref={textRef} className={`absolute w-[900px] h-[200px] left-[calc(50%-900px/2)] top-1 font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black max-[480px]:relative max-[480px]:w-[330px] max-[480px]:h-auto max-[480px]:mt-[20px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:left-0 max-[480px]:mx-auto ${
               !isTextVisible ? '!opacity-0' : ''
             } ${
               isTextVisible ? 'animate-fade-up' : ''
@@ -148,10 +157,10 @@ const RecruitSectionNew = () => {
             }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
-                <h3 className="absolute left-[34px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
+                <h3 className="absolute left-[34px] top-[61px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
                   正社員・インターン採用
                 </h3>
-                <p className="absolute left-[34px] top-[99px] font-['Noto_Sans_JP'] font-bold text-[28px] leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[75px] max-[480px]:text-[22px]">
+                <p className="absolute left-[34px] top-[99px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-bold text-[28px] leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[75px] max-[480px]:text-[22px]">
                   エンジニア
                 </p>
                 <HoverButton
@@ -160,7 +169,7 @@ const RecruitSectionNew = () => {
                   normalText="#000000"
                   hoverBg="#000000"
                   hoverText="#ffffff"
-                  className="absolute left-[35px] top-[268px] w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable'] font-medium text-base leading-[45px] text-center max-[480px]:left-[25px] max-[480px]:top-[150px] max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:text-[14px] max-[480px]:rounded-[30px]"
+                  className="absolute left-[35px] top-[268px] w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[45px] text-center max-[480px]:left-[25px] max-[480px]:top-[150px] max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:text-[14px] max-[480px]:rounded-[30px]"
                 >
                   More
                 </HoverButton>
@@ -177,10 +186,10 @@ const RecruitSectionNew = () => {
             }}>
               <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60"></div>
               <div className="relative z-10 h-full">
-                <h3 className="absolute left-[32px] top-[61px] font-['Noto_Sans_JP'] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
+                <h3 className="absolute left-[32px] top-[61px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-bold text-lg leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[45px] max-[480px]:text-[15px]">
                   アルバイト採用
                 </h3>
-                <p className="absolute left-[32px] top-[99px] font-['Noto_Sans_JP'] font-bold text-[28px] leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[75px] max-[480px]:text-[22px]">
+                <p className="absolute left-[32px] top-[99px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-bold text-[28px] leading-[21px] text-white max-[480px]:left-[25px] max-[480px]:top-[75px] max-[480px]:text-[22px]">
                   DIILOスタッフ
                 </p>
                 <HoverButton
@@ -189,7 +198,7 @@ const RecruitSectionNew = () => {
                   normalText="#000000"
                   hoverBg="#000000"
                   hoverText="#ffffff"
-                  className="absolute left-[32px] top-[268px] w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable'] font-medium text-base leading-[45px] text-center max-[480px]:left-[25px] max-[480px]:top-[150px] max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:text-[14px] max-[480px]:rounded-[30px]"
+                  className="absolute left-[32px] top-[268px] w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[45px] text-center max-[480px]:left-[25px] max-[480px]:top-[150px] max-[480px]:w-[100px] max-[480px]:h-[40px] max-[480px]:text-[14px] max-[480px]:rounded-[30px]"
                 >
                   More
                 </HoverButton>
@@ -204,11 +213,17 @@ const RecruitSectionNew = () => {
         isOpen={engineerModalOpen}
         onClose={() => setEngineerModalOpen(false)}
         onSwitchToStaff={switchToStaffModal}
+        onContactClick={openContactModal}
       />
       <StaffRecruitModal
         isOpen={staffModalOpen}
         onClose={() => setStaffModalOpen(false)}
         onSwitchToEngineer={switchToEngineerModal}
+        onContactClick={openContactModal}
+      />
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
       />
     </>
   );

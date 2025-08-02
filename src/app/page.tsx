@@ -2,7 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { Suspense } from "react";
-import ParticleSystem from "./components/ParticleSystem";
+import ParticleSystem from "./components/effects/ParticleSystem";
 import IiLoCorporateSite from "./components/iiLoCorporateSite";
 export default function Home() {
   return (
