@@ -152,12 +152,12 @@ const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                   {newsItem && (
                     <>
                       {/* Date */}
-                      <div className="tw text-[#898989] font-normal text-[14px] leading-[24px] font-['Noto_Sans_JP'] mb-4 max-[480px]:text-[12px] max-[480px]:leading-[20px]">
+                      <div className="tw text-[#898989] font-normal text-[14px] leading-[24px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] mb-4 max-[480px]:text-[12px] max-[480px]:leading-[20px]">
                         {newsItem.date}
                       </div>
 
                       {/* Title */}
-                      <h1 className="tw text-black font-medium text-[26px] leading-[32px] font-['Noto_Sans_JP'] m-0 max-[480px]:text-[20px] max-[480px]:leading-[24px]">
+                      <h1 className="tw text-black font-medium text-[26px] leading-[32px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] m-0 max-[480px]:text-[20px] max-[480px]:leading-[24px]">
                         {newsItem.title}
                       </h1>
                     </>
@@ -187,11 +187,11 @@ const NewsDetailModal: React.FC<NewsDetailModalProps> = ({
                       {detailContent?.content.map((paragraph, index) => (
                         <div key={index}>
                           {paragraph === "見出し" ? (
-                            <h3 className="tw text-black font-normal text-[18px] leading-[27px] font-['Noto_Sans_JP'] mt-8 mb-4 max-[480px]:text-[16px] max-[480px]:mt-6 max-[480px]:mb-3">
+                            <h3 className="tw text-black font-normal text-[18px] leading-[27px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] mt-8 mb-4 max-[480px]:text-[16px] max-[480px]:mt-6 max-[480px]:mb-3">
                               見出し
                             </h3>
                           ) : (
-                            <p className="tw text-black font-normal text-[16px] leading-[27px] font-['Noto_Sans_JP'] max-[480px]:text-[14px] max-[480px]:leading-[24px]">
+                            <p className="tw text-black font-normal text-[16px] leading-[27px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] max-[480px]:text-[14px] max-[480px]:leading-[24px]">
                               {paragraph}
                             </p>
                           )}

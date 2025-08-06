@@ -213,10 +213,10 @@ const NewsModal: React.FC<NewsModalProps> = ({ isOpen, onClose, onNewsItemClick 
                               }`}
                               onClick={() => onNewsItemClick({ id: item.id, date: item.date, title: item.title })}
                             >
-                              <div className="text-[#898989] font-normal text-[13px] leading-[22px] font-['Noto_Sans_JP'] mb-2 max-[480px]:text-[13px] max-[480px]:leading-[20px] max-[480px]:mb-1 max-[480px]:mr-16">
+                              <div className="text-[#898989] font-normal text-[13px] leading-[22px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] mb-2 max-[480px]:text-[13px] max-[480px]:leading-[20px] max-[480px]:mb-1 max-[480px]:mr-16">
                                 {item.date}
                               </div>
-                              <div className="text-black font-normal text-[15px] leading-[24px] font-['Noto_Sans_JP'] max-[480px]:text-[15px] max-[480px]:leading-[22px] break-words word-wrap break-word max-[480px]:mr-16">
+                              <div className="text-black font-normal text-[15px] leading-[24px] font-['Noto_Sans_JP','Noto_Sans',sans-serif] max-[480px]:text-[15px] max-[480px]:leading-[22px] break-words word-wrap break-word max-[480px]:mr-16">
                                 {item.title}
                               </div>
                             </div>

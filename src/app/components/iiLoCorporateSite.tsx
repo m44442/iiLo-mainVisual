@@ -127,7 +127,10 @@ const IiLoCorporateSite = () => {
       <RecruitSectionNew />
       <ContactSectionTailwind />
       <CompanySectionNew />
-      <NewsSectionNew onNewsMoreClick={() => setNewsModalOpen(true)} />
+      <NewsSectionNew 
+        onNewsMoreClick={() => setNewsModalOpen(true)}
+        onNewsItemClick={handleNewsItemClick}
+      />
       <Footer />
 
       {/* Mission Modal */}

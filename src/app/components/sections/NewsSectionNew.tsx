@@ -6,11 +6,31 @@ import MorphingText from "../effects/MorphingText";
 
 interface NewsSectionNewProps {
   onNewsMoreClick?: () => void;
+  onNewsItemClick?: (newsItem: { id: number; date: string; title: string }) => void;
 }
 
-const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick }) => {
+const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick, onNewsItemClick }) => {
   const [startTitleMorphing, setStartTitleMorphing] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
+
+  // Display news data (first 3 items from the news list)
+  const displayNewsItems = [
+    {
+      id: 1,
+      date: "YYYY.MM.DD",
+      title: "歯科クリニック特化LINEマーケティングSaaS「DIILo」をリリースいたしました",
+    },
+    {
+      id: 2,
+      date: "YYYY.MM.DD", 
+      title: "コーポレートサイト公開しました",
+    },
+    {
+      id: 3,
+      date: "YYYY.MM.DD",
+      title: "タイトル",
+    },
+  ];
 
   useEffect(() => {
     if (!titleRef.current) return;
@@ -55,32 +75,24 @@ const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick }) => {
       </div>
 
       <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full">
-        <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
-            YYYY.MM.DD
+        {displayNewsItems.map((item, index) => (
+          <div key={item.id}>
+            <div 
+              className="flex items-center py-5 max-[480px]:py-3 cursor-pointer"
+              onClick={() => onNewsItemClick && onNewsItemClick(item)}
+            >
+              <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
+                {item.date}
+              </div>
+              <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px] truncate">
+                {item.title}
+              </div>
+            </div>
+            {index < displayNewsItems.length - 1 && (
+              <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
+            )}
           </div>
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
-            最新情報タイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイトルタイ…
-          </div>
-        </div>
-        <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
-        <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
-            YYYY.MM.DD
-          </div>
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
-            最新情報タイトル
-          </div>
-        </div>
-        <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
-        <div className="flex items-center py-5 max-[480px]:py-3">
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white mr-10 whitespace-nowrap min-w-[90px] max-[480px]:text-[13px] max-[480px]:leading-[22px] max-[480px]:min-w-[70px] max-[480px]:mr-2">
-            YYYY.MM.DD
-          </div>
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[22px] !text-white flex-1 max-[480px]:text-[13px] max-[480px]:leading-[22px]">
-            最新情報タイトル
-          </div>
-        </div>
+        ))}
         <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
       </div>
       <div className="text-left mt-10 pl-[414px] max-[480px]:pl-[19px] max-[480px]:mt-4">
