@@ -4,7 +4,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { HoverButton } from "../ui/hover-button";
 import MorphingText from "../effects/MorphingText";
 
-const NewsSectionNew = () => {
+interface NewsSectionNewProps {
+  onNewsMoreClick?: () => void;
+}
+
+const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick }) => {
   const [startTitleMorphing, setStartTitleMorphing] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +89,8 @@ const NewsSectionNew = () => {
           normalText="#000000"
           hoverBg="transparent"
           hoverText="#FFFFFF"
-          className="w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] flex items-center justify-center border border-transparent hover:border-white max-[480px]:w-[80px] max-[480px]:h-[32px] max-[480px]:rounded-[16px] max-[480px]:text-[11px] max-[480px]:leading-[32px]"
+          onClick={onNewsMoreClick}
+          className="w-[120px] h-[45px] rounded-[35px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] flex items-center justify-center border border-transparent hover:border-white max-[480px]:w-[80px] max-[480px]:h-[32px] max-[480px]:rounded-[16px] max-[480px]:text-[11px] max-[480px]:leading-[32px] cursor-pointer"
         >
           More
         </HoverButton>
