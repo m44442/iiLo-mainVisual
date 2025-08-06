@@ -95,7 +95,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
       <section
         id="service"
-        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-220"
+        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-10"
         style={
           isInModal
             ? {
