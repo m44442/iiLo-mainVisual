@@ -297,7 +297,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
 
           {/* Moreボタン */}
           <div
-            className="tw absolute md:w-[100px] md:h-[35px] md:left-[75px] md:top-[233px] max-md:w-[80px] max-md:h-[35px] max-md:left-[46px] max-md:top-[273px]"
+            className="tw absolute md:w-[100px] md:h-[35px] md:left-[75px] md:top-[233px] max-md:w-[80px] max-md:h-[35px] max-md:left-[46px] max-md:top-[273px] duration-600"
             style={{
               ...(isDesktop && {
                 width: "100px",
@@ -314,21 +314,9 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
             }}
           >
             <Button
-              variant="pagetop"
-              size="lg"
-              className="tw w-full h-full max-md:text-[13px] max-md:rounded-[25px] max-md:font-medium max-md:leading-[22px] max-md:bg-black max-md:text-white"
-              style={{
-                ...(!isDesktop && {
-                  background: "#000000",
-                  borderRadius: "25px",
-                  fontFamily: "'General Sans Variable'",
-                  fontWeight: "500",
-                  fontSize: "13px",
-                  lineHeight: "22px",
-                  textAlign: "center",
-                  color: "#FFFFFF",
-                }),
-              }}
+              type="button"
+              variant="ghost"
+              className="tw bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base w-full h-full"
             >
               More
             </Button>
