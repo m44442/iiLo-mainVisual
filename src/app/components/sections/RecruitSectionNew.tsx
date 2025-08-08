@@ -108,7 +108,7 @@ const RecruitSectionNew = () => {
     <>
       <section
         id="recruit"
-        className="font-sans w-full pt-[220px] pb-[220px] px-6 bg-[#E7E7E7] m-0 max-[480px]:pt-[30px] max-[480px]:pb-[30px] max-[480px]:px-[23px] max-[480px]:w-full"
+        className="font-sans w-full pt-[200px] pb-[220px] px-6 bg-[#E7E7E7] m-0 max-[480px]:pt-[30px] max-[480px]:pb-[30px] max-[480px]:px-[23px] max-[480px]:w-full"
       >
         <div className="max-w-[1400px] mx-auto">
           <div className="relative h-[260px] mb-[60px] max-[480px]:h-auto max-[480px]:mb-[30px] max-[480px]:mt-[50px]">
@@ -117,7 +117,7 @@ const RecruitSectionNew = () => {
               <div className="w-2 h-2 bg-black rounded-full mr-[15px]"></div>
               <MorphingText
                 targetText="Recruit"
-                speed={50}
+                speed={40}
                 autoStart={startTitleMorphing}
                 className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-black max-[480px]:text-3xl"
                 chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"

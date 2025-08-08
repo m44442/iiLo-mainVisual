@@ -78,7 +78,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
       },
       {
         threshold: 0,
-        rootMargin: '0px 0px 200px 0px',
+        rootMargin: '0px 0px 500px 0px',
       }
     );
 
@@ -95,7 +95,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
       <section
         id="service"
-        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-100"
+        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-120"
         style={
           isInModal
             ? {
@@ -115,14 +115,14 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         }
       >
         {/* Service タイトル */}
-        <div className={`absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-8 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-10 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
           <MorphingText
             targetText="Service"
-            speed={50}
+            speed={40}
             autoStart={startMorphing}
             className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[32px] leading-[50px] text-white max-md:text-3xl"
-            chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
+            chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!;f"
             incrementRate={0.33}
           />
         </div>
@@ -130,7 +130,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         {/* DIILoプロダクトエリア */}
         <div
           ref={cardRef}
-          className="tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-8"
+          className="tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-2"
           style={{
             ...(isDesktop && {
               width: "800px",

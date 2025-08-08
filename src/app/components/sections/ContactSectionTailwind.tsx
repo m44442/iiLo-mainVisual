@@ -99,7 +99,7 @@ const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSe
             <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
             <MorphingText
               targetText="Contact"
-              speed={50}
+              speed={40}
               autoStart={startTitleMorphing || isInModal}
               className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px] w-[110px] max-[480px]:w-[85px]"
               chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
