@@ -29,10 +29,8 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
   useEffect(() => {
     const checkDevice = () => {
       const width = window.innerWidth;
-      console.log("📱 Device check - window.innerWidth:", width);
       setIsDesktop(width >= 768);
       setIsMobile(width <= 480);
-      console.log("📱 Device state:", { isDesktop: width >= 768, isMobile: width <= 480 });
     };
 
     checkDevice();
@@ -49,17 +47,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log("🔥 Text intersection Debug:", {
-            isIntersecting: entry.isIntersecting,
-            hasTextAnimated: hasTextAnimated,
-            isMobile: isMobile,
-            isDesktop: isDesktop,
-            boundingClientRect: entry.boundingClientRect,
-            intersectionRatio: entry.intersectionRatio,
-            target: entry.target.className
-          });
           if (entry.isIntersecting) {
-            console.log("✅ Text fadeup triggered");
             // テキストアニメーションとタイトルモーフィングをほぼ同時に発動
             setHasTextAnimated(true);
             setTimeout(() => {

@@ -1,293 +1,131 @@
-## 🚀 主要機能
+# iiLo メインビジュアル - 技術仕様書
 
-- **Three.js背景**: 100,000個のパーティクルがマウスとスクロールに反応
-- **6つのセクション構成**: Mission, Service, News, Recruit, Company, Contact
-- **統一されたボタン**: HoverButtonコンポーネントで色変化アニメーション
-- **フルスクリーンモーダル**: React Springを使ったお問い合わせフォーム
-- **レスポンシブ対応**: PC 1728px基準、モバイル最適化済み
-- **WebGLシェーダー**: カスタム頂点・フラグメントシェーダーで描画最適化
+Next.js 14 + Three.js による企業サイト。WebGLパーティクルシステムとコンポーネント統一化を実装。
 
-## 🛠 技術スタック
+## 実装概要
 
-- **フレームワーク**: Next.js 14.0.4 + TypeScript
-- **3Dグラフィックス**: Three.js, React Three Fiber, React Three Drei
-- **アニメーション**: GSAP, React Spring
-- **スタイリング**: Tailwind CSS 4.1.10
-- **UIコンポーネント**: shadcn/ui (Radix UI primitives)
-- **アイコン**: Lucide React
+- **パーティクル描画**: 100,000個のパーティクル、カスタムシェーダーによるGPU処理
+- **レイアウト統一**: 全セクションで `left-[120px]` タイトル位置、`max-w-[1728px]` コンテナ幅に統一
+- **コンポーネント標準化**: HoverButton で全ボタンの UI/UX を統一、shadcn/ui (Button, Input, Textarea, Dialog, Label) 使用
+- **アニメーション最適化**: GSAP Timeline + Intersection Observer による負荷軽減
+- **フォーム処理**: React Spring による 60fps アニメーションモーダル
 
-## 📁 詳細なファイル構成
+## コンポーネント構成と編集対象
 
+### `/components/effects/` - 3D・アニメーション処理
+- **ParticleSystem.tsx**: WebGLシェーダー処理、パフォーマンス調整時に編集
+  - `particleNumber: 100000` - パーティクル数調整
+  - `lerpFactor: 0.05` - マウス追従の滑らかさ
+  - モバイル対応時は `const isMobile` 条件分岐を調整
+- **MorphingText.tsx**: テキストアニメーション、文字表示の調整時に編集
+  - `speed: 50` - アニメーション速度
+  - `chars` - ランダム表示文字セット
+- **CustomCursor.tsx**: カーソル見た目変更時のみ編集
+
+### `/components/sections/` - メインコンテンツ（縦スクロール順）
+全セクション共通レイアウト規則:
+- タイトル位置: `left-[120px]` (PC) / `ml-6` (Mobile)  
+- コンテナ: `max-w-[1728px] mx-auto`
+- ボタン: HoverButton使用必須
+
+1. **MissionSectionWithAnimation.tsx**: トップのヒーローセクション
+   - MorphingTextで「AI-POWERED BUSINESS TRANSFORMATION」表示
+   - 背景: Three.jsパーティクル、白背景
+   
+2. **ServiceSectionDiiLo.tsx**: プロダクト「DIILo」紹介セクション  
+   - 製品カード中央配置、背景: 黒
+   - 製品説明・機能説明、「More」ボタン
+   
+3. **NewsSectionNew.tsx**: ニュース・お知らせセクション
+   - 最新情報表示、背景: 白
+   - 「More」ボタンでニュース詳細へ
+   
+4. **RecruitSectionNew.tsx**: 採用情報セクション
+   - 求人案内、背景: 黒
+   - 採用メッセージ・応募ボタン
+   
+5. **CompanySectionNew.tsx**: 会社概要セクション  
+   - 企業情報・沿革、背景: 白
+   - 会社詳細への導線
+   
+6. **ContactSectionTailwind.tsx**: お問い合わせセクション
+   - ContactModal呼び出しボタン、背景: 黒
+   - 連絡先情報表示
+
+### `/components/modals/` - モーダル処理
+- **ContactModal.tsx**: フォーム項目変更時に編集
+  - フィールド追加時は `formData` state と JSX両方を更新
+  - アニメーション変更は `useChain` タイミング調整
+
+### `/components/ui/` - 共通UIコンポーネント  
+- **hover-button.tsx**: 全セクションのボタン統一、色・アニメーション変更時に編集
+  - `normalBg`, `hoverBg` - ボタン色設定
+  - 変更時は全セクションに影響するため注意
+
+## パフォーマンス考慮点
+
+### Three.js パーティクルシステム
+- **レンダリング**: RawShaderMaterial でブラウザ最適化バイパス
+- **モバイル対応**: `window.innerWidth < 768` でパーティクルサイズ調整
+- **メモリ管理**: MeshSurfaceSampler による効率的頂点サンプリング
+- **インタラクション**: lerp補間 (`lerpFactor: 0.05`) でマウス追従の調整
+
+### アニメーション最適化  
+- **GSAP**: `power3.out`, `power1.inOut` イージング、Timeline による同期制御
+- **監視**: Intersection Observer で viewport 外要素の処理停止
+- **描画**: `useFrame` 60fps制御、`uTime` uniform による GPU 時間管理
+
+## 技術的実装詳細
+
+### WebGL シェーダー実装
+```glsl
+// 頂点シェーダー: Simplex noise + マウスインタラクション
+morphing.x = snoise(normalize(morphing.xy)) * sin(morphing.y + uTime * PI);
+// マウス範囲内での引力・斥力計算
+float attraction = strength * 0.8 * sin(uTime * PI * 2.0 + distanceToMouse);
 ```
-プロジェクトルート/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   │   ├── effects/           # 3D エフェクトとアニメーション
-│   │   │   │   ├── ParticleSystem.tsx    # メイン3Dパーティクルシステム
-│   │   │   │   ├── MorphingText.tsx      # テキストモーフィングアニメーション
-│   │   │   │   └── CustomCursor.tsx      # カスタムカーソルコンポーネント
-│   │   │   │
-│   │   │   ├── modals/            # モーダル関連
-│   │   │   │   └── ContactModal.tsx      # お問い合わせモーダル
-│   │   │   │
-│   │   │   ├── sections/          # メインページのセクション
-│   │   │   │   ├── MissionSectionWithAnimation.tsx    # ミッションセクション（ヒーロー）
-│   │   │   │   ├── ServiceSectionDiiLo.tsx           # サービスセクション（DIILo紹介）
-│   │   │   │   ├── NewsSectionNew.tsx                # ニュースセクション
-│   │   │   │   ├── RecruitSectionNew.tsx             # 採用情報セクション
-│   │   │   │   ├── CompanySectionNew.tsx             # 会社概要セクション
-│   │   │   │   └── ContactSectionTailwind.tsx        # コンタクトセクション
-│   │   │   │
-│   │   │   ├── three/             # Three.js 関連
-│   │   │   │   └── ThreeCanvas.tsx        # Three.js キャンバス設定
-│   │   │   │
-│   │   │   └── ui/                # shadcn/ui コンポーネント
-│   │   │       ├── button.tsx             # 基本ボタンコンポーネント
-│   │   │       ├── dialog.tsx             # ダイアログコンポーネント
-│   │   │       ├── hover-button.tsx       # カスタムホバーボタン
-│   │   │       ├── input.tsx              # 入力フィールドコンポーネント
-│   │   │       ├── label.tsx              # ラベルコンポーネント
-│   │   │       └── textarea.tsx           # テキストエリアコンポーネント
-│   │   │
-│   │   ├── hooks/                 # カスタムReactフック
-│   │   │   ├── useScrollLock.ts           # スクロールロック機能
-│   │   │   └── useBodyFixed.ts            # body要素の固定機能
-│   │   │
-│   │   ├── globals.css            # グローバルスタイル
-│   │   ├── layout.tsx             # ルートレイアウト
-│   │   └── page.tsx               # メインページ
-│   │
-│   └── lib/
-│       └── utils.ts               # ユーティリティ関数
-│
-├── components.json                # shadcn/ui 設定ファイル
-├── package.json                   # プロジェクト依存関係
-├── tailwind.config.js            # Tailwind CSS 設定
-└── tsconfig.json                 # TypeScript 設定
+
+### React Spring アニメーション連携
+```typescript
+// チェーンアニメーション設定
+useChain(isOpen ? [springApi, transApi] : [transApi, springApi], [0, isOpen ? 0.15 : 0.6]);
 ```
 
-## 🎨 コンポーネント詳細
+### レスポンシブ実装パターン
+```typescript  
+// デバイス別パーティクル最適化
+const baseSize = isMobile ? 1.5 : 2.0;
+```
 
-### メインセクション
+## 依存関係・バージョン
 
-#### 1. **MissionSectionWithAnimation.tsx** 
-- **役割**: ヒーローセクション、ミッションステートメント
-- **機能**: MorphingTextエフェクト、スクロール連動アニメーション
-- **レイアウト**: フルスクリーン、タイトル位置 `left-[120px]`
-
-#### 2. **ServiceSectionDiiLo.tsx**
-- **役割**: プロダクト（DIILo）の紹介
-- **機能**: フルワイドレイアウト、製品カードの中央配置
-- **レイアウト**: `max-w-[1728px] mx-auto` で中央揃え
-
-#### 3. **NewsSectionNew.tsx**
-- **役割**: ニュースと更新情報の表示
-- **機能**: HoverButtonを使用、統一されたタイトル配置
-
-#### 4. **RecruitSectionNew.tsx**
-- **役割**: 採用情報
-- **機能**: HoverButtonを使用、レスポンシブ対応
-
-#### 5. **CompanySectionNew.tsx**
-- **役割**: 会社概要
-- **機能**: HoverButtonを使用、統一されたレイアウト
-
-#### 6. **ContactSectionTailwind.tsx**
-- **役割**: お問い合わせセクション
-- **機能**: ContactModalの呼び出し、HoverButtonを使用
-
-### エフェクト・アニメーション
-
-#### **ParticleSystem.tsx**
-- **機能**: 100,000個以上のパーティクル制御
-- **特徴**: 
-  - カスタムWebGLシェーダー（頂点・フラグメントシェーダー）
-  - ボックス⇔球体間のモーフィング
-  - マウスインタラクション（引力・斥力効果）
-  - スクロールベースのスケーリング
-  - モバイル最適化（パーティクル数削減）
-
-#### **MorphingText.tsx**
-- **機能**: 文字単位でのテキストモーフィング
-- **プロパティ**:
-  - `targetText`: 最終表示テキスト
-  - `speed`: アニメーション速度（デフォルト: 50ms）
-  - `chars`: ランダム文字セット
-  - `incrementRate`: 変化速度（デフォルト: 1/3）
-
-#### **CustomCursor.tsx**
-- **機能**: インタラクティブカスタムカーソル
-- **反応要素**: ボタン、リンク、クリック可能要素
-
-### モーダル
-
-#### **ContactModal.tsx**
-- **機能**: お問い合わせフォームモーダル
-- **使用shadcn/uiコンポーネント**:
-  - `Input` - 入力フィールド
-  - `Textarea` - テキストエリア
-  - `Button` - 送信ボタン
-- **特徴**:
-  - React Spring による高度なアニメーション
-  - スクロールロック機能
-  - レスポンシブデザイン対応
-  - フォームバリデーション
-
-## 🧩 shadcn/ui コンポーネント使用状況
-
-### 設定ファイル: `components.json`
 ```json
-{
-  "style": "new-york",           // デザインスタイル
-  "rsc": true,                   // React Server Components対応
-  "tailwind": {
-    "baseColor": "neutral",      // ベースカラー
-    "cssVariables": true         // CSS変数使用
-  },
-  "aliases": {
-    "ui": "@/app/components/ui"  # UI コンポーネントパス
-  }
-}
+"next": "14.0.4",
+"three": "^0.159.0", 
+"@react-three/fiber": "^8.15.12",
+"gsap": "^3.13.0",
+"tailwindcss": "^4.1.10"
 ```
 
-### 使用中のshadcn/uiコンポーネント
+## デプロイ設定
 
-#### **Button (`src/app/components/ui/button.tsx`)**
-- **使用箇所**: ContactModal, 各セクション
-- **バリエーション**: `default`, `destructive`, `outline`, `secondary`, `ghost`, `link`
-- **カスタマイズ**: HoverButtonで拡張
+- **ビルド**: `next build` - 静的最適化有効
+- **型チェック**: TypeScript strict mode
+- **Lint**: ESLint Next.js rules
 
-#### **HoverButton (`src/app/components/ui/hover-button.tsx`)**
-- **基本**: Buttonコンポーネントを拡張
-- **機能**: カスタムホバーステート、色変更アニメーション
-- **プロパティ**:
-  - `normalBg`: 通常時背景色
-  - `normalText`: 通常時テキスト色
-  - `hoverBg`: ホバー時背景色
-  - `hoverText`: ホバー時テキスト色
+## 保守・拡張時の注意点
 
-#### **Dialog (`src/app/components/ui/dialog.tsx`)**
-- **使用箇所**: モーダルシステムの基盤
-- **機能**: オーバーレイ、スクロール管理
+### 破壊的変更リスク
+- **ParticleSystem.tsx**: シェーダーコード変更時のGPUコンパチビリティ
+- **HoverButton**: 全セクション共通のため影響範囲大
+- **ContactModal**: React Spring deps変更でアニメーション破綻リスク
 
-#### **Input (`src/app/components/ui/input.tsx`)**
-- **使用箇所**: ContactModal フォームフィールド
-- **スタイル**: カスタムボーダー、レスポンシブサイズ
-
-#### **Textarea (`src/app/components/ui/textarea.tsx`)**
-- **使用箇所**: ContactModal お問い合わせ内容
-- **機能**: リサイズ無効化、高さ固定
-
-#### **Label (`src/app/components/ui/label.tsx`)**
-- **使用箇所**: フォームラベル（必要に応じて）
-
-## 🎯 レイアウトシステム
-
-### デスクトップレイアウト
-- **コンテナ幅**: `max-w-[1728px]` 中央配置
-- **タイトル位置**: `left-[120px]` で統一
-- **セクション高さ**: `min-h-screen` または固定高さ
-
-### レスポンシブ対応
-- **ブレークポイント**: `md:` (768px以上)
-- **モバイル**: フル幅、パディング調整
-- **タッチ対応**: ボタンサイズ最適化
-
-## 🚀 開発環境セットアップ
-
-### 必要環境
-- Node.js 18.0 以上
-- npm または yarn
-
-### インストール手順
-
-1. **リポジトリクローン**
-```bash
-git clone <repository-url>
-cd iilo-mainvisual
-```
-
-2. **依存関係インストール**
-```bash
-npm install
-```
-
-3. **開発サーバー起動**
-```bash
-npm run dev
-```
-
-4. **ブラウザでアクセス**
-http://localhost:3000
-
-### 本番ビルド
-
-```bash
-npm run build
-npm start
-```
-
-## 🔧 開発コマンド
-
-- `npm run dev` - 開発サーバー起動
-- `npm run build` - 本番ビルド
-- `npm start` - 本番サーバー起動
-- `npm run lint` - ESLint実行
-
-## 📱 パフォーマンス最適化
-
-### モバイル対応
-- **パーティクル数削減**: デバイス検出による最適化
-- **スムーズ補間**: マウス移動のlerp処理
-- **Intersection Observer**: ビューポート内アニメーションのみ
-- **コンポーネントメモ化**: 不要な再レンダリング防止
-
-### アニメーション最適化
-- **GSAP タイムライン**: 効率的なアニメーション管理
-- **CSS Transform**: GPU アクセラレーション活用
-- **RequestAnimationFrame**: 滑らかなフレームレート
-
-## 🎨 デザインシステム
-
-### カラーパレット
-- **プライマリ**: #000000 (黒)
-- **セカンダリ**: #FFFFFF (白)
-- **グレー**: #E7E7E7 (背景), #898989 (ボーダー)
-
-### タイポグラフィ
-- **英文**: GeneralSansVariable (システムフォントフォールバック)
-- **和文**: NotoSansJP
-- **レスポンシブ**: クエリ別サイズ調整
-
-### スペーシング
-- **セクション間**: 統一マージン
-- **コンテナ内**: 一貫したパディング
-- **レスポンシブ**: ブレークポイント別調整
-
-## 🔍 引き継ぎ時の注意点
-
-### 重要なファイル
-1. **ParticleSystem.tsx**: WebGL シェーダー含む複雑な3D処理
-2. **ContactModal.tsx**: React Spring の複雑なアニメーション
-3. **HoverButton.tsx**: 全セクションで使用される統一UIコンポーネント
-
-### 開発時の注意
-- **shadcn/ui更新**: `components.json` の設定維持
-- **Tailwind CSS**: `tw` プレフィックス使用箇所に注意
-- **TypeScript**: strict モード有効、型定義必須
-
-### パフォーマンス監視
-- **3Dパーティクル**: フレームレート監視必要
-- **モーダルアニメーション**: メモリリーク注意
-- **レスポンシブ**: 各デバイスでの表示確認必要
-
-## 📞 サポート
-
-技術的な質問や問題については、コードベースの構造とこのドキュメントを参照してください。
+### パフォーマンス監視対象
+- Three.js レンダリングFPS（dev tools Performance tab）
+- モバイルでのパーティクル描画負荷
+- モーダルアニメーション中のメモリ使用量
 
 ---
 
-**開発チーム**: iiLo Development Team  
-**最終更新**: 2025年1月  
-**Next.js**: 14.0.4 / **TypeScript**: 5.3.3
+**技術責任者**: 開発チーム  
+**Next.js**: 14.0.4 / **Three.js**: 0.159.0
