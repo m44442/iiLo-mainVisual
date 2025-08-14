@@ -2,17 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useScrollLock } from "../../hooks/useScrollLock";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import { Button } from "../ui/button";
+import { HoverButton } from "../ui/hover-button";
 import ContactModal from "../modals/ContactModal";
 import MorphingText from "../effects/MorphingText";
 
@@ -89,26 +79,24 @@ const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSe
     };
   }, [hasCardAnimated, isInModal]);
   return (
-    <>
-      
+    <>   
       <section className="font-sans bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
-      <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px]">
-        <div className="flex items-start gap-10 max-w-[1200px] mx-auto max-md:flex-col max-md:gap-6 max-[480px]:flex-col max-[480px]:gap-[20px]">
-          {/* Section Header */}
-          <div className={`flex items-center -ml-40 flex-shrink-0 mt-5 max-md:ml-0 max-md:mt-0 max-[480px]:ml-[19px] max-[480px]:mt-0 transition-opacity duration-500 ease-in-out min-w-[140px] max-[480px]:min-w-[100px] ${startTitleMorphing || isInModal ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
-            <MorphingText
-              targetText="Contact"
-              speed={40}
-              autoStart={startTitleMorphing || isInModal}
-              className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px] w-[110px] max-[480px]:w-[85px]"
-              chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
-              incrementRate={0.33}
-            />
-          </div>
+        {/* Section Header */}
+        <div className={`flex items-center ml-[120px] mb-10 max-md:ml-[30px] max-md:mb-6 max-[480px]:ml-[80px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing || isInModal ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
+          <MorphingText
+            targetText="Contact"
+            speed={40}
+            autoStart={startTitleMorphing || isInModal}
+            className="font-['General_Sans_Variable','General_Sans',sans-serif] font-semibold text-[30px] leading-[45px] text-white m-0 max-[480px]:text-3xl max-[480px]:leading-[38px] w-[110px] max-[480px]:w-[85px]"
+            chars="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=<>?!"
+            incrementRate={0.33}
+          />
+        </div>
 
-          {/* Contact Card */}
-          <div ref={cardRef} className="bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden flex-1 p-[30px] mt-[35px] max-md:mt-0 max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0" style={{
+        {/* Contact Card */}
+        <div className="max-w-[1200px] mx-auto px-[164px] max-md:px-6 max-[480px]:px-[23px] md:-mt-16 max-md:mt-0">
+          <div ref={cardRef} className="bg-[url('/Mask%20group.svg')] bg-cover bg-center rounded-xl relative overflow-hidden p-[30px] max-md:mx-2 max-md:max-w-none max-md:h-[300px] max-[480px]:w-[330px] max-[480px]:h-[180px] max-[480px]:ml-0 max-[480px]:mr-auto max-[480px]:mt-[20px] max-[480px]:rounded-[12px] max-[480px]:p-0" style={{
             clipPath: (isCardVisible || isInModal) ? 'inset(0% 0% 0% 0%)' : 'inset(0% 100% 0% 0%)',
             transition: isCardVisible ? 'clip-path 1.5s var(--ease-explosive)' : 'none',
             willChange: 'clip-path',
@@ -123,21 +111,23 @@ const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSe
               <h4 className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] ml-[-63px] font-medium text-[28px] leading-[21px] text-white m-0 mb-[90px] max-md:text-[24px] max-md:leading-[28px] max-md:mb-[30px] max-[480px]:text-[14px] max-[480px]:leading-[18px] max-[480px]:mb-[20px] max-[480px]:ml-0">
                 ご相談・お問合せ
               </h4>
-              <Button
+              <HoverButton
                 onClick={onContactClick || openModal}
-                variant="ghost"
-                className="bg-[#E7E7E7] text-black border-none ml-[-63px] rounded-[35px] py-3 px-8 font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[26px] cursor-pointer transition-all duration-300 ease-in-out w-[150px] h-[45px] flex items-center justify-center hover:bg-transparent hover:text-white hover:border hover:border-white max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[14px] max-[480px]:bg-white max-[480px]:self-start max-[480px]:ml-0"
+                normalBg="#ffffff"
+                normalText="#000000"
+                hoverBg="#000000"
+                hoverText="#ffffff"
+                className="ml-[-63px] rounded-[35px] w-[150px] h-[45px] font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-base leading-[45px] text-center cursor-pointer max-md:w-[120px] max-md:h-10 max-md:text-sm max-[480px]:w-[50px] max-[480px]:h-[28px] max-[480px]:text-[10px] max-[480px]:rounded-[25px] max-[480px]:ml-0"
               >
                 More
-              </Button>
+              </HoverButton>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Contact Modal - only show if no external handler */}
       {!onContactClick && <ContactModal isOpen={isModalOpen} onClose={closeModal} />}
-    </section>
     </>
   );
 };

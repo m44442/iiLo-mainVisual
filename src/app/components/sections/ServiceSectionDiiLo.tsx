@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import { HoverButton } from "../ui/hover-button";
 import MorphingText from "../effects/MorphingText";
 
 interface ServiceSectionDiiLoProps {
@@ -95,7 +96,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
     <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
       <section
         id="service"
-        className="tw font-sans relative bg-black w-full min-h-screen md:w-[1728px] md:h-[900px] md:left-[calc(50%-864px)] max-md:left-0 max-md:pb-120"
+        className="tw font-sans relative bg-black w-full min-h-screen md:h-[900px] max-md:pb-120"
         style={
           isInModal
             ? {
@@ -103,19 +104,16 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
                 background: "#000000",
                 transform: isMobile ? "none" : "scale(0.85)",
                 transformOrigin: "center center",
-                left: isMobile ? "auto" : "50%",
-                marginLeft: isMobile ? "0" : "-864px",
-                width: isMobile ? "100%" : undefined,
               }
             : {
                 position: "relative",
                 background: "#000000",
-                ...(isDesktop && { left: "calc(50% - 864px)" }),
               }
         }
       >
+        <div className="max-w-[1728px] mx-auto relative h-full">
         {/* Service タイトル */}
-        <div className={`absolute left-[263px] top-[150px] flex items-center md:left-[263px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-10 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute left-[120px] top-[150px] flex items-center md:left-[120px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-10 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
           <MorphingText
             targetText="Service"
@@ -130,12 +128,11 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
         {/* DIILoプロダクトエリア */}
         <div
           ref={cardRef}
-          className="tw absolute md:left-[490px] md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-2"
+          className="tw absolute md:left-1/2 md:-translate-x-1/2 md:top-[162px] md:w-[800px] md:h-[310px] max-md:relative max-md:left-0 max-md:top-0 max-md:w-full max-md:ml-2 max-md:mt-2"
           style={{
             ...(isDesktop && {
               width: "800px",
               height: "310px",
-              left: "490px",
               top: "162px",
             }),
             ...(!isDesktop && {
@@ -313,13 +310,16 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            <Button
+            <HoverButton
               type="button"
-              variant="ghost"
-              className="tw bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base w-full h-full"
+              normalBg="#000000"
+              normalText="#ffffff"
+              hoverBg="transparent"
+              hoverText="#000000"
+              className="tw border-none rounded-[35px] w-full h-full font-['General_Sans_Variable','General_Sans',sans-serif] font-medium text-lg leading-[45px] text-center cursor-pointer transition-all duration-300 hover:border hover:border-black hover:scale-105 lg:text-base"
             >
               More
-            </Button>
+            </HoverButton>
           </div>
 
           {/* PC反射 */}
@@ -481,6 +481,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
           >
             「歯科現場への最適化」と、誰でも直感的に扱えるユーザーインターフェースを両立させた、次世代の歯秔DXプラットフォームです。
           </div>
+        </div>
         </div>
       </section>
     </div>

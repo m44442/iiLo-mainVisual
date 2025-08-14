@@ -2,8 +2,8 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 import { Button } from "./ui/button";
+import { HoverButton } from "./ui/hover-button";
 import styles from "./MissionSectionWithAnimation.module.css";
 
 interface MissionSectionWithAnimationProps {
@@ -597,14 +597,17 @@ const MissionSectionWithAnimation: React.FC<
           } ${
             isMoreButtonVisible ? 'animate-fade-up' : ''
           }`}>
-            <Button
+            <HoverButton
               type="button"
               onClick={onMissionMoreClick || (() => router.push("/mission"))}
-              variant="ghost"
-              className="bg-black text-white border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:bg-transparent hover:text-black hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base"
+              normalBg="#000000"
+              normalText="#ffffff"
+              hoverBg="transparent"
+              hoverText="#000000"
+              className="border-none rounded-[35px] py-3 px-12 text-lg cursor-pointer transition-all duration-300 hover:border hover:border-black hover:scale-105 lg:py-2 lg:px-8 lg:text-base font-['General_Sans_Variable','General_Sans',sans-serif] font-medium"
             >
               More
-            </Button>
+            </HoverButton>
           </div>
         )}
       </div>

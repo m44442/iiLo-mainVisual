@@ -34,7 +34,7 @@ const CompanySectionNew = () => {
 
   return (
     <section className="font-sans pt-[180px] pb-[180px] bg-[#E7E7E7] m-0 max-[480px]:pt-[60px] max-[480px]:pb-[60px]">
-      <div ref={titleRef} className={`flex items-center ml-[183px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
+      <div ref={titleRef} className={`flex items-center md:ml-[120px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
         <div className="w-2 h-2 bg-black rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-2"></div>
         <MorphingText
           targetText="Company"
@@ -46,10 +46,10 @@ const CompanySectionNew = () => {
         />
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-[414px] max-[480px]:px-6 max-[480px]:max-w-full">
+      <div className="max-w-[1200px] mx-auto px-[414px] max-[480px]:px-6 max-[480px]:max-w-full md:-mt-16 md:-ml-20 max-[480px]:mt-0 max-[480px]:ml-0">
         <div className="flex mb-7 items-center max-[480px]:mb-3">
           <div className="min-w-[120px] mr-10 max-[480px]:min-w-[70px] max-[480px]:mr-2">
-            <span className="inline-block bg-white text-black font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] px-4 whitespace-nowrap max-[480px]:text-[12px] max-[480px]:leading-[18px] max-[480px]:px-2">
+            <span className="inline-block bg-black text-white font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] px-4 whitespace-nowrap max-[480px]:text-[12px] max-[480px]:leading-[18px] max-[480px]:px-2">
               会社名
             </span>
           </div>

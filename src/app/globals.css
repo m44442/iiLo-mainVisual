@@ -1183,7 +1183,7 @@ body.modal-open {
   animation: fadeIn 1s ease-in-out forwards;
 }
 
-/* 爆発的加速エフェクト用のカスタムイージング */
+/* めっちゃ加速するエフェクト用のカスタムイージング */
 :root {
   --ease-explosive: cubic-bezier(0.95, 0, 0.05, 1);
 }

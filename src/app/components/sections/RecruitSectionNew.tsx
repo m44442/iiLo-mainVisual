@@ -110,10 +110,10 @@ const RecruitSectionNew = () => {
         id="recruit"
         className="font-sans w-full pt-[200px] pb-[220px] px-6 bg-[#E7E7E7] m-0 max-[480px]:pt-[30px] max-[480px]:pb-[30px] max-[480px]:px-[23px] max-[480px]:w-full"
       >
-        <div className="max-w-[1400px] mx-auto">
+        <div className="mx-auto">
           <div className="relative h-[260px] mb-[60px] max-[480px]:h-auto max-[480px]:mb-[30px] max-[480px]:mt-[50px]">
             {/* Title with dot */}
-            <div className={`absolute left-[53px] top-0 flex items-center max-[480px]:relative max-[480px]:left-[12px] max-[480px]:top-0 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
+            <div className={`absolute left-[70px] top-0 flex items-center max-[480px]:relative max-[480px]:left-[12px] max-[480px]:top-0 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
               <div className="w-2 h-2 bg-black rounded-full mr-[15px]"></div>
               <MorphingText
                 targetText="Recruit"

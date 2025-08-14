@@ -11,7 +11,6 @@ import {
 } from "@react-spring/web";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { useScrollLock } from "../../hooks/useScrollLock";
 interface ContactModalProps {

@@ -62,7 +62,7 @@ const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick, onNews
       id="news"
       className="font-sans pt-[200px] pb-[200px] bg-[#000000] text-[#ffffff] m-0 w-full relative block max-[480px]:pt-[60px] max-[480px]:pb-[60px]"
     >
-      <div ref={titleRef} className={`flex items-center ml-[183px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
+      <div ref={titleRef} className={`flex items-center ml-[120px] mb-10 max-[480px]:ml-[19px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing ? 'opacity-100' : 'opacity-0'}`}>
         <div className="w-2 h-2 bg-white rounded-full mr-[15px] max-[480px]:w-1.5 max-[480px]:h-1.5 max-[480px]:mr-2"></div>
         <MorphingText
           targetText="News"
@@ -74,7 +74,7 @@ const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick, onNews
         />
       </div>
 
-      <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full">
+      <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full md:-mt-20 max-[480px]:mt-0">
         {displayNewsItems.map((item, index) => (
           <div key={item.id}>
             <div 
@@ -94,8 +94,10 @@ const NewsSectionNew: React.FC<NewsSectionNewProps> = ({ onNewsMoreClick, onNews
           </div>
         ))}
         <div className="w-full h-px bg-[#E7E7E7] m-0 max-[480px]:w-full"></div>
+        <div className="text-left mt-10 max-[480px]:mt-4">
+        </div>
       </div>
-      <div className="text-left mt-10 pl-[414px] max-[480px]:pl-[19px] max-[480px]:mt-4">
+      <div className="max-w-[900px] mx-auto px-10 max-[480px]:px-5 max-[480px]:max-w-full">
         <HoverButton
           normalBg="#E7E7E7"
           normalText="#000000"
