@@ -2,7 +2,6 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
 import { HoverButton } from "./ui/hover-button";
 import styles from "./MissionSectionWithAnimation.module.css";
 
@@ -24,7 +23,6 @@ const MissionSectionWithAnimation: React.FC<
   const [showMissionText, setShowMissionText] = useState(false);
   const [showPictFlow, setShowPictFlow] = useState(false);
   const [isMoreButtonVisible, setIsMoreButtonVisible] = useState(false);
-  const [hasMoreButtonAnimated, setHasMoreButtonAnimated] = useState(false);
   const [isTextVisible, setIsTextVisible] = useState(false);
   const [hasTextAnimated, setHasTextAnimated] = useState(false);
   const moreButtonRef = useRef<HTMLDivElement>(null);
@@ -93,7 +91,6 @@ const MissionSectionWithAnimation: React.FC<
             setHasTextAnimated(true);
             setTimeout(() => {
               setIsMoreButtonVisible(true);
-              setHasMoreButtonAnimated(true);
             }, 500);
           }
         });

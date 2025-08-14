@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Button } from "../ui/button";
 import { HoverButton } from "../ui/hover-button";
 import MorphingText from "../effects/MorphingText";
 
@@ -81,17 +80,15 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
   }, [hasTextAnimated]);
 
   return (
-    <div className={isInModal ? "tw w-full overflow-hidden py-8" : ""}>
+    <div className={isInModal ? "tw w-full py-8" : ""}>
       <section
         id="service"
-        className="tw font-sans relative bg-black w-full min-h-screen md:h-[900px] max-md:pb-120"
+        className={isInModal ? "tw font-sans relative bg-black w-full min-h-screen" : "tw font-sans relative bg-black w-full min-h-screen md:h-[900px] max-md:pb-120"}
         style={
           isInModal
             ? {
                 position: "relative",
                 background: "#000000",
-                transform: isMobile ? "none" : "scale(0.85)",
-                transformOrigin: "center center",
               }
             : {
                 position: "relative",
@@ -101,7 +98,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
       >
         <div className="max-w-[1728px] mx-auto relative h-full">
         {/* Service タイトル */}
-        <div className={`absolute left-[120px] top-[150px] flex items-center md:left-[120px] md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-10 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`absolute ${isInModal ? 'left-[30px] md:left-[30px]' : 'left-[120px] md:left-[120px]'} top-[150px] flex items-center md:top-[150px] max-md:relative max-md:left-auto max-md:top-auto max-md:pt-10 max-md:pl-6 transition-opacity duration-500 ease-in-out ${startMorphing ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-2 h-2 bg-white rounded-full mr-[15px]"></div>
           <MorphingText
             targetText="Service"

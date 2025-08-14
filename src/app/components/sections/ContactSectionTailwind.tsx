@@ -13,12 +13,6 @@ interface ContactSectionTailwindProps {
 
 const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSectionTailwindProps = {}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    message: "",
-  });
   const [isCardVisible, setIsCardVisible] = useState(false);
   const [hasCardAnimated, setHasCardAnimated] = useState(false);
   const [startTitleMorphing, setStartTitleMorphing] = useState(false);
@@ -27,20 +21,7 @@ const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSe
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert("お問い合わせを送信しました。ありがとうございます。");
-  };
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
 
   // モーダル表示時の背景スクロール制御
   useScrollLock(isModalOpen);
@@ -82,7 +63,7 @@ const ContactSectionTailwind = ({ onContactClick, isInModal = false }: ContactSe
     <>   
       <section className="font-sans bg-black py-20 m-0 max-[480px]:py-[40px]" id="contact">
         {/* Section Header */}
-        <div className={`flex items-center ml-[120px] mb-10 max-md:ml-[30px] max-md:mb-6 max-[480px]:ml-[80px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing || isInModal ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`flex items-center ${isInModal ? 'ml-[20px] md:ml-[20px]' : 'ml-[120px]'} mb-10 max-md:ml-[30px] max-md:mb-6 max-[480px]:ml-[80px] max-[480px]:mb-4 transition-opacity duration-500 ease-in-out ${startTitleMorphing || isInModal ? 'opacity-100' : 'opacity-0'}`}>
           <div className="w-2 h-2 bg-[#E7E7E7] rounded-full mr-[15px] max-[480px]:bg-white"></div>
           <MorphingText
             targetText="Contact"
