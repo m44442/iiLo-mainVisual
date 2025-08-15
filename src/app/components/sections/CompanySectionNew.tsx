@@ -87,16 +87,6 @@ const CompanySectionNew = () => {
             <span className="max-[480px]:whitespace-normal">〒50-0044　東京都渋谷区円山町5番3号</span><br className="hidden max-[480px]:block" /><span className="max-[480px]:whitespace-normal">MIEUX渋谷ビル8階</span>
           </div>
         </div>
-        <div className="flex mb-7 items-center max-[480px]:mb-3">
-          <div className="min-w-[120px] mr-10 max-[480px]:min-w-[70px] max-[480px]:mr-2">
-            <span className="inline-block bg-black text-white font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] px-4 whitespace-nowrap max-[480px]:text-[12px] max-[480px]:leading-[18px] max-[480px]:px-2">
-              電話
-            </span>
-          </div>
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px]">
-            00-0000-0000
-          </div>
-        </div>
       </div>
     </section>
   );

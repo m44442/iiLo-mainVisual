@@ -1,10 +1,10 @@
 # iiLo メインビジュアル - 技術仕様書
 
-Next.js 14 + Three.js による企業サイト。WebGLパーティクルシステムとコンポーネント統一化を実装。
+Next.js 14 + Three.js　+ TailwindCSS(一部CSS) +  shadcn　
 
 ## 実装概要
 
-- **パーティクル描画**: 100,000個のパーティクル、カスタムシェーダーによるGPU処理
+- **パーティクル描画**: 100,000個のパーティクルで実装しています。
 - **レイアウト統一**: 全セクションで `left-[120px]` タイトル位置、`max-w-[1728px]` コンテナ幅に統一
 - **コンポーネント標準化**: HoverButton で全ボタンの UI/UX を統一、shadcn/ui (Button, Input, Textarea, Dialog, Label) 使用
 - **アニメーション最適化**: GSAP Timeline + Intersection Observer による負荷軽減
@@ -39,6 +39,11 @@ Next.js 14 + Three.js による企業サイト。WebGLパーティクルシス�
 3. **NewsSectionNew.tsx**: ニュース・お知らせセクション
    - 最新情報表示、背景: 白
    - 「More」ボタンでニュース詳細へ
+   - **編集時の注意点**:
+     - ニュース項目は `newsData` 配列で管理
+     - 新規追加時は配列の先頭に追加（最新順）
+     - 日付フォーマット: "YYYY年MM月DD日"
+     - NewsDetailModalと連携してニュース詳細を表示
    
 4. **RecruitSectionNew.tsx**: 採用情報セクション
    - 求人案内、背景: 黒
@@ -58,6 +63,7 @@ Next.js 14 + Three.js による企業サイト。WebGLパーティクルシス�
   - アニメーション変更は `useChain` タイミング調整
 
 ### `/components/ui/` - 共通UIコンポーネント  
+- shadcnのコンポーネントディレクトリです
 - **hover-button.tsx**: 全セクションのボタン統一、色・アニメーション変更時に編集
   - `normalBg`, `hoverBg` - ボタン色設定
   - 変更時は全セクションに影響するため注意
@@ -113,19 +119,5 @@ const baseSize = isMobile ? 1.5 : 2.0;
 - **型チェック**: TypeScript strict mode
 - **Lint**: ESLint Next.js rules
 
-## 保守・拡張時の注意点
-
-### 破壊的変更リスク
-- **ParticleSystem.tsx**: シェーダーコード変更時のGPUコンパチビリティ
-- **HoverButton**: 全セクション共通のため影響範囲大
-- **ContactModal**: React Spring deps変更でアニメーション破綻リスク
-
-### パフォーマンス監視対象
-- Three.js レンダリングFPS（dev tools Performance tab）
-- モバイルでのパーティクル描画負荷
-- モーダルアニメーション中のメモリ使用量
-
----
-
-**技術責任者**: 開発チーム  
+--- 
 **Next.js**: 14.0.4 / **Three.js**: 0.159.0
