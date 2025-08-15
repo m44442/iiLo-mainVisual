@@ -85,7 +85,14 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
 
   return (
     <>
-      {/* ヘッダー全体 */}
+      {/* ヘッダー背景レイヤー（ぼかし専用） */}
+      {isScrolled && (
+        <div
+          className="fixed top-0 left-0 w-full h-[60px] z-[49] backdrop-blur-md [backdrop-filter:blur(20px)] [-webkit-backdrop-filter:blur(20px)] border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out md:py-8 lg:py-10 max-[767px]:h-[50px] max-[480px]:h-[50px]"
+        />
+      )}
+      
+      {/* ヘッダーコンテンツレイヤー */}
       <header
         className={`
         fixed top-0 left-0 w-full h-[60px] z-50 px-6 py-2
@@ -94,11 +101,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
         max-[767px]:h-[50px] max-[767px]:px-6 max-[767px]:py-2
         max-[480px]:w-full max-[480px]:h-[50px] max-[480px]:p-0 max-[480px]:bg-white/[0.01]
         ${!isInParticleSection ? '[mix-blend-mode:difference]' : ''}
-        ${
-          isScrolled
-            ? "backdrop-blur-md border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
-            : "bg-transparent"
-        }
+        bg-transparent
       `}
       >
         <div className="relative w-full h-full max-w-[1200px] mx-auto pt-2 max-[480px]:pt-0 max-[480px]:max-w-none">
@@ -230,7 +233,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
         <div
           className={`
           fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-[49]
-          bg-black/95 backdrop-blur-[15px]
+          bg-black/95 backdrop-blur-[15px] [-webkit-backdrop-filter:blur(15px)]
           ${isMenuOpen && !isClosing ? "animate-expandFromCenter" : "opacity-0"}
           ${isClosing ? "animate-contractToCenter" : ""}
         `}
