@@ -88,7 +88,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
       {/* ヘッダー背景レイヤー（ぼかし専用） */}
       {isScrolled && (
         <div
-          className="fixed top-0 left-0 w-full h-[60px] z-[49] backdrop-blur-md [backdrop-filter:blur(20px)] [-webkit-backdrop-filter:blur(20px)] border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out md:py-8 lg:py-10 max-[767px]:h-[50px] max-[480px]:h-[50px]"
+          className="fixed top-0 left-0 w-full h-[60px] z-[49] [backdrop-filter:blur(20px)] [-webkit-backdrop-filter:blur(20px)] border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)] transition-all duration-300 ease-in-out md:py-8 lg:py-10 max-[767px]:h-[50px] max-[480px]:h-[50px]"
         />
       )}
       
