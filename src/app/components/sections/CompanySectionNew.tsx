@@ -54,7 +54,7 @@ const CompanySectionNew = () => {
             </span>
           </div>
           <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px]">
-            合同会社IILo
+            株式会社IILo
           </div>
         </div>
         <div className="flex mb-7 items-center max-[480px]:mb-3">
@@ -64,7 +64,7 @@ const CompanySectionNew = () => {
             </span>
           </div>
           <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px]">
-            名前 名前
+            稲田 海晟
           </div>
         </div>
         <div className="flex mb-7 items-center max-[480px]:mb-3">
@@ -74,7 +74,7 @@ const CompanySectionNew = () => {
             </span>
           </div>
           <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px]">
-            2025年◯月
+            2025年9月
           </div>
         </div>
         <div className="flex mb-7 items-center max-[480px]:mb-3">
@@ -83,8 +83,8 @@ const CompanySectionNew = () => {
               住所
             </span>
           </div>
-          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px]">
-            〒000-0000　住所住所住所住所住所住所
+          <div className="font-['Noto_Sans_JP','Noto_Sans',sans-serif] font-normal text-base leading-[27px] text-black flex-1 max-[480px]:text-[12px] max-[480px]:leading-[18px] whitespace-nowrap">
+            <span className="max-[480px]:whitespace-normal">〒50-0044　東京都渋谷区円山町5番3号</span><br className="hidden max-[480px]:block" /><span className="max-[480px]:whitespace-normal">MIEUX渋谷ビル8階</span>
           </div>
         </div>
         <div className="flex mb-7 items-center max-[480px]:mb-3">

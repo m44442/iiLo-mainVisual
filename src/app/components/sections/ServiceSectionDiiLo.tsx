@@ -389,7 +389,7 @@ const ServiceSectionDiiLo: React.FC<ServiceSectionDiiLoProps> = ({
               }),
             }}
           >
-            DiiLoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
+            DIILoは、歯科クリニック向けに特化したLINE公式アカウント連携型のマーケティング＆患者管理ツールです。
           </div>
 
           {/* 2行目 */}

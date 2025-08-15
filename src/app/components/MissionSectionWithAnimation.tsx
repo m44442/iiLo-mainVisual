@@ -565,7 +565,7 @@ const MissionSectionWithAnimation: React.FC<
           } ${
             isTextVisible ? 'animate-fade-up' : ''
           }`}>
-            第一弾として、歯科業界に特化したLINE連携型SaaS「DiiLo（ディーロ）」をリリース。
+            第一弾として、歯科業界に特化したLINE連携型SaaS「DIILo（ディーロ）」をリリース。
           </p>
 
           <p className={`text-[18px] leading-[1.8] text-black mb-1 lg:text-base lg:mb-1 md:text-sm max-md:text-xs ${

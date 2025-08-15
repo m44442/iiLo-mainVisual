@@ -334,7 +334,7 @@ const EngineerRecruitModal = ({
               </div>
 
               {/* Contact Section */}
-              <ContactSectionTailwind onContactClick={onContactClick} />
+              <ContactSectionTailwind onContactClick={onContactClick} isInModal={true} />
 
               {/* Others Section */}
               <div className="tw bg-[#E7E7E7] py-20 m-0 max-[480px]:py-[40px] max-[480px]:mt-6 max-[480px]:mb-6 max-[480px]:pb-30">
