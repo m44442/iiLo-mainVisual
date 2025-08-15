@@ -29,7 +29,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose, onSwitchTo
     const navHeader = document.querySelector("nav");
 
     if (isOpen) {
-      // Hide header elements
+      // 非表示: header elements
       if (header) {
         (header as HTMLElement).style.display = "none";
       }
@@ -37,7 +37,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose, onSwitchTo
         (navHeader as HTMLElement).style.display = "none";
       }
     } else {
-      // Show header elements
+      // 表示: header elements
       if (header) {
         header.removeAttribute('style');
       }
@@ -46,7 +46,7 @@ const MissionModal: React.FC<MissionModalProps> = ({ isOpen, onClose, onSwitchTo
       }
     }
 
-    // Cleanup on unmount
+    // クリーンアップ: on unmount
     return () => {
       if (header) {
         header.removeAttribute('style');

@@ -20,7 +20,7 @@ interface ContactModalProps {
 
 const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
   const [formData, setFormData] = useState({
-    inquiryType: "service", // "service" or "recruitment"
+    inquiryType: "service",
     firstName: "",
     lastName: "",
     email: "",
@@ -35,7 +35,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     const navHeader = document.querySelector("nav");
 
     if (isOpen) {
-      // Hide header elements
+      // ヘッダー要素を非表示
       if (header) {
         (header as HTMLElement).style.display = "none";
       }
@@ -43,7 +43,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
         (navHeader as HTMLElement).style.display = "none";
       }
     } else {
-      // Show header elements
+      // ヘッダー要素を表示
       if (header) {
         header.removeAttribute('style');
       }
@@ -52,7 +52,7 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
       }
     }
 
-    // Cleanup on unmount
+    // アンマウント時のクリーンアップ
     return () => {
       if (header) {
         header.removeAttribute('style');

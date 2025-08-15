@@ -13,7 +13,7 @@ export const useScrollLock = (isLocked: boolean) => {
       wasLocked.current = true;
       
       if (lockCount === 1) {
-        // First lock - disable scroll
+        // 最初のロック - スクロール無効化
         document.body.style.overflow = "hidden";
         document.documentElement.style.overflow = "hidden";
       }
@@ -22,13 +22,13 @@ export const useScrollLock = (isLocked: boolean) => {
       wasLocked.current = false;
       
       if (lockCount === 0) {
-        // Last unlock - enable scroll
+        // 最後のアンロック - スクロール有効化
         document.body.style.overflow = "auto";
         document.documentElement.style.overflow = "auto";
       }
     }
 
-    // Cleanup on unmount
+    // アンマウント時のクリーンアップ
     return () => {
       if (wasLocked.current) {
         lockCount = Math.max(0, lockCount - 1);

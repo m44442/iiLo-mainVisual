@@ -32,27 +32,19 @@ vec3 permute(vec3 x) {
 
 float snoise(vec2 v)
   {
-  const vec4 C = vec4(0.211324865405187,  // (3.0-sqrt(3.0))/6.0
-                      0.366025403784439,  // 0.5*(sqrt(3.0)-1.0)
-                     -0.577350269189626,  // -1.0 + 2.0 * C.x
-                      0.024390243902439); // 1.0 / 41.0
-// First corner
+  const vec4 C = vec4(0.211324865405187,
+                      0.366025403784439,
+                     -0.577350269189626,
+                      0.024390243902439);
   vec2 i  = floor(v + dot(v, C.yy) );
   vec2 x0 = v -   i + dot(i, C.xx);
 
-// Other corners
   vec2 i1;
-  //i1.x = step( x0.y, x0.x ); // x0.x > x0.y ? 1.0 : 0.0
-  //i1.y = 1.0 - i1.x;
   i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
-  // x0 = x0 - 0.0 + 0.0 * C.xx ;
-  // x1 = x0 - i1 + 1.0 * C.xx ;
-  // x2 = x0 - 1.0 + 2.0 * C.xx ;
   vec4 x12 = x0.xyxy + C.xxzz;
   x12.xy -= i1;
 
-// Permutations
-  i = mod289(i); // Avoid truncation effects in permutation
+  i = mod289(i);
   vec3 p = permute( permute( i.y + vec3(0.0, i1.y, 1.0 ))
     + i.x + vec3(0.0, i1.x, 1.0 ));
 
@@ -60,19 +52,14 @@ float snoise(vec2 v)
   m = m*m ;
   m = m*m ;
 
-// Gradients: 41 points uniformly over a line, mapped onto a diamond.
-// The ring size 17*17 = 289 is close to a multiple of 41 (41*7 = 287)
 
   vec3 x = 2.0 * fract(p * C.www) - 1.0;
   vec3 h = abs(x) - 0.5;
   vec3 ox = floor(x + 0.5);
   vec3 a0 = x - ox;
 
-// Normalise gradients implicitly by scaling m
-// Approximation of: m *= inversesqrt( a0*a0 + h*h );
   m *= 1.79284291400159 - 0.85373472095314 * ( a0*a0 + h*h );
 
-// Compute final noise value at P
   vec3 g;
   g.x  = a0.x  * x0.x  + h.x  * x0.y;
   g.yz = a0.yz * x12.xz + h.yz * x12.yw;
@@ -84,12 +71,12 @@ float PI = 3.14159265;
 void main() {
 //mix関数で線形補完
  vec3 morphing = mix(position, two, uPoint01);
- //シンプレックスノイズ（元の動きを保持）
+ //ノイズ
  morphing.x = snoise(normalize(morphing.xy)) * sin(morphing.y + uTime * PI);
  morphing.y = snoise(normalize(morphing.xy)) * cos(morphing.x + uTime * PI);
  morphing.z = morphing.z + snoise(normalize(morphing.xy)) * sin(morphing.y + uTime * PI);
 
- // より強いマウスインタラクション
+ // マウスイへの反応
  vec2 mousePos = uMouse * 8.0; // マウス座標をワールド座標に変換（少し調整）
  vec2 particlePos = morphing.xy;
  vec2 mouseToParticle = particlePos - mousePos;
@@ -101,20 +88,19 @@ void main() {
    float strength = (mouseRange - distanceToMouse) / mouseRange;
    vec2 direction = normalize(mouseToParticle);
    
-   // より強い引力効果
+   // 引力効果
    float attraction = strength * 0.8 * sin(uTime * PI * 2.0 + distanceToMouse);
    morphing.xy -= direction * attraction;
    
-   // より目立つ波紋効果
+   // 波紋効果
    float ripple = sin(distanceToMouse * 0.3 - uTime * PI * 4.0) * strength * 0.5;
    morphing.z += ripple;
    
-   // 追加の渦巻き効果
+   // 渦巻き効果
    float spiral = cos(atan(mouseToParticle.y, mouseToParticle.x) * 3.0 + uTime * PI * 2.0) * strength * 0.3;
    morphing.xy += vec2(-direction.y, direction.x) * spiral;
  }
  
- // より強いグローバルなマウス影響
  float globalInfluence = length(uMouse) * 0.3;
  morphing.x += globalInfluence * sin(uTime * PI * 1.5 + morphing.y * 0.1);
  morphing.y += globalInfluence * cos(uTime * PI * 1.5 + morphing.x * 0.1);
@@ -152,7 +138,6 @@ export default function ParticleSystem() {
   const { geometry, material } = useMemo(() => {
     const particleNumber = 100000;
 
-    // Box geometry particles
     const boxGeometry = new THREE.BoxGeometry(10, 10, 10, 100, 100, 100);
     const boxMaterial = new THREE.MeshBasicMaterial();
     const boxMesh = new THREE.Mesh(boxGeometry, boxMaterial);
@@ -165,7 +150,6 @@ export default function ParticleSystem() {
       boxParticles.set([vertex.x, vertex.y, vertex.z], i * 3);
     }
 
-    // Sphere geometry particles
     const sphereGeometry = new THREE.SphereGeometry(10, 100, 100);
     const sphereMaterial = new THREE.MeshBasicMaterial();
     const sphereMesh = new THREE.Mesh(sphereGeometry, sphereMaterial);
@@ -178,7 +162,6 @@ export default function ParticleSystem() {
       sphereParticles.set([vertex.x, vertex.y, vertex.z], i * 3);
     }
 
-    // Create buffer geometry
     const bufferGeometry = new THREE.BufferGeometry();
     bufferGeometry.setAttribute(
       "position",
@@ -210,7 +193,7 @@ export default function ParticleSystem() {
     };
   }, []);
 
-  // Mouse and Scroll Event Listeners (独立したuseEffect)
+  // マウスとスクロールの座標を更新するためのイベントリスナー
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       // ターゲット座標を更新（実際の座標は後でスムーズに補間）
@@ -231,7 +214,7 @@ export default function ParticleSystem() {
     };
   }, []); // 依存関係なし、一度だけ実行
 
-  // GSAP Animation
+  // 初期アニメーションの設定
   useEffect(() => {
     if (materialRef.current) {
       const isMobile = window.innerWidth < 768; // モバイル判定
@@ -289,7 +272,7 @@ export default function ParticleSystem() {
     }
   }, []);
 
-  // Animation loop
+  // アニメーションの更新
   useFrame(() => {
     if (materialRef.current) {
       materialRef.current.uniforms.uTime.value += 0.00085;
