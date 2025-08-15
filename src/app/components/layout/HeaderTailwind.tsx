@@ -170,7 +170,13 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
                 onClick={(e) => {
                   if (item.text === "Mission") {
                     e.preventDefault();
-                    onMissionClick?.();
+                    const missionElement = document.querySelector('#mission');
+                    if (missionElement) {
+                      missionElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                    }
                   } else if (item.href.startsWith("#")) {
                     handleMenuClick(e);
                   }
@@ -294,7 +300,13 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
                   onClick={(e) => {
                     if (item.text === "Mission") {
                       e.preventDefault();
-                      onMissionClick?.();
+                      const missionElement = document.querySelector('#mission');
+                      if (missionElement) {
+                        missionElement.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                      }
                       closeMenu();
                     } else if (item.href.startsWith("#")) {
                       handleMenuClick(e);
