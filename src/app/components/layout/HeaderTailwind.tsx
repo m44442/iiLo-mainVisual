@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { useScrollLock } from "../../hooks/useScrollLock";
 
@@ -16,7 +15,6 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOverDarkSection, setIsOverDarkSection] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -73,7 +71,10 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
   };
 
   const handleLogoClick = () => {
-    router.push("/");
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
   };
 
   const handleMenuClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
