@@ -13,7 +13,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
   const [isClosing, setIsClosing] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOverDarkSection, setIsOverDarkSection] = useState(false);
+  const [isInParticleSection, setIsInParticleSection] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -21,19 +21,10 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
       const scrollTop = window.scrollY;
       setIsScrolled(scrollTop > 50);
       
-      // 黒い背景セクション（Service、Contact、News）の判定
-      const serviceSection = document.querySelector('#service');
-      const contactSection = document.querySelector('#contact');
-      const newsSection = document.querySelector('#news');
-      
-      const isInDarkSection = [serviceSection, contactSection, newsSection]
-        .some(section => {
-          if (!section) return false;
-          const rect = section.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100; // ヘッダー位置
-        });
-        
-      setIsOverDarkSection(isInDarkSection);
+      // ParticleSystemセクション（最初のセクション）の判定
+      const missionSection = document.querySelector('#mission');
+      const isInParticle = !missionSection || missionSection.getBoundingClientRect().top > 0;
+      setIsInParticleSection(isInParticle);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -102,9 +93,10 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
         md:px-6 md:py-8 lg:px-8 lg:py-10
         max-[767px]:h-[50px] max-[767px]:px-6 max-[767px]:py-2
         max-[480px]:w-full max-[480px]:h-[50px] max-[480px]:p-0 max-[480px]:bg-white/[0.01]
+        ${!isInParticleSection ? '[mix-blend-mode:difference]' : ''}
         ${
           isScrolled
-            ? "bg-white/[0.15] backdrop-blur-md border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
+            ? "backdrop-blur-md border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
             : "bg-transparent"
         }
       `}
@@ -126,7 +118,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
           `}
             onClick={handleLogoClick}
           >
-            {(isMenuOpen || isOverDarkSection) ? (
+            {(isMenuOpen || (isInParticleSection ? false : false)) ? (
               <Image
                 src="/images/IILo-DIILo_logo_IILo_logo-w.png"
                 alt="IILo"
@@ -136,7 +128,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
               />
             ) : (
               <Image
-                src="/images/IILo-DIILo_logo_IILo_logo-b.png"
+                src={isInParticleSection ? "/images/IILo-DIILo_logo_IILo_logo-b.png" : "/images/IILo-DIILo_logo_IILo_logo-w.png"}
                 alt="IILo"
                 width={80}
                 height={28}
@@ -146,7 +138,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
           </div>
 
           {/* デスクトップナビゲーション */}
-             <nav className="max-md:hidden lg:flex items-start gap-8 absolute right-[133px] top-[-7px]">
+             <nav className={`max-md:hidden lg:flex items-start gap-8 absolute right-[133px] top-[-7px] ${!isInParticleSection ? '[mix-blend-mode:difference]' : ''}`}>
             {[
               { href: "/mission", text: "Mission" },
               { href: "#service", text: "Service" },
@@ -161,7 +153,7 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
                 className={`
                   relative inline-block h-5 mr-[30px] text-sm font-semibold 
                   cursor-pointer overflow-hidden transition-all duration-300 group
-                  ${isOverDarkSection ? '!text-white' : '!text-black'}
+                  ${isInParticleSection ? '!text-black' : '!text-white'}
                   ${
                     isLoaded
                       ? `opacity-100 translate-y-0 animate-[slideInDown_0.6s_cubic-bezier(0.25,0.46,0.45,0.94)_${0.1 + index * 0.1}s_forwards]`
@@ -218,14 +210,14 @@ const HeaderTailwind = ({ onMissionClick }: HeaderTailwindProps = {}) => {
                 className={`h-0.5 w-full transition-all duration-300 ease-out origin-center ${
                   isMenuOpen 
                     ? "rotate-45 translate-y-1 bg-white" 
-                    : `rotate-0 ${isOverDarkSection ? '!bg-white' : '!bg-black'}`
+                    : `rotate-0 ${isInParticleSection ? '!bg-black' : 'bg-white'}`
                 }`}
               />
               <div
                 className={`h-0.5 w-full transition-all duration-300 ease-out origin-center ${
                   isMenuOpen 
                     ? "-rotate-45 -translate-y-1 bg-white" 
-                    : `rotate-0 ${isOverDarkSection ? '!bg-white' : '!bg-black'}`
+                    : `rotate-0 ${isInParticleSection ? '!bg-black' : 'bg-white'}`
                 }`}
               />
             </div>
